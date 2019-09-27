@@ -7,7 +7,7 @@
 <style scoped lang="scss">
   #map {
     height: 80vh;
-    width: 80vw;
+    width: 40vw;
   }
 </style>
 
