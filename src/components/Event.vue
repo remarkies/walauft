@@ -1,8 +1,11 @@
 <template>
     <div class="event">
-        <div class="club">Zukunft</div>
+
         <div class="event-name">Raumklang</div>
-        <div class="acts">Dawes</div>
+        <div class="event-desc-container">
+            <div class="club">Zukunft</div>
+            <div class="zeit">22:00</div>
+        </div>
     </div>
 </template>
 

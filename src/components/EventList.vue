@@ -1,6 +1,8 @@
 <template>
     <div class="event-list">
         <Event />
+        <Event />
+        <Event />
     </div>
 </template>
 
@@ -13,5 +15,5 @@
 </script>
 
 <style scoped>
-
+    @import "../styles/event.scss";
 </style>
