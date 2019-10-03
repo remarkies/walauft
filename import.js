@@ -15,11 +15,11 @@ for(let i = 0; i < checkDaysInAdvance; i++) {
     let date = moment().add(i, 'days').format("YYYY-MM-DD");
     let url = url1 + date + url2 + region;
 
-    downloadDataFromUrl(url, region);
+    downloadJsonFromUrl(url, region);
   }
 }
 
-function downloadDataFromUrl(url, region) {
+function downloadJsonFromUrl(url, region) {
   let req = https.get(url, function(res) {
     let data = '',
       json_data;
