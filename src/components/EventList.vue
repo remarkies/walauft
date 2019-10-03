@@ -19,6 +19,10 @@
     created: async function() {
       let result = await getEntries(this.$route.params.regionId);
 
+      
+
+
+
       this.events = result.items;
       console.log(this.events.length);
     }
