@@ -1,3 +1,4 @@
+
 <template>
   <div class="home">
       <ul>
@@ -6,7 +7,7 @@
   </div>
 </template>
 <style lang="scss">
-    @import '../styles/home.sass';
+    @import '../styles/home.scss';
 </style>
 <script>
   //  import Vue from "Vue";
