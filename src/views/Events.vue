@@ -19,7 +19,7 @@
   export default {
     name: "events",
     components: { Header, EventList },
-    
+
   };
 
 

@@ -1,8 +1,9 @@
 <template>
     <div class="event">
-        <div class="club">{{event.name}}</div>
-        <div class="event-name">{{event.date}}</div>
-        <div class="acts">{{event.location.name}}</div>
+
+        <div class="club">{{event.location.name}}</div>
+        <div class="event-name">{{event.name}}</div>
+        <div class="zeit">{{event.start}}</div>
     </div>
 </template>
 
