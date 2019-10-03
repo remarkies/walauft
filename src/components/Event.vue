@@ -1,17 +1,17 @@
 <template>
     <div class="event">
-
-        <div class="event-name">Raumklang</div>
-        <div class="event-desc-container">
-            <div class="club">Zukunft</div>
-            <div class="zeit">22:00</div>
-        </div>
+        <div class="club">{{event.name}}</div>
+        <div class="event-name">{{event.date}}</div>
+        <div class="acts">{{event.location.name}}</div>
     </div>
 </template>
 
 <script>
   export default {
-    name: "Event"
+    name: "Event",
+    props: {
+      event: {}
+    }
   };
 </script>
 
