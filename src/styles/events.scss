@@ -1,10 +1,11 @@
 
 .heute-sonst-switch{
-  font-size: 100px;
+  font-size: 10vw;
+  display: flex;
+  justify-content: space-evenly;
 }
 #heute{
-  padding:100px;
+
 }
 #sonst{
-  padding:100px;
 }

@@ -1,10 +1,10 @@
 <template>
   <div class="Events">
     <div class="heute-sonst-switch">
-      <a id="heute" >hüt</a>
-      <a id="sonst">süsch</a>
+      <a><div id="heute" >hüt</div></a>
+      <a><div id="sonst" >süsch</div></a>
     </div>
-    Region ID is: {{ $route.params.regionId }}
+
     <Header/>
     <EventList/>
   </div>
