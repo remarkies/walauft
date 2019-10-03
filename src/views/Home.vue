@@ -1,235 +1,33 @@
 <template>
-  <div class="home">
-    <div id="map"></div>
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+    <div id="home">
+        <ul>
+            <li v-for="region in regionen">
+                {{ region.name }}
+            </li>
+        </ul>
+    </div>
 </template>
-<style scoped lang="scss">
-  #map {
-    height: 80vh;
-    width: 40vw;
-  }
-</style>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
-export default {
-  name: "home",
+  //  import Vue from "Vue";
+  export default {
+    name: "home",
+    data: function() {
+      return {
+        regionen: [
+          { id:"2",name: "Luzern" },
+          { id:"3",name: "Bern" },
+          { id:"4",name: "Basel" },
+          { id:"5",name: "St.Gallen" },
+          { id:"6",name: "Zürich" }
+        ]
+      };
+    }
+  ,
   components: {
-    HelloWorld
-  },
-  mounted: function(){
-    const element = document.getElementById("map")
-    const styles =
-      [
-        {
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#242f3e"
-            }
-          ]
-        },
-        {
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#746855"
-            }
-          ]
-        },
-        {
-          "elementType": "labels.text.stroke",
-          "stylers": [
-            {
-              "color": "#242f3e"
-            }
-          ]
-        },
-        {
-          "featureType": "administrative",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "administrative.locality",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#d59563"
-            }
-          ]
-        },
-        {
-          "featureType": "poi",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "poi",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#d59563"
-            }
-          ]
-        },
-        {
-          "featureType": "poi.park",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#263c3f"
-            }
-          ]
-        },
-        {
-          "featureType": "poi.park",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#6b9a76"
-            }
-          ]
-        },
-        {
-          "featureType": "road",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#38414e"
-            }
-          ]
-        },
-        {
-          "featureType": "road",
-          "elementType": "geometry.stroke",
-          "stylers": [
-            {
-              "color": "#212a37"
-            }
-          ]
-        },
-        {
-          "featureType": "road",
-          "elementType": "labels.icon",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "road",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#9ca5b3"
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#746855"
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry.stroke",
-          "stylers": [
-            {
-              "color": "#1f2835"
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#f3d19c"
-            }
-          ]
-        },
-        {
-          "featureType": "transit",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "featureType": "transit",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#2f3948"
-            }
-          ]
-        },
-        {
-          "featureType": "transit.station",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#d59563"
-            }
-          ]
-        },
-        {
-          "featureType": "water",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#17263c"
-            }
-          ]
-        },
-        {
-          "featureType": "water",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#515c6d"
-            }
-          ]
-        },
-        {
-          "featureType": "water",
-          "elementType": "labels.text.stroke",
-          "stylers": [
-            {
-              "color": "#17263c"
-            }
-          ]
-        }
-      ];
-
-    const options = {
-      zoom: 14,
-      center: new google.maps.LatLng(47.071467, 8.277621),
-      styles: styles,
-      zoomControl: false,
-      mapTypeControl: false,
-      streetViewControl: false,
-      fullscreenControl: false
-    };
-
-    this.map = new google.maps.Map(element, options);
   }
-};
+  ,
+
+  }
+  ;
 </script>
