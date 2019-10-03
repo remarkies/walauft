@@ -2,7 +2,7 @@
 <template>
   <div class="home">
       <ul>
-          <li v-for="region in regionen">{{region.name}}</li>
+          <li v-for="region in regionen"><router-link :to="{name: 'events', params: {regionId: region.id}}">{{region.name}}</router-link></li>
       </ul>
   </div>
 </template>
@@ -25,6 +25,6 @@
           ]
         };
       }
-    ,
+
 };
 </script>
