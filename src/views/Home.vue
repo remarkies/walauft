@@ -1,13 +1,12 @@
 <template>
   <div class="home">
     <div id="map"></div>
-    <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 <style scoped lang="scss">
   #map {
-    height: 80vh;
-    width: 40vw;
+    height: 100vh;
+    width: 100vw;
   }
 </style>
 
@@ -221,7 +220,7 @@ export default {
 
     const options = {
       zoom: 14,
-      center: new google.maps.LatLng(47.071467, 8.277621),
+      center: new google.maps.LatLng(47.5639257, 7.6031379),
       styles: styles,
       zoomControl: false,
       mapTypeControl: false,
