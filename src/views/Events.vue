@@ -1,5 +1,6 @@
 <template>
   <div class="Events">
+    Region ID is: {{ $route.params.regionId }}
     <Header/>
     <EventList/>
   </div>
@@ -12,4 +13,6 @@
     name: "events",
     components: { Header, EventList }
   };
+
+
 </script>
