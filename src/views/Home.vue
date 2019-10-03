@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <div id="map"></div>
+      <ul>
+          <li v-for="region in regionen">{{region.name}}</li>
+      </ul>
   </div>
 </template>
 <style lang="scss">
@@ -23,10 +25,5 @@
         };
       }
     ,
-    components: {}
-
-
-    this.map = new google.maps.Map(element, options);
-  }
 };
 </script>
