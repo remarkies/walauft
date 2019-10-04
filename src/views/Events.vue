@@ -7,8 +7,8 @@
     </div>
 
     <Header/>
-    <EventList/>
-    <GMap/>
+    <EventList @locationChanged="changedHandler"/>
+    <GMap ref="map" />
   </div>
 </template>
 <style scoped>
@@ -22,7 +22,11 @@
   export default {
     name: "events",
     components: { Header, EventList, GMap },
-
+    methods: {
+      changedHandler: function(event) {
+        this.$refs.map.showLocation(event.lat, event.lng);
+      }
+    } ,
 
   };
 
