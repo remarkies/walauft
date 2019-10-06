@@ -13,13 +13,13 @@
         let position = new google.maps.LatLng(lat, lang);
         console.log(lat, lang);
         this.map.panTo(position);
+        setMapOnAll(null);
         let marker = new google.maps.Marker({
           position: position,
-          icon: "myicon.png",
+         // icon: "myicon.png",
           map: this.map,
 
         });
-
 
         ;
       }
