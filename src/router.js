@@ -12,7 +12,7 @@ export default new Router({
       component: Home
     },
     {
-      path: "/events:regionId",
+      path: "/events/:regionId",
       name: "events",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route

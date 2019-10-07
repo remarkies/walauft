@@ -1,6 +1,6 @@
 <template>
     <div class="event-list">
-        <Event :event="event.fields.json" v-for="event in events" />
+        <Event @click.native="eventClick(event.fields.json.location.latitude, event.fields.json.location.longitude)" :event="event.fields.json" v-for="event in events" />
     </div>
 </template>
 
@@ -12,6 +12,12 @@
 
   export default {
     name: "EventList",
+    methods: {
+      eventClick: function(latitude, longitude) {
+        this.$emit('locationChanged', {lat: latitude, lng: longitude});
+       console.log(latitude, longitude);
+      }
+    } ,
     data: function() {
       return {
         events: []

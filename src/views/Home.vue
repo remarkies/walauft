@@ -1,10 +1,11 @@
-
 <template>
-  <div class="home">
-      <ul>
-          <li v-for="region in regionen"><router-link :to="{name: 'events', params: {regionId: region.id}}">{{region.name}}</router-link></li>
-      </ul>
-  </div>
+    <div class="home">
+        <ul>
+            <li v-for="region in regionen">
+                <router-link :to="{name: 'events', params: {regionId: region.id}}">{{region.name}}</router-link>
+            </li>
+        </ul>
+    </div>
 </template>
 <style lang="scss">
     @import '../styles/home.scss';
@@ -26,5 +27,5 @@
         };
       }
 
-};
+  };
 </script>
