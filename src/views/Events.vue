@@ -1,12 +1,12 @@
 <template>
   <div class="Events">
     <div class="heute-sonst-switch">
-      <a><div id="heute" >hüt</div></a>
-      <a><div id="sonst" >süsch</div></a>
+      <a v-on:click="changeTypeToToday"><div id="heute" >hüt</div></a>
+      <a v-on:click="changeTypeToRest"><div id="sonst" >süsch</div></a>
     </div>
 
     <Header/>
-    <EventList/>
+    <EventList :type="type" />
   </div>
 </template>
 <style scoped>
@@ -19,10 +19,22 @@
   export default {
     name: "events",
     components: { Header, EventList },
+    data: function() {
+      return {
+        type: {
+          type: String,
+          default : "0"
+        }
+      }
+    },
+    methods : {
+      changeTypeToToday: function() {
+        this.type = "0";
+      },
+      changeTypeToRest: function() {
+        this.type = "1";
+      }
 
+    }
   };
-
-
-
-
 </script>

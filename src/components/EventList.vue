@@ -7,26 +7,44 @@
 <script>
   import Event from "./Event";
   import { getEntries } from "../services/api";
+  import moment from "moment";
+
 
   export default {
     name: "EventList",
     data: function() {
-      return { events: []}
+      return {
+        events: []
+      }
     },
     components: {
       Event
     },
-    created: async function() {
-      let result = await getEntries(this.$route.params.regionId);
+    props: {
+      type: String
+    },
+    watch: {
+      type: async function(newVal) {
+        var Enumerable = require('../../node_modules/linq');
+        let result = await getEntries(this.$route.params.regionId);
 
-      
+        console.log("New Val: " + newVal);
 
-
-
-      this.events = result.items;
-      console.log(this.events.length);
+        if(newVal == "0")
+          this.events = Enumerable.from(result.items)
+            .where($ => $.fields.json.date == moment().add(-10, 'hours').format('YYYY-MM-DD'))
+            .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
+        else if(newVal == "1")
+          this.events = Enumerable.from(result.items)
+            .where($ => moment($.fields.json.date).add(-1, 'day').isAfter(moment()))
+            .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
+      }
+    },
+    mounted: function() {
+        this.type = "0";
     }
   };
+
 
 
 </script>
