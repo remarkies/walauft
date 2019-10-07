@@ -6,7 +6,7 @@
       <a v-on:click="changeTypeToRest"><div id="sonst" >süsch</div></a>
     </div>
 
-    <Header/>
+    <Header :type="type"/>
     <EventList :type="type" @locationChanged="changedHandler"/>
     <GMap ref="map" />
   </div>
