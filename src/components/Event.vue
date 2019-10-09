@@ -18,5 +18,5 @@
 </script>
 
 <style scoped>
-
+    @import "../styles/event.scss";
 </style>

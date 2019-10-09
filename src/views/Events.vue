@@ -1,14 +1,16 @@
 <template>
-  <div class="Events">
+  <div class="events">
 
     <GMap id="backgroundMap" ref="map" />
-    <div class="heute-sonst-switch">
-      <a v-on:click="changeTypeToToday"><div id="heute" >hüt</div></a>
-      <a v-on:click="changeTypeToRest"><div id="sonst" >süsch</div></a>
-    </div>
+    <div class="content">
+      <div class="heute-sonst-switch">
+        <a v-on:click="changeTypeToToday"><div id="heute" >hüt</div></a>
+        <a v-on:click="changeTypeToRest"><div id="sonst" >süsch</div></a>
+      </div>
 
-    <Header :type="type"/>
-    <EventList :type="type" @locationChanged="changedHandler"/>
+      <Header :type="type"/>
+      <EventList :type="type" @locationChanged="changedHandler"/>
+    </div>
   </div>
 </template>
 <style scoped>

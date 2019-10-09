@@ -118,5 +118,5 @@
 </script>
 
 <style scoped>
-    @import "../styles/event.scss";
+    @import "../styles/eventList.scss";
 </style>
