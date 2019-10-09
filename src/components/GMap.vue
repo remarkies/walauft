@@ -26,8 +26,8 @@
 
         let marker = new google.maps.Marker({
           position: position,
-          animation: google.maps.Animation.DROP,
-         // icon: "myicon.png",
+          //animation: google.maps.Animation.DROP,
+          icon: "Circle.svg",
           map: this.map,
         });
         this.markers.push(marker);
