@@ -12,21 +12,15 @@ body {
   color: $primary;
 
   a {
-
     text-decoration: none;
     text-transform: uppercase;
-    font-family: $fontfamily2;
+    font-family: $fontfamily1;
   }
-
-
   a:link {
     color: $primary;
   }
   a:visited {
     color: $primary;
-  }
-  a:hover {
-    color: $third;
   }
 }
 
