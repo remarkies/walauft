@@ -14,4 +14,5 @@
     @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
     @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap');
     @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Grenze&display=swap');
 </style>
