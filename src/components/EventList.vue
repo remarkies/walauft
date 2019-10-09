@@ -1,12 +1,10 @@
 <template>
     <div class="event-list">
-        <p>Selected genres</p>
-        <div class="selected-genres">
-            <Tag @click.native="tagClick(genre)" :tag="genre" v-for="genre in selectedGenres"/>
-        </div>
-        <p>Available genres</p>
         <div class="genres">
-            <Tag @click.native="tagClick(genre)" :tag="genre" v-for="genre in genres"/>
+            <Tag @click.native="tagClick(genre)" :tag="genre[1]" v-for="genre in genres"/>
+        </div>
+        <div class="selected-genres">
+            <Tag @click.native="tagClick(genre)" :tag="genre[1]" v-for="genre in selectedGenres"/>
         </div>
         <Event @click.native="eventClick(event.fields.json.location.latitude, event.fields.json.location.longitude)" :event="event.fields.json" v-for="event in filteredEvents" />
     </div>
@@ -44,8 +42,14 @@
           let foundGenre = false;
 
           this.selectedGenres.forEach(o => {
-            if(musicstyles.toUpperCase().includes(o.toUpperCase()))
-              foundGenre = true;
+
+            let styles = musicstyles.split(',');
+            styles.forEach(s => {
+              s = s.trimLeft().trimRight();
+
+              if(o[1].toUpperCase() === this.getParentGenre(s)[1].toUpperCase())
+                foundGenre = true;
+            });
           });
 
 
@@ -54,7 +58,19 @@
         } else {
           return true;
         }
+      },
+      getParentGenre: function(child) {
+        let Enumerable = require('../../node_modules/linq');
+
+        let parent = Enumerable.from(this.genresOverall).firstOrDefault($ => $[2].toUpperCase().includes(child.toUpperCase()));
+        if(parent === undefined) {
+
+          parent = this.genresOverall[5];
+        }
+
+        return parent;
       }
+
     },
     data: function() {
       return {
@@ -63,58 +79,12 @@
         genres: [],
         selectedGenres: [],
         genresOverall: [
-          [1, "Chlöpft & Tätscht", "Deep House,House"],
-          [2, "Gitarre Gschmäus"],
-          [3, "Gangster"],
-          [4, "Radio Musik"],
-          [5, "Ab uf Südamerika"],
-          [6, "Restliche Gugus", "Elektr. Musik" +
-          "1: \"\"\n" +
-          "2: \"\"\n" +
-          "3: \"\"\n" +
-          "4: \"\"\n" +
-          "5: \" Hits\"\n" +
-          "6: \" Worldmusic\"\n" +
-          "7: \"Diverses\"\n" +
-          "8: \"Schlager\"\n" +
-          "9: \" Volksmusik\"\n" +
-          "10: \"Afro Beats\"\n" +
-          "11: \" Disco\"\n" +
-          "12: \" Urban\"\n" +
-          "13: \"Jazz\"\n" +
-          "14: \"90's\"\n" +
-          "15: \" Club Classics\"\n" +
-          "16: \" Funk\"\n" +
-          "17: \" Hip Hop\"\n" +
-          "18: \" Reggaeton\"\n" +
-          "19: \" Soul\"\n" +
-          "20: \" Trap\"\n" +
-          "21: \"Hip Hop\"\n" +
-          "22: \" Techno\"\n" +
-          "23: \"Indie Rock\"\n" +
-          "24: \"Electro Swing\"\n" +
-          "25: \" Latin\"\n" +
-          "26: \"Funk\"\n" +
-          "27: \" Oldschool\"\n" +
-          "28: \" R'n'B\"\n" +
-          "29: \"Pop\"\n" +
-          "30: \"Partytunes\"\n" +
-          "31: \" Schlager\"\n" +
-          "32: \" Rap\"\n" +
-          "33: \"R'n'B\"\n" +
-          "34: \"80's\"\n" +
-          "35: \" 90's\"\n" +
-          "36: \"Salsa\"\n" +
-          "37: \" Partytunes\"\n" +
-          "38: \" Dancehall\"\n" +
-          "39: \" Reggae\"\n" +
-          "40: \"Rock\"\n" +
-          "41: \"Tech House\"\n" +
-          "42: \"Dancehall\"\n" +
-          "43: \" Pop\"\n" +
-          "44: \" Singer/Songwriter\""]
-
-
+          [1, "Chlöpft & Tätscht", "Tech House,Techno,Elektr. Musik,Deep House,House,Electro Swing"],
+          [2, "Gitarre Gschmäus", "Indie Rock,Rock,Metal"],
+          [3, "Gangster", "Rap,Urban,Hip Hop,Trap,Oldschool,R'n'B"],
+          [4, "Radio Musik", "80's,90's,Singer/Songwriter,Partytunes,Pop,Club Classics,90's,Disco,Hits,Worldmusic,Schlager,Volksmusik"],
+          [5, "Ab uf Südamerika", "Reggae,Dancehall,Salsa,Afro Beats,Funk,Reggaeton,Latin"],
+          [6, "Restliche Gugus", "Soul,Jazz,Diverses"]
         ],
 
       }
@@ -153,9 +123,11 @@
           this.events.forEach(o => {
             let eventGenres = o.fields.json.musicstyles.split(',');
             eventGenres.forEach(eventGenre => {
-              let trimmedGenre = eventGenre.trimRight();
-              if(!Enumerable.from(this.genres).any($ => $ === trimmedGenre) && trimmedGenre.length > 0)
-                this.genres.push(eventGenre.trimRight());
+              let trimmedGenre = eventGenre.trimRight().trimLeft();
+              if(!Enumerable.from(this.genres).any($ => $ === this.getParentGenre(trimmedGenre)) && trimmedGenre.length > 0) {
+
+                this.genres.push(this.getParentGenre(trimmedGenre));
+              }
             });
           });
         } catch(exception) {

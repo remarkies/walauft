@@ -30,9 +30,6 @@
           if(o.length > 0)
             res.push(o);
         });
-
-
-
         return res;
       }
     }
