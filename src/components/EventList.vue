@@ -1,12 +1,10 @@
 <template>
     <div class="event-list">
-        <p>Selected genres</p>
-        <div class="selected-genres">
-            <Tag @click.native="tagClick(genre)" :tag="genre" v-for="genre in selectedGenres"/>
-        </div>
-        <p>Available genres</p>
         <div class="genres">
-            <Tag @click.native="tagClick(genre)" :tag="genre" v-for="genre in genres"/>
+            <Tag @click.native="tagClick(genre)" :tag="genre[1]" v-for="genre in genres"/>
+        </div>
+        <div class="selected-genres">
+            <Tag @click.native="tagClick(genre)" :tag="genre[1]" v-for="genre in selectedGenres"/>
         </div>
         <Event @click.native="eventClick(event.fields.json.location.latitude, event.fields.json.location.longitude)" :event="event.fields.json" v-for="event in filteredEvents" />
     </div>
@@ -44,8 +42,14 @@
           let foundGenre = false;
 
           this.selectedGenres.forEach(o => {
-            if(musicstyles.toUpperCase().includes(o.toUpperCase()))
-              foundGenre = true;
+
+            let styles = musicstyles.split(',');
+            styles.forEach(s => {
+              s = s.trimLeft().trimRight();
+
+              if(o[1].toUpperCase() === this.getParentGenre(s)[1].toUpperCase())
+                foundGenre = true;
+            });
           });
 
 
@@ -54,14 +58,35 @@
         } else {
           return true;
         }
+      },
+      getParentGenre: function(child) {
+        let Enumerable = require('../../node_modules/linq');
+
+        let parent = Enumerable.from(this.genresOverall).firstOrDefault($ => $[2].toUpperCase().includes(child.toUpperCase()));
+        if(parent === undefined) {
+
+          parent = this.genresOverall[5];
+        }
+
+        return parent;
       }
+
     },
     data: function() {
       return {
         events: [],
         filteredEvents: [],
         genres: [],
-        selectedGenres: []
+        selectedGenres: [],
+        genresOverall: [
+          [1, "Chlöpft & Tätscht", "Tech House,Techno,Elektr. Musik,Deep House,House,Electro Swing"],
+          [2, "Gitarre Gschmäus", "Indie Rock,Rock,Metal"],
+          [3, "Gangster", "Rap,Urban,Hip Hop,Trap,Oldschool,R'n'B"],
+          [4, "Radio Musik", "80's,90's,Singer/Songwriter,Partytunes,Pop,Club Classics,90's,Disco,Hits,Worldmusic,Schlager,Volksmusik"],
+          [5, "Ab uf Südamerika", "Reggae,Dancehall,Salsa,Afro Beats,Funk,Reggaeton,Latin"],
+          [6, "Restliche Gugus", "Soul,Jazz,Diverses"]
+        ],
+
       }
     },
     components: {
@@ -92,18 +117,24 @@
             .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
 
 
+        this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1");
+
         try {
           this.events.forEach(o => {
             let eventGenres = o.fields.json.musicstyles.split(',');
             eventGenres.forEach(eventGenre => {
-              let trimmedGenre = eventGenre.trimRight();
-              if(!Enumerable.from(this.genres).any($ => $ === trimmedGenre) && trimmedGenre.length > 0)
-                this.genres.push(eventGenre.trimRight());
+              let trimmedGenre = eventGenre.trimRight().trimLeft();
+              if(!Enumerable.from(this.genres).any($ => $ === this.getParentGenre(trimmedGenre)) && trimmedGenre.length > 0) {
+
+                this.genres.push(this.getParentGenre(trimmedGenre));
+              }
             });
           });
         } catch(exception) {
           console.log("Could not fetch genres from events! Message: " + exception);
         }
+
+        console.log(this.genres);
 
         this.filteredEvents = this.events;
       }
@@ -118,5 +149,5 @@
 </script>
 
 <style scoped>
-    @import "../styles/event.scss";
+    @import "../styles/eventList.scss";
 </style>

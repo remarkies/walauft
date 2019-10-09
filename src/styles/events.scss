@@ -1,3 +1,7 @@
+.content {
+  max-width: 800px;
+  margin: auto;
+}
 
 .heute-sonst-switch{
   font-size: 10vw;
@@ -8,6 +12,7 @@
 {
   position: fixed !important;
   z-index: -1;
+  margin: -8px;
 }
 #heute{
 

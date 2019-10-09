@@ -8,19 +8,31 @@
 
   export default {
     name: "gmap",
+    data: function() {
+      return {
+        markers: []
+      }
+    },
     methods: {
       showLocation: function(lat, lang) {
+        for (var i = 0; i < this.markers.length; i++) { //delets all markers
+          this.markers[i].setMap(null);
+        }
         let position = new google.maps.LatLng(lat, lang);
         console.log(lat, lang);
+        if(lat > 0){
         this.map.panTo(position);
-        setMapOnAll(null);
+       // console.log("marker wird gesetzt");
+
         let marker = new google.maps.Marker({
           position: position,
-         // icon: "myicon.png",
+          //animation: google.maps.Animation.DROP,
+          icon: "Circle.svg",
           map: this.map,
-
         });
-
+        this.markers.push(marker);
+        }
+        //console.log(marker);
         ;
       }
 
