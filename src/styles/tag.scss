@@ -6,14 +6,20 @@
   color: $primary;
   margin: 3px;
   padding: 1px 6px;
-  //border-radius: 2px;
+  border-radius: 2px;
   cursor: pointer;
   //text-transform: uppercase;
   white-space:nowrap;
+}
+
+.filter {
+
+  //text-decoration: line-through;
 }
 
 .selected {
   border: solid 2px $primary;
   background-color: $primary;
   color: $secondary;
+  text-decoration: none;
 }

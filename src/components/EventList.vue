@@ -1,7 +1,7 @@
 <template>
     <div class="event-list">
         <div class="genres">
-            <Tag @click.native="tagClick(genre)" :selected="genre[1]" :tag="genre[0][1]" v-for="genre in genres"/>
+            <Tag class="filter" @click.native="tagClick(genre)" :selected="genre[1]" :tag="genre[0][1]" v-for="genre in genres"/>
         </div>
         <Event @click.native="eventClick(event.fields.json.location.latitude, event.fields.json.location.longitude)" :event="event.fields.json" v-for="event in filteredEvents" />
     </div>
@@ -36,17 +36,21 @@
         if(this.genres.length > 0) {
           let foundGenre = false;
 
+
           console.log("Selected genres: " + Enumerable.from(this.genres).where($ => $[1] === true).count());
+          if(Enumerable.from(this.genres).any($ => $[1] === true)) {
+            Enumerable.from(this.genres).where($ => $[1] === true).forEach(o => {
 
-          Enumerable.from(this.genres).where($ => $[1] === true).forEach(o => {
-
-            let styles = musicstyles.split(',');
-            styles.forEach(s => {
-              s = s.trimLeft().trimRight();
-              if(o[0][1].toUpperCase() === this.getParentGenre(s)[1].toUpperCase())
-                foundGenre = true;
+              let styles = musicstyles.split(',');
+              styles.forEach(s => {
+                s = s.trimLeft().trimRight();
+                if (o[0][1].toUpperCase() === this.getParentGenre(s)[1].toUpperCase())
+                  foundGenre = true;
+              });
             });
-          });
+          } else {
+            foundGenre = true;
+          }
 
 
           return foundGenre;
@@ -74,7 +78,6 @@
         events: [],
         filteredEvents: [],
         genres: [],
-        selectedGenres: [],
         genresOverall: [
           [1, "Chlöpft & Tätscht", "Tech House,Techno,Elektr. Musik,Deep House,House,Electro Swing"],
           [2, "Gitarre Gschmäus", "Indie Rock,Rock,Metal"],
@@ -125,7 +128,7 @@
               if(!Enumerable.from(this.genres).any($ => $[0][1] === this.getParentGenre(trimmedGenre)[1]) && trimmedGenre.length > 0) {
 
 
-                this.genres.push([this.getParentGenre(trimmedGenre), true]);
+                this.genres.push([this.getParentGenre(trimmedGenre), false]);
               }
             });
           });

@@ -19,7 +19,16 @@
           this.markers[i].setMap(null);
         }
         let position = new google.maps.LatLng(lat, lang);
-        console.log(lat, lang);
+
+        var icon = {
+          path: 'M-10,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0',
+          fillColor: '#FFF',
+          fillOpacity: .8,
+          anchor: new google.maps.Point(0,0),
+          strokeWeight: 0,
+          scale: 0.5
+        };
+
         if(lat > 0){
         this.map.panTo(position);
        // console.log("marker wird gesetzt");
@@ -27,13 +36,11 @@
         let marker = new google.maps.Marker({
           position: position,
           //animation: google.maps.Animation.DROP,
-          icon: "Circle.svg",
+          icon: icon,
           map: this.map,
         });
         this.markers.push(marker);
         }
-        //console.log(marker);
-        ;
       }
 
     },
