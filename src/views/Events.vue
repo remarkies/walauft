@@ -4,8 +4,8 @@
     <GMap id="backgroundMap" ref="map" />
     <div class="content">
       <div class="heute-sonst-switch">
-        <a v-on:click="changeTypeToToday"><div id="heute" >hüt</div></a>
-        <a v-on:click="changeTypeToRest"><div id="sonst" >süsch</div></a>
+        <a v-on:click="changeTypeToToday" v-bind:class="{ active: heuteActive}"><div id="heute" >HÜT</div></a>
+        <a v-on:click="changeTypeToRest" v-bind:class="{ active: !heuteActive}"><div id="sonst" >SÜSCH</div></a>
       </div>
 
       <Header :type="type"/>
@@ -26,6 +26,7 @@
     components: { Header, EventList, GMap },
     data: function() {
       return {
+        heuteActive: true,
         type: {
           type: String,
           default : "0"
@@ -34,9 +35,11 @@
     },
     methods : {
       changeTypeToToday: function() {
+        this.heuteActive = true;
         this.type = "0";
       },
       changeTypeToRest: function() {
+        this.heuteActive = false;
         this.type = "1";
       },
       changedHandler: function(event) {
