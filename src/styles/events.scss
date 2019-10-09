@@ -5,10 +5,41 @@
   overflow: hidden;
 }
 
+
+.header {
+  padding-top: 2em;
+  display: flex;
+  width: 100vw;
+  padding-bottom: 2em;
+}
+
+.city {
+  font-size: 4em;
+  flex-grow: 0;
+}
+
+.nav{
+  justify-content: center;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 3em;
+}
+
+#today {
+}
+
+#all {
+
+}
+
+
+
 .heute-sonst-switch{
   color: white;
-  font-size: 7em;
-  text-decoration: none ;
+  font-size: 4em;
+  text-decoration:none;
   display: flex;
   justify-content: space-evenly;
   font-family: $fontfamily2 !important;

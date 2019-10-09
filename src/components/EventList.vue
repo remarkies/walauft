@@ -36,8 +36,6 @@
         if(this.genres.length > 0) {
           let foundGenre = false;
 
-
-          console.log("Selected genres: " + Enumerable.from(this.genres).where($ => $[1] === true).count());
           if(Enumerable.from(this.genres).any($ => $[1] === true)) {
             Enumerable.from(this.genres).where($ => $[1] === true).forEach(o => {
 
@@ -117,7 +115,7 @@
             .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
 
 
-        this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1");
+        //this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1");
 
         try {
           this.events.forEach(o => {
@@ -135,9 +133,6 @@
         } catch(exception) {
           console.log("Could not fetch genres from events! Message: " + exception);
         }
-
-
-        console.log(this.genres);
 
         this.filteredEvents = this.events;
       }
