@@ -1,6 +1,7 @@
 <template>
   <div class="Events">
 
+    <GMap id="backgroundMap" ref="map" />
     <div class="heute-sonst-switch">
       <a v-on:click="changeTypeToToday"><div id="heute" >hüt</div></a>
       <a v-on:click="changeTypeToRest"><div id="sonst" >süsch</div></a>
@@ -8,7 +9,6 @@
 
     <Header :type="type"/>
     <EventList :type="type" @locationChanged="changedHandler"/>
-    <GMap ref="map" />
   </div>
 </template>
 <style scoped>

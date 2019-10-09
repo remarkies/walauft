@@ -4,8 +4,10 @@
   display: flex;
   justify-content: space-evenly;
 }
-.gmap{
-  position: fixed;
+#backgroundMap
+{
+  position: fixed !important;
+  z-index: -1;
 }
 #heute{
 
