@@ -1,34 +1,33 @@
 @import 'theme.scss';
 .event{
-  padding-bottom: 2.5rem;
-  font-size: 2rem;
-  text-align: left;
 
-  //border: solid 4px white;
-  //background-color:rgba(51, 51, 51, 0.5);
+  padding: 1em;
+  margin: 1em 0em;
+  text-align: left;
+  background-color:rgba(51, 51, 51, 0.8);
   border-radius: 1px;
   cursor: pointer;
-  width: 100%;
-  padding-left: 10px;
+  width: 100vw;
+  display: flex;
+
 
 }
 
-a{
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 1.5em;
-  font-family: $fontfamily2;
-  padding-top: 20px;
+.dates {
+  font-size: 1.8em;
+  padding-right: 1em;
 }
 .event-name{
+
+  font-size: 1.8em;
   text-transform: uppercase;
-  font-family: $fontfamily2;
 
 }
+.club {
+  font-size: 1.4em;
+}
+
 .club, .zeit {
-  font-family: $fontfamily1;
-  font-weight: normal;
-  font-size: 1rem;
   padding-right: 10px;
 }
 
@@ -38,13 +37,6 @@ a{
 
 
 .genres {
-  display: flex;
-  max-width: 100vw;
-
-  flex-wrap: wrap;
-}
-
-.selected-genres {
   display: flex;
   max-width: 100vw;
 

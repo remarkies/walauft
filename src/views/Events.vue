@@ -8,7 +8,6 @@
         <a v-on:click="changeTypeToRest" v-bind:class="{ active: !heuteActive}"><div id="sonst" >SÜSCH</div></a>
       </div>
 
-      <Header :type="type"/>
       <EventList :type="type" @locationChanged="changedHandler"/>
     </div>
   </div>
@@ -18,12 +17,11 @@
 </style>
 <script>
 
-  import Header from "../components/Header";
   import EventList from "../components/EventList";
   import GMap from "../components/GMap"
   export default {
     name: "events",
-    components: { Header, EventList, GMap },
+    components: { EventList, GMap },
     data: function() {
       return {
         heuteActive: true,

@@ -2,16 +2,23 @@
 .content {
   max-width: 800px;
   margin: auto;
+  overflow: hidden;
 }
 
 .heute-sonst-switch{
   color: grey;
-  font-size: 3em;
+  font-size: 5em;
+
   display: flex;
   justify-content: space-evenly;
 }
+
+.heute-sonst-switch a {
+  cursor: pointer;
+}
+
 .active{
-  color: white;
+  color: $primary;
 
 }
 #backgroundMap
