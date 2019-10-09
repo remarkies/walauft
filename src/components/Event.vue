@@ -1,13 +1,19 @@
 <template>
     <div class="event">
+        <div class="dates">
+            <div class="datum">{{getWeekday(event.date)}}</div>
+            <div class="datum">{{getDate(event.date)}}</div>
+        </div>
+        <div>
         <div class="event-name">{{event.name}}</div>
-        <div class="event-desc-container">
+            <div class="event-desc-container">
 
-                <div class="club">{{event.location.name}}</div>
-                <div class="zeit">{{event.start}}</div>
+                    <div class="club">{{event.location.name}}</div>
+                    <div class="zeit">{{event.start}}</div>
 
-            <div class="genres">
-                <Tag :tag="genre" v-for="genre in splitGenres(event.musicstyles)"/>
+                <div class="genres">
+                    <Tag :tag="genre" v-for="genre in splitGenres(event.musicstyles)"/>
+                </div>
             </div>
         </div>
     </div>
@@ -15,6 +21,8 @@
 
 <script>
   import Tag from "./Tag";
+
+  import moment from "moment";
   export default {
     name: "Event",
     components: { Tag },
@@ -33,6 +41,12 @@
             res.push(o);
         });
         return res;
+      },
+      getWeekday: function(date) {
+        return moment(date).format("ddd").toUpperCase();
+      },
+      getDate: function(date) {
+        return moment(date).format("DD.MM");
       }
     }
   };
