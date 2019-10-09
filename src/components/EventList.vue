@@ -61,7 +61,62 @@
         events: [],
         filteredEvents: [],
         genres: [],
-        selectedGenres: []
+        selectedGenres: [],
+        genresOverall: [
+          [1, "Chlöpft & Tätscht", "Deep House,House"],
+          [2, "Gitarre Gschmäus"],
+          [3, "Gangster"],
+          [4, "Radio Musik"],
+          [5, "Ab uf Südamerika"],
+          [6, "Restliche Gugus", "Elektr. Musik" +
+          "1: \"\"\n" +
+          "2: \"\"\n" +
+          "3: \"\"\n" +
+          "4: \"\"\n" +
+          "5: \" Hits\"\n" +
+          "6: \" Worldmusic\"\n" +
+          "7: \"Diverses\"\n" +
+          "8: \"Schlager\"\n" +
+          "9: \" Volksmusik\"\n" +
+          "10: \"Afro Beats\"\n" +
+          "11: \" Disco\"\n" +
+          "12: \" Urban\"\n" +
+          "13: \"Jazz\"\n" +
+          "14: \"90's\"\n" +
+          "15: \" Club Classics\"\n" +
+          "16: \" Funk\"\n" +
+          "17: \" Hip Hop\"\n" +
+          "18: \" Reggaeton\"\n" +
+          "19: \" Soul\"\n" +
+          "20: \" Trap\"\n" +
+          "21: \"Hip Hop\"\n" +
+          "22: \" Techno\"\n" +
+          "23: \"Indie Rock\"\n" +
+          "24: \"Electro Swing\"\n" +
+          "25: \" Latin\"\n" +
+          "26: \"Funk\"\n" +
+          "27: \" Oldschool\"\n" +
+          "28: \" R'n'B\"\n" +
+          "29: \"Pop\"\n" +
+          "30: \"Partytunes\"\n" +
+          "31: \" Schlager\"\n" +
+          "32: \" Rap\"\n" +
+          "33: \"R'n'B\"\n" +
+          "34: \"80's\"\n" +
+          "35: \" 90's\"\n" +
+          "36: \"Salsa\"\n" +
+          "37: \" Partytunes\"\n" +
+          "38: \" Dancehall\"\n" +
+          "39: \" Reggae\"\n" +
+          "40: \"Rock\"\n" +
+          "41: \"Tech House\"\n" +
+          "42: \"Dancehall\"\n" +
+          "43: \" Pop\"\n" +
+          "44: \" Singer/Songwriter\""]
+
+
+        ],
+
       }
     },
     components: {
@@ -92,6 +147,8 @@
             .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
 
 
+        this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1");
+
         try {
           this.events.forEach(o => {
             let eventGenres = o.fields.json.musicstyles.split(',');
@@ -104,6 +161,8 @@
         } catch(exception) {
           console.log("Could not fetch genres from events! Message: " + exception);
         }
+
+        console.log(this.genres);
 
         this.filteredEvents = this.events;
       }
