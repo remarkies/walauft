@@ -10,7 +10,7 @@
 <style lang="scss">
     @import '../styles/home.scss';
 </style>
-<script>
+<script scoped>
   //  import Vue from "Vue";
   export default {
     name: "home",

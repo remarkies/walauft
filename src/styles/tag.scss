@@ -1,6 +1,7 @@
 @import 'theme.scss';
 .tag {
-  font-size: 1em;
+  font-size: 1rem;
+  font-family: "Open Sans";
   border: solid 2px $primary;
   color: $primary;
   margin: 3px;

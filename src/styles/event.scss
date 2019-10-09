@@ -1,32 +1,52 @@
 @import 'theme.scss';
 .event{
-  margin: 12px 0px;
-  padding: 12px;
+  padding-bottom: 2.5rem;
+  font-size: 2rem;
   text-align: left;
+
   //border: solid 4px white;
   //background-color:rgba(51, 51, 51, 0.5);
   border-radius: 1px;
   cursor: pointer;
+  width: 100%;
+  padding-left: 10px;
 
 }
-.event-name {
+
+a{
+  text-decoration: none;
   text-transform: uppercase;
   font-size: 1.5em;
+  font-family: "Open Sans Condensed";
+  padding-top: 20px;
 }
-.club{
+.event-name{
+  text-transform: uppercase;
+  font-family: "Open Sans Condensed";
 
-  font-size: 1.2em;
-  padding-right: 5px;
 }
-.zeit{
-  font-size: 0.8em;
-  margin-right: 12px;
+.club, .zeit {
+  font-family: "Open Sans";
+  font-weight: normal;
+  font-size: 1rem;
+  padding-right: 10px;
 }
+
 .event-desc-container{
   display: flex;
-  //flex-direction: column;
 }
+
 
 .genres {
   display: flex;
+  max-width: 100vw;
+
+  flex-wrap: wrap;
+}
+
+.selected-genres {
+  display: flex;
+  max-width: 100vw;
+
+  flex-wrap: wrap;
 }
