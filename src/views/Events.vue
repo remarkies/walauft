@@ -4,8 +4,8 @@
     <GMap id="backgroundMap" ref="map" />
     <div class="content">
       <div class="heute-sonst-switch">
-        <a v-on:click="changeTypeToToday" v-bind:class="{ active: heuteActive}"><div id="heute" >HÜT</div></a>
-        <a v-on:click="changeTypeToRest" v-bind:class="{ active: !heuteActive}"><div id="sonst" >SÜSCH</div></a>
+        <a v-on:click="changeTypeToToday" v-bind:class="{ active: !heuteActive}"><div id="heute" >HÜT</div></a>
+        <a v-on:click="changeTypeToRest" v-bind:class="{ active: heuteActive}"><div id="sonst" >SÜSCH</div></a>
       </div>
 
       <EventList :type="type" @locationChanged="changedHandler"/>

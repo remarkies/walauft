@@ -6,12 +6,13 @@
 }
 
 .heute-sonst-switch{
-  color: grey;
-  font-size: 5em;
-
+  color: white;
+  font-size: 7em;
+  text-decoration: none ;
   display: flex;
   justify-content: space-evenly;
   font-family: $fontfamily2 !important;
+  height: 100px;
 }
 
 .heute-sonst-switch a {
@@ -19,11 +20,13 @@
 }
 
 .active{
-  color: white;
+
+  text-decoration: line-through;
 
 }
 #backgroundMap
 {
+  pointer-events: none;
   position: fixed !important;
   z-index: -1;
 }
