@@ -43,32 +43,37 @@
 
           position: {
             lat: 47.049026,
-            lng: 8.308846
+            lng: 8.308846,
+            color: "#2973a6"
           }
         },
         { //Bern id 3
           position: {
             lat: 46.946367,
-            lng: 7.444112
+            lng: 7.444112,
+            color: "#a69029"
           }
         },
         { //Basel id 4
           position: {
             lat: 47.549363,
-            lng: 7.589188
+            lng: 7.589188,
+            color: "#a62c29"
           }
         },
 
         { //SANGALLE! id 5
           position: {
             lat: 47.424854,
-            lng: 9.376589
+            lng: 9.376589,
+            color: "#29a74e"
           }
         },
         { //Zürich id 6
           position: {
             lat: 47.380134,
-            lng: 8.527955
+            lng: 8.527955,
+            color: "#29a6a5"
           }
         }
       ];
@@ -126,6 +131,9 @@
               "stylers": [
                 {
                   "color": "#757575"
+                },
+                {
+                  "visibility": "off"
                 }
               ]
             },
@@ -157,6 +165,14 @@
             },
             {
               "featureType": "administrative.neighborhood",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
               "stylers": [
                 {
                   "visibility": "off"
@@ -201,10 +217,21 @@
             },
             {
               "featureType": "road",
-              "elementType": "geometry.fill",
               "stylers": [
                 {
-                  "color": "#2c2c2c"
+                  "color": "#515151"
+                },
+                {
+                  "weight": 0.5
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "labels.icon",
+              "stylers": [
+                {
+                  "visibility": "off"
                 }
               ]
             },
@@ -255,6 +282,17 @@
             },
             {
               "featureType": "transit",
+              "stylers": [
+                {
+                  "color": "#ffffff"
+                },
+                {
+                  "weight": 0.5
+                }
+              ]
+            },
+            {
+              "featureType": "transit",
               "elementType": "labels.text.fill",
               "stylers": [
                 {
@@ -262,12 +300,14 @@
                 }
               ]
             },
+
+
             {
               "featureType": "water",
-              "elementType": "geometry",
+              "elementType": "geometry.fill",
               "stylers": [
                 {
-                  "color": "#000000"
+                  "color": locations[this.$route.params.regionId - 2].position.color,
                 }
               ]
             },
@@ -280,7 +320,8 @@
                 }
               ]
             }
-          ];
+          ]
+        ;
         const options = {
           zoom: 14,
           center: new google.maps.LatLng(locations[this.$route.params.regionId - 2].position),
