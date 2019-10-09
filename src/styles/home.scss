@@ -1,18 +1,19 @@
+@import 'theme.scss';
 body {
-  background-color: black;
-  color: white;
+  background-color: $secondary;
+  color: $primary;
   a {
     text-decoration: none
   }
 
   a:link {
-    color: white;
+    color: $primary;
   }
   a:visited {
-    color: white;
+    color: $primary;
   }
   a:hover {
-    color: grey;
+    color: $third;
   }
 }
 

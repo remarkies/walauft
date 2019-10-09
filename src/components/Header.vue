@@ -9,6 +9,6 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     @import url('https://fonts.googleapis.com/css?family=Abel&display=swap');
 </style>

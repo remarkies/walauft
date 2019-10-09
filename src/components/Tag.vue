@@ -1,20 +1,22 @@
 <template>
-    <div class="tag">{{tag}}</div>
+    <div v-bind:class="{ selected: selected }" class="tag">{{tag}}</div>
 </template>
 
 <script>
   export default {
     name: "Tag",
     props: {
-      tag: String
+      tag: String,
+      selected: Boolean
     },
     watch: {
       tag: function(newVal) {
-      }
+      },
+
     }
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     @import "../styles/tag.scss";
 </style>

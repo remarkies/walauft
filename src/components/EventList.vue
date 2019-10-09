@@ -1,10 +1,7 @@
 <template>
     <div class="event-list">
         <div class="genres">
-            <Tag @click.native="tagClick(genre)" :tag="genre[1]" v-for="genre in genres"/>
-        </div>
-        <div class="selected-genres">
-            <Tag @click.native="tagClick(genre)" :tag="genre[1]" v-for="genre in selectedGenres"/>
+            <Tag @click.native="tagClick(genre)" :selected="genre[1]" :tag="genre[0][1]" v-for="genre in genres"/>
         </div>
         <Event @click.native="eventClick(event.fields.json.location.latitude, event.fields.json.location.longitude)" :event="event.fields.json" v-for="event in filteredEvents" />
     </div>
@@ -24,30 +21,29 @@
         this.$emit('locationChanged', {lat: latitude, lng: longitude});
        console.log(latitude, longitude);
       },
-      tagClick: function(tag) {
-        let Enumerable = require('../../node_modules/linq');
-        if(!Enumerable.from(this.selectedGenres).any($ => $ === tag)){
-          this.selectedGenres.push(tag);
+      tagClick: function(genre) {
+
+        let index = -1;
+        for(let i = 0; i < this.genres.length; i++) {
+          if(this.genres[i] === genre)
+            index = i;
         }
-        else {
-          for(let i = 0; i < this.selectedGenres.length; i++) {
-            if(this.selectedGenres[i] === tag) {
-              this.selectedGenres.splice(i,1);
-            }
-          }
-        }
+        genre[1] = !genre[1];
+        this.$set(this.genres, index, genre);
       },
       genreComparer: function(musicstyles) {
-        if(this.selectedGenres.length > 0) {
+        let Enumerable = require('../../node_modules/linq');
+        if(this.genres.length > 0) {
           let foundGenre = false;
 
-          this.selectedGenres.forEach(o => {
+          console.log("Selected genres: " + Enumerable.from(this.genres).where($ => $[1] === true).count());
+
+          Enumerable.from(this.genres).where($ => $[1] === true).forEach(o => {
 
             let styles = musicstyles.split(',');
             styles.forEach(s => {
               s = s.trimLeft().trimRight();
-
-              if(o[1].toUpperCase() === this.getParentGenre(s)[1].toUpperCase())
+              if(o[0][1].toUpperCase() === this.getParentGenre(s)[1].toUpperCase())
                 foundGenre = true;
             });
           });
@@ -61,6 +57,7 @@
       },
       getParentGenre: function(child) {
         let Enumerable = require('../../node_modules/linq');
+
 
         let parent = Enumerable.from(this.genresOverall).firstOrDefault($ => $[2].toUpperCase().includes(child.toUpperCase()));
         if(parent === undefined) {
@@ -97,7 +94,7 @@
       type: String
     },
     watch: {
-      selectedGenres: async function() {
+      genres: async function() {
         let Enumerable = require('../../node_modules/linq');
         this.filteredEvents = Enumerable.from(this.events).where($ => this.genreComparer($.fields.json.musicstyles))
           .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
@@ -124,15 +121,18 @@
             let eventGenres = o.fields.json.musicstyles.split(',');
             eventGenres.forEach(eventGenre => {
               let trimmedGenre = eventGenre.trimRight().trimLeft();
-              if(!Enumerable.from(this.genres).any($ => $ === this.getParentGenre(trimmedGenre)) && trimmedGenre.length > 0) {
 
-                this.genres.push(this.getParentGenre(trimmedGenre));
+              if(!Enumerable.from(this.genres).any($ => $[0][1] === this.getParentGenre(trimmedGenre)[1]) && trimmedGenre.length > 0) {
+
+
+                this.genres.push([this.getParentGenre(trimmedGenre), true]);
               }
             });
           });
         } catch(exception) {
           console.log("Could not fetch genres from events! Message: " + exception);
         }
+
 
         console.log(this.genres);
 
@@ -148,6 +148,6 @@
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     @import "../styles/eventList.scss";
 </style>
