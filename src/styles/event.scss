@@ -16,6 +16,18 @@
 .dates {
   font-size: 1.8em;
   padding-right: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.weekday {
+  flex-grow:0;
+}
+
+.datum {
+  flex-grow: 1;
+  flex-direction: column-reverse;
+  display: flex;
 }
 .event-name{
 
@@ -25,10 +37,18 @@
 }
 .club {
   font-size: 1.4em;
+
 }
+
 
 .club, .zeit {
   padding-right: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.zeit {
+  margin-bottom: 1em;
 }
 
 .event-desc-container{

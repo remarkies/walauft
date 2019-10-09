@@ -1,7 +1,7 @@
 <template>
     <div class="event">
         <div class="dates">
-            <div class="datum">{{getWeekday(event.date)}}</div>
+            <div class="weekday">{{getWeekday(event.date)}}</div>
             <div class="datum">{{getDate(event.date)}}</div>
         </div>
         <div>
