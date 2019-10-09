@@ -28,6 +28,7 @@
     async mounted() {
       const locations = [
         { //Luzern id 2
+
           position: {
             lat: 47.049026,
             lng: 8.308846
