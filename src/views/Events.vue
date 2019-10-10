@@ -5,7 +5,8 @@
 
     <div class="header">
       <div id="today" class="nav"><a v-on:click="changeTypeToToday" v-bind:class="{ active: !heuteActive}">HÜT</a></div>
-        <div class="city"><router-link :to="{name: 'home'}">{{getCurrentCity()}}</router-link></div>
+
+      <div class="city"><router-link :to="{name: 'home'}"><-{{getCurrentCity()}}</router-link></div>
       <div id="all" class="nav"><a v-on:click="changeTypeToRest" v-bind:class="{ active: heuteActive}">SÜSCH</a></div>
     </div>
       <div class="content">
@@ -14,6 +15,7 @@
   </div>
 </template>
 <style scoped>
+
   @import "../styles/events.scss";
 </style>
 <script>
@@ -28,11 +30,11 @@
         heuteActive: true,
         when: "0",
         regionen: [
-          { id: "2", name: "Luzern" },
-          { id: "3", name: "Bern" },
-          { id: "4", name: "Basel" },
-          { id: "5", name: "St.Gallen" },
-          { id: "6", name: "Zürich" }
+          { id: "2", name: "Luzärn" },
+          { id: "3", name: "Bärn" },
+          { id: "4", name: "Baasel" },
+          { id: "5", name: "St.Galle" },
+          { id: "6", name: "Züri" }
         ]
       }
     },
