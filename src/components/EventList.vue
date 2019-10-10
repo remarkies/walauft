@@ -84,7 +84,7 @@
             .where($ => moment($.fields.json.date).add(-1, 'day').isAfter(moment())).toArray();
 
 
-        this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1").toArray();
+        //this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1").toArray();
 
         try {
           this.events.forEach(o => {
