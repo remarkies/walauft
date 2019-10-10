@@ -68,6 +68,9 @@
 
         return parent;
       },
+      compareDates: function ( a, b ) {
+        return moment(a.fields.json.date, "YYYY-MM-DD").format('YYYYMMDD') - moment(b.fields.json.date, "YYYY-MM-DD").format('YYYYMMDD');
+      },
       updateEvents: async function() {
         let Enumerable = require('../../node_modules/linq');
         let result = await getEntries(this.$route.params.regionId);
@@ -75,15 +78,13 @@
 
         if(this.when === "0")
           this.events = Enumerable.from(result.items)
-            .where($ => $.fields.json.date == moment().add(-10, 'hours').format('YYYY-MM-DD'))
-            .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
+            .where($ => $.fields.json.date == moment().add(-10, 'hours').format('YYYY-MM-DD')).toArray();
         else if(this.when === "1")
           this.events = Enumerable.from(result.items)
-            .where($ => moment($.fields.json.date).add(-1, 'day').isAfter(moment()))
-            .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
+            .where($ => moment($.fields.json.date).add(-1, 'day').isAfter(moment())).toArray();
 
 
-        //this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1");
+        this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1").toArray();
 
         try {
           this.events.forEach(o => {
@@ -102,7 +103,7 @@
           console.log("Could not fetch genres from events! Message: " + exception);
         }
 
-        this.filteredEvents = this.events;
+        this.filteredEvents = this.events.sort(this.compareDates);
       }
     },
     data: function() {
@@ -132,7 +133,7 @@
       genres: async function() {
         let Enumerable = require('../../node_modules/linq');
         this.filteredEvents = Enumerable.from(this.events).where($ => this.genreComparer($.fields.json.musicstyles))
-          .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
+          .orderBy($ => $.fields.json.date && $.fields.json.name).toArray().sort(this.compareDates);
       },
       when: function() {
         this.updateEvents();
