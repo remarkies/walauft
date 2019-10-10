@@ -12,11 +12,12 @@
 <style lang="scss">
 #app {
   @import 'styles/theme.scss';
-    @import url('https://fonts.googleapis.com/css?family=Abel&display=swap');
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap');
-    @import url('https://fonts.googleapis.com/css?family=Unica+One&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
     @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap');
+
+    * {
+        font-family: 'Varela Round', sans-serif;
+    }
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
