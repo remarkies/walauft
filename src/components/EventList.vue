@@ -19,7 +19,6 @@
     methods: {
       eventClick: function(latitude, longitude) {
         this.$emit('locationChanged', {lat: latitude, lng: longitude});
-       console.log(latitude, longitude);
       },
       tagClick: function(genre) {
 
@@ -68,48 +67,17 @@
         }
 
         return parent;
-      }
-
-    },
-    data: function() {
-      return {
-        events: [],
-        filteredEvents: [],
-        genres: [],
-        genresOverall: [
-          [1, "Chlöpft & Tätscht", "Tech House,Techno,Elektr. Musik,Deep House,House,Electro Swing"],
-          [2, "Gitarre Gschmäus", "Indie Rock,Rock,Metal"],
-          [3, "Gangster", "Rap,Urban,Hip Hop,Trap,Oldschool,R'n'B"],
-          [4, "Radio Musik", "80's,90's,Singer/Songwriter,Partytunes,Pop,Club Classics,90's,Disco,Hits,Worldmusic,Schlager,Volksmusik"],
-          [5, "Ab uf Südamerika", "Reggae,Dancehall,Salsa,Afro Beats,Funk,Reggaeton,Latin"],
-          [6, "Restliche Gugus", "Soul,Jazz,Diverses"]
-        ],
-
-      }
-    },
-    components: {
-      Tag,
-      Event
-    },
-    props: {
-      type: String
-    },
-    watch: {
-      genres: async function() {
-        let Enumerable = require('../../node_modules/linq');
-        this.filteredEvents = Enumerable.from(this.events).where($ => this.genreComparer($.fields.json.musicstyles))
-          .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
       },
-      type: async function(newVal) {
+      updateEvents: async function() {
         let Enumerable = require('../../node_modules/linq');
         let result = await getEntries(this.$route.params.regionId);
         this.genres = [];
 
-        if(newVal == "0")
+        if(this.when === "0")
           this.events = Enumerable.from(result.items)
             .where($ => $.fields.json.date == moment().add(-10, 'hours').format('YYYY-MM-DD'))
             .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
-        else if(newVal == "1")
+        else if(this.when === "1")
           this.events = Enumerable.from(result.items)
             .where($ => moment($.fields.json.date).add(-1, 'day').isAfter(moment()))
             .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
@@ -137,8 +105,41 @@
         this.filteredEvents = this.events;
       }
     },
+    data: function() {
+      return {
+        events: [],
+        filteredEvents: [],
+        genres: [],
+        genresOverall: [
+          [1, "Chlöpft & Tätscht", "Tech House,Techno,Elektr. Musik,Deep House,House,Electro Swing"],
+          [2, "Gitarre Gschmäus", "Indie Rock,Rock,Metal"],
+          [3, "Gangster", "Rap,Urban,Hip Hop,Trap,Oldschool,R'n'B"],
+          [4, "Radio Musik", "80's,90's,Singer/Songwriter,Partytunes,Pop,Club Classics,90's,Disco,Hits,Worldmusic,Schlager,Volksmusik"],
+          [5, "Ab uf Südamerika", "Reggae,Dancehall,Salsa,Afro Beats,Funk,Reggaeton,Latin"],
+          [6, "Restliche Gugus", "Soul,Jazz,Diverses"]
+        ],
+
+      }
+    },
+    components: {
+      Tag,
+      Event
+    },
+    props: {
+      when: String
+    },
+    watch: {
+      genres: async function() {
+        let Enumerable = require('../../node_modules/linq');
+        this.filteredEvents = Enumerable.from(this.events).where($ => this.genreComparer($.fields.json.musicstyles))
+          .orderBy($ => $.fields.json.date && $.fields.json.name).toArray();
+      },
+      when: function() {
+        this.updateEvents();
+      }
+    },
     mounted: function() {
-        this.type = "0";
+        this.updateEvents();
     }
   };
 
