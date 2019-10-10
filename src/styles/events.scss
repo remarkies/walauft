@@ -9,12 +9,16 @@
 .header {
   padding-top: 2em;
   display: flex;
-  width: 100vw;
+  justify-content: space-evenly;
+  margin: auto;
+  max-width: 800px;
   padding-bottom: 2em;
+  font-size: 2.4em;
+
 }
 
 .city {
-  font-size: 4em;
+
   flex-grow: 0;
 }
 
@@ -24,7 +28,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 3em;
+
 }
 
 #today {
@@ -34,17 +38,6 @@
 
 }
 
-
-
-.heute-sonst-switch{
-  color: white;
-  font-size: 4em;
-  text-decoration:none;
-  display: flex;
-  justify-content: space-evenly;
-  font-family: $fontfamily2 !important;
-  height: 100px;
-}
 
 .heute-sonst-switch a {
   cursor: pointer;

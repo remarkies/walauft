@@ -23,9 +23,18 @@ body {
     color: $primary;
   }
 }
+.title{
+  font-size: 4.5em;
+  float: right;
+  transform-origin: bottom right;
+  transform: rotate(-90deg) translate(45px, 0px);
+  opacity: 0.5;
 
+
+}
 .home {
-
+  -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
   ul {
     list-style: none;
     position: absolute;
@@ -39,5 +48,21 @@ body {
       text-align: left;
       height: 100%;
     }
+  }
+}
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
