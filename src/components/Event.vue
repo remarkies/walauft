@@ -12,7 +12,7 @@
                     <div class="zeit">{{event.start}}</div>
 
                 <div class="genres">
-                    <Tag :tag="genre" v-for="genre in splitGenres(event.musicstyles)"/>
+                    <Tag :tag="genre" v-for="genre in splitGenres(event.musicstyles).slice(0,2)"/>
                 </div>
             </div>
         </div>
