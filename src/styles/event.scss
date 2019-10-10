@@ -1,4 +1,53 @@
 @import 'theme.scss';
+
+/*
+<div class="event-content">
+            <div class="name-desc">Event</div>
+            <div class="name">{{event.name}}</div>
+            <div class="acts-desc">Acts</div>
+            <div class="acts">{{event.acts}}</div>
+            <div class="date">{{event.date}}</div>
+            <div class="start">{{event.start}}</div>
+            <div class="genres">
+                <Tag :tag="genre" v-for="genre in splitGenres(event.musicstyles)"/>
+            </div>
+            <div class="location-name-desc">Location</div>
+            <div class="location-name">{{event.location.name}}</div>
+            <div class="location-street">{{event.location.street}}</div>
+            <div class="location-streetno">{{event.location.streetno}}</div>
+            <div class="location-url">{{event.location.url}}</div>
+            <div class="price-desc">Preis</div>
+            <div class="price">{{event.price}}</div>
+            <div class="min-age-desc">Mindestalter</div>
+            <div class="min-age">{{event.minage}}</div>
+            <div class="text">{{event.text}}</div>
+        </div>
+
+ */
+
+.selected {
+
+
+
+
+}
+
+
+
+
+@media screen and (max-width: 800px) {
+  .event {
+    width: 100vw;
+  }
+}
+@media screen and (min-width: 801px) {
+  .event {
+
+    width: calc(100vw - 2em);
+  }
+}
+
+
 .event{
 
   padding: 1em;
@@ -7,11 +56,130 @@
   background-color:$background;
   border-radius: 2px;
   cursor: pointer;
-  width: 100vw;
   display: flex;
 
+  .tag {
+
+    margin: 3px 3px 3px 0px;
+  }
+
+  .event-content {
+    display: flex;
+    flex-direction: row;
+    flex-grow:1;
+    max-width: calc(800px - 2em);
+    .info1 {
+      flex-grow: 1;
+
+
+      .name {
+        font-size: $bigFontSize;
+        margin-top: 0.2em;
+        margin-bottom: 0.5em;
+      }
+      .location-name {
+        margin-bottom: 0.5em;
+      }
+      .acts-desc {
+        font-size: $smallFontSize;
+      }
+      .acts {
+        font-size: $normalFontSize;
+      }
+
+      .genres {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+      }
+
+      .text {
+        font-size: $smallFontSize;
+        margin-bottom: 1em;
+      }
+
+      .extra-info {
+        display: flex;
+
+      }
+    }
+
+    .date-info {
+      flex-grow: 0;
+      display: flex;
+      flex-direction: column;
+
+      .week-date {
+        font-size: $xBigFontSize;
+        display: flex;
+        align-self: flex-start;
+      }
+
+      .date-rotate {
+        display: flex;
+        flex-direction: column;
+
+
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        margin-top: 2.5em;
+        margin-left: -3.2em;
+        .date {
+          font-size: $bigFontSize;
+          white-space: nowrap;
+
+        }
+
+        .start {
+          font-size: $smallFontSize;
+        }
+      }
+    }
+
+
+
+  }
 
 }
+
+
+
+.start {
+  font-size: $normalFontSize;
+}
+.location-name-desc {
+  font-size: $smallFontSize;
+}
+.location-name {
+  font-size: $normalFontSize;
+}
+
+.location-street-desc {
+  display: flex;
+}
+
+.location-street {
+  font-size: $normalFontSize;
+  padding-right: 0.2em;
+}
+
+.location-streetno {
+  font-size: $normalFontSize;
+
+}
+.location-url {
+  font-size: $smallFontSize;
+}
+
+
+
+
+
+
 
 .dates {
   font-size: 1.8em;
@@ -29,7 +197,7 @@
   flex-direction: column-reverse;
   display: flex;
 }
-.event-name{
+.event-title{
 
   font-size: 2.4em;
   text-transform: uppercase;
@@ -56,9 +224,5 @@
 }
 
 
-.genres {
-  display: flex;
-  max-width: 100vw;
 
-  flex-wrap: wrap;
-}
+
