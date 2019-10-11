@@ -12,7 +12,7 @@
             <div class="info1">
                 <div class="name">{{event.name}}</div>
 
-                <div class="location-name"><a v-bind:href="event.location.url">{{event.location.name}}</a></div>
+                <div class="location-name">{{event.location.name}}</div>
                 <div v-if="areActsAvailable(event.acts)" class="acts-desc">Acts</div>
                 <div v-if="areActsAvailable(event.acts)" class="acts">{{event.acts}}</div>
                 <div class="genres">
@@ -26,6 +26,9 @@
                     <Tag v-if="isPriceAvailable(event.price)" :tag="getPrice(event.price)"></Tag>
                 </div>
 
+            </div>
+            <div  class="map-icon">
+                <img src="../assets/map-icon.svg" alt="map-icon" height="50px" width="50px" />
             </div>
 
         </div>
@@ -56,9 +59,10 @@
   import Tag from "./Tag";
 
   import moment from "moment";
+  import Events from "../views/Events";
   export default {
     name: "Event",
-    components: { Tag },
+    components: { Events, Tag },
     data: function() {
       return { selected: false }
     },
@@ -87,6 +91,8 @@
       },
       handleSelect: function() {
         this.selected = !this.selected;
+
+        this.$parent.$parent.hideContent = this.selected;
 
       },
       getDateDetail: function(date) {
