@@ -17,6 +17,10 @@
 
 }
 
+.hide {
+  padding-top: 100vh;
+}
+
 .city {
 
   flex-grow: 0;
@@ -29,6 +33,13 @@
   align-items: center;
   cursor: pointer;
 
+}
+
+.map-icon {
+  cursor: pointer;
+  position: fixed;
+  right: 50px;
+  bottom: 40px;
 }
 
 #today {
@@ -48,14 +59,15 @@
   text-decoration: line-through;
 
 }
+.showMap {
+  display: none;
+}
+
+
+
 #backgroundMap
 {
+  z-index: -1;
   pointer-events: none;
   position: fixed !important;
-  z-index: -1;
-}
-#heute{
-
-}
-#sonst{
 }

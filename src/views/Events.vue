@@ -1,18 +1,15 @@
 <template>
   <div class="events">
-
-    <GMap id="backgroundMap" ref="map" />
-
-    <div class="header">
-      <div id="today" class="nav"><a v-on:click="changeTypeToToday" v-bind:class="{ active: !heuteActive}">HÜT</a></div>
-
-      <div class="city"><router-link :to="{name: 'home'}"><-{{getCurrentCity()}}</router-link></div>
-      <div id="all" class="nav"><a v-on:click="changeTypeToRest" v-bind:class="{ active: heuteActive}">SÜSCH</a></div>
+      <GMap  id="backgroundMap" ref="map" />
+      <div v-bind:class="{ hide: hideContent}" class="header">
+        <div id="today" class="nav"><a v-on:click="changeTypeToToday" v-bind:class="{ active: !heuteActive}">HÜT</a></div>
+          <div class="city"><router-link :to="{name: 'home'}"><-{{getCurrentCity()}}</router-link></div>
+        <div id="all" class="nav"><a v-on:click="changeTypeToRest" v-bind:class="{ active: heuteActive}">SÜSCH</a></div>
+      </div>
+      <div v-bind:class="{ showMap: showMap }" class="content">
+        <EventList :when="when" @locationChanged="changedHandler"/>
+      </div>
     </div>
-      <div class="content">
-      <EventList :when="when" @locationChanged="changedHandler"/>
-    </div>
-  </div>
 </template>
 <style scoped>
 
@@ -30,12 +27,19 @@
         heuteActive: true,
         when: "0",
         regionen: [
-          { id: "2", name: "Luzärn" },
-          { id: "3", name: "Bärn" },
-          { id: "4", name: "Baasel" },
-          { id: "5", name: "St.Galle" },
-          { id: "6", name: "Züri" }
-        ]
+      { id: "2", name: "Luzärn" },
+      { id: "3", name: "Bärn" },
+      { id: "4", name: "Baasel" },
+      { id: "5", name: "St.Galle" },
+      { id: "6", name: "Züri" }
+        ],
+        showMap: false,
+        hideContent: false
+      }
+    },
+    watch : {
+      hideContent : function() {
+        console.log("Hide content");
       }
     },
     methods : {
@@ -54,8 +58,11 @@
         let Enumerable = require('../../node_modules/linq');
         let city = Enumerable.from(this.regionen).firstOrDefault($ => $.id === this.$route.params.regionId);
         return city.name;
-      }
-
-    }
+      },
+      handleMap: function() {
+        this.showMap = !this.showMap;
+        console.log("handle map function");
+      },
+    },
   };
 </script>
