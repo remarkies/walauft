@@ -27,9 +27,6 @@
                 </div>
 
             </div>
-            <div  class="map-icon">
-                <img src="../assets/map-icon.svg" alt="map-icon" height="50px" width="50px" />
-            </div>
 
         </div>
 
