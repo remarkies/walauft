@@ -11,13 +11,14 @@
       </div>
 
       <div v-if="hideContent" v-on:click="handleMap" class="map-icon">
+          <div v-if="showMap" class="icon-text">{{iconText}}</div>
           <img src="../assets/map-icon.svg" alt="map-icon" height="50px" width="50px" />
       </div>
     </div>
 </template>
 <style scoped>
-
-  @import "../styles/events.scss";
+    @import "../styles/theme.scss";
+    @import "../styles/events.scss";
 </style>
 <script>
 
@@ -39,7 +40,8 @@
         ],
         showMap: false,
         hideContent: false,
-        eventSelected: false
+        eventSelected: false,
+        iconText: ""
       }
     },
     methods : {

@@ -90,6 +90,7 @@
         this.selected = !this.selected;
 
         this.$parent.$parent.hideContent = this.selected;
+        this.$parent.$parent.iconText = this.event.location.name;
 
       },
       getDateDetail: function(date) {

@@ -1,4 +1,5 @@
 @import 'theme.scss';
+
 .content {
   max-width: 800px;
   margin: auto;
@@ -25,6 +26,15 @@
   justify-content: flex-end;
 
 
+
+}
+
+.icon-text {
+  font-size: 3em;
+  display: flex;
+  margin-right: 12px;
+
+  align-items: center;
 
 }
 
