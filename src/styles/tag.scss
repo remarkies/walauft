@@ -1,6 +1,6 @@
 @import 'theme.scss';
 .tag {
-  font-size: 1em !important;
+  font-size: 1.2em !important;
   font-family: "Open Sans";
   border: solid 2px $primary;
   color: $primary;
@@ -8,6 +8,7 @@
   padding: 1px 6px;
   border-radius: 2px;
   cursor: pointer;
+  background-color: $background;
   //text-transform: uppercase;
   white-space:nowrap;
 }

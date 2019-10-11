@@ -31,6 +31,7 @@
 
         if(lat > 0){
         this.map.panTo(position);
+
        // console.log("marker wird gesetzt");
 
         let marker = new google.maps.Marker({

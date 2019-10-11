@@ -19,7 +19,7 @@
       function() {
         return {
           regionen: [
-            { id: "2", name: "Luzärn" },
+            { id: "2", name: "Lozärn" },
             { id: "3", name: "Bärn" },
             { id: "4", name: "Baasel" },
             { id: "5", name: "St.Galle" },

@@ -51,10 +51,14 @@
 }
 
 .selected {
-  height: 100vh;
   position: fixed;
   top: -1em;
-
+  animation-duration: 0.5s;
+  animation-name: slideOut;
+  height: 100vh;
+  background-color: rgba(0,0,0,0) !important;
+  background-image: linear-gradient(to bottom, $background 0%, $background 40%, rgba(51,51,51,0) 100%);
+  overflow: scroll;
 }
 
 
@@ -226,4 +230,15 @@
 
 .event-desc-container{
   display: flex;
+}
+@keyframes slideOut {
+  from {
+    color: rgba(0,0,0,0);
+    height: 0vh;
+  }
+
+  to {
+    color: $primary;
+    height: 100vh;
+  }
 }
