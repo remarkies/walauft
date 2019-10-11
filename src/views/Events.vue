@@ -6,14 +6,19 @@
           <div class="city"><router-link :to="{name: 'home'}"><-{{getCurrentCity()}}</router-link></div>
         <div id="all" class="nav"><a v-on:click="changeTypeToRest" v-bind:class="{ active: heuteActive}">SÜSCH</a></div>
       </div>
-      <div v-bind:class="{ showMap: showMap }" class="content">
+      <div v-bind:class="{ showMap: showMap, hide: hideContent }" class="content">
         <EventList :when="when" @locationChanged="changedHandler"/>
+      </div>
+
+      <div v-if="hideContent" v-on:click="handleMap" class="map-icon">
+          <div v-if="showMap" class="icon-text">{{iconText}}</div>
+          <img src="../assets/map-icon.svg" alt="map-icon" height="50px" width="50px" />
       </div>
     </div>
 </template>
 <style scoped>
-
-  @import "../styles/events.scss";
+    @import "../styles/theme.scss";
+    @import "../styles/events.scss";
 </style>
 <script>
 
@@ -34,12 +39,9 @@
       { id: "6", name: "Züri" }
         ],
         showMap: false,
-        hideContent: false
-      }
-    },
-    watch : {
-      hideContent : function() {
-        console.log("Hide content");
+        hideContent: false,
+        eventSelected: false,
+        iconText: ""
       }
     },
     methods : {
@@ -61,7 +63,6 @@
       },
       handleMap: function() {
         this.showMap = !this.showMap;
-        console.log("handle map function");
       },
     },
   };

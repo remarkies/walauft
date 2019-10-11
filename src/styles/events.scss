@@ -1,9 +1,47 @@
 @import 'theme.scss';
+
 .content {
   max-width: 800px;
   margin: auto;
   overflow: hidden;
+  z-index: 5;
 }
+
+
+
+
+.map-icon {
+
+  max-width: 800px;
+  margin: auto;
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  width: 100vw;
+  left: 50%;
+  bottom: 50px;
+  z-index: 9999;
+  transform: translate(-50%,0);
+  right: -50px;
+  justify-content: flex-end;
+
+
+
+}
+
+.icon-text {
+  font-size: 3em;
+  display: flex;
+  margin-right: 12px;
+
+  align-items: center;
+
+}
+
+.map-icon img {
+  margin-right: 50px;
+}
+
 
 
 .header {
@@ -18,8 +56,18 @@
 }
 
 .hide {
-  padding-top: 100vh;
+  //padding-top: 100vh;
+  height: 0;
+  overflow: hidden;
+
+
+
 }
+
+.header.hide {
+  display: none;
+}
+
 
 .city {
 
@@ -35,19 +83,7 @@
 
 }
 
-.map-icon {
-  cursor: pointer;
-  position: fixed;
-  right: 50px;
-  bottom: 40px;
-}
 
-#today {
-}
-
-#all {
-
-}
 
 
 .heute-sonst-switch a {

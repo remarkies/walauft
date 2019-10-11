@@ -27,9 +27,6 @@
                 </div>
 
             </div>
-            <div  class="map-icon">
-                <img src="../assets/map-icon.svg" alt="map-icon" height="50px" width="50px" />
-            </div>
 
         </div>
 
@@ -93,6 +90,7 @@
         this.selected = !this.selected;
 
         this.$parent.$parent.hideContent = this.selected;
+        this.$parent.$parent.iconText = this.event.location.name;
 
       },
       getDateDetail: function(date) {
