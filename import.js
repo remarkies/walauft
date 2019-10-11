@@ -7,7 +7,7 @@ const contentfulM = require('contentful-management')
 let url1 = "https://zuerich.usgang.ch/v1/events?date=";
 let url2 = "&regionid=";
 
-let checkDaysInAdvance = 10;
+let checkDaysInAdvance = 14;
 //2 : "Luzern", 3 : "Bern", 4 : "Basel", 5 : "St.Gallen", 6 : "Zürich"
 let regions = ["2", "3", "4", "5", "6"];
 
@@ -18,7 +18,7 @@ let client = connectToContentful();
 let clientM = connectToContentfulManagement();
 
 
-for(let i = 0; i < checkDaysInAdvance; i++) {
+for(let i = checkDaysInAdvance; i < checkDaysInAdvance + 1; i++) {
   regions.forEach((region) => {
     let date = moment().add(i, 'days').format("YYYY-MM-DD");
     let link = url1 + date + url2 + region;
