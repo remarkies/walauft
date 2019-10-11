@@ -7,7 +7,7 @@ const contentfulM = require('contentful-management')
 let url1 = "https://zuerich.usgang.ch/v1/events?date=";
 let url2 = "&regionid=";
 
-let checkDaysInAdvance = 20;
+let checkDaysInAdvance = 10;
 //2 : "Luzern", 3 : "Bern", 4 : "Basel", 5 : "St.Gallen", 6 : "Zürich"
 let regions = ["2", "3", "4", "5", "6"];
 
@@ -26,9 +26,24 @@ for(let i = 0; i < checkDaysInAdvance; i++) {
   });
 }
 
+
 links.forEach((url) => {
   downloadJsonFromUrl(url.url, url.id);
 });
+
+
+/*
+clientM.getSpace('rq1gh35slude')
+  .then(space => space.getEnvironment('master'))
+  .then(environment => environment.getEntries({'content_type': 'event'}))
+  .then(response => Promise.all(response.items.map(entry => { entry.unpublish();   })));
+
+clientM.getSpace('rq1gh35slude')
+  .then(space => space.getEnvironment('master'))
+  .then(environment => environment.getEntries({'content_type': 'event'}))
+  .then(response => Promise.all(response.items.map(entry => { entry.delete()   })));
+*/
+
 
 function downloadJsonFromUrl(url, region) {
   let req = https.get(url, function(res) {
@@ -59,8 +74,8 @@ function downloadJsonFromUrl(url, region) {
         let event = json_data.items[i];
 
         console.log("Region ID: " + region + " Event ID: " + event.id);
-
-        handleEvent(event, region);
+        createEntry(event, region);
+        //handleEvent(event, region);
       }
     });
   });
@@ -110,9 +125,12 @@ function handleEvent(event, region) {
 
       let entryId = null;
       response.items.forEach(item => {
+
+
         if(item.fields.json.id === event.id) {
           entryId = item.sys.id;
         }
+
       });
 
       return entryId;
