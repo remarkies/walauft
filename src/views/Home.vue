@@ -1,6 +1,7 @@
 <template>
     <div class="home">
         <div class="title">WALAUFT </div>
+        <div class="title2"> IN </div>
         <ul>
             <li v-for="region in regionen">
                 <router-link :to="{name: 'events', params: {regionId: region.id}}">{{region.name}}</router-link>
