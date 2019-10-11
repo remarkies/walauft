@@ -7,7 +7,7 @@ const contentfulM = require('contentful-management')
 let url1 = "https://zuerich.usgang.ch/v1/events?date=";
 let url2 = "&regionid=";
 
-let checkDaysInAdvance = 14;
+let checkDaysInAdvance = 21;
 //2 : "Luzern", 3 : "Bern", 4 : "Basel", 5 : "St.Gallen", 6 : "Zürich"
 let regions = ["2", "3", "4", "5", "6"];
 
