@@ -1,19 +1,23 @@
-var contentful = require('contentful');
-var moment = require('moment');
+export function getEvents(regionId, today) {
+    let axios = require('axios');
 
-var client = contentful.createClient({
-  space: 'rq1gh35slude',
-  accessToken: 'tq-9zxXuOyTJpiEXSAxg2waOG07mURBt7lJgoTBEPZs'
-});
+    let url = "https://walauftapi.herokuapp.com/" + "events/" + regionId + "/" + today;
+    //url = "http://localhost:3000/" + "events/" + regionId + "/" + today;
+    return axios.post(url).then((res) => {
 
 
-export function getEntries(regionId) {
-  return new Promise(function (resolve, reject) {
-    client.getEntries({content_type: 'event', 'fields.region': regionId, limit: 1000} )
-      .then((response) => {
-          resolve(response);
-      })
-      .catch(console.error);
-  });
+      let json = JSON.parse(JSON.stringify(res.data));
+
+
+      let events = [];
+
+      json.forEach(o => {
+        o.events.forEach(e => {
+          events.push(e);
+        });
+      });
+
+      return events;
+    });
 }
 
