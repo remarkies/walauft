@@ -3,13 +3,13 @@
         <div class="genres">
             <Tag class="filter" @click.native="tagClick(genre)" :selected="genre[1]" :tag="genre[0][1]" v-for="genre in genres"/>
         </div>
-        <Event @click.native="eventClick(event.fields.json.location.latitude, event.fields.json.location.longitude)" :event="event.fields.json" v-for="event in filteredEvents" />
+        <Event @click.native="eventClick(event.location.latitude, event.location.longitude)" :event="event" v-for="event in filteredEvents" />
     </div>
 </template>
 
 <script>
   import Event from "./Event";
-  import { getEntries } from "../services/api";
+  import { getEvents } from "../services/api";
   import moment from "moment";
   import Tag from "./Tag";
 
@@ -69,26 +69,22 @@
         return parent;
       },
       compareDates: function ( a, b ) {
-        return moment(a.fields.json.date, "YYYY-MM-DD").format('YYYYMMDD') - moment(b.fields.json.date, "YYYY-MM-DD").format('YYYYMMDD');
+        return moment(a.date, "YYYY-MM-DD").format('YYYYMMDD') - moment(b.date, "YYYY-MM-DD").format('YYYYMMDD');
       },
       updateEvents: async function() {
         let Enumerable = require('../../node_modules/linq');
-        let result = await getEntries(this.$route.params.regionId);
+
         this.genres = [];
 
-        if(this.when === "0")
-          this.events = Enumerable.from(result.items)
-            .where($ => $.fields.json.date == moment().add(-10, 'hours').format('YYYY-MM-DD')).toArray();
-        else if(this.when === "1")
-          this.events = Enumerable.from(result.items)
-            .where($ => moment($.fields.json.date).add(-1, 'day').isAfter(moment())).toArray();
+        this.events = await getEvents(this.$route.params.regionId, this.when);
 
+        this.filteredEvents = this.events;
 
-        this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1").toArray();
+        //this.events = Enumerable.from(this.events).where($ => $.fields.json.location.longitude !== "-1" && $.fields.json.location.latitude !== "-1").toArray();
 
         try {
           this.events.forEach(o => {
-            let eventGenres = o.fields.json.musicstyles.split(',');
+            let eventGenres = o.musicstyles.split(',');
             eventGenres.forEach(eventGenre => {
               let trimmedGenre = eventGenre.trimRight().trimLeft();
 
@@ -103,7 +99,6 @@
           console.log("Could not fetch genres from events! Message: " + exception);
         }
 
-        this.filteredEvents = this.events.sort(this.compareDates);
       }
     },
     data: function() {
@@ -132,10 +127,11 @@
     watch: {
       genres: async function() {
         let Enumerable = require('../../node_modules/linq');
-        this.filteredEvents = Enumerable.from(this.events).where($ => this.genreComparer($.fields.json.musicstyles))
-          .orderBy($ => $.fields.json.date && $.fields.json.name).toArray().sort(this.compareDates);
+        this.filteredEvents = Enumerable.from(this.events).where($ => this.genreComparer($.musicstyles)).toArray();
+
       },
       when: function() {
+        this.events = null;
         this.updateEvents();
       }
     },
