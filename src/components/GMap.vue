@@ -23,7 +23,7 @@
         var icon = {
           path: 'M-10,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0',
           fillColor: '#FFF',
-          fillOpacity: .8,
+          fillOpacity: 1,
           anchor: new google.maps.Point(0,0),
           strokeWeight: 0,
           scale: 0.5

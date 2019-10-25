@@ -29,4 +29,8 @@
   background-color: $primary;
   color: $secondary;
   text-decoration: none;
+  -webkit-transition: all 900ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  -moz-transition: all 900ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  -o-transition: all 900ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  transition: all 900ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
 }
