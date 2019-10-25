@@ -58,14 +58,22 @@
       },
       getParentGenre: function(child) {
         let Enumerable = require('../../node_modules/linq');
+        /*
+                let parentGenre = null;
 
-
-        let parent = Enumerable.from(this.genresOverall).firstOrDefault($ => $[2].toUpperCase().includes(child.toUpperCase()));
+                this.genresOverall.forEach(o => {
+                  if(o[2].toUpperCase().includes(child.trimLeft().trimRight().toUpperCase())) {
+                    console.log("Genres overall found: " + o[1] + " for:" + child);
+                  }
+                });
+        */
+        let parent = Enumerable.from(this.genresOverall).firstOrDefault($ => $[2].toUpperCase().includes(child.trimLeft().trimRight().toUpperCase()));
         if(parent === undefined) {
 
           parent = this.genresOverall[5];
         }
 
+        //console.log("getParentGenre function: param: " + child + " Parent found: " + parent);
         return parent;
       },
       compareDates: function ( a, b ) {

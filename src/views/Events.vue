@@ -11,8 +11,13 @@
       </div>
 
       <div v-if="hideContent" v-on:click="handleMap" class="map-icon">
-          <div v-if="showMap" class="icon-text">{{iconText}}</div>
-          <img src="../assets/map-icon.svg" alt="map-icon" height="50px" width="50px" />
+          <div v-if="showMap" class="icon-text">
+              <font-awesome-icon size="xs" id="backToEventToggle" :icon="['fas', 'arrow-left']" />
+              {{iconText}}
+          </div>
+          <div id="map-icon">
+              <font-awesome-icon size="4x" :icon="['fas', 'map']" />
+          </div>
       </div>
     </div>
 </template>
