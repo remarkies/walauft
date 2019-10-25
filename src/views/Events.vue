@@ -2,9 +2,12 @@
   <div class="events">
       <GMap  id="backgroundMap" ref="map" />
       <div v-bind:class="{ hide: hideContent}" class="header">
-        <div id="today" class="nav"><a v-on:click="changeTypeToToday" v-bind:class="{ active: !heuteActive}">HÜT</a></div>
-          <div class="city"><router-link :to="{name: 'home'}">< {{getCurrentCity()}}</router-link></div>
-        <div id="all" class="nav"><a v-on:click="changeTypeToRest" v-bind:class="{ active: heuteActive}">SÜSCH</a></div>
+          <div class="city"><router-link :to="{name: 'home'}">&lt;{{getCurrentCity()}}</router-link></div>
+          <div class="heute-sonst-switch">
+          <div id="today"><a v-on:click="changeTypeToToday" v-bind:class="{ inactive: !heuteInactive, active: heuteInactive}">HÜT</a></div>
+        <div id="slash">/</div>
+        <div id="all"><a v-on:click="changeTypeToRest" v-bind:class="{ inactive: heuteInactive, active: !heuteInactive}">SÜSCH</a></div>
+          </div>
       </div>
       <div v-bind:class="{ showMap: showMap, hide: hideContent }" class="content">
         <EventList :when="when" @locationChanged="changedHandler"/>
@@ -29,14 +32,14 @@
     components: { EventList, GMap },
     data: function() {
       return {
-        heuteActive: true,
+        heuteInactive: true,
         when: "0",
         regionen: [
-          { id: "2", name: "Lozärn" },
-          { id: "3", name: "Bärn" },
-          { id: "4", name: "Baasel" },
-          { id: "5", name: "St.Galle" },
-          { id: "6", name: "Züri" }
+          { id: "2", name: "LZN" },
+          { id: "3", name: "BRN" },
+          { id: "4", name: "BSL" },
+          { id: "5", name: "SG" },
+          { id: "6", name: "ZH" }
         ],
         showMap: false,
         hideContent: false,
@@ -46,11 +49,11 @@
     },
     methods : {
       changeTypeToToday: function() {
-        this.heuteActive = true;
+        this.heuteInactive = true;
         this.when = "0";
       },
       changeTypeToRest: function() {
-        this.heuteActive = false;
+        this.heuteInactive = false;
         this.when = "1";
       },
       changedHandler: function(event) {

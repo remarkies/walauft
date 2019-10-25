@@ -44,8 +44,7 @@
 
 
 .header {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding: 10px;
   display: flex;
   justify-content: space-evenly;
   margin: auto;
@@ -70,29 +69,42 @@
 
 
 .city {
+  font-size: 4.5rem;
 
-  flex-grow: 0;
+  text-align: left;
+  flex-grow: 1;
 }
 
-.nav{
-  justify-content: center;
-  flex-grow: 1;
+.heute-sonst-switch{
+  justify-content: space-evenly;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+}
+.heute-sonst-switch a {
+  cursor: pointer;
+}
+#slash{
+  justify-content: space-evenly;
   display: flex;
   align-items: center;
   cursor: pointer;
 
 }
 
-
-
-
-.heute-sonst-switch a {
-  cursor: pointer;
+.active{
+  font-size: 150%;
+  border-bottom: white solid;
+  -webkit-transition: all 200ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  -moz-transition: all 200ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  -o-transition: all 200ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+  transition: all 200ms cubic-bezier(0.190, 1.000, 0.220, 1.000); /* easeOutExpo */
 }
 
-.active{
+.inactive{
 
-  text-decoration: line-through;
 
 }
 .showMap {
