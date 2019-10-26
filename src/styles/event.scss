@@ -32,11 +32,19 @@
   .event {
     width: 100vw;
   }
+
+  .event-title {
+    font-size: 16px;
+  }
 }
 @media screen and (min-width: 801px) {
   .event {
 
     width: calc(100vw - 2em);
+  }
+
+  .event-title {
+    font-size: 2em;
   }
 }
 
@@ -86,15 +94,46 @@
     max-width: calc(800px - 2em);
     .info1 {
       flex-grow: 1;
+      max-width: calc(100vw - 20px - 114px);
 
       .name {
         font-size: $bigFontSize;
         margin-top: 0.2em;
         margin-bottom: 0.5em;
       }
-      .location-name {
+
+      .location {
+        display: flex;
+
+        font-size: $normalFontSize;
         margin-bottom: 0.5em;
+
+        .location-name {
+
+          flex-grow: 1;
+        }
+
+        .locationMap {
+          display: flex;
+          flex-grow: 0;
+
+          padding: 2px 6px;
+          background: $zh;
+          border-radius: 2px;
+
+          .linkDesc {
+            font-size: 16px !important;
+
+            align-self: center;
+          }
+          .linkButton {
+            margin: 0px -5px -2px 5px;
+          }
+
+
+        }
       }
+
       .acts-desc {
         font-size: $smallFontSize;
       }
@@ -110,7 +149,7 @@
 
       .extra-info {
         display: flex;
-
+        margin-bottom: 2em;
       }
     }
 
@@ -165,9 +204,6 @@
 .location-name-desc {
   font-size: $smallFontSize;
 }
-.location-name {
-  font-size: $normalFontSize;
-}
 
 .location-street-desc {
   display: flex;
@@ -208,9 +244,12 @@
   flex-direction: column-reverse;
   display: flex;
 }
+
+
+
 .event-title{
 
-  font-size: 2em;
+
   text-transform: uppercase;
 
 }
@@ -253,3 +292,55 @@
   margin-right: 0.5em;
   margin-bottom: 2px;
 }
+
+.detailTag:hover {
+  background: $primary;
+  color: $secondary;
+}
+
+.eventTagHead {
+  border: solid 2px $fifth;
+  background: $fifth;
+
+  color: $primary;
+  margin-bottom: 0px !important;
+}
+
+.tagSelected {
+  border: solid 1px $primary;
+  background: $primary;
+  color: $secondary;
+}
+
+/*
+.ZH {
+  border: none;
+  background: $zh;
+  color: $primary;
+}
+
+.BRN {
+  border: none;
+  background: $brn;
+  color: $primary;
+}
+
+.LZN {
+  border: none;
+  background: $lzn;
+  color: $primary;
+}
+
+.SG {
+  border: none;
+  background: $sg;
+  color: $primary;
+}
+
+.BSL {
+  border: none;
+  background: $bsl;
+  color: $primary;
+}
+
+ */

@@ -1,9 +1,12 @@
 <template>
-    <div class="event-list">
-        <div class="genres">
-            <Tag class="filter" @click.native="tagClick(genre)" :selected="genre[1]" :tag="genre[0][1]" v-for="genre in genres"/>
+    <div>
+        <Loading v-if="isLoading"></Loading>
+        <div class="event-list">
+            <div class="genres">
+                <Tag class="filter" @click.native="tagClick(genre)" :selected="genre[1]" :tag="genre[0][1]" v-for="genre in genres"/>
+            </div>
+            <Event @click.native="eventClick(event.location.latitude, event.location.longitude)" :event="event" v-for="event in filteredEvents" />
         </div>
-        <Event @click.native="eventClick(event.location.latitude, event.location.longitude)" :event="event" v-for="event in filteredEvents" />
     </div>
 </template>
 
@@ -12,6 +15,7 @@
   import { getEvents } from "../services/api";
   import moment from "moment";
   import Tag from "./Tag";
+  import Loading from "./Loading";
 
 
   export default {
@@ -82,6 +86,7 @@
       updateEvents: async function() {
         let Enumerable = require('../../node_modules/linq');
 
+        this.isLoading = true;
         this.genres = [];
 
         this.events = await getEvents(this.$route.params.regionId, this.when);
@@ -105,6 +110,8 @@
           });
         } catch(exception) {
           console.log("Could not fetch genres from events! Message: " + exception);
+        } finally {
+          this.isLoading = false;
         }
 
       }
@@ -115,17 +122,18 @@
         filteredEvents: [],
         genres: [],
         genresOverall: [
-          [1, "Chlöpft & Tätscht", "Tech House,Techno,Elektr. Musik,Deep House,House,Electro Swing"],
-          [2, "Gitarre Gschmäus", "Indie Rock,Rock,Metal"],
-          [3, "Gangster", "Rap,Urban,Hip Hop,Trap,Oldschool,R'n'B"],
-          [4, "Radio Musik", "80's,90's,Singer/Songwriter,Partytunes,Pop,Club Classics,90's,Disco,Hits,Worldmusic,Schlager,Volksmusik"],
-          [5, "Ab uf Südamerika", "Reggae,Dancehall,Salsa,Afro Beats,Funk,Reggaeton,Latin"],
-          [6, "Restliche Gugus", "Soul,Jazz,Diverses"]
+          [1, "Chlöpft & Tätscht", "Deep House,Techno,House,Elektr. Musik,Tech House,Goa,Drum'n'Bass,Dubstep,Trance,Electro,Hardstyle,Downtempo,Nu-​Disco,Hardcore,Electro Swing"],
+          [2, "Gitarre & Schlagzüg", "Rock,Indie,Indie Rock,Rock'n'Roll,Hard Rock,Heavy Metal,Punk,Wave,Grunge"],
+          [3, "Gangster", "Hip Hop,Rap,Oldschool,Trap,Cloud Rap,Deutschrap"],
+          [4, "Radio Musik", "Disco,Pop,Schlager,Volksmusik,Country,Worldmusic,Electropop,Deutsche Welle,Singer/Songwriter,Chansons"],
+          [5, "Ab uf Südamerika", "Funk,Latin,Blues,Reggaeton,R'n'B,Reggae,Salsa,Afro Beats,Dancehall,Soul,Jazz,Tango,Tropical,Swing,Folk,Afro House,Baile Funk,Urban"],
+          [6, "Misch Masch", "Partytunes,Hits,Diverses,Open Format,Club Classics,Chill Out,80's,90's,Oriental Beats,00's,Mash Up,60's,70's,Oldies,Balkan Beats,Klassik"]
         ],
-
+        isLoading: false
       }
     },
     components: {
+      Loading,
       Tag,
       Event
     },

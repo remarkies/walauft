@@ -2,7 +2,8 @@
   <div class="events">
       <GMap  id="backgroundMap" ref="map" />
       <div v-bind:class="{ hide: hideContent}" class="header">
-          <div class="city"><router-link :to="{name: 'home'}">&lt;{{getCurrentCity()}}</router-link></div>
+          <div class="city"><router-link :to="{name: 'home'}">
+              <font-awesome-icon size="1x" id="backRegion" :icon="['fas', 'arrow-left']" />{{getCurrentCity()}}</router-link></div>
           <div class="heute-sonst-switch">
           <div id="today"><a v-on:click="changeTypeToToday" v-bind:class="{ inactive: !heuteInactive, active: heuteInactive}">HÜT</a></div>
         <div id="slash">/</div>
@@ -17,6 +18,9 @@
           <div v-if="showMap" class="icon-text">
               <font-awesome-icon size="xs" id="backToEventToggle" :icon="['fas', 'arrow-left']" />
               {{iconText}}
+          </div>
+          <div v-if="!showMap" class="icon-text">
+              Map
           </div>
           <div id="map-icon">
               <font-awesome-icon size="4x" :icon="['fas', 'map']" />
