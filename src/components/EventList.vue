@@ -123,11 +123,11 @@
         genres: [],
         genresOverall: [
           [1, "Chlöpft & Tätscht", "Deep House,Techno,House,Elektr. Musik,Tech House,Goa,Drum'n'Bass,Dubstep,Trance,Electro,Hardstyle,Downtempo,Nu-​Disco,Hardcore,Electro Swing"],
-          [2, "Gitarre & Schlagzüg", "Rock,Indie,Indie Rock,Rock'n'Roll,Hard Rock,Heavy Metal,Punk,Wave,Grunge"],
+          [2, "Gitarre & Co.", "Rock,Indie,Indie Rock,Rock'n'Roll,Hard Rock,Heavy Metal,Punk,Wave,Grunge"],
           [3, "Gangster", "Hip Hop,Rap,Oldschool,Trap,Cloud Rap,Deutschrap"],
-          [4, "Radio Musik", "Disco,Pop,Schlager,Volksmusik,Country,Worldmusic,Electropop,Deutsche Welle,Singer/Songwriter,Chansons"],
-          [5, "Ab uf Südamerika", "Funk,Latin,Blues,Reggaeton,R'n'B,Reggae,Salsa,Afro Beats,Dancehall,Soul,Jazz,Tango,Tropical,Swing,Folk,Afro House,Baile Funk,Urban"],
-          [6, "Misch Masch", "Partytunes,Hits,Diverses,Open Format,Club Classics,Chill Out,80's,90's,Oriental Beats,00's,Mash Up,60's,70's,Oldies,Balkan Beats,Klassik"]
+          [4, "Radio Musik", "Disco,Pop,Schlager,Volksmusik,Country,Worldmusic,Electropop,Deutsche Welle,Singer/Songwriter,Chansons,Folk"],
+          [5, "Tanzbei Schwinge", "Funk,Latin,Blues,Reggaeton,R'n'B,Reggae,Salsa,Afro Beats,Dancehall,Soul,Jazz,Tango,Tropical,Swing,Afro House,Baile Funk,Urban,Balkan Beats,Oriental Beats"],
+          [6, "Misch Masch", "Partytunes,Hits,Diverses,Open Format,Club Classics,Chill Out,80's,90's,00's,Mash Up,60's,70's,Oldies,Klassik"]
         ],
         isLoading: false
       }

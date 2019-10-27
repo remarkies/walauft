@@ -50,6 +50,13 @@
           { id: "5", name: "SG" },
           { id: "6", name: "ZH" }
         ],
+        regionenLong: [
+          { id: "2", name: "Lozärn" },
+          { id: "3", name: "Bärn" },
+          { id: "4", name: "Baasel" },
+          { id: "5", name: "St.Galle" },
+          { id: "6", name: "Züri" }
+        ],
         showMap: false,
         hideContent: false,
         eventSelected: false,
@@ -70,7 +77,12 @@
       },
       getCurrentCity: function() {
         let Enumerable = require('../../node_modules/linq');
-        let city = Enumerable.from(this.regionen).firstOrDefault($ => $.id === this.$route.params.regionId);
+        let city = null;
+        if(screen.width > 800) {
+          city = Enumerable.from(this.regionenLong).firstOrDefault($ => $.id === this.$route.params.regionId);
+        } else {
+          city = Enumerable.from(this.regionen).firstOrDefault($ => $.id === this.$route.params.regionId);
+        }
         return city.name;
       },
       handleMap: function() {

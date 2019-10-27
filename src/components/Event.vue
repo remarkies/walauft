@@ -126,10 +126,11 @@
 
 
         let index = 0;
+        let textLength = 1;
         genres.forEach(o => {
-
-          if(index < 2 || screen.width > 800) {
+          if(screen.width / (textLength + this.event.location.name.length) > 20  || screen.width > 800) {
             array.push(o);
+            textLength += o.length + 2;
           } else if (index === 3) {
             array.push("...");
           }
