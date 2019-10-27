@@ -40,6 +40,14 @@
   .date-info {
     margin-right: -10px;
   }
+
+  .week-date {
+    font-size: 30px;
+  }
+
+  .name {
+    margin-top: 0.1em;
+  }
 }
 @media screen and (min-width: 801px) {
   .event {
@@ -53,6 +61,14 @@
 
   .date-info {
     margin-right: 10px;
+  }
+
+  .week-date {
+    font-size: 3.4em;
+  }
+
+  .name {
+    margin-top: 0.2em;
   }
 }
 
@@ -106,7 +122,6 @@
 
       .name {
         font-size: $bigFontSize;
-        margin-top: 0.2em;
         margin-bottom: 0.5em;
       }
 
@@ -171,7 +186,6 @@
 
 
       .week-date {
-        font-size: $xBigFontSize;
         display: flex;
         align-self: flex-start;
       }

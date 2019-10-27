@@ -17,14 +17,7 @@
                             <font-awesome-icon size="xs" class="pre-icon" :icon="['fas', 'building']" />
                             {{event.location.name}}
                         </div>
-                        <!--
-                        <div class="locationMap" v-on:click="handleMap">
-                            <div class="linkDesc">Map</div>
-                            <div class="linkButton">
-                                <font-awesome-icon size="xs" class="pre-icon" :icon="['fas', 'map-pin']" />
-                            </div>
-                        </div>
-                        -->
+
                     </div>
                     <div v-if="areActsAvailable(event.acts)" class="acts-desc">Acts</div>
                     <div v-if="areActsAvailable(event.acts)" class="acts"><font-awesome-icon class="pre-icon" size="xs" :icon="['fas', 'user']" />{{event.acts}}</div>
@@ -98,8 +91,6 @@
             res.push(o);
         });
         return res;
-      },
-      handleMap: function() {
       },
       selectGenres: function(genres) {
 

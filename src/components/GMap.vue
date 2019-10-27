@@ -14,11 +14,7 @@
       }
     },
     methods: {
-      showLocation: function(lat, lang) {
-        for (var i = 0; i < this.markers.length; i++) { //delets all markers
-          this.markers[i].setMap(null);
-        }
-        let position = new google.maps.LatLng(lat, lang);
+      showOwnLocation: function(map, markers) {
 
         var icon = {
           path: 'M-10,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0',
@@ -29,19 +25,71 @@
           scale: 0.5
         };
 
-        if(lat > 0){
-        this.map.panTo(position);
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
 
-       // console.log("marker wird gesetzt");
+        function success(pos) {
+            var crd = pos.coords;
+            let ownLoc = new google.maps.Marker({
+                position: new google.maps.LatLng(crd.latitude, crd.longitude),
+                //animation: google.maps.Animation.DROP,
+                icon: icon,
+                map: map
+            });
 
-        let marker = new google.maps.Marker({
-          position: position,
-          //animation: google.maps.Animation.DROP,
-          icon: icon,
-          map: this.map,
-        });
-        this.markers.push(marker);
+            if(markers.length >= 2)
+                markers[1] = ownLoc;
+            else
+                markers.push(ownLoc);
+
+              var bounds = new google.maps.LatLngBounds();
+              for (var i = 0; i < markers.length; i++) {
+                bounds.extend(markers[i].getPosition());
+              }
+
+              map.fitBounds(bounds);
         }
+
+        function error(err) {
+          console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
+      },
+      showLocation: function(lat, lang) {
+        for (var i = 0; i < this.markers.length; i++) { //delets all markers
+          this.markers[i].setMap(null);
+        }
+        let position = new google.maps.LatLng(lat, lang);
+
+
+        var icon = {
+          path: 'M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z',
+          fillColor: '#fff',
+          fillOpacity: 1,
+          anchor: new google.maps.Point(0,0),
+          strokeWeight: 0,
+          scale: 0.06,
+        };
+
+        if(lat > 0){
+            this.map.panTo(position);
+
+           // console.log("marker wird gesetzt");
+
+            let marker = new google.maps.Marker({
+              position: position,
+              //animation: google.maps.Animation.DROP,
+              icon: icon,
+              map: this.map,
+            });
+            this.markers.push(marker);
+        }
+        this.showOwnLocation(this.map, this.markers);
       }
 
     },
@@ -85,8 +133,6 @@
           }
         }
       ];
-
-
       //console.log(locations[this.$route.params.regionId-2].position.lng);
       try {
         const google = await gmapsInit();

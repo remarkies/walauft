@@ -1,6 +1,6 @@
 <template>
   <div class="events">
-      <GMap  id="backgroundMap" ref="map" />
+      <GMap  id="backgroundMap" v-bind:class="{ pointerEvents: pointerEvents}" ref="map" />
       <div v-bind:class="{ hide: hideContent}" class="header">
           <div class="city"><router-link :to="{name: 'home'}">
               <font-awesome-icon size="1x" id="backRegion" :icon="['fas', 'arrow-left']" />{{getCurrentCity()}}</router-link></div>
@@ -60,7 +60,17 @@
         showMap: false,
         hideContent: false,
         eventSelected: false,
-        iconText: ""
+        iconText: "",
+        pointerEvents: false
+      }
+    },
+    watch: {
+      showMap: function(newVal) {
+        if(newVal) {
+            this.pointerEvents = true
+        } else {
+            this.pointerEvents = false;
+        }
       }
     },
     methods : {
