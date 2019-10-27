@@ -18,14 +18,11 @@
   display: flex;
   width: 100vw;
   left: 50%;
-  bottom: 50px;
+  bottom: 28px;
   z-index: 9999;
   transform: translate(-50%,0);
   right: -50px;
   justify-content: flex-end;
-
-
-
 }
 
 .icon-text {
@@ -37,8 +34,8 @@
 
 }
 
-.map-icon img {
-  margin-right: 50px;
+#map-icon {
+  margin-right: 28px;
 }
 
 
@@ -120,10 +117,12 @@
   position: fixed !important;
 }
 
-#map-icon {
-  margin-right: 6em;
-}
-
 #backToEventToggle {
   margin-right: 0.5em;
+}
+
+#backRegion {
+  width: 24px;
+  margin-right: 8px;
+  padding-top: 2px;
 }

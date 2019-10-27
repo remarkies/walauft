@@ -12,18 +12,31 @@
                 <div class="info1">
                     <div class="name">{{event.name}}</div>
                     <div class="acts-desc">Club</div>
-                    <div class="location-name"><font-awesome-icon size="xs" class="pre-icon" :icon="['fas', 'building']" />{{event.location.name}}</div>
+                    <div class="location">
+                        <div class="location-name">
+                            <font-awesome-icon size="xs" class="pre-icon" :icon="['fas', 'building']" />
+                            {{event.location.name}}
+                        </div>
+                        <!--
+                        <div class="locationMap" v-on:click="handleMap">
+                            <div class="linkDesc">Map</div>
+                            <div class="linkButton">
+                                <font-awesome-icon size="xs" class="pre-icon" :icon="['fas', 'map-pin']" />
+                            </div>
+                        </div>
+                        -->
+                    </div>
                     <div v-if="areActsAvailable(event.acts)" class="acts-desc">Acts</div>
                     <div v-if="areActsAvailable(event.acts)" class="acts"><font-awesome-icon class="pre-icon" size="xs" :icon="['fas', 'user']" />{{event.acts}}</div>
                     <div class="genres">
-                        <Tag @click.native="tagClick(genre)"  :tag="genre" v-for="genre in splitGenres(event.musicstyles)"/>
+                        <Tag class="detailTag" v-bind:class="{tagSelected: genre[1]}" @click.native="tagClick(genre[0])"  :tag="genre[0]" v-for="genre in selectGenres(splitGenres(event.musicstyles))"/>
                     </div>
 
                     <div class="text">{{event.text}}</div>
 
                     <div class="extra-info">
-                        <Tag v-if="isAgeAvailable(event.getMinAge)" :tag="getMinAge(event.getMinAge)"></Tag>
-                        <Tag v-if="isPriceAvailable(event.price)" :tag="getPrice(event.price)"></Tag>
+                        <Tag class="eventTagHead" v-if="isAgeAvailable(event.minage)" :tag="getMinAge(event.minage)"></Tag>
+                        <Tag class="eventTagHead" v-if="isPriceAvailable(event.price)" :tag="getPrice(event.price)"></Tag>
                     </div>
 
                 </div>
@@ -45,7 +58,7 @@
                     <div class="club">{{event.location.name}}</div>
                     <div class="zeit">{{event.start}}</div>
                     <div class="genres">
-                        <Tag :tag="genre" v-for="genre in splitGenres(event.musicstyles).slice(0,2)"/>
+                        <Tag class="eventTagHead" :tag="genre" v-for="genre in getShortetGenres(splitGenres(event.musicstyles))"/>
                     </div>
             </div>
         </div>
@@ -65,7 +78,10 @@
     name: "Event",
     components: { Events, Tag },
     data: function() {
-      return { selected: false }
+      return {
+        selected: false,
+        selectedCity: ""
+      }
     },
     props: {
       event: {}
@@ -82,6 +98,44 @@
             res.push(o);
         });
         return res;
+      },
+      handleMap: function() {
+      },
+      selectGenres: function(genres) {
+
+        let array = [];
+        genres.forEach(o => {
+          let parentGenre = this.$parent.getParentGenre(o);
+
+          let isSelected = false;
+          this.$parent.genres.forEach(x => {
+            if(x[0] === parentGenre) {
+              isSelected = x[1];
+            }
+          });
+
+
+          array.push([o , isSelected]);
+
+        });
+
+        return array;
+      },
+      getShortetGenres: function(genres) {
+        let array = [];
+
+
+        let index = 0;
+        genres.forEach(o => {
+
+          if(index < 2 || screen.width > 800) {
+            array.push(o);
+          } else if (index === 3) {
+            array.push("...");
+          }
+          index++;
+        });
+        return array;
       },
       getWeekday: function(date) {
         let weekday = moment(date).locale("de-CH");
@@ -104,7 +158,9 @@
         return age + "+";
       },
       isAgeAvailable: function(age) {
-        if(age === undefined)
+
+        console.log(age);
+        if(age === undefined || age === "")
           return false;
         else
           return true;
@@ -136,6 +192,9 @@
         if(parentGenre !== null)
             this.$parent.tagClick(parentGenre);
       }
+    },
+    mounted: function() {
+      this.selectedCity = this.$parent.$parent.getCurrentCity();
     }
 
   };
