@@ -158,8 +158,6 @@
         return age + "+";
       },
       isAgeAvailable: function(age) {
-
-        console.log(age);
         if(age === undefined || age === "")
           return false;
         else
