@@ -127,12 +127,16 @@
 
         let index = 0;
         let textLength = 1;
+        let noEnoughSpace = false;
         genres.forEach(o => {
           if(screen.width / (textLength + this.event.location.name.length) > 20  || screen.width > 800) {
             array.push(o);
             textLength += o.length + 2;
-          } else if (index === 3) {
-            array.push("...");
+          } else {
+            if(!noEnoughSpace) {
+                array.push("...");
+                noEnoughSpace = true;
+            }
           }
           index++;
         });

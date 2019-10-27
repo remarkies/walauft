@@ -36,6 +36,10 @@
   .event-title {
     font-size: 16px;
   }
+
+  .date-info {
+    margin-right: -10px;
+  }
 }
 @media screen and (min-width: 801px) {
   .event {
@@ -45,6 +49,10 @@
 
   .event-title {
     font-size: 2em;
+  }
+
+  .date-info {
+    margin-right: 10px;
   }
 }
 
@@ -157,6 +165,9 @@
       flex-grow: 0;
       display: flex;
       flex-direction: column;
+
+
+
 
 
       .week-date {
@@ -285,7 +296,7 @@
 }
 
 .icon {
-  padding: 1.2em 1.5em;
+  padding: 15px 15px;
 }
 
 .pre-icon {
