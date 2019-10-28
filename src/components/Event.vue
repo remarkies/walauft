@@ -14,9 +14,7 @@
                     <div class="acts-desc">Club</div>
                     <div class="location">
                         <div class="location-name">
-                            <font-awesome-icon size="xs" class="pre-icon" :icon="['fas', 'building']" />
-                            {{event.location.name}}
-                        </div>
+                            <font-awesome-icon size="xs" class="pre-icon" :icon="['fas', 'building']" />{{event.location.name}}</div>
 
                     </div>
                     <div v-if="areActsAvailable(event.acts)" class="acts-desc">Acts</div>
@@ -48,7 +46,7 @@
                 <div class="event-title">{{event.name}}</div>
                 <div class="event-desc-container">
 
-                    <div class="club">{{event.location.name}}</div>
+                    <div class="club"><font-awesome-icon class="pre-icon" size="xs" :icon="['fas', 'building']" />{{event.location.name}}</div>
                     <div class="zeit">{{event.start}}</div>
                     <div class="genres">
                         <Tag class="eventTagHead" :tag="genre" v-for="genre in getShortetGenres(splitGenres(event.musicstyles))"/>
@@ -120,7 +118,7 @@
         let textLength = 1;
         let noEnoughSpace = false;
         genres.forEach(o => {
-          if(screen.width / (textLength + this.event.location.name.length) > 20  || screen.width > 800) {
+          if(screen.width / (textLength + this.event.location.name.length) > 25  || screen.width > 800) {
             array.push(o);
             textLength += o.length + 2;
           } else {
@@ -131,6 +129,10 @@
           }
           index++;
         });
+
+        if(array.length === 0)
+          array.push("Unbekannt");
+
         return array;
       },
       getWeekday: function(date) {

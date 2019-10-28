@@ -1,9 +1,8 @@
 @import 'theme.scss';
-.genres {
+.genresfilter {
   display: flex;
   max-width: 100vw;
   flex-wrap: wrap;
-  padding-bottom: 1em;
   justify-content: center;
 }
 
@@ -12,8 +11,7 @@
   margin: auto;
 }
 .filter{
-  border: none;
-  border-bottom: white solid!important;
-  font-size: 150%!important;
-
+  border: none !important;
+  border-bottom: white solid !important;
+  font-size: 150% !important;
 }

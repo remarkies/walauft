@@ -280,18 +280,24 @@
 }
 .club {
   font-size: 1.4em;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  padding-right: 4px !important;
 
+  svg {
+      margin-top: 3px;
+    }
 }
 
 
 .club, .zeit {
   padding-right: 10px;
   display: flex;
-  flex-direction: column-reverse;
 }
 
 .zeit {
-  margin-bottom: 1em;
+  margin-top: 3px;
 }
 
 .event-desc-container{

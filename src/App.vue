@@ -7,6 +7,8 @@
 <style lang="scss">
 #app {
   @import 'styles/theme.scss';
+
+  @import 'styles/tooltip';
     @import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
     @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap');
 

@@ -2,10 +2,24 @@
     <div>
         <Loading v-if="isLoading"></Loading>
         <div class="event-list">
-            <div class="genres">
-                <Tag class="filter" @click.native="tagClick(genre)" :selected="genre[1]" :tag="genre[0][1]" v-for="genre in genres"/>
+            <div class="genresfilter">
+                <Tag v-tooltip.bottom="{
+                      content: split(genre[0][2]),
+                      placement: 'bottom-center',
+                      classes: ['info'],
+                      targetClasses: ['it-has-a-tooltip'],
+                      offset: 8,
+                      delay: {
+                        show: 50,
+                        hide: 50,
+                      },
+                    }"
+                     class="filter"
+                     @click.native="tagClick(genre)" :selected="genre[1]" :tag="genre[0][1]" v-for="genre in genres"/>
+
             </div>
             <Event @click.native="eventClick(event.location.latitude, event.location.longitude)" :event="event" v-for="event in filteredEvents" />
+
         </div>
     </div>
 </template>
@@ -21,6 +35,20 @@
   export default {
     name: "EventList",
     methods: {
+      split: function(text) {
+        let array = text.split(',');
+        let res = "";
+
+        array.forEach(o => {
+          if(res.length === 0) {
+            res += o;
+          } else {
+            res += ", " + o;
+          }
+
+        });
+        return res;
+      },
       eventClick: function(latitude, longitude) {
         this.$emit('locationChanged', {lat: latitude, lng: longitude});
       },
@@ -80,8 +108,11 @@
         //console.log("getParentGenre function: param: " + child + " Parent found: " + parent);
         return parent;
       },
-      compareDates: function ( a, b ) {
-        return moment(a.date, "YYYY-MM-DD").format('YYYYMMDD') - moment(b.date, "YYYY-MM-DD").format('YYYYMMDD');
+      mouseOver: function (genre) {
+        this.hoveredGenre = genre[0][2];
+      },
+      unhoverGenre: function() {
+        this.hoveredGenre = ""
       },
       updateEvents: async function() {
         let Enumerable = require('../../node_modules/linq');
@@ -129,7 +160,8 @@
           [5, "Tanzbei Schwinge", "Funk,Latin,Blues,Reggaeton,R'n'B,Reggae,Salsa,Afro Beats,Dancehall,Soul,Jazz,Tango,Tropical,Swing,Afro House,Baile Funk,Urban,Balkan Beats,Oriental Beats"],
           [6, "Misch Masch", "Partytunes,Hits,Diverses,Open Format,Club Classics,Chill Out,80's,90's,00's,Mash Up,60's,70's,Oldies,Klassik"]
         ],
-        isLoading: false
+        isLoading: false,
+        hoveredGenre: {}
       }
     },
     components: {
@@ -160,6 +192,7 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+    @import "../styles/tooltip";
     @import "../styles/eventList.scss";
 </style>

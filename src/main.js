@@ -10,7 +10,9 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faMap } from '@fortawesome/free-solid-svg-icons'
 import { faMapPin } from '@fortawesome/free-solid-svg-icons'
 
+import VTooltip from 'v-tooltip'
 
+Vue.use(VTooltip);
 
 library.add(faArrowLeft, faTimes, faBuilding, faUser, faMap, faArrowRight,faMapPin);
 
