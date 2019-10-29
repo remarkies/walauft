@@ -18,7 +18,7 @@
 
                     </div>
                     <div v-if="areActsAvailable(event.acts)" class="acts-desc">Acts</div>
-                    <div v-if="areActsAvailable(event.acts)" class="acts"><font-awesome-icon class="pre-icon" size="xs" :icon="['fas', 'user']" />{{event.acts}}</div>
+                    <div v-if="areActsAvailable(event.acts)" class="acts"><font-awesome-icon class="pre-icon" size="xs" :icon="['fas', 'user']" />{{event.acts | removeDJs}}</div>
                     <div class="genres">
                         <Tag class="detailTag" v-bind:class="{tagSelected: genre[1]}" @click.native="tagClick(genre[0])"  :tag="genre[0]" v-for="genre in selectGenres(splitGenres(event.musicstyles))"/>
                     </div>
@@ -187,6 +187,14 @@
         });
         if(parentGenre !== null)
             this.$parent.tagClick(parentGenre);
+      }
+    },
+    filters:{
+      removeDJs(value){
+        if (!value){ return '';}
+        if (value.startsWith('DJs')){
+            return value.replace(/DJs/, '');
+        }
       }
     },
     mounted: function() {
