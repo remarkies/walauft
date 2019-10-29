@@ -191,10 +191,11 @@
     },
     filters:{
       removeDJs(value){
-        if (!value){ return '';}
         if (value.startsWith('DJs')){
-            return value.replace(/DJs/, '');
+          console.log("Repalced is:" + value.replace(/DJs/, ''))
+          return value.replace(/DJs/, '');
         }
+        else{return value}
       }
     },
     mounted: function() {
