@@ -46,7 +46,7 @@
                 <div class="event-title">{{event.name}}</div>
                 <div class="event-desc-container">
 
-                    <div class="club"><font-awesome-icon class="pre-icon" size="xs" :icon="['fas', 'building']" />{{event.location.name}}</div>
+                    <div class="club">{{event.location.name}}</div>
                     <div class="zeit">{{event.start}}</div>
                     <div class="genres">
                         <Tag class="eventTagHead" :tag="genre" v-for="genre in getShortetGenres(splitGenres(event.musicstyles))"/>
@@ -78,7 +78,9 @@
       event: {}
     },
     methods: {
+
       splitGenres: function(genres) {
+        console.log(this.event);
         let splitted = genres.split(',');
 
         let res = [];

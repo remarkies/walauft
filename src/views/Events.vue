@@ -20,7 +20,7 @@
               {{iconText}}
           </div>
           <div v-if="!showMap" class="icon-text">
-              Map
+              Charte
           </div>
           <div id="map-icon">
               <font-awesome-icon size="4x" :icon="['fas', 'map']" />
