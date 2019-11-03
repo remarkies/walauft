@@ -80,7 +80,6 @@
     methods: {
 
       splitGenres: function(genres) {
-        console.log(this.event);
         let splitted = genres.split(',');
 
         let res = [];

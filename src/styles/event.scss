@@ -168,6 +168,8 @@
         font-size: $smallFontSize;
         margin-bottom: 1em;
         max-width: 500px;
+        max-height: 60%;
+        overflow: scroll;
       }
 
       .extra-info {
