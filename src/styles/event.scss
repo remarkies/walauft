@@ -113,11 +113,12 @@
 
   .event-content {
     display: flex;
-    flex-direction: row;
     flex-grow:1;
     max-width: calc(800px - 2em);
     .info1 {
       flex-grow: 1;
+      display: flex;
+      flex-direction: column;
       max-width: calc(100vw - 20px - 114px);
 
       .name {
@@ -166,10 +167,11 @@
 
       .text {
         font-size: $smallFontSize;
-        margin-bottom: 1em;
         max-width: 500px;
-        max-height: 45%;
+        margin-bottom: 58px;
+        height: 100%;
         overflow: scroll;
+        flex: 1 1 auto;
       }
 
       .extra-info {
