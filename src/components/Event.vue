@@ -22,13 +22,13 @@
                     <div class="genres">
                         <Tag class="detailTag" v-bind:class="{tagSelected: genre[1]}" @click.native="tagClick(genre[0])"  :tag="genre[0]" v-for="genre in selectGenres(splitGenres(event.musicstyles))"/>
                     </div>
-
-                    <div class="text">{{event.text}}</div>
-
                     <div class="extra-info">
                         <Tag class="eventTagHead" v-if="isAgeAvailable(event.minage)" :tag="getMinAge(event.minage)"></Tag>
                         <Tag class="eventTagHead" v-if="isPriceAvailable(event.price)" :tag="getPrice(event.price)"></Tag>
                     </div>
+                    <div class="text">{{event.text}}</div>
+
+
 
                 </div>
             <div class="icon">
