@@ -26,8 +26,6 @@
  */
 
 
-
-
 @media screen and (max-width: 800px) {
   .event {
     width: 100vw;
@@ -49,6 +47,7 @@
     margin-top: 0.1em;
   }
 }
+
 @media screen and (min-width: 801px) {
   .event {
 
@@ -88,32 +87,34 @@
   top: -1em;
   animation: slideOut 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
   height: 100vh;
-  background-color: rgba(0,0,0,0) !important;
-  background-image: linear-gradient(to bottom, $background 0%, $background 40%, rgba(51,51,51,0) 90%);
+  background-color: rgba(0, 0, 0, 0) !important;
+  background-image: linear-gradient(to bottom, $background 0%, $background 40%, rgba(51, 51, 51, 0) 90%);
   overflow: scroll;
   text-overflow: ellipsis;
 }
 
 
-.event{
+.event {
   transition-all: 5s;
   padding: 1em;
   margin: 1em auto;
   text-align: left;
-  background-color:$background;
+  background-color: $background;
   border-radius: 2px;
   cursor: pointer;
   display: flex;
   max-width: 800px;
 
   .tag {
+    display: block;
     margin: 3px 3px 3px 0px;
   }
 
   .event-content {
     display: flex;
-    flex-grow:1;
+    flex-grow: 1;
     max-width: calc(800px - 2em);
+
     .info1 {
       flex-grow: 1;
       display: flex;
@@ -149,6 +150,7 @@
 
             align-self: center;
           }
+
           .linkButton {
             margin: 0px -5px -2px 5px;
           }
@@ -160,6 +162,7 @@
       .acts-desc {
         font-size: $smallFontSize;
       }
+
       .acts {
         font-size: $normalFontSize;
       }
@@ -185,9 +188,6 @@
       flex-direction: column;
 
 
-
-
-
       .week-date {
         display: flex;
         align-self: flex-start;
@@ -206,6 +206,7 @@
 
         margin-top: 2.5em;
         margin-left: -3.2em;
+
         .date {
           font-size: $bigFontSize;
           white-space: nowrap;
@@ -219,16 +220,15 @@
     }
 
 
-
   }
 
 }
 
 
-
 .start {
   font-size: $normalFontSize;
 }
+
 .location-name-desc {
   font-size: $smallFontSize;
 }
@@ -246,14 +246,10 @@
   font-size: $normalFontSize;
 
 }
+
 .location-url {
   font-size: $smallFontSize;
 }
-
-
-
-
-
 
 
 .dates {
@@ -264,7 +260,7 @@
 }
 
 .weekday {
-  flex-grow:0;
+  flex-grow: 0;
 }
 
 .datum {
@@ -274,13 +270,13 @@
 }
 
 
-
-.event-title{
+.event-title {
 
 
   text-transform: uppercase;
 
 }
+
 .club {
   font-size: 1.4em;
   display: flex;
@@ -289,8 +285,8 @@
   padding-right: 4px !important;
 
   svg {
-      margin-top: 3px;
-    }
+    margin-top: 3px;
+  }
 }
 
 
@@ -303,12 +299,13 @@
   margin-top: 3px;
 }
 
-.event-desc-container{
+.event-desc-container {
   display: flex;
 }
+
 @keyframes slideOut {
   from {
-    color: rgba(0,0,0,0);
+    color: rgba(0, 0, 0, 0);
     height: 0vh;
   }
 
