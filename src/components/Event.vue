@@ -29,8 +29,6 @@
                     </div>
                     <div class="text">{{event.text}}</div>
 
-
-
                 </div>
             <div class="icon">
                 <font-awesome-icon size="2x" :icon="['fas', 'times']" />

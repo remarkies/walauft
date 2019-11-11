@@ -44,8 +44,15 @@
   export default {
     name: "events",
     components: { EventList, GMap },
+    mounted() {
+      window.addEventListener("scroll", this.onScroll)
+    },
+    beforeDestroy() {
+      window.removeEventListener("scroll", this.onScroll)
+    },
     data: function() {
       return {
+        scrollPosition: 0,
         heuteInactive: true,
         when: "0",
         regionen: [
@@ -86,6 +93,9 @@
       changeTypeToRest: function() {
         this.heuteInactive = false;
         this.when = "1";
+      },
+      onScroll(e){
+        this.scrollPosition = window.top.scrollY; /* or: e.target.documentElement.scrollTop */
       },
       changedHandler: function(event) {
         this.$refs.map.showLocation(event.lat, event.lng);

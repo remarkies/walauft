@@ -18,7 +18,8 @@
                      @click.native="tagClick(genre)" :selected="genre[1]" :tag="genre[0][1]" v-for="genre in genres"/>
 
             </div>
-            <Event @click.native="eventClick(event.location.latitude, event.location.longitude)" :event="event" v-for="event in filteredEvents" />
+            <Event @click.native="eventClick(event.location.latitude, event.location.longitude)" :event="event"
+                   v-for="event in filteredEvents"/>
 
         </div>
     </div>
@@ -34,13 +35,19 @@
 
   export default {
     name: "EventList",
+    data: function() {
+      return {
+        detailActive: true,
+        lastScrollPosition: 0
+      };
+    },
     methods: {
       split: function(text) {
-        let array = text.split(',');
+        let array = text.split(",");
         let res = "";
 
         array.forEach(o => {
-          if(res.length === 0) {
+          if (res.length === 0) {
             res += o;
           } else {
             res += ", " + o;
@@ -50,27 +57,39 @@
         return res;
       },
       eventClick: function(latitude, longitude) {
-        this.$emit('locationChanged', {lat: latitude, lng: longitude});
+        this.$emit("locationChanged", { lat: latitude, lng: longitude });
+
+        if (!this.detailActive) {
+          this.lastScrollPosition = this.$parent.scrollPosition;
+          //console.log("in: ", this.lastScrollPosition);
+
+        } else {
+
+          //console.log("out: ", this.lastScrollPosition);
+          window.scrollBy(0, this.lastScrollPosition);
+        }
+        this.detailActive = !this.detailActive;
+
       },
       tagClick: function(genre) {
 
         let index = -1;
-        for(let i = 0; i < this.genres.length; i++) {
-          if(this.genres[i] === genre)
+        for (let i = 0; i < this.genres.length; i++) {
+          if (this.genres[i] === genre)
             index = i;
         }
         genre[1] = !genre[1];
         this.$set(this.genres, index, genre);
       },
       genreComparer: function(musicstyles) {
-        let Enumerable = require('../../node_modules/linq');
-        if(this.genres.length > 0) {
+        let Enumerable = require("../../node_modules/linq");
+        if (this.genres.length > 0) {
           let foundGenre = false;
 
-          if(Enumerable.from(this.genres).any($ => $[1] === true)) {
+          if (Enumerable.from(this.genres).any($ => $[1] === true)) {
             Enumerable.from(this.genres).where($ => $[1] === true).forEach(o => {
 
-              let styles = musicstyles.split(',');
+              let styles = musicstyles.split(",");
               styles.forEach(s => {
                 s = s.trimLeft().trimRight();
                 if (o[0][1].toUpperCase() === this.getParentGenre(s)[1].toUpperCase())
@@ -89,7 +108,7 @@
         }
       },
       getParentGenre: function(child) {
-        let Enumerable = require('../../node_modules/linq');
+        let Enumerable = require("../../node_modules/linq");
         /*
                 let parentGenre = null;
 
@@ -100,7 +119,7 @@
                 });
         */
         let parent = Enumerable.from(this.genresOverall).firstOrDefault($ => $[2].toUpperCase().includes(child.trimLeft().trimRight().toUpperCase()));
-        if(parent === undefined) {
+        if (parent === undefined) {
 
           parent = this.genresOverall[5];
         }
@@ -108,14 +127,14 @@
         //console.log("getParentGenre function: param: " + child + " Parent found: " + parent);
         return parent;
       },
-      mouseOver: function (genre) {
+      mouseOver: function(genre) {
         this.hoveredGenre = genre[0][2];
       },
       unhoverGenre: function() {
-        this.hoveredGenre = ""
+        this.hoveredGenre = "";
       },
       updateEvents: async function() {
-        let Enumerable = require('../../node_modules/linq');
+        let Enumerable = require("../../node_modules/linq");
 
         this.isLoading = true;
         this.genres = [];
@@ -128,18 +147,18 @@
 
         try {
           this.events.forEach(o => {
-            let eventGenres = o.musicstyles.split(',');
+            let eventGenres = o.musicstyles.split(",");
             eventGenres.forEach(eventGenre => {
               let trimmedGenre = eventGenre.trimRight().trimLeft();
 
-              if(!Enumerable.from(this.genres).any($ => $[0][1] === this.getParentGenre(trimmedGenre)[1]) && trimmedGenre.length > 0) {
+              if (!Enumerable.from(this.genres).any($ => $[0][1] === this.getParentGenre(trimmedGenre)[1]) && trimmedGenre.length > 0) {
 
 
                 this.genres.push([this.getParentGenre(trimmedGenre), false]);
               }
             });
           });
-        } catch(exception) {
+        } catch (exception) {
           console.log("Could not fetch genres from events! Message: " + exception);
         } finally {
           this.isLoading = false;
@@ -162,7 +181,7 @@
         ],
         isLoading: false,
         hoveredGenre: {}
-      }
+      };
     },
     components: {
       Loading,
@@ -174,7 +193,7 @@
     },
     watch: {
       genres: async function() {
-        let Enumerable = require('../../node_modules/linq');
+        let Enumerable = require("../../node_modules/linq");
         this.filteredEvents = Enumerable.from(this.events).where($ => this.genreComparer($.musicstyles)).toArray();
 
       },
@@ -184,10 +203,9 @@
       }
     },
     mounted: function() {
-        this.updateEvents();
+      this.updateEvents();
     }
   };
-
 
 
 </script>
