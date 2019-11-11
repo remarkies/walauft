@@ -29,6 +29,7 @@
 @media screen and (max-width: 800px) {
   .event {
     width: 100vw;
+
   }
 
   .event-title {
@@ -67,7 +68,7 @@
   }
 
   .name {
-    margin-top: 0.2em;
+
   }
 }
 
@@ -78,8 +79,7 @@
 }
 
 .selected .genres {
-  margin-top: 1em;
-  margin-bottom: 1em;
+
 }
 
 .selected {
@@ -106,7 +106,7 @@
   max-width: 800px;
 
   .tag {
-    display: block;
+    min-height: 20px;
     margin: 3px 3px 3px 0px;
   }
 
@@ -123,24 +123,20 @@
 
       .name {
         font-size: $bigFontSize;
-        margin-bottom: 0.5em;
       }
 
       .location {
         display: flex;
 
         font-size: $normalFontSize;
-        margin-bottom: 0.5em;
+
 
         .location-name {
-
           flex-grow: 1;
         }
 
         .locationMap {
-          display: flex;
           flex-grow: 0;
-
           padding: 2px 6px;
           background: $zh;
           border-radius: 2px;
@@ -169,16 +165,15 @@
 
       .text {
         font-size: $smallFontSize;
-        max-width: 500px;
-        margin-bottom: 58px;
-        height: 100%;
+        max-width: 700px;
+        margin-top: 0.5em;
+        max-height: 45%;
         overflow: scroll;
         flex: 1 1 auto;
       }
 
       .extra-info {
         display: flex;
-        margin-bottom: 2em;
       }
     }
 

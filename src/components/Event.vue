@@ -1,3 +1,4 @@
+
 <template>
     <div v-bind:class="{ selected: selected }" v-on:click="handleSelect" class="event">
         <div v-if="selected" class="event-content">
@@ -54,6 +55,7 @@
             </div>
         </div>
         </div>
+
     </div>
 
 </template>
