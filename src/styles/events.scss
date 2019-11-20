@@ -5,14 +5,10 @@
   margin: auto;
   overflow: hidden;
   z-index: 5;
+
 }
 
-
-
-
 .map-icon {
-
-
   max-width: 800px;
   position: fixed;
   cursor: pointer;
@@ -30,7 +26,6 @@
   font-size: 3em;
   display: flex;
   margin-right: 12px;
-
   align-items: center;
 
 }
@@ -39,8 +34,6 @@
   margin-right: 28px;
 }
 
-
-
 .header {
   padding: 10px;
   display: flex;
@@ -48,18 +41,28 @@
   margin: auto;
   max-width: 800px;
   font-size: 2.4em;
-
+  opacity: 1;
 }
+@keyframes fade-in{
+  0%{
+    opacity: 0;
 
+  }
+  50%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+
+  }
+}
 .hide {
   //padding-top: 100vh;
   height: 0;
   overflow: hidden;
-
   margin: auto;
-
-
-
+  display: flex;
+  justify-content: space-between;
 }
 
 .header.hide {
@@ -69,14 +72,12 @@
 
 .city {
   font-size: 4.5rem;
-
-  text-align: left;
-  flex-grow: 1;
+  display: flex;
+  width: 100%;
 }
 
 .heute-sonst-switch{
   justify-content: space-evenly;
-
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -104,13 +105,10 @@
 
 .inactive{
 
-
 }
 .showMap {
   display: none;
 }
-
-
 
 #backgroundMap
 {

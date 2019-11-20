@@ -1,10 +1,42 @@
 <template>
   <div id="app">
+    <transition name="slide-to-right">
     <router-view />
+    </transition>
   </div>
 </template>
 
 <style lang="scss">
+  .slide-to-right-enter-active, .slide-to-right-leave-active {
+    transition: opacity 0.3s ease-in-out; transition: transform 0.3s ease-in-out;
+    .city{
+      transition: opacity 0.5s 0.3s ease-in-out;
+    }
+  }
+  .slide-to-right-enter-active{
+    transition-delay: 0.3s;
+  }
+  .slide-to-right-enter{
+    .city{
+      opacity: 0;
+    }
+    opacity: 0;
+  transform: translateX(100%);
+  }
+  .slide-to-right-leave-to{
+
+    transform: translateX(-100%);
+  }
+  .slide-to-right-enter-to, slide-to-right-leave{
+    .city{
+      opacity: 1;
+    }
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+
+
 #app {
   @import 'styles/theme.scss';
 
