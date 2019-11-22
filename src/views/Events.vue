@@ -95,7 +95,7 @@
         this.when = "1";
       },
       onScroll(e){
-        this.scrollPosition = window.top.scrollY; /* or: e.target.documentElement.scrollTop */
+        this.scrollPosition = window.top.scrollY;
       },
       changedHandler: function(event) {
         this.$refs.map.showLocation(event.lat, event.lng);

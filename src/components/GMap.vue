@@ -381,6 +381,7 @@
         ;
         const options = {
           zoom: 14,
+          backgroundColor: "#212121",
           center: new google.maps.LatLng(locations[this.$route.params.regionId - 2].position),
           styles: styles,
           zoomControl: false,
