@@ -7,6 +7,6 @@ The walauft-app part went additionally through another module called Studio User
 
 As a next step the project walauft got a native iOS app. The iOS app was developed during the module "Programming for iOS" at HSLU - Informatik.
 
-For all three modules I partnered up with Dariush Mehdiaraghi. 
+For all three modules I partnered up with [Dariush Mehdiaraghi](https://github.com/Dariush-Mehdiaraghi). 
 
 This project is running on [walauft.ch](https://www.walauft.ch)
