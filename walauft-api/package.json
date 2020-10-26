@@ -1,0 +1,25 @@
+{
+  "name": "walauft-api",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.1",
+    "debug": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "es6-promise": "^4.0.5",
+    "express": "^4.17.1",
+    "express-cors": "0.0.3",
+    "jsdom": "^9.10.0",
+    "moment": "^2.29.0",
+    "mongodb": "^2.2.22",
+    "morgan": "^1.10.0",
+    "request": "^2.88.2",
+    "require": "^2.4.20",
+    "serve-favicon": "^2.5.0"
+  }
+}
