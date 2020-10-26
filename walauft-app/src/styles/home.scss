@@ -1,0 +1,102 @@
+@import 'theme.scss';
+html {
+  font-size: 62.5%;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: $fourth;
+  color: $primary;
+
+  a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: $fontfamily1;
+  }
+  a:link {
+    color: $primary;
+  }
+  a:visited {
+    color: $primary;
+
+  }
+}
+
+.title {
+  font-size: 8rem;
+  opacity: 0.2;
+  float: right;
+  transform-origin: bottom right;
+  transform: rotate(-90deg) translate(75px, 0px);
+  animation: down-top 1s;
+  animation-iteration-count: initial;
+}
+.title2 {
+  font-size: 4.5rem;
+  opacity: 0.2;
+  position: absolute;
+  top: 0px;
+  padding-top: 15px;
+  padding-left: 15px;
+  animation: right-left 1.5s;
+  animation-iteration-count: initial;
+}
+.coders {
+  font-size: 1.1rem;
+  opacity: 0.2;
+  position: absolute;
+  bottom: 80px;
+  right: 5px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  transform-origin: bottom right;
+  transform: rotate(-90deg) translate(85px, 0px);
+}
+
+
+
+.home {
+  ul {
+    list-style: none;
+    position: absolute;
+    bottom: 0px;
+    padding: 7px 15px;
+  }
+
+  ul {
+    li {
+      font-size: 4.5rem;
+      text-align: left;
+      height: 100%;
+    }
+  }
+}
+
+
+@keyframes down-top {
+0%{
+  opacity: 0;
+  transform: rotate(-90deg) translate(0vw, 0px);
+}
+100%{
+  opacity: 0.2;
+  transform: rotate(-90deg) translate(75px, 0px);
+}
+}
+
+@keyframes right-left {
+  0%{
+    opacity: 0;
+    padding-left: 80px;
+  }
+  20%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 0.2;
+    padding-left: 15px;
+  }
+}

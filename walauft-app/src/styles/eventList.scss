@@ -1,0 +1,17 @@
+@import 'theme.scss';
+.genresfilter {
+  display: flex;
+  max-width: 100vw;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.event-list {
+  max-width: 800px;
+  margin: auto;
+}
+.filter{
+  border: none !important;
+  border-bottom: white solid !important;
+  font-size: 150% !important;
+}

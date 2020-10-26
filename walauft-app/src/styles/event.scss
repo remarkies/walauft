@@ -1,0 +1,371 @@
+@import 'theme.scss';
+
+/*
+<div class="event-content">
+            <div class="name-desc">Event</div>
+            <div class="name">{{event.name}}</div>
+            <div class="acts-desc">Acts</div>
+            <div class="acts">{{event.acts}}</div>
+            <div class="date">{{event.date}}</div>
+            <div class="start">{{event.start}}</div>
+            <div class="genres">
+                <Tag :tag="genre" v-for="genre in splitGenres(event.musicstyles)"/>
+            </div>
+            <div class="location-name-desc">Location</div>
+            <div class="location-name">{{event.location.name}}</div>
+            <div class="location-street">{{event.location.street}}</div>
+            <div class="location-streetno">{{event.location.streetno}}</div>
+            <div class="location-url">{{event.location.url}}</div>
+            <div class="price-desc">Preis</div>
+            <div class="price">{{event.price}}</div>
+            <div class="min-age-desc">Mindestalter</div>
+            <div class="min-age">{{event.minage}}</div>
+            <div class="text">{{event.text}}</div>
+        </div>
+
+ */
+
+
+@media screen and (max-width: 800px) {
+  .event {
+    width: 100vw;
+
+  }
+
+  .event-title {
+    font-size: 16px;
+  }
+
+  .date-info {
+    margin-right: -10px;
+  }
+
+  .week-date {
+    font-size: 30px;
+  }
+
+  .name {
+    margin-top: 0.1em;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  .event {
+
+    width: calc(100vw - 2em);
+  }
+
+  .event-title {
+    font-size: 2em;
+  }
+
+  .date-info {
+    margin-right: 10px;
+  }
+
+  .week-date {
+    font-size: 3.4em;
+  }
+
+  .name {
+
+  }
+}
+
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.selected .genres {
+
+}
+
+.selected {
+  position: fixed;
+  top: -1em;
+  animation: slideOut 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0) !important;
+  background-image: linear-gradient(to bottom, $background 0%, $background 40%, rgba(51, 51, 51, 0) 90%);
+
+  text-overflow: ellipsis;
+}
+
+
+.event {
+  transition-all: 5s;
+  padding: 1em;
+  margin: 1em auto;
+  text-align: left;
+  background-color: $background;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  max-width: 800px;
+
+  .tag {
+    min-height: 20px;
+    margin: 3px 3px 3px 0px;
+  }
+
+  .event-content {
+    display: flex;
+    flex-grow: 1;
+    max-width: calc(800px - 2em);
+
+    .info1 {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: calc(100vw - 20px - 114px);
+
+      .name {
+        font-size: $bigFontSize;
+      }
+
+      .location {
+        display: flex;
+
+        font-size: $normalFontSize;
+
+
+        .location-name {
+          flex-grow: 1;
+        }
+
+        .locationMap {
+          flex-grow: 0;
+          padding: 2px 6px;
+          background: $zh;
+          border-radius: 2px;
+
+          .linkDesc {
+            font-size: 16px !important;
+
+            align-self: center;
+          }
+
+          .linkButton {
+            margin: 0px -5px -2px 5px;
+          }
+
+
+        }
+      }
+
+      .acts-desc {
+        font-size: $smallFontSize;
+      }
+
+      .acts {
+        font-size: $normalFontSize;
+      }
+
+      .text {
+        font-size: $smallFontSize;
+        max-width: 700px;
+        margin-top: 0.5em;
+        max-height: 45%;
+        flex: 1 1 auto;
+      }
+
+      .extra-info {
+        display: flex;
+      }
+    }
+
+    .date-info {
+      flex-grow: 0;
+      display: flex;
+      flex-direction: column;
+
+
+      .week-date {
+        display: flex;
+        align-self: flex-start;
+      }
+
+      .date-rotate {
+        display: flex;
+        flex-direction: column;
+
+
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        margin-top: 2.5em;
+        margin-left: -3.2em;
+
+        .date {
+          font-size: $bigFontSize;
+          white-space: nowrap;
+
+        }
+
+        .start {
+          font-size: $smallFontSize;
+        }
+      }
+    }
+
+
+  }
+
+}
+
+
+.start {
+  font-size: $normalFontSize;
+}
+
+.location-name-desc {
+  font-size: $smallFontSize;
+}
+
+.location-street-desc {
+  display: flex;
+}
+
+.location-street {
+  font-size: $normalFontSize;
+  padding-right: 0.2em;
+}
+
+.location-streetno {
+  font-size: $normalFontSize;
+
+}
+
+.location-url {
+  font-size: $smallFontSize;
+}
+
+
+.dates {
+  font-size: 1.8em;
+  padding-right: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.weekday {
+  flex-grow: 0;
+}
+
+.datum {
+  flex-grow: 1;
+  flex-direction: column-reverse;
+  display: flex;
+}
+
+
+.event-title {
+
+
+  text-transform: uppercase;
+
+}
+
+.club {
+  font-size: 1.4em;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  padding-right: 4px !important;
+
+  svg {
+    margin-top: 3px;
+  }
+}
+
+
+.club, .zeit {
+  padding-right: 10px;
+  display: flex;
+}
+
+.zeit {
+  margin-top: 3px;
+}
+
+.event-desc-container {
+  display: flex;
+}
+
+@keyframes slideOut {
+  from {
+    color: rgba(0, 0, 0, 0);
+    height: 0vh;
+  }
+
+  to {
+    color: $primary;
+    height: 100vh;
+  }
+}
+
+.icon {
+  padding: 15px 15px;
+}
+
+.pre-icon {
+  margin-right: 0.5em;
+  margin-bottom: 2px;
+}
+
+.detailTag:hover {
+  background: $primary;
+  color: $secondary;
+}
+
+.eventTagHead {
+  border: solid 2px $fifth;
+  background: $fifth;
+
+  color: $primary;
+  margin-bottom: 0px !important;
+}
+
+.tagSelected {
+  border: solid 1px $primary;
+  background: $primary;
+  color: $secondary;
+}
+
+/*
+.ZH {
+  border: none;
+  background: $zh;
+  color: $primary;
+}
+
+.BRN {
+  border: none;
+  background: $brn;
+  color: $primary;
+}
+
+.LZN {
+  border: none;
+  background: $lzn;
+  color: $primary;
+}
+
+.SG {
+  border: none;
+  background: $sg;
+  color: $primary;
+}
+
+.BSL {
+  border: none;
+  background: $bsl;
+  color: $primary;
+}
+
+ */
