@@ -6,11 +6,7 @@ export function getEvents(regionId, today) {
     //using local server
     //url = "http://localhost:3000/" + "events/" + regionId + "/" + today;
     return axios.post(url).then((res) => {
-
-        console.log(url);
       let json = JSON.parse(JSON.stringify(res.data));
-
-
       let events = [];
 
       json.forEach(o => {

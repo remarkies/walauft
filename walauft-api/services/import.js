@@ -1,14 +1,14 @@
 let moment = require('moment');
+require('dotenv').config()
 const https = require('https');
 let database = require('../services/database');
-const env = require('../environment')
 let url1 = "https://zuerich.usgang.ch/v1/events?date=";
 let url2 = "&regionid=";
 let url3 = "&limit=100";
 
 var promise = Promise.resolve();
 
-var urlDB = env.database_prod;
+var urlDB = process.env.DB_LINK;
 
 let checkDaysInAdvance = 60;
 
