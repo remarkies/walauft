@@ -1,25 +1,22 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cors = require('cors');
-var bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-dotenv.config();
-var database = require('./services/database');
-var events = require('./routes/events');
+const express = require('express')
+require('dotenv').config()
+const app = express()
+const port = 3000
 
+let cors = require('cors');
+app.use(cors());
 
+let bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.raw());
 
-database.connect('mongodb://server:Olgr3mJu1@walauftdb-shard-00-00-wysk3.mongodb.net:27017,walauftdb-shard-00-01-wysk3.mongodb.net:27017,walauftdb-shard-00-02-wysk3.mongodb.net:27017/walauftDB?ssl=true&replicaSet=walauftDB-shard-0&authSource=admin&retryWrites=true&w=majority').then(function () {
-    console.log('connected');
+let database = require('./services/database');
+database.connect(process.env.DB_LINK).then(function () {
+  console.log('connected to database');
 });
 
-var app = express();
-
-app.use(cors());
-app.use(logger('dev'));
-app.use(bodyParser.json());
-
+let events = require('./routes/events');
 app.use('/events', events);
 
 // catch 404 and forward to error handler
@@ -41,4 +38,6 @@ app.use(function(err, req, res, next) {
   console.log(err);
 });
 
-module.exports = app;
+app.listen(port, () => {
+  console.log(`Listening at http://localhost:${port}`)
+})

@@ -4,6 +4,7 @@ let database = require('../services/database');
 let router = express.Router();
 
 router.post('/:regionId/:today',function(request,response){
+
     let regionId = request.params.regionId;
     let today = request.params.today;
 
@@ -15,7 +16,6 @@ router.post('/:regionId/:today',function(request,response){
                 { region: regionId }
             ]
         };
-        console.log(filter);
 
 
         database.find('events',filter , { sort: 'date', limit: 100 })
