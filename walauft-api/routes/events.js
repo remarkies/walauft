@@ -43,4 +43,21 @@ router.post('/:regionId/:today',function(request,response){
 
 });
 
+router.post('/:regionId',function(request,response){
+
+    let regionId = request.params.regionId;
+
+    let filter = {
+        $and: [
+            { date: { $gte: moment(new Date()).add(-10, 'hours').format('YYYYMMDD') } },
+            { region: regionId }
+        ]
+    };
+
+    database.find('events',filter , { sort: 'date', limit: 100 })
+        .then(function (docs) {
+            response.json(docs);
+        });
+});
+
 module.exports = router;
