@@ -18,15 +18,13 @@ struct RegionDayRowView: View {
     
     var body: some View {
         if regionDay!.events.count > 0 {
-            Section (header: Text("\(regionDay!.date, formatter: Self.taskDateFormat)")) {
-                
-                List {
-                    ForEach(regionDay!.events, id: \.id) {
-                        event in
-                        EventRowView(event: event)
-                    }
+            Section (header: Text("\(regionDay!.date, formatter: Self.taskDateFormat)")){
+                ForEach(regionDay!.events, id: \.id) {
+                    event in
+                    EventRowView(event: event)
                 }
             }
+            
         }
     }
 }

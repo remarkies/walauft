@@ -15,15 +15,17 @@ struct EventsView: View {
     
     var body: some View {
         VStack {
-            Form {
+            ScrollView {
                 ForEach(self.regionDays, id: \._id) {
                     regionDay in
                     
                     RegionDayRowView(regionDay: regionDay)
                 }
             }
-            .navigationBarTitle(self.selectedRegion.name, displayMode: .inline)
-        }.onAppear {
+        }
+        .background(Color("SnowStorm3"))
+        .navigationBarTitle(self.selectedRegion.name, displayMode: .inline)
+        .onAppear {
             self.eventService.loadEventsAsync(region: self.selectedRegion) {
                 (result) in
                 
