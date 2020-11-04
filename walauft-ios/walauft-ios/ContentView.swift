@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var selectedRegion: Region?
+    @State var selectedRegion: RegionModel?
     
     var body: some View {
-        Home()
+        HomeView()
     }
 }
 

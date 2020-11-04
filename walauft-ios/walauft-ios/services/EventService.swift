@@ -15,7 +15,7 @@ final class EventService: ObservableObject {
         
     }
     
-    func loadEventsAsync(region: Region, completion: @escaping ([RegionDay]?) -> Void) {
+    func loadEventsAsync(region: RegionModel, completion: @escaping ([RegionDayModel]?) -> Void) {
         
         let url = URL(string: "\(apiPath)\(String(region.id))")!
         var request = URLRequest(url: url)
@@ -35,7 +35,7 @@ final class EventService: ObservableObject {
             else if let data = data {
                 DispatchQueue.main.async {
                     do {
-                        let model = try JSONDecoder().decode([RegionDay].self, from: data)
+                        let model = try JSONDecoder().decode([RegionDayModel].self, from: data)
                         completion(model)
                     } catch let error {
                         print("JSONDecoder failed, \(error)")

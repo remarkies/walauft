@@ -8,9 +8,9 @@
 import SwiftUI
 import MapKit
 
-struct Detail: View {
+struct DetailView: View {
     
-    @State var selectedEvent: Event?
+    @State var selectedEvent: EventModel?
     
     var body: some View {
         VStack {
@@ -25,11 +25,19 @@ struct Detail: View {
                     }
                 }
                 
-                if selectedEvent!.musicstyles != nil {
+                if selectedEvent!.musicstyles.count > 0 {
                     Section (header: Text("Styles")){
-                        Text("\(selectedEvent!.musicstyles!)")
+                        Text("\(selectedEvent!.musicstyles)")
                     }
                 }
+                
+                if selectedEvent!.text.count > 0 {
+                    Section (header: Text("Description")){
+                        Text("\(selectedEvent!.text)")
+                    }
+                }
+                
+                
             }
             
         }.navigationBarTitle(selectedEvent!.location!.name)
@@ -38,6 +46,6 @@ struct Detail: View {
 
 struct Detail_Previews: PreviewProvider {
     static var previews: some View {
-        Detail(selectedEvent: nil)
+        DetailView(selectedEvent: nil)
     }
 }

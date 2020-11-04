@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Location : Codable {
+struct LocationModel : Codable {
     let id: String
     let name: String
     let city: String

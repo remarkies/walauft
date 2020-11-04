@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct Events: View {
-    @State var selectedRegion: Region
+struct EventsView: View {
+    @State var selectedRegion: RegionModel
     
     @State var eventService = EventService()
-    @State var regionDays: [RegionDay] = []
+    @State var regionDays: [RegionDayModel] = []
     
     var body: some View {
         VStack {
@@ -19,7 +19,7 @@ struct Events: View {
                 ForEach(self.regionDays, id: \._id) {
                     regionDay in
                     
-                    RegionDayRow(regionDay: regionDay)
+                    RegionDayRowView(regionDay: regionDay)
                 }
             }
             .navigationBarTitle(self.selectedRegion.name, displayMode: .inline)
@@ -38,6 +38,6 @@ struct Events: View {
 
 struct Events_Previews: PreviewProvider {
     static var previews: some View {
-        Events(selectedRegion: Region(id: 6, name: "Züri"))
+        EventsView(selectedRegion: RegionModel(id: 6, name: "Züri"))
     }
 }

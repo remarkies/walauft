@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Region: Hashable {
+struct RegionModel: Hashable {
     var id: Int
     var name: String
 }

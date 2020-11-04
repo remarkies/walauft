@@ -7,22 +7,23 @@
 
 import SwiftUI
 
-struct RegionDayRow: View {
+struct RegionDayRowView: View {
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
         return formatter
     }()
     
-    @State var regionDay: RegionDay?
+    @State var regionDay: RegionDayModel?
     
     var body: some View {
         if regionDay!.events.count > 0 {
             Section (header: Text("\(regionDay!.date, formatter: Self.taskDateFormat)")) {
+                
                 List {
                     ForEach(regionDay!.events, id: \.id) {
                         event in
-                        EventRow(event: event)
+                        EventRowView(event: event)
                     }
                 }
             }
@@ -32,6 +33,6 @@ struct RegionDayRow: View {
 
 struct RegionDayRow_Previews: PreviewProvider {
     static var previews: some View {
-        RegionDayRow(regionDay: nil)
+        RegionDayRowView(regionDay: nil)
     }
 }

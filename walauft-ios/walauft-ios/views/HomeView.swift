@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct Home: View {
+struct HomeView: View {
     
-    @State var regions: [Region] = [
-        Region(id: 2, name: "Lozärn"),
-        Region(id: 3, name: "Bärn"),
-        Region(id: 4, name: "Baasel"),
-        Region(id: 5, name: "St.Galle"),
-        Region(id: 6, name: "Züri")
+    @State var regions: [RegionModel] = [
+        RegionModel(id: 2, name: "Lozärn"),
+        RegionModel(id: 3, name: "Bärn"),
+        RegionModel(id: 4, name: "Baasel"),
+        RegionModel(id: 5, name: "St.Galle"),
+        RegionModel(id: 6, name: "Züri")
     ]
     
     var body: some View {
@@ -25,7 +25,7 @@ struct Home: View {
                         List {
                             ForEach(self.regions, id: \.self) {
                                 region in
-                                NavigationLink(destination: Events(selectedRegion: region)){
+                                NavigationLink(destination: EventsView(selectedRegion: region)){
                                     HStack {
                                         Text("\(region.name)")
                                     }
@@ -42,6 +42,6 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        HomeView()
     }
 }

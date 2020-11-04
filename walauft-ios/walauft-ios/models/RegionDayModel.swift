@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct RegionDay : Codable {
+struct RegionDayModel : Codable {
     let _id: String
     let date: Date
     let region: String
-    let events: [Event]
+    let events: [EventModel]
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -30,7 +30,7 @@ struct RegionDay : Codable {
         }
         
         region = try container.decode(String.self, forKey: .region)
-        events = try container.decode([Event].self, forKey: .events)
+        events = try container.decode([EventModel].self, forKey: .events)
     }
 }
 
