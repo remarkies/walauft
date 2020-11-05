@@ -94,6 +94,7 @@ function downloadEvents(url, region, date) {
                 let result = {};
                 result.date = moment(date).format('YYYYMMDD');
                 result.region = region;
+                //result.tags = [];
                 json_data.items.forEach((eventItem) => {
                    let foundTags = [];
 
@@ -111,6 +112,13 @@ function downloadEvents(url, region, date) {
                     foundTags.push(getTagForLocation(eventItem.location.name));
                     foundTags.push(getTagForDate(eventItem.date));
 
+                    /*
+                    foundTags.forEach(item => {
+                        if(!result.tags.includes(item)) {
+                            result.tags.push(item);
+                        }
+                    });
+                    */
                     eventItem.tags = foundTags;
                 });
 
@@ -174,21 +182,21 @@ function handleEvents(results) {
 
     let handlingPromises = [];
     let progress = 0;
-    console.log(results.length + " doc upserts to do.");
+
+    results = results.filter(o => o.events.length > 0);
 
     let lastStep = 0;
     let stepsInPerc = 10;
     results.forEach(doc => {
-        if(doc.events.length > 0)  {
-            handlingPromises.push(database.upsert('events', { date:  doc.date, region: doc.region }, doc));
-        }
-            progress++;
-            let currentPerc = Math.round(100.00 / results.length * progress)
+        handlingPromises.push(database.upsert('events', { date:  doc.date, region: doc.region }, doc));
 
-            if(currentPerc >= lastStep + stepsInPerc) {
-                console.log("Updating... (" + currentPerc + "%)");
-                lastStep += stepsInPerc;
-            }
+        progress++;
+        let currentPerc = Math.round(100.00 / results.length * progress)
+
+        if(currentPerc >= lastStep + stepsInPerc) {
+            console.log("Updating... (" + currentPerc + "%)");
+            lastStep += stepsInPerc;
+        }
     });
 
 

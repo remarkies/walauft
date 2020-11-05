@@ -1,14 +1,13 @@
 //
-//  ContentView.swift
+//  CustomNavigationView.swift
 //  walauft-ios
 //
-//  Created by Luka Kramer on 03.11.20.
+//  Created by Luka Kramer on 05.11.20.
 //
 
 import SwiftUI
 
-struct ContentView: View {
-    
+struct CustomNavigationView: View {
     init() {
         // this is not the same as manipulating the proxy directly
         let appearance = UINavigationBarAppearance()
@@ -24,7 +23,7 @@ struct ContentView: View {
         // this only applies to small titles
         appearance.titleTextAttributes = [
             .font : UIFont.systemFont(ofSize: 20),
-            NSAttributedString.Key.foregroundColor : UIColor.white,
+            NSAttributedString.Key.foregroundColor : UIColor.white
         ]
 
         //In the following two lines you make sure that you apply the style for good
@@ -36,17 +35,29 @@ struct ContentView: View {
         UINavigationBar.appearance().tintColor = .white
     }
     
-    @State var selectedRegion: RegionModel?
-    
     var body: some View {
-        NavigationView {
-            HomeView()
-        }
+        VStack {}
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct CustomNavigationView2: View {
+    
+    var body: some View {
+        
+            ZStack {
+                Color.black
+                    .edgesIgnoringSafeArea([.all])
+                NavigationLink(destination: ContentView()) {
+                    Text("push")
+                }
+            }
+            .navigationBarTitle("My Custom White title", displayMode: .inline)
+        
+    }
+}
+
+struct CustomNavigationView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        CustomNavigationView()
     }
 }

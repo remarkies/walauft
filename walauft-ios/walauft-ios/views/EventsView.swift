@@ -11,34 +11,74 @@ struct EventsView: View {
     @State var selectedRegion: RegionModel
     
     @State var eventService = EventService()
-    @State var regionDays: [RegionDayModel] = []
+    @State var filterService = FilterService()
+    @State var tagService = TagService()
+    @State var data: [RegionDayModel] = [] {
+        didSet{
+            self.isWorking = true
+            self.filterService.filterEventsWithTagsAsync(data: self.data, filterTags: self.selectedTags) {
+                filteredData in
+                
+                if filteredData != nil {
+                    self.filteredData = filteredData!
+                } else {
+                    self.filteredData = []
+                }
+                self.isWorking = false
+            }
+        }
+    }
+    @State var selectedTags: [TagModel] = []
+    @State var proposedTags: [TagModel] = []
+    @State var filteredData: [RegionDayModel] = []
+    @State var isWorking: Bool = false
+    @State var searchText: String = ""
+    
     
     var body: some View {
+        let bindingSearchText = Binding<String>(get: {
+            self.searchText
+        }, set: {
+            self.searchText = $0
+            
+            tagService.loadTagsForSearchTextAsync(data: self.data, searchText: $0) {
+                tags in
+                if tags != nil {
+                    self.proposedTags = tags!
+                } else {
+                    self.proposedTags = []
+                }
+                
+            }
+        })
+        
         ZStack (alignment: .topLeading) {
             Color("Background").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack {
-                SearchBarView()
-                
+                SearchBarView(searchText: bindingSearchText)
+                FilterView(purposedTags: $proposedTags)
                 ScrollView {
-                    ForEach(self.regionDays, id: \._id) {
+                    ForEach(self.filteredData, id: \._id) {
                         regionDay in
                         
                         RegionDayRowView(regionDay: regionDay)
                             
                     }
                 }
-            }
+            }.padding(.top, 16)
         }
         .onAppear {
             self.eventService.loadEventsAsync(region: self.selectedRegion) {
                 (result) in
                 
                 if result != nil {
-                    self.regionDays = result!
+                    self.data = result!
                 }
                 print("INFO: Loaded events for \(self.selectedRegion.name)")
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle(self.selectedRegion.name)
     }
     
 }

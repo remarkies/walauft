@@ -8,22 +8,27 @@
 import SwiftUI
 
 struct SearchBarView: View {
-    @State private var searchText: String = ""
+    @State var outputText: String = ""
+    
+    @Binding var searchText: String
+    
     var body: some View {
-        CustomTextField(
-                    placeholder: Text("Search for music styles...").foregroundColor(Color("SubtleForeground")),
-                    text: $searchText
-                )
-            
+        let binding = Binding<String>(get: {
+            self.outputText
+        }, set: {
+            self.outputText = $0
+            // do whatever you want here
+            self.searchText = $0
+        })
         
-        
+        CustomTextField(placeholder: Text("Search for anything...").foregroundColor(Color("SubtleForeground")),
+                    text: binding
+        )
     }
 }
 
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            SearchBarView()
-        }
+        Group { }
     }
 }

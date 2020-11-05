@@ -18,70 +18,67 @@ struct HomeView: View {
     ]
     
     var body: some View {
-        NavigationView {
-            VStack (alignment: .leading)  {
-                
-                VStack (alignment: .leading) {
-                    HStack (alignment: .top) {
-                        VStack {
-                            Text("IN")
+        VStack (alignment: .leading)  {
+            
+            VStack (alignment: .leading) {
+                HStack (alignment: .top) {
+                    VStack {
+                        Text("IN")
+                        .bold()
+                        .textCase(.uppercase)
+                        .font(.system(size: 50))
+                        .foregroundColor(Color("SubtleForeground"))
+                        .padding(.horizontal, 16)
+                        .padding(.top, 40)
+                        
+                        Spacer()
+                    }
+                        
+                    HStack {
+                        Spacer()
+                        Text("Walauft")
                             .bold()
                             .textCase(.uppercase)
-                            .font(.system(size: 50))
+                            .font(.system(size: 60))
                             .foregroundColor(Color("SubtleForeground"))
-                            .padding(.horizontal, 16)
-                            .padding(.top, 40)
-                            
-                            Spacer()
-                        }
-                            
-                        HStack {
-                            Spacer()
-                            Text("Walauft")
-                                .bold()
-                                .textCase(.uppercase)
-                                .font(.system(size: 60))
-                                .foregroundColor(Color("SubtleForeground"))
-                                .rotationEffect(.degrees(-90))
-                                .padding(.horizontal, -100)
-                                .padding(.top, 158)
-                        }
-                        
+                            .rotationEffect(.degrees(-90))
+                            .padding(.horizontal, -100)
+                            .padding(.top, 158)
                     }
                     
-                    VStack  (alignment: .leading) {
-                        ForEach(self.regions, id: \.self) {
-                            region in
-                            NavigationLink(destination: EventsView(selectedRegion: region)){
-                                
-                                HStack {
-                                    HStack {
-                                        Text("\(region.name)")
-                                            .bold()
-                                            .textCase(.uppercase)
-                                            .foregroundColor(Color("Foreground"))
-                                        
-                                        Spacer()
-                                        Image(systemName: "arrow.right").font(.system(size: 16, weight: .bold))
-                                            .foregroundColor(Color("SubtleForeground"))
-                                    }
-                                    
-                                    .padding(16)
-                                    
-                                }
-                                .border(Color("Layer1"), width: 2)
-                                .padding(.horizontal, 16)
-                            }
-                        }
-                    }
-                    .padding(.bottom, 50)
                 }
                 
+                VStack  (alignment: .leading) {
+                    ForEach(self.regions, id: \.self) {
+                        region in
+                        NavigationLink(destination: EventsView(selectedRegion: region)){
+                            
+                            HStack {
+                                HStack {
+                                    Text("\(region.name)")
+                                        .bold()
+                                        .textCase(.uppercase)
+                                        .foregroundColor(Color("Foreground"))
+                                    
+                                    Spacer()
+                                    Image(systemName: "arrow.right").font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(Color("SubtleForeground"))
+                                }
+                                
+                                .padding(16)
+                                
+                            }
+                            .border(Color("Layer1"), width: 2)
+                            .padding(.horizontal, 16)
+                        }
+                    }
+                }
+                .padding(.bottom, 50)
             }
-            .background(Color("Background"))
-            .ignoresSafeArea()
             
         }
+        .background(Color("Background"))
+        .ignoresSafeArea()
         
     }
 }

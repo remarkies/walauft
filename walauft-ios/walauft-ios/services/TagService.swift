@@ -2,7 +2,7 @@
 //  TagService.swift
 //  walauft-ios
 //
-//  Created by Luka Kramer on 04.11.20.
+//  Created by Luka Kramer on 05.11.20.
 //
 
 import Foundation
@@ -13,58 +13,23 @@ final class TagService {
         
     }
     
-    static func getTagsForEvent(event: EventModel) -> [TagModel] {
-        var foundTags:[TagModel] = []
+    func loadTagsForSearchTextAsync(data: [RegionDayModel], searchText: String,  completion: @escaping ([TagModel]?) -> Void) {
+        var foundTags: [TagModel] = []
         
-        foundTags.append(contentsOf: getTagsForStyles(styles: event.musicstyles))
-        foundTags.append(contentsOf: getTagsForActs(acts: event.acts))
-        foundTags.append(contentsOf: getTagsForLocation(location: event.location!.name))
-        
-        return foundTags
-    }
-    
-    static func getTagsForStyles(styles: String) -> [TagModel] {
-        var foundTags:[TagModel] = []
-        
-        let array = styles.components(separatedBy: ",").map {
-            word in word.trimmingCharacters(in: .whitespaces)
-        }
-        
-        array.forEach {
-            if "\($0)".count > 0 {
-                foundTags.append(TagModel(type: .style, text: "\($0)"))
+        for model in data {
+            for event in model.events {
+                for tag in event.tags {
+                    if tag.text.contains(searchText) {
+                        
+                        if !foundTags.contains(where: { $0.text == tag.text && $0.type == tag.type}) {
+                            foundTags.append(tag)
+                        }
+                    }
+                }
             }
         }
         
-        if foundTags.count == 0 {
-            foundTags.append(TagModel(type: .style, text: "Musik"))
-        }
-    
-        return foundTags
+        completion(foundTags)
     }
     
-    static func getTagsForActs(acts: String) -> [TagModel] {
-        var foundTags:[TagModel] = []
-        
-        let array = acts.components(separatedBy: ",").map {
-            word in word.trimmingCharacters(in: .whitespaces)
-        }
-        
-        array.forEach {
-            if "\($0)".count > 0 {
-                foundTags.append(TagModel(type: .act, text: "\($0)"))
-            }
-            
-        }
-    
-        return foundTags
-    }
-    
-    static func getTagsForLocation(location: String) -> [TagModel] {
-        var foundTags:[TagModel] = []
-        if "\(location)".count > 0 {
-            foundTags.append(TagModel(type: .location, text: location))
-        }
-        return foundTags
-    }
 }
