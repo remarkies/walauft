@@ -28,13 +28,11 @@ struct TagView: View {
                 .font(.system(size: 12))
                 .bold()
                 
-        }.foregroundColor(Color("SnowStorm3"))
+        }.foregroundColor(Color("Foreground"))
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
-        .background(Color("Frost1"))
+        .background(Color("Layer3"))
         .cornerRadius(3)
-        .shadow(radius: 1)
-        
     }
 }
 

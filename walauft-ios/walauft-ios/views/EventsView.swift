@@ -14,16 +14,19 @@ struct EventsView: View {
     @State var regionDays: [RegionDayModel] = []
     
     var body: some View {
-        VStack {
+        ZStack {
+            Color("Background")
+                .ignoresSafeArea()
+            
             ScrollView {
                 ForEach(self.regionDays, id: \._id) {
                     regionDay in
                     
                     RegionDayRowView(regionDay: regionDay)
+                        
                 }
             }
         }
-        .background(Color("SnowStorm3"))
         .navigationBarTitle(self.selectedRegion.name, displayMode: .inline)
         .onAppear {
             self.eventService.loadEventsAsync(region: self.selectedRegion) {
@@ -36,6 +39,7 @@ struct EventsView: View {
             }
         }
     }
+    
 }
 
 struct Events_Previews: PreviewProvider {

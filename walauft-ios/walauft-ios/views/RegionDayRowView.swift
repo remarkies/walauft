@@ -10,7 +10,7 @@ import SwiftUI
 struct RegionDayRowView: View {
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .full
+        formatter.dateFormat = "EE. dd. MMMM"
         return formatter
     }()
     
@@ -18,12 +18,21 @@ struct RegionDayRowView: View {
     
     var body: some View {
         if regionDay!.events.count > 0 {
-            Section (header: Text("\(regionDay!.date, formatter: Self.taskDateFormat)")){
+            
+            VStack (alignment: .leading, spacing: 0){
+                Text("\(regionDay!.date, formatter: Self.taskDateFormat)")
+                    .font(.system(size: 16))
+                    .bold()
+                    .foregroundColor(Color("SubtleForeground"))
+                    .padding(.horizontal, 24)
+                
                 ForEach(regionDay!.events, id: \.id) {
                     event in
                     EventRowView(event: event)
                 }
             }
+            .padding(.top, 8)
+            
             
         }
     }
