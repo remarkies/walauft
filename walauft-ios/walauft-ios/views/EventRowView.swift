@@ -11,45 +11,92 @@ struct EventRowView: View {
     
     @State var event: EventModel?
     
+    static let weekDayDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EE"
+        return formatter
+    }()
+    
+    static let shortDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM"
+        return formatter
+    }()
+    
     var body: some View {
         VStack (alignment: .leading) {
-            Group {
-                NavigationLink(destination: DetailView(selectedEvent: event)){
-                    if self.event != nil {
-                        HStack {
-                            Image(systemName: "music.house").font(.system(size: 16, weight: .regular))
-                            Text("\(event!.location!.name)")
+            NavigationLink(destination: DetailView(selectedEvent: event)) {
+                
+                if self.event != nil {
+                    
+                    HStack {
+                        //Weekday
+                        VStack (alignment: .center) {
+                            
+                            Text("\(self.event!.date, formatter: Self.weekDayDateFormat)")
                                 .bold()
+                                .textCase(.uppercase)
+                                .font(.system(size: 16))
+                                .foregroundColor(Color("SubtleForeground"))
+                                .padding(.leading, 12)
+                                .padding(.top, 10)
+                            
                             Spacer()
-                            Text("\(event!.start)")
-                                .bold()
                         }
-                        .foregroundColor(Color("Foreground"))
-                        .padding(16)
+                        
+                        
+                        Group {
+                            VStack (alignment: .leading, spacing: 0) {
+                                HStack {
+                                    //Location part of event row
+                                    VStack (alignment: .leading) {
+                                            Text("\(event!.location!.name)")
+                                                .bold()
+                                                .textCase(.uppercase)
+                                                .font(.system(size: 16))
+                                            Text("\(event!.name)")
+                                                .font(.system(size: 10))
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    // Time part of event row
+                                    VStack (alignment: .leading) {
+                                        Text("\(event!.start)")
+                                            .bold()
+                                            .font(.system(size: 16))
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                }
+                                HStack {
+                                    ScrollView (.horizontal){
+                                        HStack {
+                                            ForEach(self.event!.tags.filter { tag in return tag.type == "style" }, id: \.text) {
+                                                tag in
+                                                TagView(tag: tag)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.leading, 4)
+                        .padding(.top, 10)
+                        .padding(.bottom, 10)
+                        .padding(.trailing, 10)
                     }
+                    .foregroundColor(Color("Foreground"))
+                    
                 }
-                .background(Color("Layer2"))
-                .shadow(radius: 2)
-                
-                HStack {
-                    ForEach(TagService.getTagsForStyles(styles: self.event!.musicstyles), id: \.self) {
-                        tag in
-                        TagView(tag: tag)
-                    }
-                }
-                .padding(.top, 8)
-                .padding(.bottom , 16)
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
-                
             }
         }
-        .background(Color("Layer1"))
-        .mask(RoundedRectangle(cornerRadius: 5.0))
-        .padding(.horizontal, 16)
-        .padding(.vertical, 8)
-        
-        
+        //.background(Color("Layer1"))
+        .padding(.horizontal, 12)
+        .padding(.vertical, 4)
     }
 }
 

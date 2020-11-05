@@ -35,6 +35,10 @@ final class TagService {
                 foundTags.append(TagModel(type: .style, text: "\($0)"))
             }
         }
+        
+        if foundTags.count == 0 {
+            foundTags.append(TagModel(type: .style, text: "Musik"))
+        }
     
         return foundTags
     }

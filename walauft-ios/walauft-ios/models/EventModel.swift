@@ -11,6 +11,7 @@ struct EventModel: Codable {
     let id: String
     let name: String
     let acts: String
+    let date: Date
     let start: String
     let end: String?
     let location: LocationModel?
@@ -19,6 +20,7 @@ struct EventModel: Codable {
     let minagef: String
     let price: String
     let text: String
+    let tags: [TagModel]
     let comments: String
     
     init(from decoder: Decoder) throws {
@@ -27,6 +29,18 @@ struct EventModel: Codable {
         id = try container.decode(String.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
         acts = try container.decode(String.self, forKey: .acts)
+        
+        let dateString = try container.decode(String.self, forKey: .date)
+        let formatter = DateFormatter.yyyyMMdd2
+        if let date = formatter.date(from: dateString) {
+          self.date = date
+        } else {
+            print(dateString)
+            throw DecodingError.dataCorruptedError(forKey: .date,
+                  in: container,
+                  debugDescription: "Date string does not match format expected by formatter.")
+        }
+        
         start = try container.decode(String.self, forKey: .start)
         end = try container.decode(String?.self, forKey: .end)
         location = try container.decode(LocationModel?.self, forKey: .location)
@@ -36,5 +50,20 @@ struct EventModel: Codable {
         price = try container.decode(String.self, forKey: .price)
         text = try container.decode(String.self, forKey: .text)
         comments = try container.decode(String.self, forKey: .comments)
+        tags = try container.decode([TagModel].self, forKey: .tags)
     }
+    
+    
 }
+
+extension DateFormatter {
+  static let yyyyMMdd2: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    formatter.calendar = Calendar(identifier: .iso8601)
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    return formatter
+  }()
+}
+

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TagModel : Hashable {
-    let type: TagTypeModel
+struct TagModel : Codable {
+    let type: String
     let text: String
 }

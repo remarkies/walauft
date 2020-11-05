@@ -94,6 +94,26 @@ function downloadEvents(url, region, date) {
                 let result = {};
                 result.date = moment(date).format('YYYYMMDD');
                 result.region = region;
+                json_data.items.forEach((eventItem) => {
+                   let foundTags = [];
+
+                   getTagsForStyle(eventItem.musicstyles).forEach(o => {
+                       if(o.text.length > 0) {
+                           foundTags.push(o);
+                       }
+                   });
+                    getTagsForActs(eventItem.acts).forEach(o => {
+                        if(o.text.length > 0) {
+                            foundTags.push(o);
+                        }
+                    });
+
+                    foundTags.push(getTagForLocation(eventItem.location.name));
+                    foundTags.push(getTagForDate(eventItem.date));
+
+                    eventItem.tags = foundTags;
+                });
+
                 result.events = json_data.items;
 
                 resolve(result);
@@ -106,6 +126,50 @@ function downloadEvents(url, region, date) {
     });
 }
 
+function getTagsForStyle(style) {
+    let foundTags = [];
+    if(style !== null) {
+        let array = style.split(",").map(o => o.trim());
+
+        array.forEach(o => {
+           foundTags.push({
+               type: "style",
+               text: o
+           });
+        });
+    }
+    return foundTags;
+}
+
+function getTagsForActs(acts) {
+    let foundTags = [];
+    if(acts !== null) {
+        let array = acts.split(",").map(o => o.trim());
+        array = array.map(o => o.replace("Live: ", ""));
+        array.forEach(o => {
+            foundTags.push({
+                type: "act",
+                text: o
+            });
+        });
+    }
+    return foundTags;
+}
+
+function getTagForLocation(location) {
+    return {
+        type: "location",
+        text: location
+    };
+}
+
+function getTagForDate(date) {
+    return {
+        type: "date",
+        text: date
+    };
+}
+
 function handleEvents(results) {
 
     let handlingPromises = [];
@@ -115,15 +179,16 @@ function handleEvents(results) {
     let lastStep = 0;
     let stepsInPerc = 10;
     results.forEach(doc => {
-        handlingPromises.push(database.upsert('events', { date:  doc.date, region: doc.region }, doc));
-        progress++;
-        let currentPerc = Math.round(100.00 / results.length * progress)
-
-        if(currentPerc >= lastStep + stepsInPerc) {
-            console.log("Updating... (" + currentPerc + "%)");
-            lastStep += stepsInPerc;
+        if(doc.events.length > 0)  {
+            handlingPromises.push(database.upsert('events', { date:  doc.date, region: doc.region }, doc));
         }
+            progress++;
+            let currentPerc = Math.round(100.00 / results.length * progress)
 
+            if(currentPerc >= lastStep + stepsInPerc) {
+                console.log("Updating... (" + currentPerc + "%)");
+                lastStep += stepsInPerc;
+            }
     });
 
 

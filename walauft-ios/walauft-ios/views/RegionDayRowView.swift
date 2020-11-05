@@ -10,7 +10,7 @@ import SwiftUI
 struct RegionDayRowView: View {
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "EE. dd. MMMM"
+        formatter.dateFormat = "dd. MMMM"
         return formatter
     }()
     
@@ -25,7 +25,11 @@ struct RegionDayRowView: View {
                     .bold()
                     .foregroundColor(Color("SubtleForeground"))
                     .padding(.horizontal, 24)
+                    .padding(.vertical, 8)
                 
+                Divider()
+                    .frame(height: 2)
+                    .background(Color("Layer2"))
                 ForEach(regionDay!.events, id: \.id) {
                     event in
                     EventRowView(event: event)

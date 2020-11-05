@@ -14,20 +14,21 @@ struct EventsView: View {
     @State var regionDays: [RegionDayModel] = []
     
     var body: some View {
-        ZStack {
-            Color("Background")
-                .ignoresSafeArea()
-            
-            ScrollView {
-                ForEach(self.regionDays, id: \._id) {
-                    regionDay in
-                    
-                    RegionDayRowView(regionDay: regionDay)
+        ZStack (alignment: .topLeading) {
+            Color("Background").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            VStack {
+                SearchBarView()
+                
+                ScrollView {
+                    ForEach(self.regionDays, id: \._id) {
+                        regionDay in
                         
+                        RegionDayRowView(regionDay: regionDay)
+                            
+                    }
                 }
             }
         }
-        .navigationBarTitle(self.selectedRegion.name, displayMode: .inline)
         .onAppear {
             self.eventService.loadEventsAsync(region: self.selectedRegion) {
                 (result) in
