@@ -21,8 +21,10 @@ struct SearchBarView: View {
             self.searchText = $0
         })
         
-        CustomTextField(placeholder: Text("Search for anything...").foregroundColor(Color("SubtleForeground")),
-                    text: binding
+        CustomTextField(
+            placeholder: Text("Search for anything...")
+                            .foregroundColor(Color("SubtleForeground")),
+            text: binding
         )
     }
 }

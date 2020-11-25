@@ -6,11 +6,18 @@
 //
 
 import Foundation
+import Combine
 
-final class FilterService {
+final class FilterService : ObservableObject {
+    let objectWillChange = ObservableObjectPublisher()
     
+    var filterTags: [TagModel] {
+        willSet {
+            objectWillChange.send()
+        }
+    }
     init() {
-        
+        filterTags = [];
     }
     
     func filterEventsWithTagsAsync(data: [RegionDayModel], filterTags: [TagModel],  completion: @escaping ([RegionDayModel]?) -> Void) {

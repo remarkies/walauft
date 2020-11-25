@@ -11,12 +11,12 @@ struct EventsView: View {
     @State var selectedRegion: RegionModel
     
     @State var eventService = EventService()
-    @State var filterService = FilterService()
+    @ObservedObject var filterService = FilterService()
     @State var tagService = TagService()
     @State var data: [RegionDayModel] = [] {
         didSet{
             self.isWorking = true
-            self.filterService.filterEventsWithTagsAsync(data: self.data, filterTags: self.selectedTags) {
+            self.filterService.filterEventsWithTagsAsync(data: self.data, filterTags: self.filterService.filterTags) {
                 filteredData in
                 
                 if filteredData != nil {
@@ -56,7 +56,7 @@ struct EventsView: View {
             Color("Background").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack {
                 SearchBarView(searchText: bindingSearchText)
-                FilterView(purposedTags: $proposedTags)
+                FilterView(purposedTags: $proposedTags, filterTags: $filterService.filterTags)
                 ScrollView {
                     ForEach(self.filteredData, id: \._id) {
                         regionDay in

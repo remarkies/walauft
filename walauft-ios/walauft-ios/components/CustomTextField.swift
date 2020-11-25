@@ -15,7 +15,14 @@ struct CustomTextField: View {
 
     var body: some View {
         ZStack(alignment: .leading) {
-            if text.isEmpty { placeholder.font(.system(size: 12)).textCase(.uppercase).padding(.horizontal, 40).padding(.vertical, 16) }
+            if text.isEmpty {
+                placeholder
+                    .font(.system(size: 12))
+                    .textCase(.uppercase)
+                    .padding(.horizontal, 40)
+                    .padding(.vertical, 16)
+            }
+            
             TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
                 .textCase(.uppercase)
                 .font(.system(size: 12))

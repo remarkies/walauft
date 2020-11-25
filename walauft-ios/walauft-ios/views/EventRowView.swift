@@ -77,7 +77,7 @@ struct EventRowView: View {
                                         HStack {
                                             ForEach(self.event!.tags.filter { tag in return tag.type == "style" }, id: \.text) {
                                                 tag in
-                                                TagView(tag: tag)
+                                                TagView(tag: tag, clicked: {})
                                             }
                                         }
                                     }
