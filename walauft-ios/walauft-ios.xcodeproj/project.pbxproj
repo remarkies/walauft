@@ -13,6 +13,9 @@
 		A1321A232552C3EB000016B8 /* RegionDayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1321A222552C3EB000016B8 /* RegionDayModel.swift */; };
 		A1321A262552C54A000016B8 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1321A252552C54A000016B8 /* LocationModel.swift */; };
 		A1321A292552DD3E000016B8 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1321A282552DD3E000016B8 /* DetailView.swift */; };
+		A146C84D256EAC04003C2F15 /* RegionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146C84C256EAC04003C2F15 /* RegionListView.swift */; };
+		A146C850256EAE34003C2F15 /* HomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146C84F256EAE34003C2F15 /* HomeTitleView.swift */; };
+		A146C853256EB4EE003C2F15 /* RegionListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146C852256EB4EE003C2F15 /* RegionListItem.swift */; };
 		A1B2361E2552EF9400774259 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2361D2552EF9400774259 /* EventRowView.swift */; };
 		A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B236202552F0B400774259 /* RegionDayRowView.swift */; };
 		A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B905FF25545D2F0074EABA /* SearchBarView.swift */; };
@@ -39,6 +42,9 @@
 		A1321A222552C3EB000016B8 /* RegionDayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDayModel.swift; sourceTree = "<group>"; };
 		A1321A252552C54A000016B8 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		A1321A282552DD3E000016B8 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		A146C84C256EAC04003C2F15 /* RegionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionListView.swift; sourceTree = "<group>"; };
+		A146C84F256EAE34003C2F15 /* HomeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleView.swift; sourceTree = "<group>"; };
+		A146C852256EB4EE003C2F15 /* RegionListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionListItem.swift; sourceTree = "<group>"; };
 		A1B2361D2552EF9400774259 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		A1B236202552F0B400774259 /* RegionDayRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDayRowView.swift; sourceTree = "<group>"; };
 		A1B905FF25545D2F0074EABA /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -154,6 +160,9 @@
 				A1E4928525534459002F07BE /* TagView.swift */,
 				A1B905FF25545D2F0074EABA /* SearchBarView.swift */,
 				A1E2C5F52554A25300E88FDD /* FilterView.swift */,
+				A146C84C256EAC04003C2F15 /* RegionListView.swift */,
+				A146C84F256EAE34003C2F15 /* HomeTitleView.swift */,
+				A146C852256EB4EE003C2F15 /* RegionListItem.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -227,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A146C84D256EAC04003C2F15 /* RegionListView.swift in Sources */,
 				A1321A1C2552C0DC000016B8 /* EventService.swift in Sources */,
 				A1E2C5F92554A55E00E88FDD /* FilterService.swift in Sources */,
 				A1FA3F662551C57C00D1F84A /* RegionModel.swift in Sources */,
@@ -239,6 +249,7 @@
 				A1321A292552DD3E000016B8 /* DetailView.swift in Sources */,
 				A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */,
 				A1E2C5FC2554AA3600E88FDD /* TagService.swift in Sources */,
+				A146C850256EAE34003C2F15 /* HomeTitleView.swift in Sources */,
 				A1E4928D25534BBF002F07BE /* TagModel.swift in Sources */,
 				A1FA3F552551C4DC00D1F84A /* walauft_iosApp.swift in Sources */,
 				A1321A202552C342000016B8 /* EventModel.swift in Sources */,
@@ -247,6 +258,7 @@
 				A1E49276255306CC002F07BE /* LocationView.swift in Sources */,
 				A1E2C5F62554A25300E88FDD /* FilterView.swift in Sources */,
 				A1321A182552BCDD000016B8 /* EventsView.swift in Sources */,
+				A146C853256EB4EE003C2F15 /* RegionListItem.swift in Sources */,
 				A1B2361E2552EF9400774259 /* EventRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
