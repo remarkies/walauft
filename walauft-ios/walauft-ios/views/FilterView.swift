@@ -10,7 +10,7 @@ import SwiftUI
 struct FilterView: View {
     
     @Binding var purposedTags: [TagModel]
-    @Binding var filterTags: [TagModel]
+    @EnvironmentObject var filterService : FilterService
     
     var body: some View {
         VStack {
@@ -21,11 +21,11 @@ struct FilterView: View {
                         HStack {
                             ForEach(self.purposedTags.filter { tag in return tag.isSelected == false }, id: \.text) {
                                 tag in
-                                TagView(tag: tag, clicked: {
-                                    if !self.filterTags.contains(where: { $0.text == tag.text }) {
-                                        self.filterTags.append(tag)
+                                TagView(tag: tag, background:  Color("Layer2"), clicked: {
+                                    if !self.filterService.filterTags.contains(where: { $0 == tag }) {
+                                        self.filterService.filterTags.append(tag)
                                     }
-                                })
+                                }, unClicked:{})
                             }
                         }
                         .padding(.bottom, 12)
@@ -33,15 +33,16 @@ struct FilterView: View {
                 }
             }
             
-            if self.filterTags.filter { tag in return tag.isSelected == true }.count > 0 {
+            
+            if self.filterService.filterTags.filter { tag in return tag.isSelected == true }.count > 0 {
                 FilterInfoView(text: "Gsetzti Filter")
                 ScrollView (.horizontal){
                     HStack {
-                        ForEach(self.filterTags.filter { tag in return tag.isSelected == true }, id: \.text) {
+                        ForEach(self.filterService.filterTags.filter { tag in return tag.isSelected == true }, id: \.text) {
                             tag in
-                            TagView(tag: tag, clicked: {
-                                if let index = self.filterTags.firstIndex(where: { $0.text == tag.text }) {
-                                    filterTags.remove(at: index)
+                            TagView(tag: tag, background:  Color("Layer2"), clicked: {}, unClicked: {
+                                if let index = self.filterService.filterTags.firstIndex(where: { $0 == tag }) {
+                                    self.filterService.filterTags.remove(at: index)
                                 }
                             })
                         }

@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-class TagModel: Codable {
+class TagModel: Codable, Equatable {
     
     var isSelected: Bool 
     let type: String
@@ -31,5 +31,9 @@ class TagModel: Codable {
 
         try container.encode(type, forKey: .type)
         try container.encode(text, forKey: .text)
+    }
+    
+    static func ==(lhs: TagModel, rhs: TagModel) -> Bool {
+        return lhs.type == rhs.type && lhs.text == rhs.text
     }
 }

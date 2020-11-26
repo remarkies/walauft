@@ -10,6 +10,7 @@ import SwiftUI
 struct EventRowView: View {
     
     @State var event: EventModel?
+    @EnvironmentObject var filterService : FilterService
     
     static let weekDayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
@@ -77,10 +78,19 @@ struct EventRowView: View {
                                         HStack {
                                             ForEach(self.event!.tags.filter { tag in return tag.type == "style" }, id: \.text) {
                                                 tag in
-                                                TagView(tag: tag, clicked: {})
+                                                TagView(tag: tag, background:  Color("Layer1"), clicked: {
+                                                    if !self.filterService.filterTags.contains(where: { $0 == tag }) {
+                                                        self.filterService.filterTags.append(tag)
+                                                    }
+                                                }, unClicked: {
+                                                    if let index = self.filterService.filterTags.firstIndex(where: { $0 == tag }) {
+                                                        self.filterService.filterTags.remove(at: index)
+                                                    }
+                                                })
                                             }
                                         }
                                     }
+                                    .padding(.bottom, 12)
                                 }
                             }
                         }

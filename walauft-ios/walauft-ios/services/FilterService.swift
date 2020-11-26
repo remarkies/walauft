@@ -23,9 +23,10 @@ final class FilterService : ObservableObject {
         }
     }
     
-    var filterTags: [TagModel] {
+    @Published var filterTags: [TagModel] {
         willSet {
             objectWillChange.send()
+            print("filter tags changed")
         }
         didSet {
             filterEventsWithTagsAsync(data: data, filterTags: filterTags, completion: {
@@ -35,7 +36,7 @@ final class FilterService : ObservableObject {
         }
     }
     
-    var filteredData: [RegionDayModel] {
+    @Published var filteredData: [RegionDayModel] {
         willSet {
             objectWillChange.send()
         }
@@ -51,7 +52,7 @@ final class FilterService : ObservableObject {
         var hasTag = false
         
         for t in event.tags {
-            if tag.text == t.text && tag.type == t.type {
+            if tag == t {
                 hasTag = true
             }
         }

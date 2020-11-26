@@ -30,7 +30,6 @@ struct RegionDayModel : Codable {
         if let date = formatter.date(from: dateString) {
           self.date = date
         } else {
-            print(dateString)
             throw DecodingError.dataCorruptedError(forKey: .date,
                   in: container,
                   debugDescription: "Date string does not match format expected by formatter.")

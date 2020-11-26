@@ -18,7 +18,7 @@ struct HomeView: View {
             }
             .padding(.top)
             .padding(.bottom)
-            .background(Color("Background"))
+            .background(Color("Layer1"))
             .ignoresSafeArea()
         }
         

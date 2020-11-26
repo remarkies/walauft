@@ -94,8 +94,8 @@
 		A1E2C5EA255462E800E88FDD /* components */ = {
 			isa = PBXGroup;
 			children = (
-				A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */,
 				A1E2C5F22554971E00E88FDD /* CustomNavigationView.swift */,
+				A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -143,10 +143,10 @@
 		A1FA3F642551C55700D1F84A /* models */ = {
 			isa = PBXGroup;
 			children = (
-				A1FA3F652551C57C00D1F84A /* RegionModel.swift */,
 				A1321A1F2552C342000016B8 /* EventModel.swift */,
-				A1321A222552C3EB000016B8 /* RegionDayModel.swift */,
 				A1321A252552C54A000016B8 /* LocationModel.swift */,
+				A1321A222552C3EB000016B8 /* RegionDayModel.swift */,
+				A1FA3F652551C57C00D1F84A /* RegionModel.swift */,
 				A1E4928C25534BBF002F07BE /* TagModel.swift */,
 			);
 			path = models;
@@ -155,20 +155,20 @@
 		A1FA3F6D2551C61600D1F84A /* views */ = {
 			isa = PBXGroup;
 			children = (
-				A1FA3F6E2551C63000D1F84A /* HomeView.swift */,
-				A1321A172552BCDD000016B8 /* EventsView.swift */,
 				A1321A282552DD3E000016B8 /* DetailView.swift */,
 				A1B2361D2552EF9400774259 /* EventRowView.swift */,
-				A1B236202552F0B400774259 /* RegionDayRowView.swift */,
-				A1E49275255306CC002F07BE /* LocationView.swift */,
-				A1E4928525534459002F07BE /* TagView.swift */,
-				A1B905FF25545D2F0074EABA /* SearchBarView.swift */,
-				A1E2C5F52554A25300E88FDD /* FilterView.swift */,
-				A146C84C256EAC04003C2F15 /* RegionListView.swift */,
-				A146C84F256EAE34003C2F15 /* HomeTitleView.swift */,
-				A146C852256EB4EE003C2F15 /* RegionListItem.swift */,
-				A12549CF256F17DF00AB04D4 /* RegionDayListView.swift */,
+				A1321A172552BCDD000016B8 /* EventsView.swift */,
 				A12549D2256F27E200AB04D4 /* FilterInfoView.swift */,
+				A1E2C5F52554A25300E88FDD /* FilterView.swift */,
+				A146C84F256EAE34003C2F15 /* HomeTitleView.swift */,
+				A1FA3F6E2551C63000D1F84A /* HomeView.swift */,
+				A1E49275255306CC002F07BE /* LocationView.swift */,
+				A12549CF256F17DF00AB04D4 /* RegionDayListView.swift */,
+				A1B236202552F0B400774259 /* RegionDayRowView.swift */,
+				A146C852256EB4EE003C2F15 /* RegionListItem.swift */,
+				A146C84C256EAC04003C2F15 /* RegionListView.swift */,
+				A1B905FF25545D2F0074EABA /* SearchBarView.swift */,
+				A1E4928525534459002F07BE /* TagView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";

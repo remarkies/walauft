@@ -11,7 +11,7 @@ struct EventsView: View {
     @State var selectedRegion: RegionModel
     
     @State var eventService = EventService()
-    @ObservedObject var filterService = FilterService()
+    @EnvironmentObject var filterService : FilterService
     @State var tagService = TagService()
     @State var proposedTags: [TagModel] = []
     @State var isWorking: Bool = false
@@ -22,7 +22,7 @@ struct EventsView: View {
             self.searchText
         }, set: {
             self.searchText = $0
-            tagService.loadTagsForSearchTextAsync(data: self.filterService.filteredData, searchText: $0) {
+            tagService.loadTagsForSearchTextAsync(data: self.filterService.data, searchText: $0) {
                 tags in
                 if tags != nil {
                     self.proposedTags = tags!
@@ -34,17 +34,22 @@ struct EventsView: View {
         })
         
         ZStack (alignment: .topLeading) {
-            Color("Background").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack (spacing: 0) {
-                SearchBarView(searchText: bindingSearchText)
-                    .padding(.bottom)
-                FilterView(purposedTags: $proposedTags, filterTags: self.$filterService.filterTags)
-                VStack (spacing: 0) {
+                Group {
+                    SearchBarView(searchText: bindingSearchText)
+                        .padding(.bottom)
+                    FilterView(purposedTags: $proposedTags)
                     Divider()
-                    .frame(height: 2)
-                    .background(Color("Layer3"))
+                        .frame(height: 2)
+                        .background(Color("Layer3"))
+                }
+                
+                VStack (spacing: 0) {
                     RegionDayListView(days: self.$filterService.filteredData)
                 }
+                .background(Color("Background"))
+                .ignoresSafeArea()
                 
             }
             .padding(.top, 16)

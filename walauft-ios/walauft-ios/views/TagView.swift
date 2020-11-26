@@ -10,13 +10,23 @@ import SwiftUI
 struct TagView: View {
     
     @State var tag: TagModel
+    var background: Color
     var clicked: () -> Void
+    var unClicked: () -> Void
     
     var body: some View {
         VStack {
             Button(action: {
                 self.tag.isSelected = !self.tag.isSelected
-                self.clicked()
+                
+                // !!! its reversed, because changed right before
+                if self.tag.isSelected {
+                    self.clicked()
+                } else {
+                    self.unClicked()
+                }
+                
+                
             }) {
                 HStack {
                     switch self.tag.type {
@@ -42,7 +52,7 @@ struct TagView: View {
                 .padding(.vertical, 6)
             
             }
-            .background(tag.isSelected ? Color("Accent1") : Color("Layer1"))
+            .background(tag.isSelected ? Color("Accent1") : self.background)
             .cornerRadius(3)
         }
     }
