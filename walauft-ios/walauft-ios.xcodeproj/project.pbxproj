@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A11D5169257051F90054E9CF /* EventTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D5168257051F90054E9CF /* EventTagListView.swift */; };
-		A11D516C257052FA0054E9CF /* EventTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D516B257052FA0054E9CF /* EventTimeView.swift */; };
-		A11D516F257054140054E9CF /* EventPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D516E257054140054E9CF /* EventPlaceView.swift */; };
 		A11D5172257054B60054E9CF /* EventNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D5171257054B60054E9CF /* EventNameView.swift */; };
 		A11D517B25705C6A0054E9CF /* EventHeaderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D517A25705C6A0054E9CF /* EventHeaderItemView.swift */; };
 		A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12549CF256F17DF00AB04D4 /* RegionDayListView.swift */; };
@@ -44,8 +42,6 @@
 
 /* Begin PBXFileReference section */
 		A11D5168257051F90054E9CF /* EventTagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagListView.swift; sourceTree = "<group>"; };
-		A11D516B257052FA0054E9CF /* EventTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTimeView.swift; sourceTree = "<group>"; };
-		A11D516E257054140054E9CF /* EventPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPlaceView.swift; sourceTree = "<group>"; };
 		A11D5171257054B60054E9CF /* EventNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNameView.swift; sourceTree = "<group>"; };
 		A11D517A25705C6A0054E9CF /* EventHeaderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderItemView.swift; sourceTree = "<group>"; };
 		A12549CF256F17DF00AB04D4 /* RegionDayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDayListView.swift; sourceTree = "<group>"; };
@@ -95,9 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				A11D5168257051F90054E9CF /* EventTagListView.swift */,
-				A11D516B257052FA0054E9CF /* EventTimeView.swift */,
 				A11D5171257054B60054E9CF /* EventNameView.swift */,
-				A11D516E257054140054E9CF /* EventPlaceView.swift */,
 				A11D517A25705C6A0054E9CF /* EventHeaderItemView.swift */,
 			);
 			path = "event-item";
@@ -302,7 +296,6 @@
 				A11D5169257051F90054E9CF /* EventTagListView.swift in Sources */,
 				A1E2C5F92554A55E00E88FDD /* FilterService.swift in Sources */,
 				A1FA3F662551C57C00D1F84A /* RegionModel.swift in Sources */,
-				A11D516C257052FA0054E9CF /* EventTimeView.swift in Sources */,
 				A1FA3F572551C4DC00D1F84A /* ContentView.swift in Sources */,
 				A1E2C5F32554971E00E88FDD /* CustomNavigationView.swift in Sources */,
 				A11D517B25705C6A0054E9CF /* EventHeaderItemView.swift in Sources */,
@@ -321,7 +314,6 @@
 				A1321A202552C342000016B8 /* EventModel.swift in Sources */,
 				A12549D3256F27E200AB04D4 /* FilterInfoView.swift in Sources */,
 				A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */,
-				A11D516F257054140054E9CF /* EventPlaceView.swift in Sources */,
 				A1E4928625534459002F07BE /* TagView.swift in Sources */,
 				A1E49276255306CC002F07BE /* LocationView.swift in Sources */,
 				A1E2C5F62554A25300E88FDD /* FilterView.swift in Sources */,

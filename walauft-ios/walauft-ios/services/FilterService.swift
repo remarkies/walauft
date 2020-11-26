@@ -26,9 +26,11 @@ final class FilterService : ObservableObject {
     @Published var filterTags: [TagModel] {
         willSet {
             objectWillChange.send()
+            print("filtertags changed")
         }
         didSet {
-            filterEventsWithTagsAsync(data: data, filterTags: filterTags, completion: {
+            
+            filterEventsWithTagsAsync(data: deactivateTags(days: data), filterTags: filterTags, completion: {
                 newData in
                 self.filteredData = newData!
             })
@@ -45,6 +47,27 @@ final class FilterService : ObservableObject {
         data = []
         filterTags = []
         filteredData = []
+    }
+    
+    func deactivateTags(days: [RegionDayModel]) -> [RegionDayModel] {
+        for d in days {
+            for e in d.events {
+                for t in e.tags {
+                    t.isSelected = false
+                }
+            }
+        }
+        
+        return days
+    }
+    func activateTags(event: EventModel, tags: [TagModel]) -> Void {
+        for t in event.tags {
+            for ft in tags {
+                if t == ft {
+                    t.isSelected = true
+                }
+            }
+        }
     }
     
     func hasEventTag(event: EventModel, tag: TagModel) -> Bool {
@@ -79,10 +102,16 @@ final class FilterService : ObservableObject {
             for day in data {
                 var eventsShown: [EventModel] = []
                 for event in day.events {
-
+                    
+                    //deactivateTags(event: event)
+                    
                     if meetsEventRequirements(event: event, tags: filterTags) {
+                        activateTags(event: event, tags: filterTags)
                         eventsShown.append(event)
                     }
+                    
+                    
+                    
                 }
                 
                 if eventsShown.count > 0 {
