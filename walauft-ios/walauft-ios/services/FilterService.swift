@@ -26,7 +26,6 @@ final class FilterService : ObservableObject {
     @Published var filterTags: [TagModel] {
         willSet {
             objectWillChange.send()
-            print("filtertags changed")
         }
         didSet {
             

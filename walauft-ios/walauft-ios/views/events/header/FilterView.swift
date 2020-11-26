@@ -16,7 +16,7 @@ struct FilterView: View {
         VStack {
             if self.purposedTags.filter { tag in return tag.isSelected == false }.count > 0 {
                 VStack {
-                    FilterInfoView(text: "Truck zum filtere")
+                    FilterInfoView(text: "Truck s chästli ah zum filtere")
                     ScrollView (.horizontal){
                         HStack {
                             ForEach(self.purposedTags.filter { tag in return tag.isSelected == false }, id: \.text) {
@@ -35,7 +35,7 @@ struct FilterView: View {
             
             
             if self.filterService.filterTags.filter { tag in return tag.isSelected == true }.count > 0 {
-                FilterInfoView(text: "Gsetzti Filter")
+                FilterInfoView(text: "Gsetzti Chästli")
                 ScrollView (.horizontal){
                     HStack {
                         ForEach(self.filterService.filterTags.filter { tag in return tag.isSelected == true }, id: \.text) {
