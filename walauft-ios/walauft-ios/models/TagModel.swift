@@ -8,14 +8,9 @@
 import Combine
 import SwiftUI
 
-class TagModel : ObservableObject, Codable {
-    let objectWillChange = ObservableObjectPublisher()
+class TagModel: Codable {
     
-    var isSelected: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+    var isSelected: Bool 
     let type: String
     let text: String
     

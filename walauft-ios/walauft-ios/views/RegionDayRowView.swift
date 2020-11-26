@@ -36,14 +36,12 @@ struct RegionDayRowView: View {
                 }
             }
             .padding(.top, 8)
-            
-            
         }
     }
 }
 
 struct RegionDayRow_Previews: PreviewProvider {
     static var previews: some View {
-        RegionDayRowView(regionDay: nil)
+        VStack{}
     }
 }

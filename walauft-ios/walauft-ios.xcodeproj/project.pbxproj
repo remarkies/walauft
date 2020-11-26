@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12549CF256F17DF00AB04D4 /* RegionDayListView.swift */; };
+		A12549D3256F27E200AB04D4 /* FilterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12549D2256F27E200AB04D4 /* FilterInfoView.swift */; };
 		A1321A182552BCDD000016B8 /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1321A172552BCDD000016B8 /* EventsView.swift */; };
 		A1321A1C2552C0DC000016B8 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1321A1B2552C0DC000016B8 /* EventService.swift */; };
 		A1321A202552C342000016B8 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1321A1F2552C342000016B8 /* EventModel.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A12549CF256F17DF00AB04D4 /* RegionDayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDayListView.swift; sourceTree = "<group>"; };
+		A12549D2256F27E200AB04D4 /* FilterInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInfoView.swift; sourceTree = "<group>"; };
 		A1321A172552BCDD000016B8 /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
 		A1321A1B2552C0DC000016B8 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		A1321A1F2552C342000016B8 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 				A146C84C256EAC04003C2F15 /* RegionListView.swift */,
 				A146C84F256EAE34003C2F15 /* HomeTitleView.swift */,
 				A146C852256EB4EE003C2F15 /* RegionListItem.swift */,
+				A12549CF256F17DF00AB04D4 /* RegionDayListView.swift */,
+				A12549D2256F27E200AB04D4 /* FilterInfoView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -248,11 +254,13 @@
 				A1321A232552C3EB000016B8 /* RegionDayModel.swift in Sources */,
 				A1321A292552DD3E000016B8 /* DetailView.swift in Sources */,
 				A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */,
+				A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */,
 				A1E2C5FC2554AA3600E88FDD /* TagService.swift in Sources */,
 				A146C850256EAE34003C2F15 /* HomeTitleView.swift in Sources */,
 				A1E4928D25534BBF002F07BE /* TagModel.swift in Sources */,
 				A1FA3F552551C4DC00D1F84A /* walauft_iosApp.swift in Sources */,
 				A1321A202552C342000016B8 /* EventModel.swift in Sources */,
+				A12549D3256F27E200AB04D4 /* FilterInfoView.swift in Sources */,
 				A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */,
 				A1E4928625534459002F07BE /* TagView.swift in Sources */,
 				A1E49276255306CC002F07BE /* LocationView.swift in Sources */,

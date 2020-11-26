@@ -14,31 +14,41 @@ struct FilterView: View {
     
     var body: some View {
         VStack {
-            ScrollView (.horizontal){
-                HStack {
-                    ForEach(self.purposedTags.filter { tag in return tag.isSelected == false }, id: \.text) {
-                        tag in
-                        TagView(tag: tag, clicked: {
-                            if !self.filterTags.contains(where: { $0.text == tag.text }) {
-                                self.filterTags.append(tag)
+            if self.purposedTags.filter { tag in return tag.isSelected == false }.count > 0 {
+                VStack {
+                    FilterInfoView(text: "Truck zum filtere")
+                    ScrollView (.horizontal){
+                        HStack {
+                            ForEach(self.purposedTags.filter { tag in return tag.isSelected == false }, id: \.text) {
+                                tag in
+                                TagView(tag: tag, clicked: {
+                                    if !self.filterTags.contains(where: { $0.text == tag.text }) {
+                                        self.filterTags.append(tag)
+                                    }
+                                })
                             }
-                        })
+                        }
+                        .padding(.bottom, 12)
                     }
                 }
-                .padding(.bottom, 12)
             }
-            ScrollView (.horizontal){
-                HStack {
-                    ForEach(self.filterTags.filter { tag in return tag.isSelected == true }, id: \.text) {
-                        tag in
-                        TagView(tag: tag, clicked: {
-                            if let index = self.filterTags.firstIndex(where: { $0.text == tag.text }) {
-                                filterTags.remove(at: index)
-                            }
-                            //self.filterTags.append(tag)
-                        })
+            
+            if self.filterTags.filter { tag in return tag.isSelected == true }.count > 0 {
+                FilterInfoView(text: "Gsetzti Filter")
+                ScrollView (.horizontal){
+                    HStack {
+                        ForEach(self.filterTags.filter { tag in return tag.isSelected == true }, id: \.text) {
+                            tag in
+                            TagView(tag: tag, clicked: {
+                                if let index = self.filterTags.firstIndex(where: { $0.text == tag.text }) {
+                                    filterTags.remove(at: index)
+                                }
+                            })
+                        }
                     }
+                    .padding(.bottom, 12)
                 }
+                
             }
         }
         .padding(.horizontal, 24)

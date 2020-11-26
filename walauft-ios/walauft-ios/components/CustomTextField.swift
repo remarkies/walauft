@@ -29,7 +29,7 @@ struct CustomTextField: View {
                 .foregroundColor(Color("Foreground"))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
-                .border(Color("Layer1"), width: 2)
+                .border(Color("Layer3"), width: 2)
                 .padding(.horizontal, 24)
                 
         }

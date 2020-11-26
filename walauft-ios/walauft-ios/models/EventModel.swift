@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EventModel: Codable {
+struct EventModel: Codable, Hashable {
     let id: String
     let name: String
     let acts: String
@@ -53,7 +53,12 @@ struct EventModel: Codable {
         tags = try container.decode([TagModel].self, forKey: .tags)
     }
     
-    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    static func ==(lhs: EventModel, rhs: EventModel) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 extension DateFormatter {

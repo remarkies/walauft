@@ -21,28 +21,28 @@ struct TagView: View {
                 HStack {
                     switch self.tag.type {
                         case "act":
-                            Image(systemName: "person.2").font(.system(size: 10, weight: .regular))
+                            Image(systemName: "person.2").font(.system(size: 12, weight: .regular))
                         case "location":
-                            Image(systemName: "music.house").font(.system(size: 10, weight: .regular))
+                            Image(systemName: "music.house").font(.system(size: 12, weight: .regular))
                         case "date":
-                            Image(systemName: "calendar").font(.system(size: 10, weight: .regular))
+                            Image(systemName: "calendar").font(.system(size: 12, weight: .regular))
                         case "style":
-                            Image(systemName: "music.note").font(.system(size: 10, weight: .regular))
+                            Image(systemName: "music.note").font(.system(size: 12, weight: .regular))
                     default:
-                        Image(systemName: "questionmark").font(.system(size: 16, weight: .regular))
+                        Image(systemName: "questionmark").font(.system(size: 12, weight: .regular))
                     }
                     
                     Text(self.tag.text)
-                        .font(.system(size: 10))
+                        .font(.system(size: 12))
                         .bold()
                         
                 }
-                .foregroundColor(Color("Foreground"))
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
+                .foregroundColor(tag.isSelected ? Color("Background") : Color("Foreground"))
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
             
             }
-            .background(Color("Layer1"))
+            .background(tag.isSelected ? Color("Accent1") : Color("Layer1"))
             .cornerRadius(3)
         }
     }

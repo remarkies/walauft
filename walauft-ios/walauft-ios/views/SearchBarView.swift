@@ -22,7 +22,7 @@ struct SearchBarView: View {
         })
         
         CustomTextField(
-            placeholder: Text("Search for anything...")
+            placeholder: Text("Suech nach Genre, Clubs oder Künstler...")
                             .foregroundColor(Color("SubtleForeground")),
             text: binding
         )

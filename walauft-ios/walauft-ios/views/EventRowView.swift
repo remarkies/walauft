@@ -55,7 +55,7 @@ struct EventRowView: View {
                                                 .textCase(.uppercase)
                                                 .font(.system(size: 16))
                                             Text("\(event!.name)")
-                                                .font(.system(size: 10))
+                                                .font(.system(size: 12))
                                         
                                         Spacer()
                                     }
