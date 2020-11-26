@@ -18,8 +18,9 @@ struct CustomTextField: View {
             if text.isEmpty {
                 placeholder
                     .font(.system(size: 12))
+                    .foregroundColor(Color("SubtleForeground"))
                     .textCase(.uppercase)
-                    .padding(.horizontal, 40)
+                    .padding(.horizontal, 16)
                     .padding(.vertical, 16)
             }
             
@@ -29,9 +30,11 @@ struct CustomTextField: View {
                 .foregroundColor(Color("Foreground"))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 16)
-                .border(Color("Layer3"), width: 2)
-                .padding(.horizontal, 24)
-                
+            
+            
         }
+        .background(Color("Layer2"))
+        .cornerRadius(5)
+        .padding(.horizontal, 24)
     }
 }

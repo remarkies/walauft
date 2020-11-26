@@ -17,7 +17,7 @@ struct HomeTitleView: View {
                 .bold()
                 .textCase(.uppercase)
                     .font(.system(size: self.fontSize))
-                .foregroundColor(Color("SubtleForeground"))
+                .foregroundColor(Color("Layer1"))
                 .padding(.horizontal)
                     .padding(.top)
                 
@@ -30,7 +30,7 @@ struct HomeTitleView: View {
                     .bold()
                     .textCase(.uppercase)
                     .font(.system(size: self.fontSize))
-                    .foregroundColor(Color("SubtleForeground"))
+                    .foregroundColor(Color("Layer2"))
                     .rotationEffect(.degrees(-90))
                     .padding(.horizontal, -100)
                     .padding(.top, 134)

@@ -26,7 +26,6 @@ struct TagView: View {
                     self.unClicked()
                 }
                 
-                
             }) {
                 HStack {
                     switch self.tag.type {
@@ -52,7 +51,7 @@ struct TagView: View {
                 .padding(.vertical, 6)
             
             }
-            .background(tag.isSelected ? Color("Accent1") : self.background)
+            .background(tag.isSelected ? Color("Accent2") : self.background)
             .cornerRadius(3)
         }
     }
