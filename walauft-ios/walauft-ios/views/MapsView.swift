@@ -11,6 +11,8 @@ import MapKit
 
 struct MapsView: View {
     init(locations: [LocationModel] = [] ) {
+        
+        
         self._locations = State(wrappedValue: locations)
         self._region = State(wrappedValue: MKCoordinateRegion(
             center: CLLocationCoordinate2D(
@@ -35,7 +37,7 @@ struct MapsView: View {
                 ) {
                     Button(action: { print(location.name) }, label: { TagView(tag: TagModel(type: "location", text: location.name)) })
                 }
-            }.frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: 300)
+            }.frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: .infinity)
             
         }
 }
