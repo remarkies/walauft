@@ -11,7 +11,14 @@ struct RegionDayModel : Codable {
     let _id: String
     let date: Date
     let region: String
-    let events: [EventModel]
+    var events: [EventModel]
+    
+    init(_id: String, date: Date, region: String, events: [EventModel]) {
+        self._id = _id
+        self.date = date
+        self.region = region
+        self.events = events
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -23,7 +30,6 @@ struct RegionDayModel : Codable {
         if let date = formatter.date(from: dateString) {
           self.date = date
         } else {
-            print(dateString)
             throw DecodingError.dataCorruptedError(forKey: .date,
                   in: container,
                   debugDescription: "Date string does not match format expected by formatter.")

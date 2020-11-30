@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocationModel : Codable, Identifiable {
+struct LocationModel : Codable {
     let id: String
     let name: String
     let city: String
@@ -38,7 +38,7 @@ struct LocationModel : Codable, Identifiable {
         
         let longitudeString : String = try container.decode(String.self, forKey: .longitude)
         let latitudeString : String = try container.decode(String.self, forKey: .latitude)
-        if longitudeString.count > 0 && latitudeString.count > 0 && Double(longitudeString) != -1 && Double(latitudeString) != -1{
+        if longitudeString.count > 0 && latitudeString.count > 0{
             longitude = Double(longitudeString)
             latitude = Double(latitudeString)
         } else {
