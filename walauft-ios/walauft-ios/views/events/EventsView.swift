@@ -16,6 +16,7 @@ struct EventsView: View {
     @State var proposedTags: [TagModel] = []
     @State var isWorking: Bool = false
     @State var searchText: String = ""
+    @State var isListview : Bool = true
     
     var body: some View {
         let bindingSearchText = Binding<String>(get: {
@@ -36,23 +37,37 @@ struct EventsView: View {
         ZStack (alignment: .topLeading) {
             Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack (spacing: 0) {
-                Group {
-                    SearchBarView(searchText: bindingSearchText)
-                        .padding(.bottom)
-                    FilterView(purposedTags: $proposedTags)
-                    Divider()
-                        .frame(height: 2)
-                        .background(Color("Layer3"))
+                HStack(alignment: .center){
+                    Button(action: { isListview = true }, label: { Text("List").underline(isListview, color: Color("SubtleForeground"))})
+                    Text(" / ")
+                    Button(action: { isListview = false }, label: { Text("Map").underline(!isListview, color: Color("SubtleForeground"))})
+                    
+                }.padding(.horizontal, 24).foregroundColor(Color("SubtleForeground"))
+                if (isListview) {
+
+                    Group {
+                        SearchBarView(searchText: bindingSearchText)
+                            .padding(.bottom)
+                        FilterView(purposedTags: $proposedTags)
+                        Divider()
+                            .frame(height: 2)
+                            .background(Color("Layer3"))
+                    }
+                    
+                    VStack (spacing: 0) {
+                        RegionDayListView(days: self.$filterService.filteredData)
+                    }
+                    .background(Color("Background"))
+                    .ignoresSafeArea()
                 }
+          
+                if (!isListview){
+                    let everyLocationOnFirstDate = self.filterService.filteredData[0].events.map { event in event.location! }
+                    MapsView(locations: everyLocationOnFirstDate)
                 
-                VStack (spacing: 0) {
-                    RegionDayListView(days: self.$filterService.filteredData)
                 }
-                .background(Color("Background"))
-                .ignoresSafeArea()
-                
-            }
-            .padding(.top, 16)
+            }.padding(.top, 16)
+        
         }
         .onAppear {
             self.eventService.loadEventsAsync(region: self.selectedRegion) {

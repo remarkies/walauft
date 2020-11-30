@@ -38,6 +38,7 @@
 		A1FA3F5C2551C4DD00D1F84A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1FA3F5B2551C4DD00D1F84A /* Preview Assets.xcassets */; };
 		A1FA3F662551C57C00D1F84A /* RegionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FA3F652551C57C00D1F84A /* RegionModel.swift */; };
 		A1FA3F6F2551C63000D1F84A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FA3F6E2551C63000D1F84A /* HomeView.swift */; };
+		E75C70E725755F9C00EE8698 /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75C70E625755F9C00EE8698 /* MapsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		A1FA3F5D2551C4DD00D1F84A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1FA3F652551C57C00D1F84A /* RegionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionModel.swift; sourceTree = "<group>"; };
 		A1FA3F6E2551C63000D1F84A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E75C70E625755F9C00EE8698 /* MapsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapsView.swift; path = "../../../../../../HSLU Vol2/Semester 5/IOS/walauft backup/walauft-ios/walauft-ios/views/MapsView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,11 +217,20 @@
 		A1FA3F6D2551C61600D1F84A /* views */ = {
 			isa = PBXGroup;
 			children = (
+				E75C70E525755EE700EE8698 /* maps */,
 				A11D5178257055E50054E9CF /* details */,
 				A11D51762570556D0054E9CF /* events */,
 				A11D5175257055540054E9CF /* home */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		E75C70E525755EE700EE8698 /* maps */ = {
+			isa = PBXGroup;
+			children = (
+				E75C70E625755F9C00EE8698 /* MapsView.swift */,
+			);
+			path = maps;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +317,7 @@
 				A11D5172257054B60054E9CF /* EventNameView.swift in Sources */,
 				A1321A292552DD3E000016B8 /* DetailView.swift in Sources */,
 				A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */,
+				E75C70E725755F9C00EE8698 /* MapsView.swift in Sources */,
 				A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */,
 				A1E2C5FC2554AA3600E88FDD /* TagService.swift in Sources */,
 				A146C850256EAE34003C2F15 /* HomeTitleView.swift in Sources */,

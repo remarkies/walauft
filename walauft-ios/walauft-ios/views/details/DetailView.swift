@@ -39,6 +39,9 @@ struct DetailView: View {
                 
                 
             }
+            if ((selectedEvent!.location?.latitude) != nil){
+            MapsView(locations: [selectedEvent!.location!])
+        }
             
         }.navigationBarTitle(selectedEvent!.location!.name)
     }
