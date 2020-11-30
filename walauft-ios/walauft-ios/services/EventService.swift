@@ -16,6 +16,7 @@ final class EventService: ObservableObject {
     }
     
     func loadEventsAsync(region: RegionModel, completion: @escaping ([RegionDayModel]?) -> Void) {
+        
         let url = URL(string: "\(apiPath)\(String(region.id))")!
         var request = URLRequest(url: url)
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")

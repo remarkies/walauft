@@ -19,9 +19,9 @@ final class TagService {
         for model in data {
             for event in model.events {
                 for tag in event.tags {
-                    if tag.text.uppercased().contains(searchText.uppercased()) {
+                    if tag.text.contains(searchText) {
                         
-                        if !foundTags.contains(where: { $0 == tag}) {
+                        if !foundTags.contains(where: { $0.text == tag.text && $0.type == tag.type}) {
                             foundTags.append(tag)
                         }
                     }
