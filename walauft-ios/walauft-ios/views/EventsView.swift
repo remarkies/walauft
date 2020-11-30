@@ -33,7 +33,7 @@ struct EventsView: View {
     @State var filteredData: [RegionDayModel] = []
     @State var isWorking: Bool = false
     @State var searchText: String = ""
-    
+    @State var isListview : Bool = true
     
     var body: some View {
         let bindingSearchText = Binding<String>(get: {
@@ -52,20 +52,37 @@ struct EventsView: View {
             }
         })
         
+
+            
+           
+        
         ZStack (alignment: .topLeading) {
             Color("Background").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack {
-                SearchBarView(searchText: bindingSearchText)
-                FilterView(purposedTags: $proposedTags)
-                ScrollView {
-                    ForEach(self.filteredData, id: \._id) {
-                        regionDay in
-                        
-                        RegionDayRowView(regionDay: regionDay)
+                HStack(alignment: .center){
+                    Button(action: { isListview = true }, label: { Text("List").underline(isListview, color: Color("SubtleForeground"))})
+                    Text(" / ")
+                    Button(action: { isListview = false }, label: { Text("Map").underline(!isListview, color: Color("SubtleForeground"))})
+                    
+                }.padding(.horizontal, 24).foregroundColor(Color("SubtleForeground"))
+                if (isListview) {
+                    SearchBarView(searchText: bindingSearchText)
+                    FilterView(purposedTags: $proposedTags)
+                    ScrollView {
+                        ForEach(self.filteredData, id: \._id) {
+                            regionDay in
                             
+                            RegionDayRowView(regionDay: regionDay)
+                                
+                        }
                     }
                 }
+                if (!isListview){
+                    let everyLocationOnFirstDate = filteredData[0].events.map { event in event.location! }
+                    MapsView(locations: everyLocationOnFirstDate)
+                }
             }.padding(.top, 16)
+           
         }
         .onAppear {
             self.eventService.loadEventsAsync(region: self.selectedRegion) {

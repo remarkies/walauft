@@ -37,10 +37,11 @@ struct DetailView: View {
                     }
                 }
                 
-                
             }
-            
-        }.navigationBarTitle(selectedEvent!.location!.name)
+            if ((selectedEvent!.location?.latitude) != nil){
+            MapsView(locations: [selectedEvent!.location!])
+        }
+        }.navigationBarTitle(selectedEvent!.location!.name).background(Color("Background"))
     }
 }
 
