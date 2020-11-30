@@ -47,7 +47,10 @@ function importData() {
     let downloadingPromises = [];
 
     links.forEach((url) => {
-        downloadingPromises.push(downloadEvents(url.url, url.id, url.date));
+        downloadingPromises.push(
+            downloadEvents(url.url, url.id, url.date)
+                .then((events) => new Promise(resolve => setTimeout(resolve(events), 1000)))
+        );
     });
 
     return Promise.all(downloadingPromises);
@@ -55,7 +58,6 @@ function importData() {
 
 function downloadEvents(url, region, date) {
     return new Promise(function (resolve, reject) {
-
         let req = https.get(url, function(res) {
 
             let data = '', json_data;
@@ -87,6 +89,7 @@ function downloadEvents(url, region, date) {
                 } catch(e) {
                     console.log(url);
                     console.log(e);
+                    reject(e);
                     return;
                 }
 
