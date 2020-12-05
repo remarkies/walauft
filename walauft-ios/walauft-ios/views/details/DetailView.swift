@@ -40,10 +40,11 @@ struct DetailView: View {
                 
             }
             if ((selectedEvent!.location?.latitude) != nil){
-            MapsView(locations: [selectedEvent!.location!])
-        }
+                MapViewRep(events: [selectedEvent!], evetsClickable: false).ignoresSafeArea()
+            }
             
-        }.navigationBarTitle(selectedEvent!.location!.name)
+        }.background(Color.black).navigationBarTitle(selectedEvent!.location!.name)
+        
     }
 }
 

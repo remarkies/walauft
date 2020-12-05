@@ -35,17 +35,17 @@ struct MapsView: View {
                     coordinate: CLLocationCoordinate2D( latitude: location.latitude!,  longitude: location.longitude!),
                     anchorPoint: CGPoint(x: 0.5, y: 1)
                 ) {
-                    Button(action: { print(location.name) }, label: {
-                        Text("button")
-                    }
+                        Button(action: { print(location.name) }, label: {
+                            Text(location.name)
+                        }
                     )
-            }//.frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: .infinity)
+                }//.frame(minWidth: 100, maxWidth: .infinity, minHeight: 44, maxHeight: .infinity)
             }
         }
-}
 
-struct LocationMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapsView()
+    struct LocationMapView_Previews: PreviewProvider {
+        static var previews: some View {
+            MapsView()
+        }
     }
 }
