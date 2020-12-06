@@ -17,7 +17,12 @@ struct EventsView: View {
     @State var isWorking: Bool = false
     @State var searchText: String = ""
     @State var isListview : Bool = true
-    
+    @State private var selectedDate = 0
+    static let taskDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd. MMMM"
+        return formatter
+    }()
     var body: some View {
         let bindingSearchText = Binding<String>(get: {
             self.searchText
@@ -44,7 +49,6 @@ struct EventsView: View {
                     
                 }.padding(.horizontal, 24).foregroundColor(Color("SubtleForeground"))
                 if (isListview) {
-
                     Group {
                         SearchBarView(searchText: bindingSearchText)
                             .padding(.bottom)
@@ -62,9 +66,26 @@ struct EventsView: View {
                 }
           
                 if (!isListview){
-                    let everyLocationOnFirstDate = self.filterService.filteredData[0].events.map { event in event.location! }
-                    MapsView(locations: everyLocationOnFirstDate)
-                
+                    if (self.filterService.filteredData.count > 0) {
+                      
+                        // MapsView(locations: everyLocationOnFirstDate)
+                        let eventDates = self.filterService.filteredData.map{ obj in obj.date}
+                        Picker(selection: $selectedDate, label: Text("")) {
+                                    ForEach(0 ..< 4) {
+                                      Text("\(eventDates[$0], formatter: Self.taskDateFormat)").tag($0)
+                                    
+                                    }
+                                }.pickerStyle(SegmentedPickerStyle())
+                                //WheelPickerStyle
+                       
+                         MapViewRep(events:  self.filterService.filteredData[0].events, evetsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
+                    }
+                    else {
+                        let eventsOnFirstDate: [EventModel] = []
+                        MapViewRep(events: eventsOnFirstDate, evetsClickable: true).frame(width: .infinity, height: .infinity)
+                    }
+                  
+                 
                 }
             }.padding(.top, 16)
         
