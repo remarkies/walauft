@@ -13,6 +13,12 @@ struct DetailView: View {
     @State var selectedEvent: EventModel?
     
     var body: some View {
+        ZStack (alignment: .topLeading) {
+            Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            VStack (spacing: 0) {
+                
+            }
+        }
         VStack {
             Form {
                 
@@ -40,8 +46,8 @@ struct DetailView: View {
                 
             }
             if ((selectedEvent!.location?.latitude) != nil){
-            MapsView(locations: [selectedEvent!.location!])
-        }
+                MapsView(locations: [selectedEvent!.location!])
+            }
             
         }.navigationBarTitle(selectedEvent!.location!.name)
     }
