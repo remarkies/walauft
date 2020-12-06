@@ -39,12 +39,12 @@
 		A1FA3F5C2551C4DD00D1F84A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1FA3F5B2551C4DD00D1F84A /* Preview Assets.xcassets */; };
 		A1FA3F662551C57C00D1F84A /* RegionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FA3F652551C57C00D1F84A /* RegionModel.swift */; };
 		A1FA3F6F2551C63000D1F84A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FA3F6E2551C63000D1F84A /* HomeView.swift */; };
-		E7081AA7257D031200392137 /* St.Gallen.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AA6257D031200392137 /* St.Gallen.json */; };
-		E7081AAC257D040200392137 /* Bern.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AA9257D040200392137 /* Bern.json */; };
-		E7081AAD257D040200392137 /* Basel.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AAA257D040200392137 /* Basel.json */; };
-		E7081AAE257D040200392137 /* Luzern.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AAB257D040200392137 /* Luzern.json */; };
-		E7633719257A8138005E7E86 /* Zürich.json in Resources */ = {isa = PBXBuildFile; fileRef = E7633718257A8138005E7E86 /* Zürich.json */; };
-		E7633725257B980C005E7E86 /* MapViewRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7633724257B980B005E7E86 /* MapViewRep.swift */; };
+		E7081ABE257D67D800392137 /* MapViewRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7081ABD257D67D800392137 /* MapViewRep.swift */; };
+		E7081AC7257D684800392137 /* Basel.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AC2257D684800392137 /* Basel.json */; };
+		E7081AC8257D684800392137 /* St.Gallen.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AC3257D684800392137 /* St.Gallen.json */; };
+		E7081AC9257D684800392137 /* Zürich.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AC4257D684800392137 /* Zürich.json */; };
+		E7081ACA257D684800392137 /* Bern.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AC5257D684800392137 /* Bern.json */; };
+		E7081ACB257D684800392137 /* Luzern.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AC6257D684800392137 /* Luzern.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,12 +84,12 @@
 		C18A9F93FF2867F3A2916716 /* Pods-walauft-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walauft-ios.debug.xcconfig"; path = "Target Support Files/Pods-walauft-ios/Pods-walauft-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		C34FD7611FF987F00008B5D1 /* Pods_walauft_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_walauft_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D008CD826FDEC2CF05100FA4 /* Pods-walauft-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walauft-ios.release.xcconfig"; path = "Target Support Files/Pods-walauft-ios/Pods-walauft-ios.release.xcconfig"; sourceTree = "<group>"; };
-		E7081AA6257D031200392137 /* St.Gallen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = St.Gallen.json; path = ../../../../../../../Downloads/St.Gallen.json; sourceTree = "<group>"; };
-		E7081AA9257D040200392137 /* Bern.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Bern.json; path = ../../../../../../../Downloads/Bern.json; sourceTree = "<group>"; };
-		E7081AAA257D040200392137 /* Basel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Basel.json; path = ../../../../../../../Downloads/Basel.json; sourceTree = "<group>"; };
-		E7081AAB257D040200392137 /* Luzern.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Luzern.json; path = ../../../../../../../Downloads/Luzern.json; sourceTree = "<group>"; };
-		E7633718257A8138005E7E86 /* Zürich.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Zürich.json"; path = "../../../../../../../Downloads/b5e539fd3d276bde3ada10719b912b1e-ca2b058d580d2fe1119a5a974401d33d0f792e78/Zürich.json"; sourceTree = "<group>"; };
-		E7633724257B980B005E7E86 /* MapViewRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRep.swift; sourceTree = "<group>"; };
+		E7081ABD257D67D800392137 /* MapViewRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRep.swift; sourceTree = "<group>"; };
+		E7081AC2257D684800392137 /* Basel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Basel.json; sourceTree = "<group>"; };
+		E7081AC3257D684800392137 /* St.Gallen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = St.Gallen.json; sourceTree = "<group>"; };
+		E7081AC4257D684800392137 /* Zürich.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Zürich.json"; sourceTree = "<group>"; };
+		E7081AC5257D684800392137 /* Bern.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Bern.json; sourceTree = "<group>"; };
+		E7081AC6257D684800392137 /* Luzern.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Luzern.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,12 +262,12 @@
 		E75C70E525755EE700EE8698 /* maps */ = {
 			isa = PBXGroup;
 			children = (
-				E7081AAA257D040200392137 /* Basel.json */,
-				E7081AA9257D040200392137 /* Bern.json */,
-				E7081AAB257D040200392137 /* Luzern.json */,
-				E7081AA6257D031200392137 /* St.Gallen.json */,
-				E7633718257A8138005E7E86 /* Zürich.json */,
-				E7633724257B980B005E7E86 /* MapViewRep.swift */,
+				E7081AC2257D684800392137 /* Basel.json */,
+				E7081AC5257D684800392137 /* Bern.json */,
+				E7081AC6257D684800392137 /* Luzern.json */,
+				E7081AC3257D684800392137 /* St.Gallen.json */,
+				E7081AC4257D684800392137 /* Zürich.json */,
+				E7081ABD257D67D800392137 /* MapViewRep.swift */,
 			);
 			path = maps;
 			sourceTree = "<group>";
@@ -331,12 +331,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7081AC7257D684800392137 /* Basel.json in Resources */,
+				E7081ACB257D684800392137 /* Luzern.json in Resources */,
+				E7081AC9257D684800392137 /* Zürich.json in Resources */,
 				A1FA3F5C2551C4DD00D1F84A /* Preview Assets.xcassets in Resources */,
-				E7081AAE257D040200392137 /* Luzern.json in Resources */,
-				E7633719257A8138005E7E86 /* Zürich.json in Resources */,
-				E7081AAC257D040200392137 /* Bern.json in Resources */,
-				E7081AAD257D040200392137 /* Basel.json in Resources */,
-				E7081AA7257D031200392137 /* St.Gallen.json in Resources */,
+				E7081AC8257D684800392137 /* St.Gallen.json in Resources */,
+				E7081ACA257D684800392137 /* Bern.json in Resources */,
 				A1FA3F592551C4DD00D1F84A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +403,7 @@
 				A1321A262552C54A000016B8 /* LocationModel.swift in Sources */,
 				A1321A232552C3EB000016B8 /* RegionDayModel.swift in Sources */,
 				A11D5172257054B60054E9CF /* EventNameView.swift in Sources */,
+				E7081ABE257D67D800392137 /* MapViewRep.swift in Sources */,
 				A1321A292552DD3E000016B8 /* DetailView.swift in Sources */,
 				A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */,
 				A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */,
@@ -412,7 +413,6 @@
 				A1E4928D25534BBF002F07BE /* TagModel.swift in Sources */,
 				A1FA3F552551C4DC00D1F84A /* walauft_iosApp.swift in Sources */,
 				A1321A202552C342000016B8 /* EventModel.swift in Sources */,
-				E7633725257B980C005E7E86 /* MapViewRep.swift in Sources */,
 				A12549D3256F27E200AB04D4 /* FilterInfoView.swift in Sources */,
 				A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */,
 				A1E4928625534459002F07BE /* TagView.swift in Sources */,
