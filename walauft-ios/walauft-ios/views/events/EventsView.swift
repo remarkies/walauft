@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EventsView: View {
     @State var selectedRegion: RegionModel
-    
+
     @State var eventService = EventService()
     @EnvironmentObject var filterService : FilterService
     @State var tagService = TagService()
@@ -17,7 +17,15 @@ struct EventsView: View {
     @State var isWorking: Bool = false
     @State var searchText: String = ""
     @State var isListview : Bool = true
-    
+    @State private var selectedDate = 0
+
+
+    static let taskDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd. MMMM"
+        return formatter
+    }()
+
     var body: some View {
         let bindingSearchText = Binding<String>(get: {
             self.searchText
@@ -30,10 +38,10 @@ struct EventsView: View {
                 } else {
                     self.proposedTags = []
                 }
-                
+
             }
         })
-        
+
         ZStack (alignment: .topLeading) {
             Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack (spacing: 0) {
@@ -41,7 +49,7 @@ struct EventsView: View {
                     Button(action: { isListview = true }, label: { Text("List").underline(isListview, color: Color("SubtleForeground"))})
                     Text(" / ")
                     Button(action: { isListview = false }, label: { Text("Map").underline(!isListview, color: Color("SubtleForeground"))})
-                    
+
                 }.padding(.horizontal, 24).foregroundColor(Color("SubtleForeground"))
                 if (isListview) {
 
@@ -53,26 +61,43 @@ struct EventsView: View {
                             .frame(height: 2)
                             .background(Color("Layer3"))
                     }
-                    
+
                     VStack (spacing: 0) {
                         RegionDayListView(days: self.$filterService.filteredData)
                     }
                     .background(Color("Background"))
                     .ignoresSafeArea()
                 }
-          
+
                 if (!isListview){
-                    let everyLocationOnFirstDate = self.filterService.filteredData[0].events.map { event in event.location! }
-                    MapsView(locations: everyLocationOnFirstDate)
-                
+                    if (self.filterService.filteredData.count > 0) {
+
+                        // MapsView(locations: everyLocationOnFirstDate)
+                        let eventDates = self.filterService.filteredData.map{ obj in obj.date}
+                        Picker(selection: $selectedDate, label: Text("")) {
+                            ForEach(0 ..< min(eventDates.count, 4)) {
+                                      Text("\(eventDates[$0], formatter: Self.taskDateFormat)").tag($0)
+
+                                    }
+                                }.pickerStyle(SegmentedPickerStyle())
+                                //WheelPickerStyle
+
+                        MapViewRep(events: self.filterService.filteredData[selectedDate].events, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
+                    }
+                    else {
+                        let emptyEvents: [EventModel] = []
+                        MapViewRep(events: emptyEvents, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity)
+                    }
+
+
                 }
             }.padding(.top, 16)
-        
+
         }
         .onAppear {
             self.eventService.loadEventsAsync(region: self.selectedRegion) {
                 (result) in
-                
+
                 if result != nil {
                     self.filterService.data = result!
                 }
@@ -82,7 +107,7 @@ struct EventsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle(self.selectedRegion.name)
     }
-    
+
 }
 
 struct Events_Previews: PreviewProvider {

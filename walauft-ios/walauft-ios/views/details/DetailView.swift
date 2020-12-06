@@ -9,9 +9,9 @@ import SwiftUI
 import MapKit
 
 struct DetailView: View {
-    
+
     @State var selectedEvent: EventModel?
-    
+
     var body: some View {
         ZStack (alignment: .topLeading) {
             Color("Background").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
