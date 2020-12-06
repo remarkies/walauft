@@ -18,11 +18,14 @@ struct EventsView: View {
     @State var searchText: String = ""
     @State var isListview : Bool = true
     @State private var selectedDate = 0
+
+    
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd. MMMM"
         return formatter
     }()
+    
     var body: some View {
         let bindingSearchText = Binding<String>(get: {
             self.searchText
@@ -71,18 +74,18 @@ struct EventsView: View {
                         // MapsView(locations: everyLocationOnFirstDate)
                         let eventDates = self.filterService.filteredData.map{ obj in obj.date}
                         Picker(selection: $selectedDate, label: Text("")) {
-                                    ForEach(0 ..< 4) {
+                            ForEach(0 ..< min(eventDates.count, 4)) {
                                       Text("\(eventDates[$0], formatter: Self.taskDateFormat)").tag($0)
                                     
                                     }
                                 }.pickerStyle(SegmentedPickerStyle())
                                 //WheelPickerStyle
                        
-                         MapViewRep(events:  self.filterService.filteredData[0].events, evetsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
+                        MapViewRep(events: self.filterService.filteredData[selectedDate].events, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
                     }
                     else {
-                        let eventsOnFirstDate: [EventModel] = []
-                        MapViewRep(events: eventsOnFirstDate, evetsClickable: true).frame(width: .infinity, height: .infinity)
+                        let emptyEvents: [EventModel] = []
+                        MapViewRep(events: emptyEvents, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity)
                     }
                   
                  

@@ -20,8 +20,13 @@ struct DetailView: View {
             }
         }
         VStack {
+           
             Form {
+<<<<<<< Updated upstream
 
+=======
+               
+>>>>>>> Stashed changes
                 Section (header: Text("Event")){
                     Text("\(selectedEvent!.name)")
                 }
@@ -46,11 +51,18 @@ struct DetailView: View {
 
             }
             if ((selectedEvent!.location?.latitude) != nil){
+      
                 MapViewRep(events: [selectedEvent!], evetsClickable: false).ignoresSafeArea()
             }
+<<<<<<< Updated upstream
 
         }.background(Color.black).navigationBarTitle(selectedEvent!.location!.name)
 
+=======
+            
+        }.navigationBarTitle(selectedEvent!.location!.name)
+        
+>>>>>>> Stashed changes
     }
 }
 

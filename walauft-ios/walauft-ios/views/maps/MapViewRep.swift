@@ -13,11 +13,24 @@ import MapKitGoogleStyler
 struct MapViewRep: UIViewRepresentable {
  
     var events: [EventModel]
+    var region: RegionModel?
     var evetsClickable: Bool
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
-
-        guard let overlayFileURLString = Bundle.main.path(forResource: "overlay", ofType: "json") else {
+        let nameOfJSON: String
+        if (events.isEmpty) {
+            nameOfJSON = "Zürich"
+        }else{
+            if(events[0].location!.city == "St. Gallen"){
+                nameOfJSON = "St.Gallen"
+            }
+            else{
+            nameOfJSON = events[0].location!.city
+            }
+           
+        }
+        print(nameOfJSON)
+        guard let overlayFileURLString = Bundle.main.path(forResource: nameOfJSON, ofType: "json") else {
                 print("could not load JSON")
                 return MKMapView(frame: .zero)
         }
@@ -27,18 +40,7 @@ struct MapViewRep: UIViewRepresentable {
             return MKMapView(frame: .zero)
         }
         mapView.addOverlay(tileOverlay)
-        let eventsWithALocation = events.filter{ event in event.location!.latitude != nil}
-        let locations = eventsWithALocation.map { event in event.location! }
-
-        let annotationsOfLocations =  locations.map {
-        location -> MKPointAnnotation in
-         
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
-            annotation.title = location.name
-            
-            return annotation
-        }
+        let annotationsOfLocations = getAnnotationsFromEvents(events: events)
         mapView.addAnnotations(annotationsOfLocations)
         mapView.showAnnotations(annotationsOfLocations, animated: true)
      
@@ -48,8 +50,26 @@ struct MapViewRep: UIViewRepresentable {
         return mapView
     }
     
-    func updateUIView(_ uiView: MKMapView, context: Context) {
-
+    func updateUIView(_ mapView: MKMapView, context: Context) {
+        let annotationsOfEvents = getAnnotationsFromEvents(events: events)
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotations(annotationsOfEvents)
+        mapView.showAnnotations(annotationsOfEvents, animated: true)
+    }
+    
+    private func getAnnotationsFromEvents(events: [EventModel])->[MKAnnotation]{
+        let eventsWithALocation = events.filter{ event in event.location!.latitude != nil}
+        let locations = eventsWithALocation.map { event in event.location! }
+        let annotationsOfLocations =  locations.map {
+        location -> MKPointAnnotation in
+         
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
+            annotation.title = location.name
+            
+            return annotation
+        }
+        return annotationsOfLocations
     }
     
     class Coordinator: NSObject, MKMapViewDelegate{
@@ -78,7 +98,7 @@ struct MapViewRep: UIViewRepresentable {
                   anView!.annotation = annotation
               }
  
-            anView!.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+           // anView!.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
             anView!.image =  UIImage(systemName: "music.house")
             anView!.largeContentTitle = annotation.title!
             anView!.backgroundColor = UIColor.white
