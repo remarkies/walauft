@@ -22,11 +22,6 @@ struct DetailView: View {
         VStack {
            
             Form {
-<<<<<<< Updated upstream
-
-=======
-               
->>>>>>> Stashed changes
                 Section (header: Text("Event")){
                     Text("\(selectedEvent!.name)")
                 }
@@ -54,15 +49,10 @@ struct DetailView: View {
       
                 MapViewRep(events: [selectedEvent!], evetsClickable: false).ignoresSafeArea()
             }
-<<<<<<< Updated upstream
 
-        }.background(Color.black).navigationBarTitle(selectedEvent!.location!.name)
-
-=======
-            
         }.navigationBarTitle(selectedEvent!.location!.name)
         
->>>>>>> Stashed changes
+
     }
 }
 
