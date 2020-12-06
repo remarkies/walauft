@@ -32,6 +32,13 @@
 		A1E2C5FC2554AA3600E88FDD /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5FB2554AA3600E88FDD /* TagService.swift */; };
 		A1E4928625534459002F07BE /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4928525534459002F07BE /* TagView.swift */; };
 		A1E4928D25534BBF002F07BE /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4928C25534BBF002F07BE /* TagModel.swift */; };
+		A1F075AF257D6617009BCA73 /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */; };
+		A1F075B2257D69B1009BCA73 /* EventDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075B1257D69B1009BCA73 /* EventDetailContentView.swift */; };
+		A1F075BB257D6A85009BCA73 /* EventTagsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075BA257D6A85009BCA73 /* EventTagsInfoView.swift */; };
+		A1F075BE257D6D0E009BCA73 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075BD257D6D0E009BCA73 /* EventDetailView.swift */; };
+		A1F075C2257D79A7009BCA73 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075C1257D79A7009BCA73 /* LocationDetailView.swift */; };
+		A1F075C6257D7AA9009BCA73 /* LocationDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075C5257D7AA9009BCA73 /* LocationDetailContentView.swift */; };
+		A1F075C9257D8D1B009BCA73 /* RotatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075C8257D8D1B009BCA73 /* RotatedView.swift */; };
 		A1FA3F552551C4DC00D1F84A /* walauft_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FA3F542551C4DC00D1F84A /* walauft_iosApp.swift */; };
 		A1FA3F572551C4DC00D1F84A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FA3F562551C4DC00D1F84A /* ContentView.swift */; };
 		A1FA3F592551C4DD00D1F84A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1FA3F582551C4DD00D1F84A /* Assets.xcassets */; };
@@ -67,6 +74,13 @@
 		A1E2C5FB2554AA3600E88FDD /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		A1E4928525534459002F07BE /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		A1E4928C25534BBF002F07BE /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
+		A1F075B1257D69B1009BCA73 /* EventDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailContentView.swift; sourceTree = "<group>"; };
+		A1F075BA257D6A85009BCA73 /* EventTagsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagsInfoView.swift; sourceTree = "<group>"; };
+		A1F075BD257D6D0E009BCA73 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
+		A1F075C1257D79A7009BCA73 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
+		A1F075C5257D7AA9009BCA73 /* LocationDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailContentView.swift; sourceTree = "<group>"; };
+		A1F075C8257D8D1B009BCA73 /* RotatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatedView.swift; sourceTree = "<group>"; };
 		A1FA3F512551C4DC00D1F84A /* walauft-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "walauft-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FA3F542551C4DC00D1F84A /* walauft_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walauft_iosApp.swift; sourceTree = "<group>"; };
 		A1FA3F562551C4DC00D1F84A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -138,7 +152,13 @@
 			isa = PBXGroup;
 			children = (
 				A1321A282552DD3E000016B8 /* DetailView.swift */,
+				A1F075B1257D69B1009BCA73 /* EventDetailContentView.swift */,
+				A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */,
+				A1F075BD257D6D0E009BCA73 /* EventDetailView.swift */,
+				A1F075BA257D6A85009BCA73 /* EventTagsInfoView.swift */,
 				A1D979FD257BF97400468F0C /* EventTextInfoView.swift */,
+				A1F075C1257D79A7009BCA73 /* LocationDetailView.swift */,
+				A1F075C5257D7AA9009BCA73 /* LocationDetailContentView.swift */,
 			);
 			path = details;
 			sourceTree = "<group>";
@@ -158,6 +178,7 @@
 			children = (
 				A1E2C5F22554971E00E88FDD /* CustomNavigationView.swift */,
 				A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */,
+				A1F075C8257D8D1B009BCA73 /* RotatedView.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -305,6 +326,8 @@
 				A146C84D256EAC04003C2F15 /* RegionListView.swift in Sources */,
 				A1321A1C2552C0DC000016B8 /* EventService.swift in Sources */,
 				A11D5169257051F90054E9CF /* EventTagListView.swift in Sources */,
+				A1F075C2257D79A7009BCA73 /* LocationDetailView.swift in Sources */,
+				A1F075C6257D7AA9009BCA73 /* LocationDetailContentView.swift in Sources */,
 				A1E2C5F92554A55E00E88FDD /* FilterService.swift in Sources */,
 				A1FA3F662551C57C00D1F84A /* RegionModel.swift in Sources */,
 				A1FA3F572551C4DC00D1F84A /* ContentView.swift in Sources */,
@@ -314,18 +337,23 @@
 				A1E2C5EC255462FD00E88FDD /* CustomTextField.swift in Sources */,
 				A1321A262552C54A000016B8 /* LocationModel.swift in Sources */,
 				A1321A232552C3EB000016B8 /* RegionDayModel.swift in Sources */,
+				A1F075B2257D69B1009BCA73 /* EventDetailContentView.swift in Sources */,
+				A1F075C9257D8D1B009BCA73 /* RotatedView.swift in Sources */,
 				A11D5172257054B60054E9CF /* EventNameView.swift in Sources */,
 				A1321A292552DD3E000016B8 /* DetailView.swift in Sources */,
+				A1F075AF257D6617009BCA73 /* DetailHeaderView.swift in Sources */,
 				E7BC5CE62575694800FD3344 /* MapsView.swift in Sources */,
 				A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */,
 				A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */,
 				A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */,
 				A1E2C5FC2554AA3600E88FDD /* TagService.swift in Sources */,
 				A146C850256EAE34003C2F15 /* HomeTitleView.swift in Sources */,
+				A1F075BE257D6D0E009BCA73 /* EventDetailView.swift in Sources */,
 				A1E4928D25534BBF002F07BE /* TagModel.swift in Sources */,
 				A1FA3F552551C4DC00D1F84A /* walauft_iosApp.swift in Sources */,
 				A1321A202552C342000016B8 /* EventModel.swift in Sources */,
 				A12549D3256F27E200AB04D4 /* FilterInfoView.swift in Sources */,
+				A1F075BB257D6A85009BCA73 /* EventTagsInfoView.swift in Sources */,
 				A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */,
 				A1E4928625534459002F07BE /* TagView.swift in Sources */,
 				A1E2C5F62554A25300E88FDD /* FilterView.swift in Sources */,
