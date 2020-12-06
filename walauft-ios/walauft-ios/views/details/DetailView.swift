@@ -9,19 +9,19 @@ import SwiftUI
 import MapKit
 
 struct DetailView: View {
-
+    
     @State var selectedEvent: EventModel?
-
+    
     var body: some View {
         ZStack (alignment: .topLeading) {
             Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack (spacing: 0) {
-
+                
             }
         }
         VStack {
             Form {
-
+                
                 Section (header: Text("Event")){
                     Text("\(selectedEvent!.name)")
                 }
@@ -30,27 +30,26 @@ struct DetailView: View {
                         Text("\(selectedEvent!.acts)")
                     }
                 }
-
+                
                 if selectedEvent!.musicstyles.count > 0 {
                     Section (header: Text("Styles")){
                         Text("\(selectedEvent!.musicstyles)")
                     }
                 }
-
+                
                 if selectedEvent!.text.count > 0 {
                     Section (header: Text("Description")){
                         Text("\(selectedEvent!.text)")
                     }
                 }
-
-
+                
+                
             }
             if ((selectedEvent!.location?.latitude) != nil){
-                MapViewRep(events: [selectedEvent!], evetsClickable: false).ignoresSafeArea()
+                MapsView(locations: [selectedEvent!.location!])
             }
-
-        }.background(Color.black).navigationBarTitle(selectedEvent!.location!.name)
-
+            
+        }.navigationBarTitle(selectedEvent!.location!.name)
     }
 }
 
