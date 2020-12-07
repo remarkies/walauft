@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct LocationDetailContentView: View {
     var event: EventModel
@@ -15,9 +16,27 @@ struct LocationDetailContentView: View {
                 EventTextInfoView(title: "Adresse", text: "\(event.location!.street) \(event.location!.streetno), \(event.location!.zipcode), \(event.location!.city)")                
                 
                 if ((event.location?.latitude) != nil){
-                    MapViewRep(events: [event], evetsClickable: false)
-                        .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-                        .frame(idealWidth: 300, maxWidth: .infinity, minHeight: 300, idealHeight: 300, maxHeight: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    VStack {
+                        MapViewRep(events: [event], evetsClickable: false)
+                            .cornerRadius(3)
+                            .frame(idealWidth: 300, maxWidth: .infinity, minHeight: 300, idealHeight: 300, maxHeight: 300, alignment: .center)
+                        Button ("Open in Maps", action: {
+                            let latitude:CLLocationDegrees =  event.location!.latitude!
+                            let longitude:CLLocationDegrees =  event.location!.longitude!
+
+                            let regionDistance:CLLocationDistance = 10000
+                            let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+                            let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+                            let options = [
+                                MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+                                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+                            ]
+                            let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+                            let mapItem = MKMapItem(placemark: placemark)
+                            mapItem.name = "\(event.location!.name)"
+                            mapItem.openInMaps(launchOptions: options)
+                        })
+                    }
                 }
             }
             Spacer()
