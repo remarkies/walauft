@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct EventsView: View {
-    @State var selectedRegion: RegionModel
+    @EnvironmentObject var filterService : FilterService
+    @EnvironmentObject var selectedRegion: RegionModel
 
     @State var eventService = EventService()
-    @EnvironmentObject var filterService : FilterService
     @State var isWorking: Bool = false
     @State var searchText: String = ""
     @State var isListview : Bool = true
@@ -52,11 +52,11 @@ struct EventsView: View {
                                 }.pickerStyle(SegmentedPickerStyle())
                                 //WheelPickerStyle
 
-                        MapViewRep(events: self.filterService.filteredData[selectedDate].events, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
+                        MapViewRep(events: self.filterService.filteredData[selectedDate].events, region: selectedRegion, eventsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
                     }
                     else {
-
-                        MapViewRep(events: emptyEvents, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity)
+                        let emptyEvents: [EventModel] = []
+                        MapViewRep(events: emptyEvents, region: selectedRegion, eventsClickable: true).frame(width: .infinity, height: .infinity)
                     }
 
 
@@ -93,6 +93,6 @@ struct EventsView: View {
 
 struct Events_Previews: PreviewProvider {
     static var previews: some View {
-        EventsView(selectedRegion: RegionModel(id: 6, name: "Züri"))
+        EventsView()
     }
 }
