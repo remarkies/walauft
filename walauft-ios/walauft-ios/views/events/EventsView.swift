@@ -45,12 +45,7 @@ struct EventsView: View {
         ZStack (alignment: .topLeading) {
             Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack (spacing: 0) {
-                HStack(alignment: .center){
-                    Button(action: { isListview = true }, label: { Text("List").underline(isListview, color: Color("SubtleForeground"))})
-                    Text(" / ")
-                    Button(action: { isListview = false }, label: { Text("Map").underline(!isListview, color: Color("SubtleForeground"))})
-
-                }.padding(.horizontal, 24).foregroundColor(Color("SubtleForeground"))
+                
                 if (isListview) {
 
                     Group {
@@ -106,6 +101,17 @@ struct EventsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle(self.selectedRegion.name)
+        .navigationBarItems(trailing:
+            HStack(alignment: .center) {
+                CustomIconButton(icon: "list.bullet", background: isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
+                    isListview = true
+                })
+                CustomIconButton(icon: "map", background: !isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
+                    isListview = false
+                })
+            }
+        )
+        
     }
 
 }

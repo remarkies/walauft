@@ -26,6 +26,7 @@
 		A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B905FF25545D2F0074EABA /* SearchBarView.swift */; };
 		A1BBC825257E6CE600061E67 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC824257E6CE600061E67 /* MapService.swift */; };
 		A1BBC828257E706600061E67 /* EventListInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC827257E706600061E67 /* EventListInfoView.swift */; };
+		A1BBC82B257E746900061E67 /* CustomIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC82A257E746900061E67 /* CustomIconButton.swift */; };
 		A1C7098F257E601C008D7123 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C7098E257E601C008D7123 /* CustomButton.swift */; };
 		A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D979FD257BF97400468F0C /* EventTextInfoView.swift */; };
 		A1E2C5EC255462FD00E88FDD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */; };
@@ -78,6 +79,7 @@
 		A1B905FF25545D2F0074EABA /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		A1BBC824257E6CE600061E67 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		A1BBC827257E706600061E67 /* EventListInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListInfoView.swift; sourceTree = "<group>"; };
+		A1BBC82A257E746900061E67 /* CustomIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIconButton.swift; sourceTree = "<group>"; };
 		A1C7098E257E601C008D7123 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		A1D979FD257BF97400468F0C /* EventTextInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTextInfoView.swift; sourceTree = "<group>"; };
 		A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */,
 				A1F075C8257D8D1B009BCA73 /* RotatedView.swift */,
 				A1C7098E257E601C008D7123 /* CustomButton.swift */,
+				A1BBC82A257E746900061E67 /* CustomIconButton.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				A1F075AF257D6617009BCA73 /* DetailHeaderView.swift in Sources */,
 				A1C7098F257E601C008D7123 /* CustomButton.swift in Sources */,
 				A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */,
+				A1BBC82B257E746900061E67 /* CustomIconButton.swift in Sources */,
 				A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */,
 				A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */,
 				A1E2C5FC2554AA3600E88FDD /* TagService.swift in Sources */,
