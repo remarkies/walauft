@@ -16,11 +16,11 @@ struct EventsView: View {
     @State var searchText: String = ""
     @State var isListview : Bool = true
     @State private var selectedDate = 0
+    @State var emptyEvents: [EventModel] = []
 
-
-    static let taskDateFormat: DateFormatter = {
+    static let weekDayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd. MMMM"
+        formatter.dateFormat = "EE dd."
         return formatter
     }()
 
@@ -28,7 +28,7 @@ struct EventsView: View {
         ZStack (alignment: .topLeading) {
             Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack (spacing: 0) {
-                
+
                 if (isListview) {
                     SearchBarView()
 
@@ -46,7 +46,7 @@ struct EventsView: View {
                         let eventDates = self.filterService.filteredData.map{ obj in obj.date}
                         Picker(selection: $selectedDate, label: Text("")) {
                             ForEach(0 ..< min(eventDates.count, 4)) {
-                                      Text("\(eventDates[$0], formatter: Self.taskDateFormat)").tag($0)
+                                      Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
 
                                     }
                                 }.pickerStyle(SegmentedPickerStyle())
@@ -86,7 +86,7 @@ struct EventsView: View {
                 })
             }
         )
-        
+
     }
 
 }

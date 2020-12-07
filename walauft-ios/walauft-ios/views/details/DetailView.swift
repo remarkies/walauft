@@ -12,11 +12,11 @@ struct DetailView: View {
 
     @State var selectedEvent: EventModel?
     @State private var fitInScreen = false
-    
+
     var body: some View {
         ZStack (alignment: .topLeading) {
             Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            
+
             VStack (alignment: .leading, spacing: 0) {
                 Divider()
                     .frame(height: 2)

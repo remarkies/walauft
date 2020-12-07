@@ -11,7 +11,7 @@ import MapKit
 import MapKitGoogleStyler
 
 struct MapViewRep: UIViewRepresentable {
- 
+
     @State var events: [EventModel]
     var region: RegionModel?
     var eventsClickable: Bool
@@ -27,7 +27,7 @@ struct MapViewRep: UIViewRepresentable {
             else{
             nameOfJSON = events[0].location!.city
             }
-           
+
         }
         print(nameOfJSON)
         guard let overlayFileURLString = Bundle.main.path(forResource: nameOfJSON, ofType: "json") else {
@@ -43,50 +43,53 @@ struct MapViewRep: UIViewRepresentable {
         let annotationsOfLocations = getAnnotationsFromEvents(events: events)
         mapView.addAnnotations(annotationsOfLocations)
         mapView.showAnnotations(annotationsOfLocations, animated: true)
-     
+
         mapView.overrideUserInterfaceStyle = .dark
 
         mapView.delegate = context.coordinator
         return mapView
     }
-    
+
     func updateUIView(_ mapView: MKMapView, context: Context) {
+
         let annotationsOfEvents = getAnnotationsFromEvents(events: events)
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(annotationsOfEvents)
         mapView.showAnnotations(annotationsOfEvents, animated: true)
     }
-    
+
     private func getAnnotationsFromEvents(events: [EventModel])->[MKAnnotation]{
         let eventsWithALocation = events.filter{ event in event.location!.latitude != nil}
         let locations = eventsWithALocation.map { event in event.location! }
         let annotationsOfLocations =  locations.map {
         location -> MKPointAnnotation in
-         
+
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
             annotation.title = location.name
-            
+
             return annotation
         }
         return annotationsOfLocations
     }
-    
+
     class Coordinator: NSObject, MKMapViewDelegate{
         var parent: MapViewRep
         init(_ parent: MapViewRep) {
             self.parent = parent
         }
+
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             if (parent.eventsClickable){
                 let eventClicked = parent.events.filter {
                      event in
+
                      event.location!.name == view.annotation?.title
                  }
-                
+
                 let detailView = UIHostingController(rootView: DetailView(selectedEvent: eventClicked[0]))
-                              
-               
+
+
                 mapView.parentViewController?.navigationController?.pushViewController(detailView, animated: true)
             }
         }
@@ -98,11 +101,11 @@ struct MapViewRep: UIViewRepresentable {
               } else {
                   anView!.annotation = annotation
               }
- 
+
            // anView!.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
             let iconImage = UIImage(systemName: "music.note.house.fill",
                                     withConfiguration: UIImage.SymbolConfiguration(weight: .regular))!.withTintColor(.white, renderingMode: .alwaysOriginal)
-            
+
             anView!.image = iconImage
             anView!.largeContentTitle = annotation.title!
             //anView!.backgroundColor = UIColor.white
@@ -117,11 +120,11 @@ struct MapViewRep: UIViewRepresentable {
             }
         }
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-    
+
 }
 extension UIView {
     var parentViewController: UIViewController? {
