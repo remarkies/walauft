@@ -30,7 +30,7 @@ struct EventRowView: View {
                 
                 if self.event != nil {
                     VStack (alignment: .leading, spacing: 4) {
-                        HStack (alignment: .lastTextBaseline) {
+                        HStack (alignment: .top) {
                             EventHeaderItemView(text: Text("\(self.event!.date, formatter: Self.weekDayDateFormat)"))
                                 .frame(width: 40)
                             

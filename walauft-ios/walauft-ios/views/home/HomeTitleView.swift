@@ -16,14 +16,12 @@ struct HomeTitleView: View {
                 Text("IN")
                 .bold()
                 .textCase(.uppercase)
-                    .font(.system(size: self.fontSize))
+                .font(.system(size: self.fontSize))
                 .foregroundColor(Color("Layer1"))
-                .padding(.horizontal)
-                    .padding(.top)
-                
                 Spacer()
             }
-                
+            .padding(.leading, 10)
+            Spacer()
             HStack {
                 Spacer()
                 Text("Walauft")
@@ -31,10 +29,9 @@ struct HomeTitleView: View {
                     .textCase(.uppercase)
                     .font(.system(size: self.fontSize))
                     .foregroundColor(Color("Layer2"))
-                    .rotationEffect(.degrees(-90))
-                    .padding(.horizontal, -100)
-                    .padding(.top, 134)
+                    .rotated()
             }
+            .padding(.top, 10)
         }
     }
 }

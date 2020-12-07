@@ -66,7 +66,6 @@ function downloadEvents(url, region, date) {
                 data += stream;
             });
 
-
             res.on('end', function() {
                 try {
 
@@ -78,7 +77,8 @@ function downloadEvents(url, region, date) {
                         .replace(/\\t/g, "\\t")
                         .replace(/\\b/g, "\\b")
                         .replace(/\\f/g, "\\f");
-// remove non-printable and other non-valid JSON chars
+
+                    // remove non-printable and other non-valid JSON chars
                     data = data.replace(/[\u0000-\u0019]+/g,"");
 
                     if(!data.includes("Service unavailable!")) {
@@ -97,15 +97,15 @@ function downloadEvents(url, region, date) {
                 let result = {};
                 result.date = moment(date).format('YYYYMMDD');
                 result.region = region;
-                //result.tags = [];
+                
                 json_data.items.forEach((eventItem) => {
-                   let foundTags = [];
+                    let foundTags = [];
 
-                   getTagsForStyle(eventItem.musicstyles).forEach(o => {
+                    getTagsForStyle(eventItem.musicstyles).forEach(o => {
                        if(o.text.length > 0) {
                            foundTags.push(o);
                        }
-                   });
+                    });
                     getTagsForActs(eventItem.acts).forEach(o => {
                         if(o.text.length > 0) {
                             foundTags.push(o);
@@ -115,13 +115,6 @@ function downloadEvents(url, region, date) {
                     foundTags.push(getTagForLocation(eventItem.location.name));
                     foundTags.push(getTagForDate(eventItem.date));
 
-                    /*
-                    foundTags.forEach(item => {
-                        if(!result.tags.includes(item)) {
-                            result.tags.push(item);
-                        }
-                    });
-                    */
                     eventItem.tags = foundTags;
                 });
 

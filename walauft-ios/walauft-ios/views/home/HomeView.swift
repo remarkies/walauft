@@ -11,16 +11,14 @@ struct HomeView: View {
     
     var body: some View {
         VStack (alignment: .leading) {
-            VStack (alignment: .leading) {
-                HomeTitleView(fontSize: 60)
-                Spacer()
-                RegionListView()
-            }
-            .padding(.top)
-            .padding(.bottom)
-            .background(Color("Background"))
-            .ignoresSafeArea()
+            HomeTitleView(fontSize: 60)
+                .padding(.top, 20)
+            Spacer()
+            RegionListView()
         }
+        .padding(.vertical)
+        .background(Color("Background"))
+        .ignoresSafeArea()
         
     }
 }

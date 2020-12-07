@@ -11,48 +11,32 @@ import MapKit
 struct DetailView: View {
 
     @State var selectedEvent: EventModel?
+    @State private var fitInScreen = false
 
     var body: some View {
         ZStack (alignment: .topLeading) {
-           
-            VStack (spacing: 0) {
+            Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
 
+            VStack (alignment: .leading, spacing: 0) {
+                Divider()
+                    .frame(height: 2)
+                    .background(Color("Layer3"))
+                ScrollView {
+                    EventDetailView(event: selectedEvent!)
+                    LocationDetailView(event: selectedEvent!)
+                }
             }
+            .background(Color("Background"))
+            .ignoresSafeArea(edges: /*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/)
         }
-        VStack {
-           
-            Form {
-                Section (header: Text("Event")){
-                    Text("\(selectedEvent!.name)")
-                }
-                if selectedEvent!.acts.count > 0 {
-                    Section (header: Text("Acts")){
-                        Text("\(selectedEvent!.acts)")
-                    }
-                }
+        .navigationBarTitle(selectedEvent!.location!.name)
+    }
+}
 
-                if selectedEvent!.musicstyles.count > 0 {
-                    Section (header: Text("Styles")){
-                        Text("\(selectedEvent!.musicstyles)")
-                    }
-                }
-
-                if selectedEvent!.text.count > 0 {
-                    Section (header: Text("Description")){
-                        Text("\(selectedEvent!.text)")
-                    }
-                }
-
-
-            }
-            if ((selectedEvent!.location?.latitude) != nil){
-      
-               // MapViewRep(events: [selectedEvent!], evetsClickable: false).ignoresSafeArea()
-            }
-
-        }.navigationBarTitle(selectedEvent!.location!.name)
-        
-
+struct ViewHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat { 0 }
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value = value + nextValue()
     }
 }
 
