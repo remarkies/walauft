@@ -20,7 +20,7 @@ struct LocationDetailContentView: View {
                         MapViewRep(events: [event], evetsClickable: false)
                             .cornerRadius(3)
                             .frame(idealWidth: 300, maxWidth: .infinity, minHeight: 300, idealHeight: 300, maxHeight: 300, alignment: .center)
-                        Button ("Open in Maps", action: {
+                        CustomButton(icon: "map", text: "Open in Maps", accent: Color("Layer2"), action: {
                             let latitude:CLLocationDegrees =  event.location!.latitude!
                             let longitude:CLLocationDegrees =  event.location!.longitude!
 
@@ -36,6 +36,7 @@ struct LocationDetailContentView: View {
                             mapItem.name = "\(event.location!.name)"
                             mapItem.openInMaps(launchOptions: options)
                         })
+                     
                     }
                 }
             }
