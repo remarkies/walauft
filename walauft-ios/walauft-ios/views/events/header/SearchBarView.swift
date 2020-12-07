@@ -48,6 +48,7 @@ struct SearchBarView: View {
                                     if !self.filterService.filterTags.contains(where: { $0 == tag }) {
                                         self.filterService.filterTags.append(tag)
                                         self.searchText = ""
+                                        self.proposedTags = []
                                     }
                                 }, unClicked:{})
                             }
