@@ -49,12 +49,12 @@ router.post('/:regionId',function(request,response){
 
     let filter = {
         $and: [
-            { date: { $gte: moment(new Date()).add(-10, 'hours').format('YYYYMMDD') } },
+            { date: { $gte: moment(new Date()).add(-1, 'years').add(-10, 'hours').format('YYYYMMDD') } },
             { region: regionId }
         ]
     };
 
-    database.find('events',filter , { sort: 'date', limit: 100 })
+    database.find('events',filter , { sort: 'date', limit: 10 })
         .then(function (docs) {
             response.json(docs);
         });

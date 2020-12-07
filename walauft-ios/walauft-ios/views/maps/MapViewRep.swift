@@ -12,9 +12,9 @@ import MapKitGoogleStyler
 
 struct MapViewRep: UIViewRepresentable {
  
-    var events: [EventModel]
+    @State var events: [EventModel]
     var region: RegionModel?
-    var evetsClickable: Bool
+    var eventsClickable: Bool
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
         let nameOfJSON: String
@@ -78,11 +78,12 @@ struct MapViewRep: UIViewRepresentable {
             self.parent = parent
         }
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            if (parent.evetsClickable){
-                let eventClicked = parent.events.filter{
+            if (parent.eventsClickable){
+                let eventClicked = parent.events.filter {
                      event in
                      event.location!.name == view.annotation?.title
                  }
+                
                 let detailView = UIHostingController(rootView: DetailView(selectedEvent: eventClicked[0]))
                               
                
@@ -99,9 +100,12 @@ struct MapViewRep: UIViewRepresentable {
               }
  
            // anView!.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            anView!.image =  UIImage(systemName: "music.house")
+            let iconImage = UIImage(systemName: "music.note.house.fill",
+                                    withConfiguration: UIImage.SymbolConfiguration(weight: .regular))!.withTintColor(.white, renderingMode: .alwaysOriginal)
+            
+            anView!.image = iconImage
             anView!.largeContentTitle = annotation.title!
-            anView!.backgroundColor = UIColor.white
+            //anView!.backgroundColor = UIColor.white
               anView!.canShowCallout = false
               return anView
         }

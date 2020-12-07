@@ -21,8 +21,10 @@ struct RegionListView: View {
         VStack  (alignment: .leading) {
             ForEach(self.regions, id: \.self) {
                 region in
-                NavigationLink(destination: EventsView(selectedRegion: region)
-                                    .environmentObject(FilterService())){
+                NavigationLink(destination:
+                                EventsView()
+                                    .environmentObject(FilterService())
+                                    .environmentObject(region)) {
                     RegionListItem(region: region)
                 }
             }

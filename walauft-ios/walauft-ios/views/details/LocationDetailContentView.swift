@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct LocationDetailContentView: View {
+    @EnvironmentObject var selectedRegion: RegionModel
     var event: EventModel
     
     var body: some View {
@@ -22,7 +23,7 @@ struct LocationDetailContentView: View {
                 
                 if ((event.location?.latitude) != nil){
                     VStack {
-                        MapViewRep(events: [event], evetsClickable: false)
+                        MapViewRep(events: [event], eventsClickable: false)
                             .cornerRadius(3)
                             .frame(idealWidth: 300, maxWidth: .infinity, minHeight: 300, idealHeight: 300, maxHeight: 300, alignment: .center)
                         CustomButton(icon: "map", text: "Open in Maps", accent: Color("Layer2"), action: {
@@ -31,6 +32,7 @@ struct LocationDetailContentView: View {
                      
                     }
                 } else {
+                    
                     CustomButton(icon: "map", text: "Open in Maps", accent: Color("Layer2"), action: {
                         MapService.searchCoordinates(forAddress: "\(event.location!.street) \(event.location!.streetno), \(event.location!.zipcode), \(event.location!.city)") {
                             coordinate in

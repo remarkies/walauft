@@ -97,7 +97,7 @@ function downloadEvents(url, region, date) {
                 let result = {};
                 result.date = moment(date).format('YYYYMMDD');
                 result.region = region;
-                
+
                 json_data.items.forEach((eventItem) => {
                     let foundTags = [];
 
