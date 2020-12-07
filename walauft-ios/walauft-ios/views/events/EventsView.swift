@@ -12,8 +12,6 @@ struct EventsView: View {
 
     @State var eventService = EventService()
     @EnvironmentObject var filterService : FilterService
-    @State var tagService = TagService()
-    @State var proposedTags: [TagModel] = []
     @State var isWorking: Bool = false
     @State var searchText: String = ""
     @State var isListview : Bool = true
@@ -27,35 +25,12 @@ struct EventsView: View {
     }()
 
     var body: some View {
-        let bindingSearchText = Binding<String>(get: {
-            self.searchText
-        }, set: {
-            self.searchText = $0
-            tagService.loadTagsForSearchTextAsync(data: self.filterService.data, searchText: $0) {
-                tags in
-                if tags != nil {
-                    self.proposedTags = tags!
-                } else {
-                    self.proposedTags = []
-                }
-
-            }
-        })
-
         ZStack (alignment: .topLeading) {
             Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack (spacing: 0) {
                 
                 if (isListview) {
-
-                    Group {
-                        SearchBarView(searchText: bindingSearchText)
-                            .padding(.bottom)
-                        FilterView(purposedTags: $proposedTags)
-                        Divider()
-                            .frame(height: 2)
-                            .background(Color("Layer3"))
-                    }
+                    SearchBarView()
 
                     VStack (spacing: 0) {
                         RegionDayListView(days: self.$filterService.filteredData)
