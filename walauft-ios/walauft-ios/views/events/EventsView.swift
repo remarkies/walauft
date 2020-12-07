@@ -52,11 +52,11 @@ struct EventsView: View {
                                 }.pickerStyle(SegmentedPickerStyle())
                                 //WheelPickerStyle
 
-                        MapViewRep(events: self.$filterService.filteredData[selectedDate].events, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
+                        MapViewRep(events: self.filterService.filteredData[selectedDate].events, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
                     }
                     else {
 
-                        MapViewRep(events: $emptyEvents, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity)
+                        MapViewRep(events: emptyEvents, region: selectedRegion, evetsClickable: true).frame(width: .infinity, height: .infinity)
                     }
 
 
