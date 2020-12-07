@@ -12,7 +12,7 @@ import MapKitGoogleStyler
 
 struct MapViewRep: UIViewRepresentable {
  
-    var events: [EventModel]
+    @Binding var events: [EventModel]
     var region: RegionModel?
     var evetsClickable: Bool
     func makeUIView(context: Context) -> MKMapView {
@@ -51,6 +51,7 @@ struct MapViewRep: UIViewRepresentable {
     }
     
     func updateUIView(_ mapView: MKMapView, context: Context) {
+        
         let annotationsOfEvents = getAnnotationsFromEvents(events: events)
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(annotationsOfEvents)
@@ -77,12 +78,21 @@ struct MapViewRep: UIViewRepresentable {
         init(_ parent: MapViewRep) {
             self.parent = parent
         }
+       
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             if (parent.evetsClickable){
                 let eventClicked = parent.events.filter{
                      event in
+                    
                      event.location!.name == view.annotation?.title
                  }
+                let eventLocationNames = parent.events.map{
+                    event in
+                   
+                    event.location!.name
+                }
+                print("every name in loactions: ", eventLocationNames)
+                print("name of clicked annotation: ", view.annotation!.title!)
                 let detailView = UIHostingController(rootView: DetailView(selectedEvent: eventClicked[0]))
                               
                

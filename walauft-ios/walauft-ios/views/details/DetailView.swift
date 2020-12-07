@@ -14,7 +14,7 @@ struct DetailView: View {
 
     var body: some View {
         ZStack (alignment: .topLeading) {
-            Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+           
             VStack (spacing: 0) {
 
             }
@@ -47,7 +47,7 @@ struct DetailView: View {
             }
             if ((selectedEvent!.location?.latitude) != nil){
       
-                MapViewRep(events: [selectedEvent!], evetsClickable: false).ignoresSafeArea()
+               // MapViewRep(events: [selectedEvent!], evetsClickable: false).ignoresSafeArea()
             }
 
         }.navigationBarTitle(selectedEvent!.location!.name)
