@@ -24,6 +24,8 @@
 		A1B2361E2552EF9400774259 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2361D2552EF9400774259 /* EventRowView.swift */; };
 		A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B236202552F0B400774259 /* RegionDayRowView.swift */; };
 		A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B905FF25545D2F0074EABA /* SearchBarView.swift */; };
+		A1BBC825257E6CE600061E67 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC824257E6CE600061E67 /* MapService.swift */; };
+		A1BBC828257E706600061E67 /* EventListInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC827257E706600061E67 /* EventListInfoView.swift */; };
 		A1C7098F257E601C008D7123 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C7098E257E601C008D7123 /* CustomButton.swift */; };
 		A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D979FD257BF97400468F0C /* EventTextInfoView.swift */; };
 		A1E2C5EC255462FD00E88FDD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */; };
@@ -74,6 +76,8 @@
 		A1B2361D2552EF9400774259 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		A1B236202552F0B400774259 /* RegionDayRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDayRowView.swift; sourceTree = "<group>"; };
 		A1B905FF25545D2F0074EABA /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		A1BBC824257E6CE600061E67 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
+		A1BBC827257E706600061E67 /* EventListInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListInfoView.swift; sourceTree = "<group>"; };
 		A1C7098E257E601C008D7123 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		A1D979FD257BF97400468F0C /* EventTextInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTextInfoView.swift; sourceTree = "<group>"; };
 		A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				A1D979FD257BF97400468F0C /* EventTextInfoView.swift */,
 				A1F075C1257D79A7009BCA73 /* LocationDetailView.swift */,
 				A1F075C5257D7AA9009BCA73 /* LocationDetailContentView.swift */,
+				A1BBC827257E706600061E67 /* EventListInfoView.swift */,
 			);
 			path = details;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 				A1321A1B2552C0DC000016B8 /* EventService.swift */,
 				A1E2C5F82554A55E00E88FDD /* FilterService.swift */,
 				A1E2C5FB2554AA3600E88FDD /* TagService.swift */,
+				A1BBC824257E6CE600061E67 /* MapService.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -425,6 +431,7 @@
 				A1321A262552C54A000016B8 /* LocationModel.swift in Sources */,
 				A1321A232552C3EB000016B8 /* RegionDayModel.swift in Sources */,
 				A1F075B2257D69B1009BCA73 /* EventDetailContentView.swift in Sources */,
+				A1BBC828257E706600061E67 /* EventListInfoView.swift in Sources */,
 				A1F075C9257D8D1B009BCA73 /* RotatedView.swift in Sources */,
 				A11D5172257054B60054E9CF /* EventNameView.swift in Sources */,
 				E7081ABE257D67D800392137 /* MapViewRep.swift in Sources */,
@@ -445,6 +452,7 @@
 				A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */,
 				A1E4928625534459002F07BE /* TagView.swift in Sources */,
 				A1E2C5F62554A25300E88FDD /* FilterView.swift in Sources */,
+				A1BBC825257E6CE600061E67 /* MapService.swift in Sources */,
 				A1321A182552BCDD000016B8 /* EventsView.swift in Sources */,
 				A146C853256EB4EE003C2F15 /* RegionListItem.swift in Sources */,
 				A1B2361E2552EF9400774259 /* EventRowView.swift in Sources */,

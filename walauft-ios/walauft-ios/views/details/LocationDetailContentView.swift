@@ -10,10 +10,15 @@ import MapKit
 
 struct LocationDetailContentView: View {
     var event: EventModel
+    
     var body: some View {
         HStack {
             VStack (alignment: .leading) {
-                EventTextInfoView(title: "Adresse", text: "\(event.location!.street) \(event.location!.streetno), \(event.location!.zipcode), \(event.location!.city)")                
+                
+                EventListInfoView(title: "Adresse", texts: [
+                    "\(event.location!.street) \(event.location!.streetno)",
+                    "\(event.location!.zipcode), \(event.location!.city)"
+                ])       
                 
                 if ((event.location?.latitude) != nil){
                     VStack {
@@ -21,23 +26,19 @@ struct LocationDetailContentView: View {
                             .cornerRadius(3)
                             .frame(idealWidth: 300, maxWidth: .infinity, minHeight: 300, idealHeight: 300, maxHeight: 300, alignment: .center)
                         CustomButton(icon: "map", text: "Open in Maps", accent: Color("Layer2"), action: {
-                            let latitude:CLLocationDegrees =  event.location!.latitude!
-                            let longitude:CLLocationDegrees =  event.location!.longitude!
-
-                            let regionDistance:CLLocationDistance = 10000
-                            let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-                            let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
-                            let options = [
-                                MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
-                                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
-                            ]
-                            let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-                            let mapItem = MKMapItem(placemark: placemark)
-                            mapItem.name = "\(event.location!.name)"
-                            mapItem.openInMaps(launchOptions: options)
+                            MapService.openMapWithCoordinates(latitude: event.location!.latitude!, longitude: event.location!.longitude!, pinText: event.location!.name)
                         })
                      
                     }
+                } else {
+                    CustomButton(icon: "map", text: "Open in Maps", accent: Color("Layer2"), action: {
+                        MapService.searchCoordinates(forAddress: "\(event.location!.street) \(event.location!.streetno), \(event.location!.zipcode), \(event.location!.city)") {
+                            coordinate in
+                            if coordinate != nil {
+                                MapService.openMapWithCoordinates(latitude: coordinate!.latitude, longitude: coordinate!.longitude, pinText: event.location!.name)
+                            }
+                        }
+                    })
                 }
             }
             Spacer()
