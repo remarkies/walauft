@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -54,6 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181D569277907946C92C68D9 /* Pods-walauft-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walauft-ios.debug.xcconfig"; path = "Target Support Files/Pods-walauft-ios/Pods-walauft-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		2F4C1371D32901A8F13FFD17 /* Pods-walauft-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walauft-ios.release.xcconfig"; path = "Target Support Files/Pods-walauft-ios/Pods-walauft-ios.release.xcconfig"; sourceTree = "<group>"; };
 		A11D5168257051F90054E9CF /* EventTagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagListView.swift; sourceTree = "<group>"; };
 		A11D5171257054B60054E9CF /* EventNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNameView.swift; sourceTree = "<group>"; };
 		A11D517A25705C6A0054E9CF /* EventHeaderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderItemView.swift; sourceTree = "<group>"; };
@@ -94,9 +96,6 @@
 		A1FA3F5D2551C4DD00D1F84A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1FA3F652551C57C00D1F84A /* RegionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionModel.swift; sourceTree = "<group>"; };
 		A1FA3F6E2551C63000D1F84A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		C18A9F93FF2867F3A2916716 /* Pods-walauft-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walauft-ios.debug.xcconfig"; path = "Target Support Files/Pods-walauft-ios/Pods-walauft-ios.debug.xcconfig"; sourceTree = "<group>"; };
-		C34FD7611FF987F00008B5D1 /* Pods_walauft_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_walauft_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D008CD826FDEC2CF05100FA4 /* Pods-walauft-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walauft-ios.release.xcconfig"; path = "Target Support Files/Pods-walauft-ios/Pods-walauft-ios.release.xcconfig"; sourceTree = "<group>"; };
 		E7081ABD257D67D800392137 /* MapViewRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRep.swift; sourceTree = "<group>"; };
 		E7081AC2257D684800392137 /* Basel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Basel.json; sourceTree = "<group>"; };
 		E7081AC3257D684800392137 /* St.Gallen.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = St.Gallen.json; sourceTree = "<group>"; };
@@ -116,6 +115,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9CD759A6C160EC20FEFAA441 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				181D569277907946C92C68D9 /* Pods-walauft-ios.debug.xcconfig */,
+				2F4C1371D32901A8F13FFD17 /* Pods-walauft-ios.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A11D5174257055270054E9CF /* event-item */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +209,8 @@
 			children = (
 				A1FA3F532551C4DC00D1F84A /* walauft-ios */,
 				A1FA3F522551C4DC00D1F84A /* Products */,
+				9CD759A6C160EC20FEFAA441 /* Pods */,
+				D96C6FE9FA74CF1836D9F674 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -259,6 +269,13 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		D96C6FE9FA74CF1836D9F674 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E75C70E525755EE700EE8698 /* maps */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,9 +296,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1FA3F602551C4DD00D1F84A /* Build configuration list for PBXNativeTarget "walauft-ios" */;
 			buildPhases = (
+				6522EBBAA8481DBBF6F4393E /* [CP] Check Pods Manifest.lock */,
 				A1FA3F4D2551C4DC00D1F84A /* Sources */,
 				A1FA3F4E2551C4DC00D1F84A /* Frameworks */,
 				A1FA3F4F2551C4DC00D1F84A /* Resources */,
+				CFAAA6E53EC1AF8E6F294222 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -341,6 +360,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6522EBBAA8481DBBF6F4393E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-walauft-ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFAAA6E53EC1AF8E6F294222 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-walauft-ios/Pods-walauft-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-walauft-ios/Pods-walauft-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-walauft-ios/Pods-walauft-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A1FA3F4D2551C4DC00D1F84A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -366,7 +427,6 @@
 				E7081ABE257D67D800392137 /* MapViewRep.swift in Sources */,
 				A1321A292552DD3E000016B8 /* DetailView.swift in Sources */,
 				A1F075AF257D6617009BCA73 /* DetailHeaderView.swift in Sources */,
-				E7BC5CE62575694800FD3344 /* MapsView.swift in Sources */,
 				A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */,
 				A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */,
 				A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */,
@@ -508,6 +568,7 @@
 		};
 		A1FA3F612551C4DD00D1F84A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 181D569277907946C92C68D9 /* Pods-walauft-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -530,6 +591,7 @@
 		};
 		A1FA3F622551C4DD00D1F84A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F4C1371D32901A8F13FFD17 /* Pods-walauft-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

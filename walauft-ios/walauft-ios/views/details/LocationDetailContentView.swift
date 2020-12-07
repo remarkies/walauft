@@ -15,7 +15,7 @@ struct LocationDetailContentView: View {
                 EventTextInfoView(title: "Adresse", text: "\(event.location!.street) \(event.location!.streetno), \(event.location!.zipcode), \(event.location!.city)")                
                 
                 if ((event.location?.latitude) != nil){
-                    MapsView(locations: [event.location!])
+                    MapViewRep(events: [event], evetsClickable: false)
                         .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                         .frame(idealWidth: 300, maxWidth: .infinity, minHeight: 300, idealHeight: 300, maxHeight: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 }
