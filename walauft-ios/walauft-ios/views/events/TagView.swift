@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TagView: View {
-    
+    @EnvironmentObject var dataService : DataService
     @State var tag: TagModel
     var background: Color
     var clicked: () -> Void
@@ -17,13 +17,10 @@ struct TagView: View {
     var body: some View {
         VStack {
             Button(action: {
-                self.tag.isSelected = !self.tag.isSelected
-                
-                // !!! its reversed, because changed right before
-                if self.tag.isSelected {
-                    self.clicked()
-                } else {
+                if dataService.isFilterTag(tag: tag) {
                     self.unClicked()
+                } else {
+                    self.clicked()
                 }
                 
             }) {
@@ -46,12 +43,12 @@ struct TagView: View {
                         .bold()
                         
                 }
-                .foregroundColor(tag.isSelected ? Color("Background") : Color("Foreground"))
+                .foregroundColor(Color("Foreground"))
                 .padding(.horizontal, 10)
                 .padding(.vertical, 6)
             
             }
-            .background(tag.isSelected ? Color("Accent2") : self.background)
+            .background(self.dataService.isFilterTag(tag: tag) ? Color("Layer3") : self.background)
             .cornerRadius(3)
         }
     }

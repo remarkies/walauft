@@ -43,20 +43,43 @@ router.post('/:regionId/:today',function(request,response){
 
 });
 
-router.post('/:regionId',function(request,response){
+router.post('/:filter',function(request,response){
+    var param = request.body;
 
-    let regionId = request.params.regionId;
+    let date = moment(new Date())
+                    .add(-1, 'years')
+                    .add(-10, 'hours')
+                    .format('YYYYMMDD');
 
-    let filter = {
-        $and: [
-            { date: { $gte: moment(new Date()).add(-1, 'years').add(-10, 'hours').format('YYYYMMDD') } },
-            { region: regionId }
-        ]
-    };
+    let query = [
+        { $match: { region: "" + param.regionId + "", date: { $gte: date } } },
+        { $unwind: '$events' },
+    ];
 
-    database.find('events',filter , { sort: 'date', limit: 10 })
+    if(param.tags !== undefined && param.tags.length > 0) {
+        let orQuery = { $match: { $or: [] } };
+        param.tags.forEach(tag => {
+            orQuery.$match.$or.push({'events.tags': { $elemMatch: { type: '' + tag.type + '', text: '' + tag.text + ''  }}});
+        });
+        query.push(orQuery);
+    }
+
+    query.push({ $group: { _id: '$_id', date: { '$last':'$date'}, region: { '$last' : '$region' }, events: {$push: '$events'}}});
+    query.push({ $sort : { date: 1 } });
+
+    if(param.tags !== undefined && param.tags.length > 0) {
+        query.push({ $limit: 100 })
+    } else {
+        query.push({ $limit: 5 })
+    }
+
+
+    database.aggregate('events', query)
         .then(function (docs) {
             response.json(docs);
+        })
+        .catch(err => {
+            console.log(err);
         });
 });
 

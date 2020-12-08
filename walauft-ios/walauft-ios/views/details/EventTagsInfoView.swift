@@ -11,23 +11,18 @@ struct EventTagsInfoView: View {
     var title: String
     var tags: [TagModel]
     var tagType: String
+    
+    @State private var totalHeight
+              = CGFloat.zero
     var body: some View {
+        
         VStack (alignment: .leading) {
             Text("\(title)")
                 .bold()
                 .font(.system(size: 12))
                 .foregroundColor(Color("Foreground"))
-            ScrollView (.horizontal){
-                HStack {
-                    ForEach(tags.filter { tag in return tag.type == tagType }, id: \.text) {
-                        tag in
-                        TagView(tag: tag,
-                                background: Color("Layer1"),
-                                clicked:{}, unClicked:{})
-                    }
-                }
-                .padding(.bottom, 12)
-            }
+            WrappedTags(tags: tags.filter { tag in return tag.type == tagType })
+                
         }
     }
 }

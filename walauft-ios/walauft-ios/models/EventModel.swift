@@ -16,9 +16,9 @@ struct EventModel: Codable, Hashable {
     let end: String?
     var location: LocationModel?
     let musicstyles: String
-    let minage: String
-    let minagef: String
-    let price: String
+    let minage: Int?
+    let minagef: Int?
+    let price: Double?
     let text: String
     let tags: [TagModel]
     let comments: String
@@ -44,9 +44,27 @@ struct EventModel: Codable, Hashable {
         end = try container.decode(String?.self, forKey: .end)
         location = try container.decode(LocationModel?.self, forKey: .location)
         musicstyles = try container.decode(String.self, forKey: .musicstyles)
-        minage = try container.decode(String.self, forKey: .minage)
-        minagef = try container.decode(String.self, forKey: .minagef)
-        price = try container.decode(String.self, forKey: .price)
+        let minageString = try container.decode(String.self, forKey: .minage)
+        let minagefString = try container.decode(String.self, forKey: .minage)
+        
+        if minageString.count > 0 {
+            minage = Int(minageString)
+        } else {
+            minage = nil
+        }
+        if minagefString.count > 0 {
+            minagef = Int(minagefString)
+        } else {
+            minagef = nil
+        }
+        
+        let priceString = try container.decode(String.self, forKey: .price)
+        if priceString.count > 0 {
+            price = Double(priceString)
+        } else {
+            price = nil
+        }
+        
         text = try container.decode(String.self, forKey: .text)
         comments = try container.decode(String.self, forKey: .comments)
         tags = try container.decode([TagModel].self, forKey: .tags)
