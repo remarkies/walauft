@@ -16,6 +16,7 @@ struct EventTextInfoView: View {
                 .bold()
                 .font(.system(size: 12))
                 .foregroundColor(Color("Foreground"))
+                .padding(.bottom, 1)
             Text("\(text)")
                 .font(.system(size: 16))
                 .foregroundColor(Color("Foreground"))

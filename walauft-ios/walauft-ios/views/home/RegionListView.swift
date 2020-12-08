@@ -23,7 +23,7 @@ struct RegionListView: View {
                 region in
                 NavigationLink(destination:
                                 EventsView()
-                                    .environmentObject(FilterService(selectedRegion: region))
+                                    .environmentObject(DataService(selectedRegion: region))
                                     .environmentObject(region)) {
                     RegionListItem(region: region)
                 }

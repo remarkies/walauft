@@ -21,6 +21,7 @@
 		A146C84D256EAC04003C2F15 /* RegionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146C84C256EAC04003C2F15 /* RegionListView.swift */; };
 		A146C850256EAE34003C2F15 /* HomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146C84F256EAE34003C2F15 /* HomeTitleView.swift */; };
 		A146C853256EB4EE003C2F15 /* RegionListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A146C852256EB4EE003C2F15 /* RegionListItem.swift */; };
+		A15C6D28257FB7F700E57D6B /* WrappedTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C6D27257FB7F700E57D6B /* WrappedTags.swift */; };
 		A1B2361E2552EF9400774259 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2361D2552EF9400774259 /* EventRowView.swift */; };
 		A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B236202552F0B400774259 /* RegionDayRowView.swift */; };
 		A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B905FF25545D2F0074EABA /* SearchBarView.swift */; };
@@ -32,7 +33,7 @@
 		A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D979FD257BF97400468F0C /* EventTextInfoView.swift */; };
 		A1E2C5EC255462FD00E88FDD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */; };
 		A1E2C5F32554971E00E88FDD /* CustomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5F22554971E00E88FDD /* CustomNavigationView.swift */; };
-		A1E2C5F92554A55E00E88FDD /* FilterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5F82554A55E00E88FDD /* FilterService.swift */; };
+		A1E2C5F92554A55E00E88FDD /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5F82554A55E00E88FDD /* DataService.swift */; };
 		A1E4928625534459002F07BE /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4928525534459002F07BE /* TagView.swift */; };
 		A1E4928D25534BBF002F07BE /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4928C25534BBF002F07BE /* TagModel.swift */; };
 		A1F075AF257D6617009BCA73 /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */; };
@@ -73,6 +74,7 @@
 		A146C84C256EAC04003C2F15 /* RegionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionListView.swift; sourceTree = "<group>"; };
 		A146C84F256EAE34003C2F15 /* HomeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleView.swift; sourceTree = "<group>"; };
 		A146C852256EB4EE003C2F15 /* RegionListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionListItem.swift; sourceTree = "<group>"; };
+		A15C6D27257FB7F700E57D6B /* WrappedTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedTags.swift; sourceTree = "<group>"; };
 		A1B2361D2552EF9400774259 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		A1B236202552F0B400774259 /* RegionDayRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDayRowView.swift; sourceTree = "<group>"; };
 		A1B905FF25545D2F0074EABA /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		A1D979FD257BF97400468F0C /* EventTextInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTextInfoView.swift; sourceTree = "<group>"; };
 		A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A1E2C5F22554971E00E88FDD /* CustomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationView.swift; sourceTree = "<group>"; };
-		A1E2C5F82554A55E00E88FDD /* FilterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterService.swift; sourceTree = "<group>"; };
+		A1E2C5F82554A55E00E88FDD /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		A1E4928525534459002F07BE /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		A1E4928C25534BBF002F07BE /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
@@ -194,7 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				A1321A1B2552C0DC000016B8 /* EventService.swift */,
-				A1E2C5F82554A55E00E88FDD /* FilterService.swift */,
+				A1E2C5F82554A55E00E88FDD /* DataService.swift */,
 				A1BBC824257E6CE600061E67 /* MapService.swift */,
 			);
 			path = services;
@@ -208,6 +210,7 @@
 				A1F075C8257D8D1B009BCA73 /* RotatedView.swift */,
 				A1C7098E257E601C008D7123 /* CustomButton.swift */,
 				A1BBC82A257E746900061E67 /* CustomIconButton.swift */,
+				A15C6D27257FB7F700E57D6B /* WrappedTags.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -421,7 +424,8 @@
 				A11D5169257051F90054E9CF /* EventTagListView.swift in Sources */,
 				A1F075C2257D79A7009BCA73 /* LocationDetailView.swift in Sources */,
 				A1F075C6257D7AA9009BCA73 /* LocationDetailContentView.swift in Sources */,
-				A1E2C5F92554A55E00E88FDD /* FilterService.swift in Sources */,
+				A15C6D28257FB7F700E57D6B /* WrappedTags.swift in Sources */,
+				A1E2C5F92554A55E00E88FDD /* DataService.swift in Sources */,
 				A1FA3F662551C57C00D1F84A /* RegionModel.swift in Sources */,
 				A1FA3F572551C4DC00D1F84A /* ContentView.swift in Sources */,
 				A1E2C5F32554971E00E88FDD /* CustomNavigationView.swift in Sources */,

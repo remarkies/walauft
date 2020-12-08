@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventsView: View {
-    @EnvironmentObject var filterService : FilterService
+    @EnvironmentObject var dataService : DataService
     @EnvironmentObject var selectedRegion: RegionModel
 
     @State var isWorking: Bool = false
@@ -32,17 +32,17 @@ struct EventsView: View {
                     SearchBarView()
 
                     VStack (spacing: 0) {
-                        RegionDayListView(days: self.$filterService.data)
+                        RegionDayListView(days: self.$dataService.data)
                     }
                     .background(Color("Background"))
                     .ignoresSafeArea()
                 }
 
                 if (!isListview){
-                    if (self.filterService.data.count > 0) {
+                    if (self.dataService.data.count > 0) {
 
                         // MapsView(locations: everyLocationOnFirstDate)
-                        let eventDates = self.filterService.data.map{ obj in obj.date}
+                        let eventDates = self.dataService.data.map{ obj in obj.date}
                         Picker(selection: $selectedDate, label: Text("")) {
                             ForEach(0 ..< min(eventDates.count, 4)) {
                                       Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
@@ -51,7 +51,7 @@ struct EventsView: View {
                                 }.pickerStyle(SegmentedPickerStyle())
                                 //WheelPickerStyle
 
-                        MapViewRep(events: self.filterService.data[selectedDate].events, region: selectedRegion, eventsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
+                        MapViewRep(events: self.dataService.data[selectedDate].events, region: selectedRegion, eventsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
                     }
                     else {
                         let emptyEvents: [EventModel] = []
@@ -64,7 +64,7 @@ struct EventsView: View {
 
         }
         .onAppear() {
-            self.filterService.filterTags = []
+            self.dataService.filterTags = []
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle(self.selectedRegion.name)

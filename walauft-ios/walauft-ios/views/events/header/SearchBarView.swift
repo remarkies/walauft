@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct SearchBarView: View {
-    @EnvironmentObject var filterService : FilterService
+    @EnvironmentObject var dataService : DataService
     
     @State var searchText: String = ""
-    
     @State var proposedTags: [TagModel] = []
     
     var body: some View {
@@ -20,7 +19,7 @@ struct SearchBarView: View {
         }, set: {
             self.searchText = $0
             
-            filterService.loadTagsForSearchTextAsync(data: self.filterService.data, searchText: $0) {
+            dataService.loadTagsForSearchTextAsync(data: self.dataService.data, searchText: $0) {
                 tags in
                 if tags != nil {
                     self.proposedTags = tags!
@@ -37,16 +36,17 @@ struct SearchBarView: View {
         .padding(.bottom)
         
         VStack {
-            if proposedTags.filter { tag in return tag.isSelected == false }.count > 0 {
+            if proposedTags.count > 0 {
                 VStack {
                     FilterInfoView(text: "Truck s chästli ah zum filtere")
                     ScrollView (.horizontal){
                         HStack {
-                            ForEach(proposedTags.filter { tag in return tag.isSelected == false }, id: \.text) {
+                            ForEach(proposedTags, id: \.self) {
                                 tag in
                                 TagView(tag: tag, background:  Color("Layer2"), clicked: {
-                                    if !self.filterService.filterTags.contains(where: { $0 == tag }) {
-                                        self.filterService.filterTags.append(tag)
+                                    if !self.dataService.isFilterTag(tag: tag) {
+                                        
+                                        self.dataService.filterTags.append(tag)
                                         self.searchText = ""
                                         self.proposedTags = []
                                     }
@@ -59,15 +59,15 @@ struct SearchBarView: View {
             }
             
             
-            if self.filterService.filterTags.filter { tag in return tag.isSelected == true }.count > 0 {
+            if self.dataService.filterTags.count > 0 {
                 FilterInfoView(text: "Gsetzti Chästli")
                 ScrollView (.horizontal){
                     HStack {
-                        ForEach(self.filterService.filterTags.filter { tag in return tag.isSelected == true }, id: \.text) {
+                        ForEach(self.dataService.filterTags, id: \.self) {
                             tag in
                             TagView(tag: tag, background:  Color("Layer2"), clicked: {}, unClicked: {
-                                if let index = self.filterService.filterTags.firstIndex(where: { $0 == tag }) {
-                                    self.filterService.filterTags.remove(at: index)
+                                if let index = self.dataService.filterTags.firstIndex(where: { $0 == tag }) {
+                                    self.dataService.filterTags.remove(at: index)
                                 }
                             })
                         }

@@ -10,7 +10,6 @@ import SwiftUI
 
 class TagModel: Codable, Equatable, Hashable {
     let id: UUID
-    var isSelected: Bool 
     let type: String
     let text: String
     
@@ -20,7 +19,6 @@ class TagModel: Codable, Equatable, Hashable {
         id = UUID()
         type = try container.decode(String.self, forKey: .type)
         text = try container.decode(String.self, forKey: .text)
-        isSelected = false
     }
     
     enum CodingKeys: CodingKey {

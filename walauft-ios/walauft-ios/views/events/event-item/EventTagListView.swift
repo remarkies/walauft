@@ -9,25 +9,26 @@ import SwiftUI
 
 struct EventTagListView: View {
     
-    @EnvironmentObject var filterService : FilterService
+    @EnvironmentObject var dataService : DataService
     @State var tags: [TagModel] = []
     
     var body: some View {
         ScrollView (.horizontal){
             HStack {
-                ForEach(self.tags.filter { tag in return tag.type == "style" }, id: \.text) {
+                ForEach(self.tags.filter { tag in return tag.type == "style" }, id: \.self) {
                     tag in
                     TagView(tag: tag, background:  Color("Layer1"), clicked: {
-                        if !self.filterService.filterTags.contains(where: { $0 == tag }) {
-                            self.filterService.filterTags.append(tag)
+                        if !self.dataService.filterTags.contains(where: { $0 == tag }) {
+                            self.dataService.filterTags.append(tag)
                         }
                     }, unClicked: {
-                        if let index = self.filterService.filterTags.firstIndex(where: { $0 == tag }) {
-                            self.filterService.filterTags.remove(at: index)
+                        if let index = self.dataService.filterTags.firstIndex(where: { $0 == tag }) {
+                            self.dataService.filterTags.remove(at: index)
                         }
                     })
                 }
-            }.padding(.bottom, 12)
+            }
+            .padding(.bottom, 12)
         }
         
     }
