@@ -23,6 +23,7 @@ struct DetailView: View {
                     .background(Color("Layer3"))
                 ScrollView {
                     EventDetailView(event: selectedEvent!)
+                 
                     LocationDetailView(event: selectedEvent!)
                 }
             }
@@ -45,3 +46,4 @@ struct Detail_Previews: PreviewProvider {
         DetailView(selectedEvent: nil)
     }
 }
+ 

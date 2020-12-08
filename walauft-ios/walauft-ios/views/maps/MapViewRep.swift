@@ -11,25 +11,22 @@ import MapKit
 import MapKitGoogleStyler
 
 struct MapViewRep: UIViewRepresentable {
-
-    @State var events: [EventModel]
-    var region: RegionModel?
-    var eventsClickable: Bool
+    
+    @EnvironmentObject var filterService : FilterService
+    @EnvironmentObject var selectedRegion: RegionModel
+    @Binding var selectedDate: Int
+    private  var event: EventModel?
+    private var eventsClickable: Bool
+    
+    init(selectedDate: Binding<Int>? = Binding.constant(0),event: EventModel? = nil, eventsClickable: Bool) {
+        self._selectedDate = selectedDate ?? Binding.constant(0)
+        self.event = event
+        self.eventsClickable = eventsClickable
+    }
+    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
-        let nameOfJSON: String
-        if (events.isEmpty) {
-            nameOfJSON = "Zürich"
-        }else{
-            if(events[0].location!.city == "St. Gallen"){
-                nameOfJSON = "St.Gallen"
-            }
-            else{
-            nameOfJSON = events[0].location!.city
-            }
-
-        }
-        print(nameOfJSON)
+        let nameOfJSON = String(selectedRegion.id)  
         guard let overlayFileURLString = Bundle.main.path(forResource: nameOfJSON, ofType: "json") else {
                 print("could not load JSON")
                 return MKMapView(frame: .zero)
@@ -40,27 +37,48 @@ struct MapViewRep: UIViewRepresentable {
             return MKMapView(frame: .zero)
         }
         mapView.addOverlay(tileOverlay)
-        let annotationsOfLocations = getAnnotationsFromEvents(events: events)
-        mapView.addAnnotations(annotationsOfLocations)
-        mapView.showAnnotations(annotationsOfLocations, animated: true)
-
+        if (!filterService.filteredData.isEmpty){
+            let annotationsOfLocations = getAnnotationsFromEvents(events: filterService.filteredData[selectedDate].events)
+            mapView.addAnnotations(annotationsOfLocations)
+            mapView.showAnnotations(annotationsOfLocations, animated: true)
+        }
         mapView.overrideUserInterfaceStyle = .dark
-
         mapView.delegate = context.coordinator
         return mapView
     }
 
     func updateUIView(_ mapView: MKMapView, context: Context) {
-
-        let annotationsOfEvents = getAnnotationsFromEvents(events: events)
         mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotations(annotationsOfEvents)
-        mapView.showAnnotations(annotationsOfEvents, animated: true)
+        if (!filterService.filteredData.isEmpty){
+            let annotationsOfEvents = getAnnotationsFromEvents(events: filterService.filteredData[selectedDate].events)
+            mapView.addAnnotations(annotationsOfEvents)
+            mapView.showAnnotations(annotationsOfEvents, animated: true)
+        }
     }
 
     private func getAnnotationsFromEvents(events: [EventModel])->[MKAnnotation]{
-        let eventsWithALocation = events.filter{ event in event.location!.latitude != nil}
-        let locations = eventsWithALocation.map { event in event.location! }
+        let locations: [LocationModel]
+        if event == nil{
+            let eventsWithALocation = events.filter{ event in event.location!.latitude != nil}
+            var eventsWithNoLocation = events.filter{ event in event.location!.latitude == nil}
+//            eventsWithNoLocation.map{ event in
+//                MapService.searchCoordinates(forAddress: "\(event.location!.street) \(event.location!.streetno), \(event.location!.zipcode), \(event.location!.city)") {
+//                    coordinate in
+//                    if coordinate != nil {
+//                        return coordinate!.latitude
+//
+//                        }
+//
+//                    }
+//                }
+            
+    
+           
+            locations = eventsWithALocation.map { event in event.location! }
+        }
+        else{
+             locations = [event!.location!]
+        }
         let annotationsOfLocations =  locations.map {
         location -> MKPointAnnotation in
 
@@ -81,14 +99,14 @@ struct MapViewRep: UIViewRepresentable {
 
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             if (parent.eventsClickable){
-                let eventClicked = parent.events.filter {
+                let eventClicked = parent.filterService.filteredData[parent.selectedDate].events.filter {
                      event in
 
                      event.location!.name == view.annotation?.title
                  }
 
-                let detailView = UIHostingController(rootView: DetailView(selectedEvent: eventClicked[0]))
-
+                let detailView = UIHostingController(rootView: DetailView(selectedEvent: eventClicked[0]).environmentObject(parent.selectedRegion).environmentObject(parent.filterService))
+                
 
                 mapView.parentViewController?.navigationController?.pushViewController(detailView, animated: true)
             }

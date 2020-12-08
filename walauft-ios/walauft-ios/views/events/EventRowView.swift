@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct EventRowView: View {
-    
+    @EnvironmentObject var selectedRegion: RegionModel
+    @EnvironmentObject var filterService : FilterService
     static let weekDayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "EE"
@@ -26,7 +27,7 @@ struct EventRowView: View {
     
     var body: some View {
         VStack (alignment: .leading) {
-            NavigationLink(destination: DetailView(selectedEvent: event)) {
+            NavigationLink(destination: DetailView(selectedEvent: event).environmentObject(selectedRegion).environmentObject(filterService)) {
                 
                 if self.event != nil {
                     VStack (alignment: .leading, spacing: 4) {
