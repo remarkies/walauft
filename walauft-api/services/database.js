@@ -51,6 +51,18 @@ module.exports.find = function (collection, query, options) {
     });
 };
 
+module.exports.aggregate = function (collection, query, options) {
+    return new Promise(function (resolve, reject) {
+        database.collection(collection, function (err, collection) {
+            if(err) return reject(err);
+            collection.aggregate(query, options).toArray(function (err, docs) {
+                if(err) return reject(err);
+                resolve(docs);
+            });
+        });
+    });
+};
+
 module.exports.findAndSort = function (collection, query, options, sort) {
     return new Promise(function (resolve, reject) {
         database.collection(collection, function (err, collection) {

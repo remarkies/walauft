@@ -36,11 +36,12 @@ struct LocationModel : Codable, Identifiable {
         street = try container.decode(String.self, forKey: .street)
         streetno = try container.decode(String.self, forKey: .streetno)
         
-        let longitudeString : String = try container.decode(String.self, forKey: .longitude)
-        let latitudeString : String = try container.decode(String.self, forKey: .latitude)
-        if longitudeString.count > 0 && latitudeString.count > 0 && Double(longitudeString) != -1 && Double(latitudeString) != -1{
-            longitude = Double(longitudeString)
-            latitude = Double(latitudeString)
+        let longitudeString : String? = try container.decode(String?.self, forKey: .longitude)
+        let latitudeString : String? = try container.decode(String?.self, forKey: .latitude)
+        if longitudeString != nil && latitudeString != nil &&
+            Double(longitudeString!) != -1 && Double(latitudeString!) != -1 {
+            longitude = Double(longitudeString!)
+            latitude = Double(latitudeString!)
         } else {
             longitude = nil
             latitude = nil

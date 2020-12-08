@@ -11,7 +11,6 @@ struct EventsView: View {
     @EnvironmentObject var filterService : FilterService
     @EnvironmentObject var selectedRegion: RegionModel
 
-    @State var eventService = EventService()
     @State var isWorking: Bool = false
     @State var searchText: String = ""
     @State var isListview : Bool = true
@@ -33,17 +32,17 @@ struct EventsView: View {
                     SearchBarView()
 
                     VStack (spacing: 0) {
-                        RegionDayListView(days: self.$filterService.filteredData)
+                        RegionDayListView(days: self.$filterService.data)
                     }
                     .background(Color("Background"))
                     .ignoresSafeArea()
                 }
 
                 if (!isListview){
-                    if (self.filterService.filteredData.count > 0) {
+                    if (self.filterService.data.count > 0) {
 
                         // MapsView(locations: everyLocationOnFirstDate)
-                        let eventDates = self.filterService.filteredData.map{ obj in obj.date}
+                        let eventDates = self.filterService.data.map{ obj in obj.date}
                         Picker(selection: $selectedDate, label: Text("")) {
                             ForEach(0 ..< min(eventDates.count, 4)) {
                                       Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
@@ -52,7 +51,7 @@ struct EventsView: View {
                                 }.pickerStyle(SegmentedPickerStyle())
                                 //WheelPickerStyle
 
-                        MapViewRep(events: self.filterService.filteredData[selectedDate].events, region: selectedRegion, eventsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
+                        MapViewRep(events: self.filterService.data[selectedDate].events, region: selectedRegion, eventsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
                     }
                     else {
                         let emptyEvents: [EventModel] = []
@@ -64,15 +63,8 @@ struct EventsView: View {
             }.padding(.top, 16)
 
         }
-        .onAppear {
-            self.eventService.loadEventsAsync(region: self.selectedRegion) {
-                (result) in
-
-                if result != nil {
-                    self.filterService.data = result!
-                }
-                print("INFO: Loaded events for \(self.selectedRegion.name)")
-            }
+        .onAppear() {
+            self.filterService.filterTags = []
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle(self.selectedRegion.name)

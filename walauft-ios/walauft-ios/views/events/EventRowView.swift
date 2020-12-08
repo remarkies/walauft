@@ -26,9 +26,11 @@ struct EventRowView: View {
     
     var body: some View {
         VStack (alignment: .leading) {
+            
             NavigationLink(destination: DetailView(selectedEvent: event)) {
                 
                 if self.event != nil {
+                        
                     VStack (alignment: .leading, spacing: 4) {
                         HStack (alignment: .top) {
                             EventHeaderItemView(text: Text("\(self.event!.date, formatter: Self.weekDayDateFormat)"))

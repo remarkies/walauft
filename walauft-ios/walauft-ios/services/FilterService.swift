@@ -11,15 +11,11 @@ import Combine
 final class FilterService : ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
     
-    var data: [RegionDayModel] {
+    var selectedRegion: RegionModel
+    
+    @Published var data: [RegionDayModel] {
         willSet {
             objectWillChange.send()
-        }
-        didSet {
-            filterEventsWithTagsAsync(data: data, filterTags: filterTags, completion: {
-                newData in
-                self.filteredData = newData!
-            })
         }
     }
     
@@ -28,24 +24,21 @@ final class FilterService : ObservableObject {
             objectWillChange.send()
         }
         didSet {
-            
-            filterEventsWithTagsAsync(data: deactivateTags(days: data), filterTags: filterTags, completion: {
-                newData in
-                self.filteredData = newData!
-            })
+            print(filterTags)
+            EventService.loadEventsAsync(region: self.selectedRegion, filters: filterTags) {
+                (result) in
+                if result != nil {
+                    self.data = result!
+                }
+                print("INFO: Loaded events for \(self.selectedRegion.name)")
+            }
         }
     }
     
-    @Published var filteredData: [RegionDayModel] {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    init() {
-        data = []
-        filterTags = []
-        filteredData = []
+    init(selectedRegion: RegionModel) {
+        self.selectedRegion = selectedRegion
+        self.data = []
+        self.filterTags = []
     }
     
     func deactivateTags(days: [RegionDayModel]) -> [RegionDayModel] {

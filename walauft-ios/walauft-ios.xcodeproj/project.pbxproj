@@ -27,6 +27,7 @@
 		A1BBC825257E6CE600061E67 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC824257E6CE600061E67 /* MapService.swift */; };
 		A1BBC828257E706600061E67 /* EventListInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC827257E706600061E67 /* EventListInfoView.swift */; };
 		A1BBC82B257E746900061E67 /* CustomIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC82A257E746900061E67 /* CustomIconButton.swift */; };
+		A1BBC830257EDC2500061E67 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC82F257EDC2500061E67 /* FilterModel.swift */; };
 		A1C7098F257E601C008D7123 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C7098E257E601C008D7123 /* CustomButton.swift */; };
 		A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D979FD257BF97400468F0C /* EventTextInfoView.swift */; };
 		A1E2C5EC255462FD00E88FDD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */; };
@@ -78,6 +79,7 @@
 		A1BBC824257E6CE600061E67 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		A1BBC827257E706600061E67 /* EventListInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListInfoView.swift; sourceTree = "<group>"; };
 		A1BBC82A257E746900061E67 /* CustomIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIconButton.swift; sourceTree = "<group>"; };
+		A1BBC82F257EDC2500061E67 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		A1C7098E257E601C008D7123 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		A1D979FD257BF97400468F0C /* EventTextInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTextInfoView.swift; sourceTree = "<group>"; };
 		A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				A1321A222552C3EB000016B8 /* RegionDayModel.swift */,
 				A1FA3F652551C57C00D1F84A /* RegionModel.swift */,
 				A1E4928C25534BBF002F07BE /* TagModel.swift */,
+				A1BBC82F257EDC2500061E67 /* FilterModel.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				A1F075BB257D6A85009BCA73 /* EventTagsInfoView.swift in Sources */,
 				A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */,
 				A1E4928625534459002F07BE /* TagView.swift in Sources */,
+				A1BBC830257EDC2500061E67 /* FilterModel.swift in Sources */,
 				A1BBC825257E6CE600061E67 /* MapService.swift in Sources */,
 				A1321A182552BCDD000016B8 /* EventsView.swift in Sources */,
 				A146C853256EB4EE003C2F15 /* RegionListItem.swift in Sources */,

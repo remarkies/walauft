@@ -9,17 +9,34 @@ import Foundation
 
 final class EventService: ObservableObject {
     
-    let apiPath: String = "https://api.walauft.ch/events/"
-    
+    static let apiPath: String = "https://api.walauft.ch/events/:filter"
+    static let localPath: String = "http://localhost:3000/events/:filter"
     init() {
         
     }
     
-    func loadEventsAsync(region: RegionModel, completion: @escaping ([RegionDayModel]?) -> Void) {
-        let url = URL(string: "\(apiPath)\(String(region.id))")!
+    static func loadEventsAsync(region: RegionModel, filters: [TagModel], completion: @escaping ([RegionDayModel]?) -> Void) {
+        
+        
+        let filter = FilterModel(regionId: region.id, tags: filters)
+        
+        let url = URL(string: "\(apiPath)")!
+        
         var request = URLRequest(url: url)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
+        
+        var headers = request.allHTTPHeaderFields ?? [:]
+        headers["Content-Type"] = "application/json"
+        request.allHTTPHeaderFields = headers
+        
+        // encode post struct into JSON format
+        let encoder = JSONEncoder()
+        do {
+            let jsonData = try encoder.encode(filter)
+            request.httpBody = jsonData
+        } catch {
+            print(String(describing: error))
+        }
         
         URLSession.shared.dataTask(with: request as URLRequest, completionHandler: {
             (data, response, error) in
@@ -34,9 +51,11 @@ final class EventService: ObservableObject {
             else if let data = data {
                 DispatchQueue.main.async {
                     do {
+                        //let model2 = try JSONDecoder().decode(RegionDayModel.self, from: data)
                         let model = try JSONDecoder().decode([RegionDayModel].self, from: data)
                         completion(model)
                     } catch let error {
+                        print("\(data)")
                         print("JSONDecoder failed, \(error)")
                     }
                 }
