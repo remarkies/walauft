@@ -8,35 +8,35 @@
 import SwiftUI
 
 struct EventRowView: View {
+
     @EnvironmentObject var dataService : DataService
+    @EnvironmentObject var selectedRegion: RegionModel
     static let weekDayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "EE"
         return formatter
     }()
-    
+
     static let shortDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM"
         return formatter
     }()
-    
+
     @State var event: EventModel?
 
-    
+
     var body: some View {
         VStack (alignment: .leading) {
-            
-            NavigationLink(destination: DetailView(selectedEvent: event)
-                            .environmentObject(dataService)) {
-                
+            NavigationLink(destination: DetailView(selectedEvent: event).environmentObject(selectedRegion).environmentObject(dataService)) {
+
                 if self.event != nil {
-                        
+
                     VStack (alignment: .leading, spacing: 4) {
                         HStack (alignment: .top) {
                             EventHeaderItemView(text: Text("\(self.event!.date, formatter: Self.weekDayDateFormat)"))
                                 .frame(width: 40)
-                            
+
                             EventHeaderItemView(text: Text(self.event!.location!.name))
                             Spacer()
                             EventHeaderItemView(text: Text(self.event!.start))
@@ -57,7 +57,7 @@ struct EventRowView: View {
                             }
                             EventNameView(name: self.event!.name)
                             Spacer()
-                            
+
                            if self.event!.price != nil && self.event!.price! > 0{
                                HStack {
                                 Spacer()
@@ -71,7 +71,7 @@ struct EventRowView: View {
                             HStack {}
                             .frame(width: 48)
                             EventTagListView(tags: event!.tags)
-                            
+
                         }
                     }
                     .padding(.horizontal, 10)

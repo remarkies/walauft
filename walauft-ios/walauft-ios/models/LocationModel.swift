@@ -14,8 +14,8 @@ struct LocationModel : Codable, Identifiable {
     let zipcode: String
     let street: String
     let streetno: String
-    let longitude: Double?
-    let latitude: Double?
+    var longitude: Double?
+    var latitude: Double?
     let styles: String
     let url: URL?
     let description: String?

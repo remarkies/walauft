@@ -14,7 +14,7 @@ struct EventModel: Codable, Hashable {
     let date: Date
     let start: String
     let end: String?
-    let location: LocationModel?
+    var location: LocationModel?
     let musicstyles: String
     let minage: Int?
     let minagef: Int?

@@ -14,7 +14,7 @@ struct EventsView: View {
     @State var isWorking: Bool = false
     @State var searchText: String = ""
     @State var isListview : Bool = true
-    @State private var selectedDate = 0
+    @State var selectedDate = 0
     @State var emptyEvents: [EventModel] = []
 
     static let weekDayDateFormat: DateFormatter = {
@@ -46,17 +46,13 @@ struct EventsView: View {
                         Picker(selection: $selectedDate, label: Text("")) {
                             ForEach(0 ..< min(eventDates.count, 4)) {
                                       Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
-
                                     }
-                                }.pickerStyle(SegmentedPickerStyle())
+                            }.pickerStyle(SegmentedPickerStyle())
                                 //WheelPickerStyle
+                    }
+                        MapViewRep(selectedDate: $selectedDate, eventsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
 
-                        MapViewRep(events: self.dataService.data[selectedDate].events, region: selectedRegion, eventsClickable: true).frame(width: .infinity, height: .infinity).ignoresSafeArea()
-                    }
-                    else {
-                        let emptyEvents: [EventModel] = []
-                        MapViewRep(events: emptyEvents, region: selectedRegion, eventsClickable: true).frame(width: .infinity, height: .infinity)
-                    }
+
 
 
                 }
