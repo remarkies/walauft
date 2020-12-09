@@ -19,6 +19,9 @@ database.connect(process.env.DB_LINK).then(function () {
 let events = require('./routes/events');
 app.use('/events', events);
 
+let tags = require('./routes/tags');
+app.use('/tags', tags);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

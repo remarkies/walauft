@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchBarView: View {
     @EnvironmentObject var dataService : DataService
-    
+    @EnvironmentObject var selectedRegion : RegionModel
     @State var searchText: String = ""
     @State var proposedTags: [TagModel] = []
     
@@ -19,13 +19,17 @@ struct SearchBarView: View {
         }, set: {
             self.searchText = $0
             
-            dataService.loadTagsForSearchTextAsync(data: self.dataService.data, searchText: $0) {
-                tags in
-                if tags != nil {
-                    self.proposedTags = tags!
-                } else {
-                    self.proposedTags = []
-                }
+            if self.searchText.count > 2 {
+                ApiService.loadProposedTagsAsync(selectedRegion: selectedRegion, search: $0, completion: {
+                    tags in
+                    if tags != nil {
+                        self.proposedTags = tags!
+                    } else {
+                        self.proposedTags = []
+                    }
+                })
+            } else if self.searchText.count == 0 {
+                self.proposedTags = []
             }
         })
         
@@ -41,7 +45,7 @@ struct SearchBarView: View {
                     FilterInfoView(text: "Truck s chästli ah zum filtere")
                     ScrollView (.horizontal){
                         HStack {
-                            ForEach(proposedTags, id: \.self) {
+                            ForEach(proposedTags, id: \.id) {
                                 tag in
                                 TagView(tag: tag, background:  Color("Layer2"), clicked: {
                                     if !self.dataService.isFilterTag(tag: tag) {
@@ -63,7 +67,7 @@ struct SearchBarView: View {
                 FilterInfoView(text: "Gsetzti Chästli")
                 ScrollView (.horizontal){
                     HStack {
-                        ForEach(self.dataService.filterTags, id: \.self) {
+                        ForEach(self.dataService.filterTags, id: \.id) {
                             tag in
                             TagView(tag: tag, background:  Color("Layer2"), clicked: {}, unClicked: {
                                 if let index = self.dataService.filterTags.firstIndex(where: { $0 == tag }) {

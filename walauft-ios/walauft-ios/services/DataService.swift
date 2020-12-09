@@ -24,13 +24,11 @@ final class DataService : ObservableObject {
             objectWillChange.send()
         }
         didSet {
-            print(filterTags)
-            EventService.loadEventsAsync(region: self.selectedRegion, filters: filterTags) {
+            ApiService.loadEventsAsync(region: self.selectedRegion, filters: filterTags) {
                 (result) in
                 if result != nil {
                     self.data = result!
                 }
-                print("INFO: Loaded events for \(self.selectedRegion.name)")
             }
         }
     }

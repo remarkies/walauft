@@ -38,6 +38,32 @@ module.exports.upsert = function (collection, query, doc) {
     });
 };
 
+module.exports.update = function (collection, query, doc) {
+    return new Promise(function (resolve, reject) {
+        database.collection(collection, function (err, collection) {
+            if(err) return reject(err);
+
+            collection.update(query, doc, { upsert: true }, function (err, res) {
+                if(err) return reject(err);
+                resolve(res);
+            });
+        });
+    });
+};
+
+module.exports.insert = function (collection, doc) {
+    return new Promise(function (resolve, reject) {
+        database.collection(collection, function (err, collection) {
+            if(err) return reject(err);
+
+            collection.insertOne(doc, function (err, res) {
+                if(err) return reject(err);
+                resolve(res);
+            });
+        });
+    });
+};
+
 module.exports.find = function (collection, query, options) {
     return new Promise(function (resolve, reject) {
         database.collection(collection, function (err, collection) {

@@ -31,6 +31,7 @@ promise
     })
     .then(importData)
     .then(handleEvents)
+    .then(handleTags)
     .then(function () {
         database.close();
     });
@@ -38,7 +39,9 @@ promise
 function importData() {
     for(let i = 0; i < checkDaysInAdvance; i++) {
         regions.forEach((region) => {
-            let date = moment().add(i, 'days').hours(0).minutes(0).seconds(0).milliseconds(0).format("YYYY-MM-DD");
+            let date = moment()
+                .add(-1, 'years')
+                .add(i, 'days').hours(0).minutes(0).seconds(0).milliseconds(0).format("YYYY-MM-DD");
             let link = url1 + date + url2 + region + url3;
             links.push({url: link, id: region, date: date});
         });
@@ -49,7 +52,6 @@ function importData() {
     links.forEach((url) => {
         downloadingPromises.push(
             downloadEvents(url.url, url.id, url.date)
-                .then((events) => new Promise(resolve => setTimeout(resolve(events), 1000)))
         );
     });
 
@@ -67,6 +69,10 @@ function downloadEvents(url, region, date) {
             });
 
             res.on('end', function() {
+                let result = {};
+                result.date = moment(date).format('YYYYMMDD');
+                result.region = region;
+                result.events = [];
                 try {
 
                     data = data.replace(/\\n/g, "\\n")
@@ -89,14 +95,12 @@ function downloadEvents(url, region, date) {
                 } catch(e) {
                     console.log(url);
                     console.log(e);
-                    reject(e);
+                    resolve(resolve(result));
                     return;
                 }
 
                 console.log(date, regionsDic[region], json_data.items.length, url)
-                let result = {};
-                result.date = moment(date).format('YYYYMMDD');
-                result.region = region;
+
 
                 json_data.items.forEach((eventItem) => {
                     let foundTags = [];
@@ -195,10 +199,65 @@ function handleEvents(results) {
         }
     });
 
-
-    return Promise.all(handlingPromises).then(function () {
-        console.log("Log: Data imported.");
+    Promise.all(handlingPromises).then(function () {
+        console.log("Log: Events imported.");
     });
+
+    return results;
 }
 
+function handleTags(results) {
+
+    let handlingPromises = [];
+    let tagsDocs = [];
+
+    results.forEach(eventDoc => {
+        let existingTagsDoc = tagsDocs.filter(o => o.region === eventDoc.region);
+
+        if (existingTagsDoc.length === 0) {
+            let tagsDoc = {
+                region: eventDoc.region,
+                tags: []
+            }
+            tagsDocs.push(tagsDoc);
+        }
+    });
+    console.log('Basic Tags Docs created!');
+
+    results.forEach(eventDoc => {
+        let existingTagsDoc = tagsDocs.filter(o => o.region === eventDoc.region);
+
+        eventDoc.events.forEach(event => {
+            let tagsOfEvent = event.tags;
+
+            tagsOfEvent.forEach(tagOfEvent => {
+               let existingTag = existingTagsDoc[0].tags.filter(o => o.text === tagOfEvent.text && o.type === tagOfEvent.type);
+
+               if (existingTag.length > 0) {
+
+                   if (existingTag.date < tagOfEvent.date) {
+                       existingTag.date = tagOfEvent.date;
+                   }
+
+               } else {
+                   existingTagsDoc[0].tags.push({
+                       date: eventDoc.date,
+                       text: tagOfEvent.text,
+                       type: tagOfEvent.type
+                   });
+               }
+
+            });
+        });
+    });
+    console.log('Tags Docs filled with Tags!');
+
+    tagsDocs.forEach(newDoc => {
+        handlingPromises.push(database.upsert('tags', { region: newDoc.region }, newDoc));
+    });
+
+    return Promise.all(handlingPromises).then(function () {
+        console.log("Log: Tags imported.");
+    });
+}
 

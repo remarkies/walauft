@@ -15,7 +15,7 @@ struct EventTagListView: View {
     var body: some View {
         ScrollView (.horizontal){
             HStack {
-                ForEach(self.tags.filter { tag in return tag.type == "style" }, id: \.self) {
+                ForEach(self.tags.filter { tag in return tag.type == "style" }, id: \.id) {
                     tag in
                     TagView(tag: tag, background:  Color("Layer1"), clicked: {
                         if !self.dataService.filterTags.contains(where: { $0 == tag }) {

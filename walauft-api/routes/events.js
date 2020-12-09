@@ -43,7 +43,7 @@ router.post('/:regionId/:today',function(request,response){
 
 });
 
-router.post('/:filter',function(request,response){
+router.post('/',function(request,response){
     var param = request.body;
 
     let date = moment(new Date())
@@ -68,7 +68,7 @@ router.post('/:filter',function(request,response){
     query.push({ $sort : { date: 1 } });
 
     if(param.tags !== undefined && param.tags.length > 0) {
-        query.push({ $limit: 100 })
+        query.push({ $limit: 14 })
     } else {
         query.push({ $limit: 5 })
     }

@@ -14,6 +14,7 @@
     "es6-promise": "^4.0.5",
     "express": "^4.17.1",
     "express-cors": "0.0.3",
+    "fuzzy-search": "^3.2.1",
     "jsdom": "^9.10.0",
     "moment": "^2.29.0",
     "mongodb": "^2.2.22",
