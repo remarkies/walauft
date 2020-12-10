@@ -6,14 +6,18 @@
 //
 
 import Foundation
-
+import CoreLocation
+import SwiftUI
 class RegionModel: Hashable, Equatable, ObservableObject {
+    @ObservedObject private var locationManager = LocationManager()
     var id: Int
     var name: String
-    
-    init(id: Int, name: String) {
+    var position: CLLocation
+    var distanceToUser: Double?
+    init(id: Int, name: String, position: CLLocation) {
         self.id = id
         self.name = name
+        self.position = position
     }
     
     static func ==(lhs: RegionModel, rhs: RegionModel) -> Bool {

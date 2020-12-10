@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
     var body: some View {
         VStack (alignment: .leading) {
             HomeTitleView(fontSize: 60)
@@ -19,6 +19,7 @@ struct HomeView: View {
         .padding(.vertical)
         .background(Color("Background"))
         .ignoresSafeArea()
+        .statusBar(hidden: true)
         
     }
 }

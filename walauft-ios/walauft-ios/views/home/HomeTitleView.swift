@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeTitleView: View {
     var fontSize: CGFloat
-    
+
     var body: some View {
         HStack (alignment: .top) {
             VStack {

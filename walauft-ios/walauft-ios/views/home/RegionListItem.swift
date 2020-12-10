@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import CoreLocation
 struct RegionListItem: View {
     
     var region: RegionModel
@@ -31,6 +31,6 @@ struct RegionListItem: View {
 
 struct RegionListItem_Previews: PreviewProvider {
     static var previews: some View {
-        RegionListItem(region: RegionModel(id: 1, name: "Zürich"))
+        RegionListItem(region: RegionModel(id: 1, name: "Zürich", position: CLLocation(latitude:47.38037361934695,longitude: 8.531073592850248)))
     }
 }
