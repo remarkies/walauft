@@ -10,13 +10,13 @@ import SwiftUI
 struct EventsView: View {
     @EnvironmentObject var dataService : DataService
     @EnvironmentObject var selectedRegion: RegionModel
-    
+
     @State var searchText: String = ""
     @State var isListview : Bool = true
     @State var selectedDate = 0
     @State var emptyEvents: [EventModel] = []
-    
-    
+
+
     static let weekDayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "EE dd."
@@ -32,10 +32,10 @@ struct EventsView: View {
             VStack (spacing: 0) {
                 SearchBarView()
                 if (isListview) {
-                    
+
                     Group{
                         ZStack{
-                            
+
                             VStack (spacing: 0) {
                                 RegionDayListView(days: self.$dataService.data)
                             }
@@ -43,21 +43,31 @@ struct EventsView: View {
                         }
                         .background(Color("Background"))
                         .ignoresSafeArea()
-                    }.transition(.move(edge: .leading))
-                    
+                    }
+                    .transition(.move(edge: .leading))
+
                 }
                 if (!isListview){
                     Group{
-                        if (self.dataService.datesAvailable.count > 0) {
-                            
-                            Picker(selection: $selectedDate, label: Text("")) {
-                                ForEach(0 ..< min((dataService.datesAvailable.count), 3)) {
-                                    return Text("\(dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                        ZStack (alignment: .topLeading) {
+                            MapViewRep(selectedDate: $selectedDate, eventsClickable: true).ignoresSafeArea()
+
+                            if (self.dataService.data.count > 0) {
+                                let eventDates = self.dataService.data.map{ obj in obj.date}
+                                Picker(selection: $selectedDate, label: Text("")) {
+                                    ForEach(0 ..< min(eventDates.count, 4)) {
+                                        Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                                    }
                                 }
-                            }.pickerStyle(SegmentedPickerStyle())
+                                .textCase(.uppercase)
+                                .background(Color("Layer2"))
+                                .cornerRadius(8)
+                                .pickerStyle(SegmentedPickerStyle())
+                                .padding(24)
+                            }
                         }
-                        MapViewRep(selectedDate: $selectedDate, eventsClickable: true).ignoresSafeArea()
-                    }.transition(.move(edge: .trailing))
+                    }
+                    .transition(.move(edge: .trailing))
                 }
             }.padding(.top, 16)
         }
@@ -71,20 +81,20 @@ struct EventsView: View {
                                     CustomIconButton(icon: "list.bullet", background: isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
                                         withAnimation(.easeInOut(duration: 0.3)){
                                             isListview = true
-                                            
+
                                         }
                                     }).animation(.easeIn)
                                     CustomIconButton(icon: "map", background: !isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
                                         withAnimation(.easeInOut(duration: 0.3)){
                                             isListview = false
-                                            
+
                                         }
                                     }).animation(.easeIn)
                                 }
         )
-        
+
     }
-    
+
 }
 
 struct Events_Previews: PreviewProvider {
@@ -92,6 +102,3 @@ struct Events_Previews: PreviewProvider {
         EventsView()
     }
 }
-
-
-

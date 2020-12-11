@@ -27,6 +27,7 @@ final class DataService : ObservableObject {
             objectWillChange.send()
         }
         didSet {
+            print("filtertags triggered")
             reloadEvents()
         }
     }
@@ -40,7 +41,9 @@ final class DataService : ObservableObject {
     }
     
     func reloadEvents() {
-        loading = true
+        self.data = []
+        self.loading = true
+        
         ApiService.loadEventsAsync(region: self.selectedRegion, filters: filterTags) {
             (result) in
             if result != nil {

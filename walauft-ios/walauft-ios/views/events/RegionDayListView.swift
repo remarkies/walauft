@@ -8,15 +8,43 @@
 import SwiftUI
 
 struct RegionDayListView: View {
-    
+    @EnvironmentObject var dataService : DataService
     @Binding var days: [RegionDayModel]
     
     var body: some View {
-        ScrollView {
-            ForEach(days, id: \.events) {
-                day in
-                RegionDayRowView(regionDay: day)
+        
+        if dataService.loading {
+            VStack {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color("Accent1")))
+                        .padding()
                     
+                    Spacer()
+                }
+                Spacer()
+            }
+            
+        } else if days.count > 0 {
+            ScrollView {
+                ForEach(days, id: \.events) {
+                    day in
+                    RegionDayRowView(regionDay: day)
+                        
+                }
+            }
+        } else {
+            VStack {
+                HStack {
+                    Spacer()
+                    
+                    NoEventsFoundView()
+                        .padding()
+                    
+                    Spacer()
+                }
+                Spacer()
             }
         }
     }
