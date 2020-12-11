@@ -53,6 +53,7 @@ struct SearchBarView: View {
                                         self.dataService.filterTags.append(tag)
                                         self.searchText = ""
                                         self.proposedTags = []
+                                        self.hideKeyboard()
                                     }
                                 }, unClicked:{})
                             }
@@ -88,7 +89,13 @@ struct SearchBarView: View {
             .background(Color("Layer3"))
     }
 }
-
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
         SearchBarView()
