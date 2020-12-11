@@ -9,21 +9,18 @@ import SwiftUI
 
 
 struct EventDetailView: View {
-    
-    static let weekDayDateFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EE"
-        return formatter
-    }()
+    @EnvironmentObject var dataService : DataService
 
     static let shortDateFormat: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier:"de")
         formatter.dateFormat = "dd.MM"
         return formatter
     }()
     
     static let eventDateFormat: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier:"de")
         formatter.dateFormat = "dd. MMM"
         return formatter
     }()
@@ -33,7 +30,7 @@ struct EventDetailView: View {
     
     var body: some View {
         HStack (alignment: .top) {
-            DetailHeaderView(title: Text("\(event.date, formatter: Self.weekDayDateFormat)"), focusText: event.start, text: Text("\(event.date, formatter: Self.eventDateFormat)"))
+            DetailHeaderView(title: Text("\(dataService.getSwissWeekname(date: event.date))"), focusText: event.start, text: Text("\(event.date, formatter: Self.eventDateFormat)"))
                 .rotated(Angle.degrees(90))
         
             Divider()

@@ -34,7 +34,7 @@ struct EventRowView: View {
 
                     VStack (alignment: .leading, spacing: 4) {
                         HStack (alignment: .top) {
-                            EventHeaderItemView(text: Text("\(self.event!.date, formatter: Self.weekDayDateFormat)"))
+                            EventHeaderItemView(text: Text("\(self.dataService.getSwissWeekname(date: self.event!.date))"))
                                 .frame(width: 40)
 
                             EventHeaderItemView(text: Text(self.event!.location!.name))

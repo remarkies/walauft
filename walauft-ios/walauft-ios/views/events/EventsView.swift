@@ -19,7 +19,7 @@ struct EventsView: View {
 
     static let weekDayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "EE dd."
+        formatter.dateFormat = " dd."
         return formatter
     }()
     init(){
@@ -53,10 +53,9 @@ struct EventsView: View {
                             MapViewRep(selectedDate: $selectedDate, eventsClickable: true).ignoresSafeArea()
 
                             if (self.dataService.data.count > 0) {
-                                let eventDates = self.dataService.data.map{ obj in obj.date}
                                 Picker(selection: $selectedDate, label: Text("")) {
-                                    ForEach(0 ..< min(eventDates.count, 4)) {
-                                        Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                                    ForEach(0 ..< min(self.dataService.datesAvailable.count, 3)) {
+                                        Text("\(self.dataService.getSwissWeekname(date: self.dataService.datesAvailable[$0]))\(self.dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
                                     }
                                 }
                                 .textCase(.uppercase)

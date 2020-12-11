@@ -10,6 +10,7 @@ import SwiftUI
 struct RegionDayRowView: View {
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "de_DE")
         formatter.dateFormat = "dd. MMMM"
         return formatter
     }()

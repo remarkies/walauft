@@ -85,4 +85,12 @@ final class DataService : ObservableObject {
         
         completion(foundTags)
     }
+    func getSwissWeekname(date: Date)->String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EE"
+        let weekDay = formatter.string(from: date)
+        let weekdays = [("Mon","Men"), ("Tue", "Zis"), ("Wed", "Mit"), ("Thu", "Dun"), ("Fri", "Fri"), ("Sat", "Sam"), ("Sun", "Sun")]
+        let found = weekdays.filter{ (en,swi) in en == weekDay}
+        return found[0].1
+    }
 }
