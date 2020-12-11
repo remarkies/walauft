@@ -61,7 +61,7 @@ struct EventsView: View {
             }.padding(.top, 16)
         }
         .onAppear() {
-            self.dataService.filterTags = []
+            self.dataService.reloadEvents()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle(self.selectedRegion.name)

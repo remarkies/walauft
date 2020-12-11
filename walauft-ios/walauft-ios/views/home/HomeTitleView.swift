@@ -29,7 +29,9 @@ struct HomeTitleView: View {
                     .textCase(.uppercase)
                     .font(.system(size: self.fontSize))
                     .foregroundColor(Color("Layer2"))
-                    .rotated()
+                    .rotationEffect(.degrees(-90), anchor: .bottomTrailing)
+                    .padding(.top, -72)
+                    //.rotated()
             }
             .padding(.top, 10)
         }

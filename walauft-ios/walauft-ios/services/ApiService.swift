@@ -9,6 +9,7 @@ import Foundation
 
 final class ApiService: ObservableObject {
     
+    static let useLocalEnvironement = false
     static let apiPath: String = "https://api.walauft.ch/"
     static let devApiPath: String = "http://localhost:3000/"
     static let eventsPath: String = "events/"
@@ -22,7 +23,11 @@ final class ApiService: ObservableObject {
         
         let filter = FilterModel(regionId: region.id, tags: filters)
         
-        let url = URL(string: "\(apiPath)\(eventsPath)")!
+        var url = URL(string: "\(apiPath)\(eventsPath)")!
+        if useLocalEnvironement {
+            url = URL(string: "\(devApiPath)\(eventsPath)")!
+        }
+        
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -53,14 +58,16 @@ final class ApiService: ObservableObject {
             }
             else if let data = data {
                 DispatchQueue.main.async {
+                    var model:[RegionDayModel] = []
                     do {
                         //let model2 = try JSONDecoder().decode(RegionDayModel.self, from: data)
-                        let model = try JSONDecoder().decode([RegionDayModel].self, from: data)
-                        completion(model)
+                        model = try JSONDecoder().decode([RegionDayModel].self, from: data)
+                        
                     } catch let error {
                         print("\(data)")
                         print("JSONDecoder failed, \(error)")
                     }
+                    completion(model)
                 }
             }
         }).resume()
@@ -69,8 +76,11 @@ final class ApiService: ObservableObject {
         
         let model = SearchModel(regionId: selectedRegion.id, search: search)
         
-        let url = URL(string: "\(apiPath)\(tagsPath)")!
+        var url = URL(string: "\(apiPath)\(tagsPath)")!
         
+        if useLocalEnvironement {
+            url = URL(string: "\(devApiPath)\(tagsPath)")!
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -98,14 +108,16 @@ final class ApiService: ObservableObject {
                 return
             }
             else if let data = data {
+                var model:[TagModel] = []
+                do {
+                    model = try JSONDecoder().decode([TagModel].self, from: data)
+                    
+                } catch let error {
+                    print("\(data)")
+                    print("JSONDecoder failed, \(error)")
+                }
                 DispatchQueue.main.async {
-                    do {
-                        let model = try JSONDecoder().decode([TagModel].self, from: data)
-                        completion(model)
-                    } catch let error {
-                        print("\(data)")
-                        print("JSONDecoder failed, \(error)")
-                    }
+                    completion(model)
                 }
             }
         }).resume()

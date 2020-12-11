@@ -19,7 +19,6 @@ struct HomeView: View {
         .padding(.vertical)
         .background(Color("Background"))
         .ignoresSafeArea()
-        .statusBar(hidden: true)
         
     }
 }

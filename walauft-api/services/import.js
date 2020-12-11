@@ -156,9 +156,12 @@ function getTagsForActs(acts) {
         acts = acts.replace("\n", ",");
         acts = acts.replace("+", ",");
         acts = acts.replace("Live: ", "");
+        acts = acts.replace("DJs", "");
+        acts = acts.replace("DJ", "");
+        acts = acts.replace("Div. DJs", "Irgendöper");
+        acts = acts.replace("Div.Djs", "Irgendöper");
+        acts = acts.replace("Diverse", "Irgendöper");
         let array = acts.split(",").map(o => o.trim());
-        //array = array.map(o => o.replace("Live: ", ""));
-        let newArray = [];
         array.forEach(o => {
             foundTags.push({
                 type: "act",
