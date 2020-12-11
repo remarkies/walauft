@@ -32,10 +32,13 @@ struct EventsView: View {
             VStack (spacing: 0) {
                 SearchBarView()
                 if (isListview) {
+                    
                     Group{
-                        VStack (spacing: 0) {
-                            RegionDayListView(days: self.$dataService.data)
+                        ZStack{if(dataService.loading){LoadingView().ignoresSafeArea()}
                             
+                            VStack (spacing: 0) {
+                                RegionDayListView(days: self.$dataService.data)
+                            }
                         }
                         .background(Color("Background"))
                         .ignoresSafeArea()

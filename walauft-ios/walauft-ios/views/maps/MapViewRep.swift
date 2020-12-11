@@ -27,7 +27,9 @@ struct MapViewRep: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
-        
+        mapView.overrideUserInterfaceStyle = .dark
+        mapView.showsUserLocation = true
+        mapView.delegate = context.coordinator
         let nameOfJSON = String(selectedRegion.id)  
         guard let overlayFileURLString = Bundle.main.path(forResource: nameOfJSON, ofType: "json") else {
             print("could not load JSON")
@@ -44,9 +46,7 @@ struct MapViewRep: UIViewRepresentable {
             mapView.addAnnotations(annotationsOfLocations)
             mapView.showAnnotations(annotationsOfLocations, animated: true)
         }
-        mapView.overrideUserInterfaceStyle = .dark
-        mapView.showsUserLocation = true
-        mapView.delegate = context.coordinator
+
         
         return mapView
     }
@@ -63,7 +63,7 @@ struct MapViewRep: UIViewRepresentable {
         }
         
     }
-    
+
     private func getAnnotationsFromEvents(events: [EventModel])->[MKAnnotation]{
         let locations: [LocationModel]
         //        let eventsWithNoCoordinates = events.filter{ event in event.location!.latitude == nil}
