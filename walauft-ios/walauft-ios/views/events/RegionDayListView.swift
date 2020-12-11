@@ -13,7 +13,7 @@ struct RegionDayListView: View {
     
     var body: some View {
         
-        if !dataService.loading {
+        if dataService.loading {
             VStack {
                 HStack {
                     Spacer()
