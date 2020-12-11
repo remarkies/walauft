@@ -58,14 +58,16 @@ final class ApiService: ObservableObject {
             }
             else if let data = data {
                 DispatchQueue.main.async {
+                    var model:[RegionDayModel] = []
                     do {
                         //let model2 = try JSONDecoder().decode(RegionDayModel.self, from: data)
-                        let model = try JSONDecoder().decode([RegionDayModel].self, from: data)
-                        completion(model)
+                        model = try JSONDecoder().decode([RegionDayModel].self, from: data)
+                        
                     } catch let error {
                         print("\(data)")
                         print("JSONDecoder failed, \(error)")
                     }
+                    completion(model)
                 }
             }
         }).resume()
@@ -106,14 +108,16 @@ final class ApiService: ObservableObject {
                 return
             }
             else if let data = data {
+                var model:[TagModel] = []
+                do {
+                    model = try JSONDecoder().decode([TagModel].self, from: data)
+                    
+                } catch let error {
+                    print("\(data)")
+                    print("JSONDecoder failed, \(error)")
+                }
                 DispatchQueue.main.async {
-                    do {
-                        let model = try JSONDecoder().decode([TagModel].self, from: data)
-                        completion(model)
-                    } catch let error {
-                        print("\(data)")
-                        print("JSONDecoder failed, \(error)")
-                    }
+                    completion(model)
                 }
             }
         }).resume()

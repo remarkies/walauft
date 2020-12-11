@@ -26,14 +26,7 @@ final class DataService : ObservableObject {
             objectWillChange.send()
         }
         didSet {
-            loading = true
-            ApiService.loadEventsAsync(region: self.selectedRegion, filters: filterTags) {
-                (result) in
-                if result != nil {
-                    self.data = result!
-                    self.loading = false
-                }
-            }
+            reloadEvents()
         }
     }
     
@@ -42,6 +35,17 @@ final class DataService : ObservableObject {
         self.data = []
         self.filterTags = []
         self.loading = false
+    }
+    
+    func reloadEvents() {
+        loading = true
+        ApiService.loadEventsAsync(region: self.selectedRegion, filters: filterTags) {
+            (result) in
+            if result != nil {
+                self.data = result!
+                self.loading = false
+            }
+        }
     }
     
     func isFilterTag(tag: TagModel) -> Bool {
