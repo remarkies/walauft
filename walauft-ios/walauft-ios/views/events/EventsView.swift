@@ -34,11 +34,12 @@ struct EventsView: View {
                 if (isListview) {
                     
                     Group{
-                        ZStack{if(dataService.loading){LoadingView().ignoresSafeArea()}
+                        ZStack{
                             
                             VStack (spacing: 0) {
                                 RegionDayListView(days: self.$dataService.data)
                             }
+                           // if(dataService.loading){LoadingView().ignoresSafeArea().transition(.opacity)}
                         }
                         .background(Color("Background"))
                         .ignoresSafeArea()
@@ -47,11 +48,11 @@ struct EventsView: View {
                 }
                 if (!isListview){
                     Group{
-                        if (self.dataService.data.count > 0) {
-                            let eventDates = self.dataService.data.map{ obj in obj.date}
+                        if (self.dataService.datesAvailable.count > 0) {
+                            
                             Picker(selection: $selectedDate, label: Text("")) {
-                                ForEach(0 ..< min(eventDates.count, 4)) {
-                                    Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                                ForEach(0 ..< min((dataService.datesAvailable.count), 3)) {
+                                    return Text("\(dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
                                 }
                             }.pickerStyle(SegmentedPickerStyle())
                         }

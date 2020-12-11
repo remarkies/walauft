@@ -65,21 +65,22 @@ struct MapViewRep: UIViewRepresentable {
     }
 
     private func getAnnotationsFromEvents(events: [EventModel])->[MKAnnotation]{
-        let locations: [LocationModel]
+        let locations: [(LocationModel, String)]
         //        let eventsWithNoCoordinates = events.filter{ event in event.location!.latitude == nil}
         if event == nil{
             let eventsWithALocation = events.filter{ event in event.location!.latitude != nil}
-            locations = eventsWithALocation.map { event in event.location! }
+            locations = eventsWithALocation.map { event in (event.location!, event.name) }
         }
         else{
-            locations = [event!.location!]
+            locations = [(event!.location!, event!.name)]
         }
         let annotationsOfLocations =  locations.map {
-            location -> MKPointAnnotation in
+            (location, eventName)-> MKPointAnnotation in
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
             annotation.title = location.name
+            //dont need this: annotation.subtitle = eventName
             return annotation
         }
         

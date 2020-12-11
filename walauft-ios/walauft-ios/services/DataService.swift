@@ -14,9 +14,10 @@ final class DataService : ObservableObject {
     var selectedRegion: RegionModel
     
     @Published var loading: Bool
-    
+    @Published var datesAvailable: [Date]
     @Published var data: [RegionDayModel] {
         willSet {
+            datesAvailable = self.data.map{event in event.date}
             objectWillChange.send()
         }
     }
@@ -35,6 +36,7 @@ final class DataService : ObservableObject {
         self.data = []
         self.filterTags = []
         self.loading = false
+        self.datesAvailable = []
     }
     
     func reloadEvents() {
@@ -43,6 +45,7 @@ final class DataService : ObservableObject {
             (result) in
             if result != nil {
                 self.data = result!
+                self.datesAvailable = self.data.map{event in event.date}
                 self.loading = false
             }
         }

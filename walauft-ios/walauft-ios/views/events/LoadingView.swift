@@ -33,7 +33,7 @@ struct LoadingView: View {
                     .animation(Animation.easeInOut(duration: animationDuration).delay(0.3).repeatForever(autoreverses: true))
                     .offset(y: CGFloat( self.animatingVal))
             }.onAppear{self.animatingVal = 20}
-    }
+        }.padding(10).background(Color.black).opacity(0.8)
     }
 }
 
