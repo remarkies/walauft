@@ -39,21 +39,31 @@ struct EventsView: View {
                         }
                         .background(Color("Background"))
                         .ignoresSafeArea()
-                    }.transition(.move(edge: .leading))
+                    }
+                    .transition(.move(edge: .leading))
                     
                 }
                 if (!isListview){
                     Group{
-                        if (self.dataService.data.count > 0) {
-                            let eventDates = self.dataService.data.map{ obj in obj.date}
-                            Picker(selection: $selectedDate, label: Text("")) {
-                                ForEach(0 ..< min(eventDates.count, 4)) {
-                                    Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                        ZStack (alignment: .topLeading) {
+                            MapViewRep(selectedDate: $selectedDate, eventsClickable: true).ignoresSafeArea()
+                            
+                            if (self.dataService.data.count > 0) {
+                                let eventDates = self.dataService.data.map{ obj in obj.date}
+                                Picker(selection: $selectedDate, label: Text("")) {
+                                    ForEach(0 ..< min(eventDates.count, 4)) {
+                                        Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                                    }
                                 }
-                            }.pickerStyle(SegmentedPickerStyle())
+                                .textCase(.uppercase)
+                                .background(Color("Layer2"))
+                                .cornerRadius(8)
+                                .pickerStyle(SegmentedPickerStyle())
+                                .padding(24)
+                            }
                         }
-                        MapViewRep(selectedDate: $selectedDate, eventsClickable: true).ignoresSafeArea()
-                    }.transition(.move(edge: .trailing))
+                    }
+                    .transition(.move(edge: .trailing))
                 }
             }.padding(.top, 16)
         }
