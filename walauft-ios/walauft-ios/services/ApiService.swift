@@ -9,6 +9,7 @@ import Foundation
 
 final class ApiService: ObservableObject {
     
+    static let useLocalEnvironement = false
     static let apiPath: String = "https://api.walauft.ch/"
     static let devApiPath: String = "http://localhost:3000/"
     static let eventsPath: String = "events/"
@@ -22,7 +23,11 @@ final class ApiService: ObservableObject {
         
         let filter = FilterModel(regionId: region.id, tags: filters)
         
-        let url = URL(string: "\(apiPath)\(eventsPath)")!
+        var url = URL(string: "\(apiPath)\(eventsPath)")!
+        if useLocalEnvironement {
+            url = URL(string: "\(devApiPath)\(eventsPath)")!
+        }
+        
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -69,8 +74,11 @@ final class ApiService: ObservableObject {
         
         let model = SearchModel(regionId: selectedRegion.id, search: search)
         
-        let url = URL(string: "\(apiPath)\(tagsPath)")!
+        var url = URL(string: "\(apiPath)\(tagsPath)")!
         
+        if useLocalEnvironement {
+            url = URL(string: "\(devApiPath)\(tagsPath)")!
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         

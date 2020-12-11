@@ -68,9 +68,9 @@ router.post('/',function(request,response){
     query.push({ $sort : { date: 1 } });
 
     if(param.tags !== undefined && param.tags.length > 0) {
-        query.push({ $limit: 14 })
+        query.push({ $limit: 7 })
     } else {
-        query.push({ $limit: 5 })
+        query.push({ $limit: 3 })
     }
 
 
