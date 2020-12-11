@@ -22,7 +22,7 @@ final class ApiService: ObservableObject {
         
         let filter = FilterModel(regionId: region.id, tags: filters)
         
-        let url = URL(string: "\(apiPath)\(eventsPath)")!
+        let url = URL(string: "\(devApiPath)\(eventsPath)")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -49,6 +49,7 @@ final class ApiService: ObservableObject {
                     completion(nil)
                 }
                 return
+                
             }
             else if let data = data {
                 DispatchQueue.main.async {
@@ -68,7 +69,7 @@ final class ApiService: ObservableObject {
         
         let model = SearchModel(regionId: selectedRegion.id, search: search)
         
-        let url = URL(string: "\(apiPath)\(tagsPath)")!
+        let url = URL(string: "\(devApiPath)\(tagsPath)")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

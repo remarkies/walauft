@@ -153,8 +153,15 @@ function getTagsForActs(acts) {
     let foundTags = [];
     if(acts !== null) {
         let array = acts.split(",").map(o => o.trim());
+        //array = array.map(o => o.replace("Live: ", ""));
+        let newArray = [];
         array = array.map(o => o.replace("Live: ", ""));
-        array.forEach(o => {
+        array.forEach(item => {
+            newArray.push(item.split("\r\n").map(o => o.trim()));
+            newArray.push(item.split("+").map(o => o.trim()));
+        });
+
+        newArray.forEach(o => {
             foundTags.push({
                 type: "act",
                 text: o

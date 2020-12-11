@@ -36,6 +36,7 @@ struct ContentView: View {
         // object for some reason and you have to leave it til the end
         UINavigationBar.appearance().tintColor = .white
         
+        
     }
     
     @State var selectedRegion: RegionModel?

@@ -13,6 +13,8 @@ final class DataService : ObservableObject {
     
     var selectedRegion: RegionModel
     
+    @Published var loading: Bool
+    
     @Published var data: [RegionDayModel] {
         willSet {
             objectWillChange.send()
@@ -24,10 +26,12 @@ final class DataService : ObservableObject {
             objectWillChange.send()
         }
         didSet {
+            loading = true
             ApiService.loadEventsAsync(region: self.selectedRegion, filters: filterTags) {
                 (result) in
                 if result != nil {
                     self.data = result!
+                    self.loading = false
                 }
             }
         }
@@ -37,6 +41,7 @@ final class DataService : ObservableObject {
         self.selectedRegion = selectedRegion
         self.data = []
         self.filterTags = []
+        self.loading = false
     }
     
     func isFilterTag(tag: TagModel) -> Bool {

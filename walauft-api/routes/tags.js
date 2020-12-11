@@ -31,7 +31,10 @@ router.post('/',function(request,response){
             const searcher = new fuzzy(docs, ['tags.text'], {
                 caseSensitive: false,
             });
+
             const results = searcher.search(param.search);
+            console.log(param.search)
+            console.log(results)
             response.json(results.map((result => {
                 return {
                     date: result.tags.date,
