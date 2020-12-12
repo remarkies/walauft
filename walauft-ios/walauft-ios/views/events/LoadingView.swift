@@ -13,26 +13,29 @@ struct LoadingView: View {
     let animationDuration = 0.5
     var body: some View {
         VStack{
-            Text("WArt schnell").foregroundColor(.white)
+            Text("WArt schnell")
+                .bold()
+                .foregroundColor(Color("Layer2"))
             HStack{
                 Circle()
-                    .fill(Color.white)
+                    .fill(Color("Accent1"))
                     .frame(width: self.cricleHeight, height: self.cricleHeight)
                     .opacity(0.9)
                     .animation(Animation.easeInOut(duration: animationDuration).repeatForever(autoreverses: true))
                     .offset(y: CGFloat( self.animatingVal))
                 Circle()
-                    .fill(Color.white)
+                    .fill(Color("Accent2"))
                     .frame(width: self.cricleHeight, height: self.cricleHeight)
                     .opacity(0.9)
                     .animation(Animation.easeInOut(duration: animationDuration).delay(0.2).repeatForever(autoreverses: true))
                     .offset(y: CGFloat( self.animatingVal))
                 Circle()
-                    .fill(Color.white)
+                    .fill(Color("Accent3"))
                     .frame(width: self.cricleHeight, height: self.cricleHeight)
                     .animation(Animation.easeInOut(duration: animationDuration).delay(0.3).repeatForever(autoreverses: true))
                     .offset(y: CGFloat( self.animatingVal))
-            }.onAppear{self.animatingVal = 20}
+            }
+            .onAppear{self.animatingVal = 20}
         }
     }
 }
