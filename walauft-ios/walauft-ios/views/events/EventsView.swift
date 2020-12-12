@@ -10,13 +10,13 @@ import SwiftUI
 struct EventsView: View {
     @EnvironmentObject var dataService : DataService
     @EnvironmentObject var selectedRegion: RegionModel
-
+    
     @State var searchText: String = ""
     @State var isListview : Bool = true
     @State var selectedDate = 0
     @State var emptyEvents: [EventModel] = []
-
-
+    
+    
     static let weekDayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = " dd."
@@ -32,10 +32,10 @@ struct EventsView: View {
             VStack (spacing: 0) {
                 SearchBarView()
                 if (isListview) {
-
+                    
                     Group{
                         ZStack{
-
+                            
                             VStack (spacing: 0) {
                                 RegionDayListView(days: self.$dataService.data)
                             }
@@ -44,17 +44,17 @@ struct EventsView: View {
                         .ignoresSafeArea()
                     }
                     .transition(.move(edge: .leading))
-
+                    
                 }
                 if (!isListview){
                     Group{
                         ZStack (alignment: .topLeading) {
                             MapViewRep(selectedDate: $selectedDate, eventsClickable: true).ignoresSafeArea()
-
+                            
                             if (self.dataService.data.count > 0) {
                                 Picker(selection: $selectedDate, label: Text("")) {
                                     ForEach(0 ..< min(self.dataService.datesAvailable.count, 3)) {
-                                        Text("\(self.dataService.getSwissWeekname(date: self.dataService.datesAvailable[$0]))\(self.dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                                        Text("\(SwissGermanDateFormatter.getSwissWeekname(date: self.dataService.datesAvailable[$0], short: true))\(self.dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
                                     }
                                 }
                                 .textCase(.uppercase)
@@ -77,24 +77,24 @@ struct EventsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle(self.selectedRegion.name)
         .navigationBarItems(trailing:
+                                
                                 HStack(alignment: .center) {
+                                    
                                     CustomIconButton(icon: "list.bullet", background: isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
                                         withAnimation(.easeInOut(duration: 0.3)){
                                             isListview = true
-
                                         }
                                     }).animation(.easeIn)
                                     CustomIconButton(icon: "map", background: !isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
                                         withAnimation(.easeInOut(duration: 0.3)){
                                             isListview = false
-
                                         }
                                     }).animation(.easeIn)
                                 }
         )
-
+        
     }
-
+    
 }
 
 struct Events_Previews: PreviewProvider {

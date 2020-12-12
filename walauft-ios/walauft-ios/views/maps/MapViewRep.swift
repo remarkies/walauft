@@ -54,7 +54,7 @@ struct MapViewRep: UIViewRepresentable {
     
     func updateUIView(_ mapView: MKMapView, context: Context) {
         mapView.removeAnnotations(mapView.annotations)
-        if (!dataService.data.isEmpty){
+        if (!dataService.data.isEmpty && dataService.data.indices.contains(selectedDate)){
             let annotationsOfEvents = getAnnotationsFromEvents(events: dataService.data[selectedDate].events)
             mapView.addAnnotations(annotationsOfEvents.filter{annotation in
                 !(annotation is MKUserLocation)

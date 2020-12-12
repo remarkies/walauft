@@ -12,7 +12,7 @@ struct HomeView: View {
     var body: some View {
         VStack (alignment: .leading) {
             HomeTitleView(fontSize: 60)
-                .padding(.top, 20)
+              .padding(.top, 10)
             Spacer()
             RegionListView()
         }
