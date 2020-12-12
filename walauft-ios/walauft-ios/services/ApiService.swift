@@ -28,7 +28,6 @@ final class ApiService: ObservableObject {
             url = URL(string: "\(devApiPath)\(eventsPath)")!
         }
         
-        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -57,21 +56,22 @@ final class ApiService: ObservableObject {
                 
             }
             else if let data = data {
+                var model:[RegionDayModel] = []
+                do {
+                    model = try JSONDecoder().decode([RegionDayModel].self, from: data)
+                    
+                } catch let error {
+                    print("\(data)")
+                    print("JSONDecoder failed, \(error)")
+                }
+                
                 DispatchQueue.main.async {
-                    var model:[RegionDayModel] = []
-                    do {
-                        //let model2 = try JSONDecoder().decode(RegionDayModel.self, from: data)
-                        model = try JSONDecoder().decode([RegionDayModel].self, from: data)
-                        
-                    } catch let error {
-                        print("\(data)")
-                        print("JSONDecoder failed, \(error)")
-                    }
                     completion(model)
                 }
             }
         }).resume()
     }
+    
     static func loadProposedTagsAsync(selectedRegion: RegionModel, search: String, completion: @escaping ([TagModel]?) -> Void) {
         
         let model = SearchModel(regionId: selectedRegion.id, search: search)
@@ -81,6 +81,7 @@ final class ApiService: ObservableObject {
         if useLocalEnvironement {
             url = URL(string: "\(devApiPath)\(tagsPath)")!
         }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
