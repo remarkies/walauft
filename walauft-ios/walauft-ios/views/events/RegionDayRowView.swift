@@ -34,6 +34,7 @@ struct RegionDayRowView: View {
                 
                 ForEach(regionDay!.events, id: \.tags) {
                     event in
+                    
                     EventRowView(event: event)
                 }
             }

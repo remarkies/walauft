@@ -29,7 +29,8 @@ struct RegionListView: View {
                 NavigationLink(destination:
                                 EventsView()
                                 .environmentObject(DataService(selectedRegion: region))
-                                .environmentObject(region)) {
+                                .environmentObject(region))
+                {
                     RegionListItem(region: region)
                 }
             }

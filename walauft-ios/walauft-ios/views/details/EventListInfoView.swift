@@ -15,7 +15,7 @@ struct EventListInfoView: View {
             Text("\(title)")
                 .bold()
                 .font(.system(size: 12))
-                .foregroundColor(Color("Foreground"))
+                .foregroundColor(Color("Layer2"))
             ForEach(texts, id: \.self) {
                 text in
             

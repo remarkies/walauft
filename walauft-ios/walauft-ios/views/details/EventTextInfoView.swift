@@ -9,15 +9,15 @@ import SwiftUI
 
 struct EventTextInfoView: View {
     var title: String
-    var text: String
+    var text: Text
     var body: some View {
-        VStack (alignment: .leading) {
+        VStack (alignment: .leading, spacing: 2) {
             Text("\(title)")
                 .bold()
                 .font(.system(size: 12))
-                .foregroundColor(Color("Foreground"))
-                .padding(.bottom, 1)
-            Text("\(text)")
+                .foregroundColor(Color("Layer2"))
+            
+            text
                 .font(.system(size: 16))
                 .foregroundColor(Color("Foreground"))
                 
@@ -28,6 +28,6 @@ struct EventTextInfoView: View {
 
 struct EventTextInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        EventTextInfoView(title: "Event", text: "The Professor & his One Man Dirty Rhythm and Blues Explosion!")
+        EventTextInfoView(title: "Event", text: Text("The Professor & his One Man Dirty Rhythm and Blues Explosion!"))
     }
 }

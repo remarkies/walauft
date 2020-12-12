@@ -32,6 +32,7 @@
 		A1BBC82B257E746900061E67 /* CustomIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC82A257E746900061E67 /* CustomIconButton.swift */; };
 		A1BBC830257EDC2500061E67 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC82F257EDC2500061E67 /* FilterModel.swift */; };
 		A1C7098F257E601C008D7123 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C7098E257E601C008D7123 /* CustomButton.swift */; };
+		A1CE908A2584312A00A524A6 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE90892584312A00A524A6 /* EventInfoView.swift */; };
 		A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D979FD257BF97400468F0C /* EventTextInfoView.swift */; };
 		A1E2C5EC255462FD00E88FDD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */; };
 		A1E2C5F32554971E00E88FDD /* CustomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5F22554971E00E88FDD /* CustomNavigationView.swift */; };
@@ -41,9 +42,6 @@
 		A1F075AF257D6617009BCA73 /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */; };
 		A1F075B2257D69B1009BCA73 /* EventDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075B1257D69B1009BCA73 /* EventDetailContentView.swift */; };
 		A1F075BB257D6A85009BCA73 /* EventTagsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075BA257D6A85009BCA73 /* EventTagsInfoView.swift */; };
-		A1F075BE257D6D0E009BCA73 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075BD257D6D0E009BCA73 /* EventDetailView.swift */; };
-		A1F075C2257D79A7009BCA73 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075C1257D79A7009BCA73 /* LocationDetailView.swift */; };
-		A1F075C6257D7AA9009BCA73 /* LocationDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075C5257D7AA9009BCA73 /* LocationDetailContentView.swift */; };
 		A1F075C9257D8D1B009BCA73 /* RotatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075C8257D8D1B009BCA73 /* RotatedView.swift */; };
 		A1FA3F552551C4DC00D1F84A /* walauft_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FA3F542551C4DC00D1F84A /* walauft_iosApp.swift */; };
 		A1FA3F572551C4DC00D1F84A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FA3F562551C4DC00D1F84A /* ContentView.swift */; };
@@ -89,6 +87,7 @@
 		A1BBC82A257E746900061E67 /* CustomIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIconButton.swift; sourceTree = "<group>"; };
 		A1BBC82F257EDC2500061E67 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		A1C7098E257E601C008D7123 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		A1CE90892584312A00A524A6 /* EventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
 		A1D979FD257BF97400468F0C /* EventTextInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTextInfoView.swift; sourceTree = "<group>"; };
 		A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A1E2C5F22554971E00E88FDD /* CustomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationView.swift; sourceTree = "<group>"; };
@@ -98,9 +97,6 @@
 		A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
 		A1F075B1257D69B1009BCA73 /* EventDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailContentView.swift; sourceTree = "<group>"; };
 		A1F075BA257D6A85009BCA73 /* EventTagsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTagsInfoView.swift; sourceTree = "<group>"; };
-		A1F075BD257D6D0E009BCA73 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
-		A1F075C1257D79A7009BCA73 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
-		A1F075C5257D7AA9009BCA73 /* LocationDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailContentView.swift; sourceTree = "<group>"; };
 		A1F075C8257D8D1B009BCA73 /* RotatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatedView.swift; sourceTree = "<group>"; };
 		A1FA3F512551C4DC00D1F84A /* walauft-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "walauft-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FA3F542551C4DC00D1F84A /* walauft_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walauft_iosApp.swift; sourceTree = "<group>"; };
@@ -190,13 +186,11 @@
 			isa = PBXGroup;
 			children = (
 				A1321A282552DD3E000016B8 /* DetailView.swift */,
-				A1F075B1257D69B1009BCA73 /* EventDetailContentView.swift */,
 				A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */,
-				A1F075BD257D6D0E009BCA73 /* EventDetailView.swift */,
+				A1F075B1257D69B1009BCA73 /* EventDetailContentView.swift */,
+				A1CE90892584312A00A524A6 /* EventInfoView.swift */,
 				A1F075BA257D6A85009BCA73 /* EventTagsInfoView.swift */,
 				A1D979FD257BF97400468F0C /* EventTextInfoView.swift */,
-				A1F075C1257D79A7009BCA73 /* LocationDetailView.swift */,
-				A1F075C5257D7AA9009BCA73 /* LocationDetailContentView.swift */,
 				A1BBC827257E706600061E67 /* EventListInfoView.swift */,
 			);
 			path = details;
@@ -436,8 +430,6 @@
 				A1321A1C2552C0DC000016B8 /* ApiService.swift in Sources */,
 				A11D5169257051F90054E9CF /* EventTagListView.swift in Sources */,
 				E7CAC739258267C500E5400D /* LocationManager.swift in Sources */,
-				A1F075C2257D79A7009BCA73 /* LocationDetailView.swift in Sources */,
-				A1F075C6257D7AA9009BCA73 /* LocationDetailContentView.swift in Sources */,
 				A15C6D28257FB7F700E57D6B /* WrappedTags.swift in Sources */,
 				A1E2C5F92554A55E00E88FDD /* DataService.swift in Sources */,
 				A1FA3F662551C57C00D1F84A /* RegionModel.swift in Sources */,
@@ -462,7 +454,6 @@
 				A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */,
 				A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */,
 				A146C850256EAE34003C2F15 /* HomeTitleView.swift in Sources */,
-				A1F075BE257D6D0E009BCA73 /* EventDetailView.swift in Sources */,
 				A1E4928D25534BBF002F07BE /* TagModel.swift in Sources */,
 				A1FA3F552551C4DC00D1F84A /* walauft_iosApp.swift in Sources */,
 				A1321A202552C342000016B8 /* EventModel.swift in Sources */,
@@ -470,6 +461,7 @@
 				A1F075BB257D6A85009BCA73 /* EventTagsInfoView.swift in Sources */,
 				A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */,
 				A1E4928625534459002F07BE /* TagView.swift in Sources */,
+				A1CE908A2584312A00A524A6 /* EventInfoView.swift in Sources */,
 				A1BBC830257EDC2500061E67 /* FilterModel.swift in Sources */,
 				A1BBC825257E6CE600061E67 /* MapService.swift in Sources */,
 				A1321A182552BCDD000016B8 /* EventsView.swift in Sources */,

@@ -19,7 +19,7 @@ struct RegionDayListView: View {
                     Spacer()
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color("Accent1")))
-                        .padding()
+                        .padding(.top, 24)
                     
                     Spacer()
                 }
@@ -29,9 +29,8 @@ struct RegionDayListView: View {
         } else if days.count > 0 {
             ScrollView {
                 ForEach(days, id: \.events) {
-                    day in
+                day in
                     RegionDayRowView(regionDay: day)
-                        
                 }
             }
         } else {

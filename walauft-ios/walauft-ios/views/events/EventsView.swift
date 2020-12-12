@@ -68,7 +68,9 @@ struct EventsView: View {
             }.padding(.top, 16)
         }
         .onAppear() {
-            self.dataService.reloadEvents()
+            if self.dataService.data.count == 0 {
+                self.dataService.reloadEvents()
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle(self.selectedRegion.name)

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     init() {
        
         // this is not the same as manipulating the proxy directly

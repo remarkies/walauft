@@ -23,6 +23,7 @@ struct MapViewRep: UIViewRepresentable {
         self._selectedDate = selectedDate ?? Binding.constant(0)
         self.event = event
         self.eventsClickable = eventsClickable
+
     }
     
     func makeUIView(context: Context) -> MKMapView {
@@ -78,12 +79,11 @@ struct MapViewRep: UIViewRepresentable {
             location -> MKPointAnnotation in
             
             let annotation = MKPointAnnotation()
+            
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
             annotation.title = location.name
             return annotation
         }
-        
-        
         
         return annotationsOfLocations
     }

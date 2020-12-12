@@ -20,7 +20,8 @@ struct EventTagsInfoView: View {
             Text("\(title)")
                 .bold()
                 .font(.system(size: 12))
-                .foregroundColor(Color("Foreground"))
+                .foregroundColor(Color("Layer2"))
+                .padding(.bottom, -2)
             WrappedTags(tags: tags.filter { tag in return tag.type == tagType })
                 
         }

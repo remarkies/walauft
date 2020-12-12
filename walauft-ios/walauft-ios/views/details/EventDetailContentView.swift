@@ -10,25 +10,36 @@ import SwiftUI
 struct EventDetailContentView: View {
     var event: EventModel
     var body: some View {
-        HStack {
-            VStack (alignment: .leading) {
-                EventTextInfoView(title: "Event", text: event.name)
-                
-                if event.tags.filter { tag in return tag.type == "act" }.count > 0 {
-                    EventTagsInfoView(title: "Acts", tags: event.tags, tagType: "act")
+        VStack (alignment: .leading) {
+            EventInfoView(event: event)
+            
+            EventListInfoView(title: "Adresse", texts: [
+                "\(event.location!.street) \(event.location!.streetno)",
+                "\(event.location!.zipcode), \(event.location!.city)"
+            ])
+            
+            if ((event.location?.latitude) != nil) {
+                VStack {
+                    MapViewRep(event: event, eventsClickable: false)
+                        .frame(height: 350)
+                        .cornerRadius(3)
+                    CustomButton(icon: "map", text: "Open in Maps", accent: Color("Layer2"), action: {
+                        MapService.openMapWithCoordinates(latitude: event.location!.latitude!, longitude: event.location!.longitude!, pinText: event.location!.name)
+                    })
+                 
                 }
-                
-                if event.tags.filter { tag in return tag.type == "style" }.count > 0 {
-                    EventTagsInfoView(title: "Genres", tags: event.tags, tagType: "style")
-                }
-                
-                if event.text.count > 0 {
-                    EventTextInfoView(title: "Beschriebig", text: event.text)
-                }
+            } else {
+
+                CustomButton(icon: "map", text: "Open in Maps", accent: Color("Layer2"), action: {
+                    MapService.searchCoordinates(forAddress: "\(event.location!.street) \(event.location!.streetno), \(event.location!.zipcode), \(event.location!.city)") {
+                        coordinate in
+                        if coordinate != nil {
+                            MapService.openMapWithCoordinates(latitude: coordinate!.latitude, longitude: coordinate!.longitude, pinText: event.location!.name)
+                        }
+                    }
+                })
             }
-            Spacer()
         }
-        .padding(.leading, 10)
     }
 }
 

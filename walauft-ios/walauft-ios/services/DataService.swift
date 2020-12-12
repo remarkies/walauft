@@ -8,25 +8,16 @@
 import Foundation
 import Combine
 
-final class DataService : ObservableObject {
-    let objectWillChange = ObservableObjectPublisher()
+final class DataService: ObservableObject {
     
     var selectedRegion: RegionModel
     
     @Published var loading: Bool
     
-    @Published var data: [RegionDayModel] {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+    @Published var data: [RegionDayModel]
     
     @Published var filterTags: [TagModel] {
-        willSet {
-            objectWillChange.send()
-        }
         didSet {
-            print("filtertags triggered")
             reloadEvents()
         }
     }
@@ -36,12 +27,13 @@ final class DataService : ObservableObject {
         self.data = []
         self.filterTags = []
         self.loading = false
+        print("-----")
+        print("called")
     }
     
     func reloadEvents() {
         self.data = []
         self.loading = true
-        
         ApiService.loadEventsAsync(region: self.selectedRegion, filters: filterTags) {
             (result) in
             if result != nil {
