@@ -57,6 +57,7 @@
 		E7081ACA257D684800392137 /* 3.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AC5257D684800392137 /* 3.json */; };
 		E7081ACB257D684800392137 /* 2.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AC6257D684800392137 /* 2.json */; };
 		E7CAC739258267C500E5400D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAC738258267C500E5400D /* LocationManager.swift */; };
+		E7CAC73F2583D41E00E5400D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAC73E2583D41E00E5400D /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +115,7 @@
 		E7081AC5257D684800392137 /* 3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 3.json; sourceTree = "<group>"; };
 		E7081AC6257D684800392137 /* 2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 2.json; sourceTree = "<group>"; };
 		E7CAC738258267C500E5400D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E7CAC73E2583D41E00E5400D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			children = (
 				A1E4928525534459002F07BE /* TagView.swift */,
 				A1321A172552BCDD000016B8 /* EventsView.swift */,
+				E7CAC73E2583D41E00E5400D /* LoadingView.swift */,
 				A1B2361D2552EF9400774259 /* EventRowView.swift */,
 				A12549CF256F17DF00AB04D4 /* RegionDayListView.swift */,
 				A1B236202552F0B400774259 /* RegionDayRowView.swift */,
@@ -450,6 +453,7 @@
 				A1F075AF257D6617009BCA73 /* DetailHeaderView.swift in Sources */,
 				A1C7098F257E601C008D7123 /* CustomButton.swift in Sources */,
 				A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */,
+				E7CAC73F2583D41E00E5400D /* LoadingView.swift in Sources */,
 				A1BBC82B257E746900061E67 /* CustomIconButton.swift in Sources */,
 				A12549D0256F17DF00AB04D4 /* RegionDayListView.swift in Sources */,
 				A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */,

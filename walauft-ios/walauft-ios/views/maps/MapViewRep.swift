@@ -28,7 +28,9 @@ struct MapViewRep: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)
-        
+        mapView.overrideUserInterfaceStyle = .dark
+        mapView.showsUserLocation = true
+        mapView.delegate = context.coordinator
         let nameOfJSON = String(selectedRegion.id)  
         guard let overlayFileURLString = Bundle.main.path(forResource: nameOfJSON, ofType: "json") else {
             print("could not load JSON")
@@ -45,9 +47,7 @@ struct MapViewRep: UIViewRepresentable {
             mapView.addAnnotations(annotationsOfLocations)
             mapView.showAnnotations(annotationsOfLocations, animated: true)
         }
-        mapView.overrideUserInterfaceStyle = .dark
-        mapView.showsUserLocation = true
-        mapView.delegate = context.coordinator
+
         
         return mapView
     }
@@ -64,24 +64,25 @@ struct MapViewRep: UIViewRepresentable {
         }
         
     }
-    
+
     private func getAnnotationsFromEvents(events: [EventModel])->[MKAnnotation]{
-        let locations: [LocationModel]
+        let locations: [(LocationModel, String)]
         //        let eventsWithNoCoordinates = events.filter{ event in event.location!.latitude == nil}
         if event == nil{
             let eventsWithALocation = events.filter{ event in event.location!.latitude != nil}
-            locations = eventsWithALocation.map { event in event.location! }
+            locations = eventsWithALocation.map { event in (event.location!, event.name) }
         }
         else{
-            locations = [event!.location!]
+            locations = [(event!.location!, event!.name)]
         }
         let annotationsOfLocations =  locations.map {
-            location -> MKPointAnnotation in
+            (location, eventName)-> MKPointAnnotation in
             
             let annotation = MKPointAnnotation()
             
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude!, longitude: location.longitude!)
             annotation.title = location.name
+            //dont need this: annotation.subtitle = eventName
             return annotation
         }
         

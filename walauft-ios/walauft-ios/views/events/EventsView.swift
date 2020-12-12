@@ -10,16 +10,16 @@ import SwiftUI
 struct EventsView: View {
     @EnvironmentObject var dataService : DataService
     @EnvironmentObject var selectedRegion: RegionModel
-    
+
     @State var searchText: String = ""
     @State var isListview : Bool = true
     @State var selectedDate = 0
     @State var emptyEvents: [EventModel] = []
-    
-    
+
+
     static let weekDayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "EE dd."
+        formatter.dateFormat = " dd."
         return formatter
     }()
     init(){
@@ -32,27 +32,30 @@ struct EventsView: View {
             VStack (spacing: 0) {
                 SearchBarView()
                 if (isListview) {
+
                     Group{
-                        VStack (spacing: 0) {
-                            RegionDayListView(days: self.$dataService.data)
-                            
+                        ZStack{
+
+                            VStack (spacing: 0) {
+                                RegionDayListView(days: self.$dataService.data)
+                            }
+                           // if(dataService.loading){LoadingView().ignoresSafeArea().transition(.opacity)}
                         }
                         .background(Color("Background"))
                         .ignoresSafeArea()
                     }
                     .transition(.move(edge: .leading))
-                    
+
                 }
                 if (!isListview){
                     Group{
                         ZStack (alignment: .topLeading) {
                             MapViewRep(selectedDate: $selectedDate, eventsClickable: true).ignoresSafeArea()
-                            
+
                             if (self.dataService.data.count > 0) {
-                                let eventDates = self.dataService.data.map{ obj in obj.date}
                                 Picker(selection: $selectedDate, label: Text("")) {
-                                    ForEach(0 ..< min(eventDates.count, 4)) {
-                                        Text("\(eventDates[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                                    ForEach(0 ..< min(self.dataService.datesAvailable.count, 3)) {
+                                        Text("\(self.dataService.getSwissWeekname(date: self.dataService.datesAvailable[$0]))\(self.dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
                                     }
                                 }
                                 .textCase(.uppercase)
@@ -79,20 +82,20 @@ struct EventsView: View {
                                     CustomIconButton(icon: "list.bullet", background: isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
                                         withAnimation(.easeInOut(duration: 0.3)){
                                             isListview = true
-                                            
+
                                         }
                                     }).animation(.easeIn)
                                     CustomIconButton(icon: "map", background: !isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
                                         withAnimation(.easeInOut(duration: 0.3)){
                                             isListview = false
-                                            
+
                                         }
                                     }).animation(.easeIn)
                                 }
         )
-        
+
     }
-    
+
 }
 
 struct Events_Previews: PreviewProvider {
@@ -100,6 +103,3 @@ struct Events_Previews: PreviewProvider {
         EventsView()
     }
 }
-
-
-
