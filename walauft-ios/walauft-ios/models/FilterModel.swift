@@ -9,5 +9,5 @@ import Foundation
 
 struct FilterModel : Codable {
     var regionId: Int
-    var tags: [ApiTagModel]
+    var tags: [SearchTagModel]
 }

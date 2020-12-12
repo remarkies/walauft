@@ -20,11 +20,13 @@ final class ApiService: ObservableObject {
     }
     
     static func loadEventsAsync(region: RegionModel, filters: [TagModel], completion: @escaping ([RegionDayModel]?) -> Void) {
+
+        var searchTags: [SearchTagModel] = []
+        for filterItem in filters {
+            searchTags.append(SearchTagModel(type: filterItem.type.rawValue, text: filterItem.text))
+        }
         
-        let tags: [ApiTagModel] = []
-        
-        
-        let filter = FilterModel(regionId: region.id, tags: tags)
+        let filter = FilterModel(regionId: region.id, tags: searchTags)
         
         var url = URL(string: "\(apiPath)\(eventsPath)")!
         if useLocalEnvironement {
@@ -42,6 +44,7 @@ final class ApiService: ObservableObject {
         let encoder = JSONEncoder()
         do {
             let jsonData = try encoder.encode(filter)
+            print(String(data: jsonData, encoding: .utf8)!)
             request.httpBody = jsonData
         } catch {
             print(String(describing: error))
@@ -59,38 +62,13 @@ final class ApiService: ObservableObject {
                 
             }
             else if let data = data {
-                var apiModels: [ApiRegionDayModel] = []
+                var regionDays: [RegionDayModel] = []
                 do {
-                    apiModels = try JSONDecoder().decode([ApiRegionDayModel].self, from: data)
+                    regionDays = try JSONDecoder().decode([RegionDayModel].self, from: data)
                 } catch let error {
                     print("\(data)")
                     print("JSONDecoder failed, \(error)")
                 }
-                
-                var regionDays: [RegionDayModel] = []
-                
-                for apiModel in apiModels {
-                    
-                    var events: [EventModel] = []
-                    for apiEvent in apiModel.events {
-                        
-                        var tags: [TagModel] = []
-                        for apiTag in apiEvent.tags {
-                            let tag = TagModel(type: TagOption(rawValue: apiTag.type) ?? .unknown, text: apiTag.text)
-                            tags.append(tag)
-                        }
-                        
-                        let location = LocationModel(name: apiEvent.location!.name, street: apiEvent.location!.street, streetNo: apiEvent.location!.streetno, zipCode: apiEvent.location!.zipcode, city: apiEvent.location!.city, longitude: apiEvent.location!.longitude, latitude: apiEvent.location!.latitude)
-                        
-                        let event = EventModel(name: apiEvent.name, date: apiEvent.date, time: apiEvent.start, tags: tags, minage: apiEvent.minage, price: apiEvent.price, description: apiEvent.text, location: location)
-                        
-                        events.append(event)
-                    }
-                    
-                    let regionDay = RegionDayModel(date: apiModel.date, region: region, events: events)
-                    regionDays.append(regionDay)
-                }
-                
                 
                 DispatchQueue.main.async {
                     completion(regionDays)
@@ -136,18 +114,12 @@ final class ApiService: ObservableObject {
                 return
             }
             else if let data = data {
-                var apiModels: [ApiTagModel] = []
+                var tags: [TagModel] = []
                 do {
-                    apiModels = try JSONDecoder().decode([ApiTagModel].self, from: data)
+                    tags = try JSONDecoder().decode([TagModel].self, from: data)
                 } catch let error {
                     print("\(data)")
                     print("JSONDecoder failed, \(error)")
-                }
-                
-                var tags: [TagModel] = []
-                for apiTag in apiModels {
-                    let tag = TagModel(type: TagOption(rawValue: apiTag.type) ?? .unknown, text: apiTag.text)
-                    tags.append(tag)
                 }
                 
                 DispatchQueue.main.async {

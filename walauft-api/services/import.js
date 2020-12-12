@@ -9,9 +9,8 @@ let url3 = "&limit=100";
 
 var promise = Promise.resolve();
 
-var urlDB = process.env.DB_LINK;
 
-let checkDaysInAdvance = 7;
+let checkDaysInAdvance = 30;
 
 let regionsDic = {
     2 : "Luzern",
@@ -22,42 +21,44 @@ let regionsDic = {
 };
 
 //2 : "Luzern", 3 : "Bern", 4 : "Basel", 5 : "St.Gallen", 6 : "Zürich"
-//let regions = ["2", "3", "4", "5", "6"];
-let regions = [ "6" ];
-let links = [];
+let regions = ["2", "3", "4", "5", "6"];
+//let regions = [ "6" ];
 
-promise
-    .then(function () {
-        return database.connect(urlDB);
-    })
-    .then(importData)
-    .then(searchForMissingLocations)
-    .then(handleEvents)
-    .then(handleTags)
-    .then(function () {
-        database.close();
-    });
+scratchData(regions);
 
-function importData() {
-    for(let i = 0; i < checkDaysInAdvance; i++) {
-        regions.forEach((region) => {
-            let date = moment()
-                .add(-1, 'years')
-                .add(i, 'days').hours(0).minutes(0).seconds(0).milliseconds(0).format("YYYY-MM-DD");
-            let link = url1 + date + url2 + region + url3;
-            links.push({url: link, id: region, date: date});
-        });
+async function scratchData(regions) {
+    await database.connect(process.env.DB_LINK);
+    console.log("INFO: Connected to Db")
+    for (const region of regions) {
+        let links = createLinks(region);
+
+        for (const link of links) {
+            let data = await importData(link);
+            data = await searchForMissingLocations(data);
+            data = await handleEvents(data);
+            data = await handleTags(data);
+        }
     }
 
-    let downloadingPromises = [];
+    await database.close();
+    console.log("INFO: Db connection closed");
+}
 
-    links.forEach((url) => {
-        downloadingPromises.push(
-            downloadEvents(url.url, url.id, url.date)
-        )
-    });
+function createLinks(region) {
+    let links = [];
 
-    return Promise.all(downloadingPromises);
+    for(let i = 0; i < checkDaysInAdvance; i++) {
+        let date = moment()
+            .add(-1, 'years')
+            .add(i, 'days').hours(0).minutes(0).seconds(0).milliseconds(0).format("YYYY-MM-DD");
+        let link = url1 + date + url2 + region + url3;
+        links.push({url: link, id: region, date: date});
+    }
+
+    return links;
+}
+function importData(link) {
+    return Promise.resolve(downloadEvents(link.url, link.id, link.date))
 }
 function downloadEvents(url, region, date) {
     return new Promise(function (resolve, reject) {
@@ -96,7 +97,7 @@ function downloadEvents(url, region, date) {
                 } catch(e) {
                     console.log(url);
                     console.log(e);
-                    resolve(resolve(result));
+                    resolve(result);
                     return;
                 }
 
@@ -118,12 +119,30 @@ function downloadEvents(url, region, date) {
                     });
 
                     foundTags.push(getTagForLocation(eventItem.location.name));
-                    foundTags.push(getTagForDate(eventItem.date));
 
                     eventItem.tags = foundTags;
                 });
-
-                result.events = json_data.items;
+                json_data.items.forEach(item => {
+                    let newEventItem = {
+                        name: item.name,
+                        date: item.date,
+                        time: item.start,
+                        tags: item.tags,
+                        minage: item.minage,
+                        price: item.price,
+                        description: item.text,
+                        location: {
+                            name: item.location.name,
+                            street: item.location.street,
+                            streetNo: item.location.streetno,
+                            zipCode: item.location.zipcode,
+                            city: item.location.city,
+                            longitude: item.location.longitude,
+                            latitude: item.location.latitude
+                        }
+                    };
+                    result.events.push(newEventItem);
+                });
 
                 resolve(result);
             });
@@ -134,18 +153,7 @@ function downloadEvents(url, region, date) {
         });
     });
 }
-function handleEvents(results) {
-    let handlingPromises = [];
-
-    results = results.filter(o => o.events.length > 0);
-
-    results.forEach(doc => {
-        handlingPromises.push(database.upsert('events', {date: doc.date, region: doc.region}, doc));
-    });
-
-    return Promise.all(handlingPromises).then(() => { console.log("Log: Events imported."); return results; })
-}
-function searchForMissingLocations(results) {
+function searchForMissingLocations(result) {
     let promises = [];
     const options = {
         provider: 'google',
@@ -156,88 +164,67 @@ function searchForMissingLocations(results) {
         //formatter: null // 'gpx', 'string', ...
     };
     const geocoder = NodeGeocoder(options);
-    for (const regionDoc of results) {
-        for (const event of regionDoc.events) {
-            if (event.location.longitude === "-1" || event.location.latitude === "-1") {
-                promises.push(new Promise((resolve, reject) => {
-                    let search = event.location.street + " " + event.location.streetno + ", " + event.location.zipcode + " " + event.location.city;
+    for (const event of result.events) {
+        if (event.location.longitude === "-1" || event.location.latitude === "-1") {
+            promises.push(new Promise((resolve, reject) => {
+                let search = event.location.street + " " + event.location.streetno + ", " + event.location.zipcode + " " + event.location.city;
 
-                    geocoder.geocode(search)
-                        .then(loc => {
-                            if (loc.length > 0) {
-                                let foundLocation = loc[0];
-                                event.location.latitude =  "" + foundLocation.latitude + "";
-                                event.location.longitude = "" + foundLocation.longitude + "";
-                            }
-                            resolve();
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            reject(error);
-                        });
-                }));
-            }
+                geocoder.geocode(search)
+                    .then(loc => {
+                        if (loc.length > 0) {
+                            let foundLocation = loc[0];
+                            event.location.latitude =  "" + foundLocation.latitude + "";
+                            event.location.longitude = "" + foundLocation.longitude + "";
+                        }
+                        resolve();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        reject(error);
+                    });
+            }));
         }
     }
 
     return Promise.all(promises).then(() => {
-        console.log("Log: Search for missing locations done.");
-        return results;
+        return result;
     });
 }
-function handleTags(results) {
+async function handleEvents(result) {
+    if (result.events.length > 0) {
+        await database.upsert('events', {date: result.date, region: result.region}, result)
+    }
+    return result;
+}
+async function handleTags(result) {
+    let tagsDoc = {
+        region: result.region,
+        tags: []
+    }
 
-    let handlingPromises = [];
-    let tagsDocs = [];
+    result.events.forEach(event => {
+        let tagsOfEvent = event.tags;
 
-    results.forEach(eventDoc => {
-        let existingTagsDoc = tagsDocs.filter(o => o.region === eventDoc.region);
+        tagsOfEvent.forEach(tagOfEvent => {
+            let existingTag = tagsDoc.tags.filter(o => o.text === tagOfEvent.text && o.type === tagOfEvent.type);
 
-        if (existingTagsDoc.length === 0) {
-            let tagsDoc = {
-                region: eventDoc.region,
-                tags: []
-            }
-            tagsDocs.push(tagsDoc);
-        }
-    });
-    console.log('Basic Tags Docs created!');
+            if (existingTag.length > 0) {
 
-    results.forEach(eventDoc => {
-        let existingTagsDoc = tagsDocs.filter(o => o.region === eventDoc.region);
-
-        eventDoc.events.forEach(event => {
-            let tagsOfEvent = event.tags;
-
-            tagsOfEvent.forEach(tagOfEvent => {
-                let existingTag = existingTagsDoc[0].tags.filter(o => o.text === tagOfEvent.text && o.type === tagOfEvent.type);
-
-                if (existingTag.length > 0) {
-
-                    if (existingTag.date < tagOfEvent.date) {
-                        existingTag.date = tagOfEvent.date;
-                    }
-
-                } else {
-                    existingTagsDoc[0].tags.push({
-                        date: eventDoc.date,
-                        text: tagOfEvent.text,
-                        type: tagOfEvent.type
-                    });
+                if (existingTag.date < tagOfEvent.date) {
+                    existingTag.date = tagOfEvent.date;
                 }
 
-            });
+            } else {
+                tagsDoc.tags.push({
+                    date: result.date,
+                    text: tagOfEvent.text,
+                    type: tagOfEvent.type
+                });
+            }
         });
     });
-    console.log('Tags Docs filled with Tags!');
 
-    tagsDocs.forEach(newDoc => {
-        handlingPromises.push(database.upsert('tags', { region: newDoc.region }, newDoc));
-    });
-
-    return Promise.all(handlingPromises).then(function () {
-        console.log("Log: Tags imported.");
-    });
+    return Promise.resolve(database.upsert('tags', { region: tagsDoc.region }, tagsDoc));
 }
 
 function getTagsForStyle(style) {
@@ -280,12 +267,6 @@ function getTagForLocation(location) {
     return {
         type: "location",
         text: location
-    };
-}
-function getTagForDate(date) {
-    return {
-        type: "date",
-        text: date
     };
 }
 
