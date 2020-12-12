@@ -26,13 +26,11 @@ struct TagView: View {
             }) {
                 HStack {
                     switch self.tag.type {
-                        case "act":
+                    case .act:
                             Image(systemName: "person.2").font(.system(size: 12, weight: .regular))
-                        case "location":
+                    case .location:
                             Image(systemName: "music.house").font(.system(size: 12, weight: .regular))
-                        case "date":
-                            Image(systemName: "calendar").font(.system(size: 12, weight: .regular))
-                        case "style":
+                    case .style:
                             Image(systemName: "music.note").font(.system(size: 12, weight: .regular))
                     default:
                         Image(systemName: "questionmark").font(.system(size: 12, weight: .regular))

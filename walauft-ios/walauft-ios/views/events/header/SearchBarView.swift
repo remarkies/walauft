@@ -71,7 +71,7 @@ struct SearchBarView: View {
                         ForEach(self.dataService.filterTags, id: \.id) {
                             tag in
                             TagView(tag: tag, background:  Color("Layer2"), clicked: {}, unClicked: {
-                                if let index = self.dataService.filterTags.firstIndex(where: { $0 == tag }) {
+                                if let index = self.dataService.filterTags.firstIndex(where: { $0.type == tag.type && $0.text == tag.text }) {
                                     self.dataService.filterTags.remove(at: index)
                                 }
                             })

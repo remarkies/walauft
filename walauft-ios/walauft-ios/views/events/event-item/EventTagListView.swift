@@ -15,14 +15,15 @@ struct EventTagListView: View {
     var body: some View {
         ScrollView (.horizontal){
             HStack {
-                ForEach(self.tags.filter { tag in return tag.type == "style" }, id: \.id) {
+                ForEach(self.tags.filter { tag in return tag.type == .style }) {
                     tag in
                     TagView(tag: tag, background:  Color("Layer1"), clicked: {
-                        if !self.dataService.filterTags.contains(where: { $0 == tag }) {
+                        if !self.dataService.filterTags.contains(where: { $0.type == tag.type && $0.text == tag.text }) {
                             self.dataService.filterTags.append(tag)
                         }
                     }, unClicked: {
-                        if let index = self.dataService.filterTags.firstIndex(where: { $0 == tag }) {
+                        if let index = self.dataService.filterTags.firstIndex(where: { $0.type == tag.type && $0.text == tag.text
+                        }) {
                             self.dataService.filterTags.remove(at: index)
                         }
                     })

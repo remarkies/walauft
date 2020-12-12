@@ -52,31 +52,12 @@ final class DataService: ObservableObject {
         var isFilterTag = false
 
         for filterTag in filterTags {
-            if tag == filterTag {
+            if tag.text == filterTag.text && tag.type == filterTag.type {
                 isFilterTag = true
                 break
             }
         }
 
         return isFilterTag
-    }
-
-    func loadTagsForSearchTextAsync(data: [RegionDayModel], searchText: String,  completion: @escaping ([TagModel]?) -> Void) {
-        var foundTags: [TagModel] = []
-
-        for model in data {
-            for event in model.events {
-                for tag in event.tags {
-                    if tag.text.uppercased().contains(searchText.uppercased()) {
-
-                        if !foundTags.contains(where: { $0 == tag}) {
-                            foundTags.append(tag)
-                        }
-                    }
-                }
-            }
-        }
-
-        completion(foundTags)
     }
 }

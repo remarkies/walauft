@@ -1,62 +1,29 @@
 //
-//  Location.swift
+//  LocationModel.swift
 //  walauft-ios
 //
-//  Created by Luka Kramer on 04.11.20.
+//  Created by Luka Kramer on 12.12.20.
 //
 
 import Foundation
 
-struct LocationModel : Codable, Identifiable {
-    let id: String
+class LocationModel : Identifiable {
+    let id = UUID()
     let name: String
-    let city: String
-    let zipcode: String
     let street: String
-    let streetno: String
-    var longitude: Double?
-    var latitude: Double?
-    let styles: String
-    let url: URL?
-    let description: String?
-    let tel: String
-    let openinghours: String
-    let minimumage: String
-    let email: String
-    let stringTypes: String
-    let image: String?
+    let streetNo: String
+    let zipCode: String
+    let city: String
+    let longitude: Double?
+    let latitude: Double?
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        id = try container.decode(String.self, forKey: .id)
-        name = try container.decode(String.self, forKey: .name)
-        city = try container.decode(String.self, forKey: .city)
-        zipcode = try container.decode(String.self, forKey: .zipcode)
-        street = try container.decode(String.self, forKey: .street)
-        streetno = try container.decode(String.self, forKey: .streetno)
-        
-        let longitudeString : String? = try container.decode(String?.self, forKey: .longitude)
-        let latitudeString : String? = try container.decode(String?.self, forKey: .latitude)
-        if longitudeString != nil && latitudeString != nil &&
-            Double(longitudeString!) != -1 && Double(latitudeString!) != -1 {
-            longitude = Double(longitudeString!)
-            latitude = Double(latitudeString!)
-        } else {
-            longitude = nil
-            latitude = nil
-        }
-        
-        styles = try container.decode(String.self, forKey: .styles)
-        let urlString = try container.decode(String.self, forKey: .url)
-        url = URL(string: urlString)
-        description = try container.decode(String?.self, forKey: .description)
-        tel = try container.decode(String.self, forKey: .tel)
-        openinghours = try container.decode(String.self, forKey: .openinghours)
-        minimumage = try container.decode(String.self, forKey: .minimumage)
-        email = try container.decode(String.self, forKey: .email)
-        stringTypes = try container.decode(String.self, forKey: .stringTypes)
-        image = try container.decode(String?.self, forKey: .image)
-        
+    init(name: String, street: String, streetNo: String, zipCode: String, city: String, longitude: Double?, latitude: Double?) {
+        self.name = name
+        self.street = street
+        self.streetNo = streetNo
+        self.zipCode = zipCode
+        self.city = city
+        self.longitude = longitude
+        self.latitude = latitude
     }
 }

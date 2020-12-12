@@ -69,11 +69,11 @@ struct MapViewRep: UIViewRepresentable {
         let locations: [(LocationModel, String)]
         //        let eventsWithNoCoordinates = events.filter{ event in event.location!.latitude == nil}
         if event == nil{
-            let eventsWithALocation = events.filter{ event in event.location!.latitude != nil}
-            locations = eventsWithALocation.map { event in (event.location!, event.name) }
+            let eventsWithALocation = events.filter{ event in event.location.latitude != nil}
+            locations = eventsWithALocation.map { event in (event.location, event.name) }
         }
         else{
-            locations = [(event!.location!, event!.name)]
+            locations = [(event!.location, event!.name)]
         }
         let annotationsOfLocations =  locations.map {
             (location, eventName)-> MKPointAnnotation in
@@ -100,7 +100,7 @@ struct MapViewRep: UIViewRepresentable {
                 let eventClicked = parent.dataService.data[parent.selectedDate].events.filter {
                     event in
                     
-                    event.location!.name == view.annotation?.title
+                    event.location.name == view.annotation?.title
                 }
                 let detailView = UIHostingController(rootView: DetailView(selectedEvent: eventClicked[0]).environmentObject(parent.selectedRegion).environmentObject(parent.dataService))
                 

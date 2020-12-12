@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct RegionDayListView: View {
+    
+    func getGermanDate(date:Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "de_DE")
+        formatter.dateFormat = "dd. MMMM"
+        return formatter.string(from: date)
+    }
+    
     @EnvironmentObject var dataService : DataService
     @Binding var days: [RegionDayModel]
     
@@ -22,23 +30,33 @@ struct RegionDayListView: View {
                    LoadingView()
                     .padding(.top, -100)
                     .transition(.opacity)
-                
-                    /*
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color("Accent1")))
-                        .padding(.top, 24)
-                    */
+                    
                     Spacer()
                 }
                 Spacer()
             }
             
         } else if days.count > 0 {
-            ScrollView {
-                ForEach(days, id: \.events) {
+            List {
+                ForEach(days) {
                 day in
-                    RegionDayRowView(regionDay: day)
+                    Section (header: GroupHeaderView(text: "\(getGermanDate(date: day.date))")) {
+                        RegionDayRowView(regionDay: day)
+                            .listRowBackground(Color("Background"))
+                            .buttonStyle(PlainButtonStyle())
+                    }
                 }
+            }
+            .background(Color("Background"))
+            .listStyle(GroupedListStyle())
+            .onAppear {
+
+                // this will disable highlighting the cell when is selected
+                UITableViewCell.appearance().selectionStyle = .none
+
+                // you can also remove the row separators
+                UITableView.appearance().separatorStyle = .none
+
             }
         } else {
             VStack {

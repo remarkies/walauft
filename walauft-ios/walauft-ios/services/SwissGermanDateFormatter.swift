@@ -8,7 +8,7 @@
 import Foundation
 
 final class SwissGermanDateFormatter {
-    static func getGermanDate(date:Date) -> String {
+    static func getGermanDate(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "de_DE")
         formatter.dateFormat = "dd. MMMM"

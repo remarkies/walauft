@@ -10,7 +10,7 @@ import MapKit
 
 struct DetailView: View {
  
-    @State var selectedEvent: EventModel?
+    @State var selectedEvent: EventModel
     @State private var fitInScreen = false
 
     var body: some View {
@@ -26,10 +26,10 @@ struct DetailView: View {
                 
                 ScrollView {
                     VStack {
-                        DetailHeaderView(title: Text("\(SwissGermanDateFormatter.getSwissWeekname(date: self.selectedEvent!.date, short: false))"), focusText: selectedEvent!.start, text: Text("\(SwissGermanDateFormatter.getGermanDate(date: selectedEvent!.date))"))
+                        DetailHeaderView(title: Text("\(SwissGermanDateFormatter.getSwissWeekname(date: selectedEvent.date, short: false))"), focusText: selectedEvent.time, text: Text("\(SwissGermanDateFormatter.getGermanDate(date: selectedEvent.date))"))
                             .padding(.top, 24)
                         
-                        EventDetailContentView(event: selectedEvent!)
+                        EventDetailContentView(event: selectedEvent)
                     }
                     .padding(.horizontal, 24)
                     .padding(.bottom, 48)
@@ -39,14 +39,14 @@ struct DetailView: View {
             .background(Color("Background"))
             .ignoresSafeArea(edges: /*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/)
         }
-        .navigationBarTitle(selectedEvent!.location!.name)
+        .navigationBarTitle(selectedEvent.location.name)
     }
 }
 
 
 struct Detail_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(selectedEvent: nil)
+        VStack {}
     }
 }
  

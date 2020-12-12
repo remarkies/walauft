@@ -21,7 +21,10 @@ final class ApiService: ObservableObject {
     
     static func loadEventsAsync(region: RegionModel, filters: [TagModel], completion: @escaping ([RegionDayModel]?) -> Void) {
         
-        let filter = FilterModel(regionId: region.id, tags: filters)
+        let tags: [ApiTagModel] = []
+        
+        
+        let filter = FilterModel(regionId: region.id, tags: tags)
         
         var url = URL(string: "\(apiPath)\(eventsPath)")!
         if useLocalEnvironement {
@@ -56,17 +59,41 @@ final class ApiService: ObservableObject {
                 
             }
             else if let data = data {
-                var model:[RegionDayModel] = []
+                var apiModels: [ApiRegionDayModel] = []
                 do {
-                    model = try JSONDecoder().decode([RegionDayModel].self, from: data)
-                    
+                    apiModels = try JSONDecoder().decode([ApiRegionDayModel].self, from: data)
                 } catch let error {
                     print("\(data)")
                     print("JSONDecoder failed, \(error)")
                 }
                 
+                var regionDays: [RegionDayModel] = []
+                
+                for apiModel in apiModels {
+                    
+                    var events: [EventModel] = []
+                    for apiEvent in apiModel.events {
+                        
+                        var tags: [TagModel] = []
+                        for apiTag in apiEvent.tags {
+                            let tag = TagModel(type: TagOption(rawValue: apiTag.type) ?? .unknown, text: apiTag.text)
+                            tags.append(tag)
+                        }
+                        
+                        let location = LocationModel(name: apiEvent.location!.name, street: apiEvent.location!.street, streetNo: apiEvent.location!.streetno, zipCode: apiEvent.location!.zipcode, city: apiEvent.location!.city, longitude: apiEvent.location!.longitude, latitude: apiEvent.location!.latitude)
+                        
+                        let event = EventModel(name: apiEvent.name, date: apiEvent.date, time: apiEvent.start, tags: tags, minage: apiEvent.minage, price: apiEvent.price, description: apiEvent.text, location: location)
+                        
+                        events.append(event)
+                    }
+                    
+                    let regionDay = RegionDayModel(date: apiModel.date, region: region, events: events)
+                    regionDays.append(regionDay)
+                }
+                
+                
                 DispatchQueue.main.async {
-                    completion(model)
+                    completion(regionDays)
                 }
             }
         }).resume()
@@ -109,16 +136,22 @@ final class ApiService: ObservableObject {
                 return
             }
             else if let data = data {
-                var model:[TagModel] = []
+                var apiModels: [ApiTagModel] = []
                 do {
-                    model = try JSONDecoder().decode([TagModel].self, from: data)
-                    
+                    apiModels = try JSONDecoder().decode([ApiTagModel].self, from: data)
                 } catch let error {
                     print("\(data)")
                     print("JSONDecoder failed, \(error)")
                 }
+                
+                var tags: [TagModel] = []
+                for apiTag in apiModels {
+                    let tag = TagModel(type: TagOption(rawValue: apiTag.type) ?? .unknown, text: apiTag.text)
+                    tags.append(tag)
+                }
+                
                 DispatchQueue.main.async {
-                    completion(model)
+                    completion(tags)
                 }
             }
         }).resume()

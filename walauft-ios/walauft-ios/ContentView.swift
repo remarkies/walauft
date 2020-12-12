@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     init() {
-       
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
         // this is not the same as manipulating the proxy directly
         let appearance = UINavigationBarAppearance()
         

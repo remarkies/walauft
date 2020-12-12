@@ -10,7 +10,7 @@ import SwiftUI
 struct EventTagsInfoView: View {
     var title: String
     var tags: [TagModel]
-    var tagType: String
+    var tagType: TagOption
     
     @State private var totalHeight
               = CGFloat.zero
@@ -30,6 +30,6 @@ struct EventTagsInfoView: View {
 
 struct EventTagsInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        EventTagsInfoView(title: "Genres", tags: [], tagType: "act")
+        EventTagsInfoView(title: "Genres", tags: [], tagType: .style)
     }
 }

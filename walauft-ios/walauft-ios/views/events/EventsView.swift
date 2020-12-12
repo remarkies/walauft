@@ -23,6 +23,7 @@ struct EventsView: View {
         return formatter
     }()
     init(){
+        //dataService = DataService(selectedRegion: selectedRegion)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
     }
@@ -32,10 +33,8 @@ struct EventsView: View {
             VStack (spacing: 0) {
                 SearchBarView()
                 if (isListview) {
-                    
                     Group{
                         ZStack{
-                            
                             VStack (spacing: 0) {
                                 RegionDayListView(days: self.$dataService.data)
                             }
