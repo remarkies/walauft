@@ -39,7 +39,6 @@ struct EventsView: View {
                             VStack (spacing: 0) {
                                 RegionDayListView(days: self.$dataService.data)
                             }
-                           // if(dataService.loading){LoadingView().ignoresSafeArea().transition(.opacity)}
                         }
                         .background(Color("Background"))
                         .ignoresSafeArea()

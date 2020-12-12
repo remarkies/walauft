@@ -15,12 +15,19 @@ struct RegionDayListView: View {
         
         if dataService.loading {
             VStack {
+                Spacer()
                 HStack {
                     Spacer()
+                    
+                   LoadingView()
+                    .padding(.top, -100)
+                    .transition(.opacity)
+                
+                    /*
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color("Accent1")))
                         .padding(.top, 24)
-                    
+                    */
                     Spacer()
                 }
                 Spacer()
