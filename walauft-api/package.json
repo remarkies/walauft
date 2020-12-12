@@ -19,6 +19,7 @@
     "moment": "^2.29.0",
     "mongodb": "^2.2.22",
     "morgan": "^1.10.0",
+    "node-geocoder": "^3.27.0",
     "request": "^2.88.2",
     "require": "^2.4.20",
     "serve-favicon": "^2.5.0"

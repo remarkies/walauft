@@ -2,6 +2,7 @@ let moment = require('moment');
 require('dotenv').config()
 const https = require('https');
 let database = require('../services/database');
+const NodeGeocoder = require('node-geocoder');
 let url1 = "https://zuerich.usgang.ch/v1/events?date=";
 let url2 = "&regionid=";
 let url3 = "&limit=100";
@@ -10,7 +11,7 @@ var promise = Promise.resolve();
 
 var urlDB = process.env.DB_LINK;
 
-let checkDaysInAdvance = 60;
+let checkDaysInAdvance = 7;
 
 let regionsDic = {
     2 : "Luzern",
@@ -21,8 +22,8 @@ let regionsDic = {
 };
 
 //2 : "Luzern", 3 : "Bern", 4 : "Basel", 5 : "St.Gallen", 6 : "Zürich"
-let regions = ["2", "3", "4", "5", "6"];
-
+//let regions = ["2", "3", "4", "5", "6"];
+let regions = [ "6" ];
 let links = [];
 
 promise
@@ -30,6 +31,7 @@ promise
         return database.connect(urlDB);
     })
     .then(importData)
+    .then(searchForMissingLocations)
     .then(handleEvents)
     .then(handleTags)
     .then(function () {
@@ -52,12 +54,11 @@ function importData() {
     links.forEach((url) => {
         downloadingPromises.push(
             downloadEvents(url.url, url.id, url.date)
-        );
+        )
     });
 
     return Promise.all(downloadingPromises);
 }
-
 function downloadEvents(url, region, date) {
     return new Promise(function (resolve, reject) {
         let req = https.get(url, function(res) {
@@ -133,87 +134,57 @@ function downloadEvents(url, region, date) {
         });
     });
 }
-
-function getTagsForStyle(style) {
-    let foundTags = [];
-    if(style !== null) {
-        let array = style.split(",").map(o => o.trim());
-
-        array.forEach(o => {
-           foundTags.push({
-               type: "style",
-               text: o
-           });
-        });
-    }
-    return foundTags;
-}
-
-function getTagsForActs(acts) {
-    let foundTags = [];
-    if(acts !== null) {
-        acts = acts.replace("\r\n", ",");
-        acts = acts.replace("\n", ",");
-        acts = acts.replace("+", ",");
-        acts = acts.replace("Live: ", "");
-        acts = acts.replace("DJs", "");
-        acts = acts.replace("DJ", "");
-        acts = acts.replace("Div. DJs", "Irgendöper");
-        acts = acts.replace("Div.Djs", "Irgendöper");
-        acts = acts.replace("Diverse", "Irgendöper");
-        let array = acts.split(",").map(o => o.trim());
-        array.forEach(o => {
-            foundTags.push({
-                type: "act",
-                text: o
-            });
-        });
-    }
-    return foundTags;
-}
-
-function getTagForLocation(location) {
-    return {
-        type: "location",
-        text: location
-    };
-}
-
-function getTagForDate(date) {
-    return {
-        type: "date",
-        text: date
-    };
-}
-
 function handleEvents(results) {
-
     let handlingPromises = [];
-    let progress = 0;
 
     results = results.filter(o => o.events.length > 0);
 
-    let lastStep = 0;
-    let stepsInPerc = 10;
     results.forEach(doc => {
-        handlingPromises.push(database.upsert('events', { date:  doc.date, region: doc.region }, doc));
-
-        progress++;
-        let currentPerc = Math.round(100.00 / results.length * progress)
-
-        if(currentPerc >= lastStep + stepsInPerc) {
-            console.log("Updating... (" + currentPerc + "%)");
-            lastStep += stepsInPerc;
-        }
+        handlingPromises.push(database.upsert('events', {date: doc.date, region: doc.region}, doc));
     });
 
-    Promise.all(handlingPromises).then(function () {
-        console.log("Log: Events imported.");
-    });
-
-    return results;
+    return Promise.all(handlingPromises).then(() => { console.log("Log: Events imported."); return results; })
 }
+function searchForMissingLocations(results) {
+    let promises = [];
+    const options = {
+        provider: 'google',
 
+        // Optional depending on the providers
+        //fetch: customFetchImplementation,
+        apiKey: 'AIzaSyAaqSC_s0YO6-lkfimjjFN9lIL31plwu8A', // for Mapquest, OpenCage, Google Premier
+        //formatter: null // 'gpx', 'string', ...
+    };
+    const geocoder = NodeGeocoder(options);
+    for (const regionDoc of results) {
+        for (const event of regionDoc.events) {
+            if (event.location.longitude === "-1" || event.location.latitude === "-1") {
+                promises.push(new Promise((resolve, reject) => {
+                    let search = event.location.street + " " + event.location.streetno + ", " + event.location.zipcode + " " + event.location.city;
+
+                    geocoder.geocode(search)
+                        .then(loc => {
+                            if (loc.length > 0) {
+                                let foundLocation = loc[0];
+                                event.location.latitude =  "" + foundLocation.latitude + "";
+                                event.location.longitude = "" + foundLocation.longitude + "";
+                            }
+                            resolve();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            reject(error);
+                        });
+                }));
+            }
+        }
+    }
+
+    return Promise.all(promises).then(() => {
+        console.log("Log: Search for missing locations done.");
+        return results;
+    });
+}
 function handleTags(results) {
 
     let handlingPromises = [];
@@ -239,21 +210,21 @@ function handleTags(results) {
             let tagsOfEvent = event.tags;
 
             tagsOfEvent.forEach(tagOfEvent => {
-               let existingTag = existingTagsDoc[0].tags.filter(o => o.text === tagOfEvent.text && o.type === tagOfEvent.type);
+                let existingTag = existingTagsDoc[0].tags.filter(o => o.text === tagOfEvent.text && o.type === tagOfEvent.type);
 
-               if (existingTag.length > 0) {
+                if (existingTag.length > 0) {
 
-                   if (existingTag.date < tagOfEvent.date) {
-                       existingTag.date = tagOfEvent.date;
-                   }
+                    if (existingTag.date < tagOfEvent.date) {
+                        existingTag.date = tagOfEvent.date;
+                    }
 
-               } else {
-                   existingTagsDoc[0].tags.push({
-                       date: eventDoc.date,
-                       text: tagOfEvent.text,
-                       type: tagOfEvent.type
-                   });
-               }
+                } else {
+                    existingTagsDoc[0].tags.push({
+                        date: eventDoc.date,
+                        text: tagOfEvent.text,
+                        type: tagOfEvent.type
+                    });
+                }
 
             });
         });
@@ -268,4 +239,55 @@ function handleTags(results) {
         console.log("Log: Tags imported.");
     });
 }
+
+function getTagsForStyle(style) {
+    let foundTags = [];
+    if(style !== null) {
+        let array = style.split(",").map(o => o.trim());
+
+        array.forEach(o => {
+           foundTags.push({
+               type: "style",
+               text: o
+           });
+        });
+    }
+    return foundTags;
+}
+function getTagsForActs(acts) {
+    let foundTags = [];
+    if(acts !== null) {
+        acts = acts.replace("\r\n", ",");
+        acts = acts.replace("\n", ",");
+        acts = acts.replace("+", ",");
+        acts = acts.replace("Live: ", "");
+        acts = acts.replace("DJs", "");
+        acts = acts.replace("DJ", "");
+        acts = acts.replace("Div. DJs", "Irgendöper");
+        acts = acts.replace("Div.Djs", "Irgendöper");
+        acts = acts.replace("Diverse", "Irgendöper");
+        let array = acts.split(",").map(o => o.trim());
+        array.forEach(o => {
+            foundTags.push({
+                type: "act",
+                text: o
+            });
+        });
+    }
+    return foundTags;
+}
+function getTagForLocation(location) {
+    return {
+        type: "location",
+        text: location
+    };
+}
+function getTagForDate(date) {
+    return {
+        type: "date",
+        text: date
+    };
+}
+
+
 
