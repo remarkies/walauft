@@ -63,7 +63,6 @@ final class DataService: ObservableObject {
 
     func loadTagsForSearchTextAsync(data: [RegionDayModel], searchText: String,  completion: @escaping ([TagModel]?) -> Void) {
         var foundTags: [TagModel] = []
-
         for model in data {
             for event in model.events {
                 for tag in event.tags {

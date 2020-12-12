@@ -26,7 +26,7 @@ struct DetailView: View {
                 
                 ScrollView {
                     VStack {
-                        DetailHeaderView(title: Text("\(SwissGermanDateFormatter.getSwissWeekname(date: self.selectedEvent!.date, short: false))"), focusText: selectedEvent!.start, text: Text("\(SwissGermanDateFormatter.getGermanDate(date: selectedEvent!.date))"))
+                        DetailHeaderView(title: Text("\(SwissGermanDateFormatter.getLongSwissDay(date: self.selectedEvent!.date))"), focusText: selectedEvent!.start, text: Text("\(SwissGermanDateFormatter.getSwissDate(date: selectedEvent!.date))"))
                             .padding(.top, 24)
                         
                         EventDetailContentView(event: selectedEvent!)

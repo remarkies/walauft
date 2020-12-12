@@ -14,8 +14,6 @@ struct EventsView: View {
     @State var searchText: String = ""
     @State var isListview : Bool = true
     @State var selectedDate = 0
-    @State var emptyEvents: [EventModel] = []
-    
     
     static let weekDayDateFormat: DateFormatter = {
         let formatter = DateFormatter()
@@ -32,7 +30,6 @@ struct EventsView: View {
             VStack (spacing: 0) {
                 SearchBarView()
                 if (isListview) {
-                    
                     Group{
                         ZStack{
                             
@@ -54,7 +51,7 @@ struct EventsView: View {
                             if (self.dataService.data.count > 0) {
                                 Picker(selection: $selectedDate, label: Text("")) {
                                     ForEach(0 ..< min(self.dataService.datesAvailable.count, 3)) {
-                                        Text("\(SwissGermanDateFormatter.getSwissWeekname(date: self.dataService.datesAvailable[$0], short: true))\(self.dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                                        Text("\(SwissGermanDateFormatter.getShortSwissDay(date: self.dataService.datesAvailable[$0]))\(self.dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
                                     }
                                 }
                                 .textCase(.uppercase)
