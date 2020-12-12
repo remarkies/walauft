@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct RegionDayRowView: View {
-    static let taskDateFormat: DateFormatter = {
+  
+    func getGermanDate(date:Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "de_DE")
         formatter.dateFormat = "dd. MMMM"
-        return formatter
-    }()
+        return formatter.string(from: date)
+    }
     
     @State var regionDay: RegionDayModel?
     
@@ -21,7 +22,7 @@ struct RegionDayRowView: View {
         if regionDay!.events.count > 0 {
             
             VStack (alignment: .leading, spacing: 0){
-                Text("\(regionDay!.date, formatter: Self.taskDateFormat)")
+                Text("\(getGermanDate(date: regionDay!.date))")
                     .font(.system(size: 16))
                     .bold()
                     .foregroundColor(Color("Layer3"))

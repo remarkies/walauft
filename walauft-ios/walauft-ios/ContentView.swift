@@ -44,7 +44,7 @@ struct ContentView: View {
             NavigationView {
                 HomeView()
             }
-        .statusBar(hidden: true)
+        
     }
 }
 

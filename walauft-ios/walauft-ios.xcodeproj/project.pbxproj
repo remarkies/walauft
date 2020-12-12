@@ -58,6 +58,7 @@
 		E7081ACB257D684800392137 /* 2.json in Resources */ = {isa = PBXBuildFile; fileRef = E7081AC6257D684800392137 /* 2.json */; };
 		E7CAC739258267C500E5400D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAC738258267C500E5400D /* LocationManager.swift */; };
 		E7CAC73F2583D41E00E5400D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAC73E2583D41E00E5400D /* LoadingView.swift */; };
+		E7CAC74E2584EB0800E5400D /* SwissGermanDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAC74D2584EB0800E5400D /* SwissGermanDateFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,7 @@
 		E7081AC6257D684800392137 /* 2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 2.json; sourceTree = "<group>"; };
 		E7CAC738258267C500E5400D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E7CAC73E2583D41E00E5400D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		E7CAC74D2584EB0800E5400D /* SwissGermanDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwissGermanDateFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				A1321A1B2552C0DC000016B8 /* ApiService.swift */,
 				A1E2C5F82554A55E00E88FDD /* DataService.swift */,
 				A1BBC824257E6CE600061E67 /* MapService.swift */,
+				E7CAC74D2584EB0800E5400D /* SwissGermanDateFormatter.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				A1321A262552C54A000016B8 /* LocationModel.swift in Sources */,
 				A1321A232552C3EB000016B8 /* RegionDayModel.swift in Sources */,
 				A1F075B2257D69B1009BCA73 /* EventDetailContentView.swift in Sources */,
+				E7CAC74E2584EB0800E5400D /* SwissGermanDateFormatter.swift in Sources */,
 				A1BBC828257E706600061E67 /* EventListInfoView.swift in Sources */,
 				A1F075C9257D8D1B009BCA73 /* RotatedView.swift in Sources */,
 				A11D5172257054B60054E9CF /* EventNameView.swift in Sources */,

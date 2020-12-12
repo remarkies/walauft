@@ -9,25 +9,7 @@ import SwiftUI
 import MapKit
 
 struct DetailView: View {
-    
-    static let weekDayDateFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE"
-        return formatter
-    }()
-
-    static let shortDateFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM"
-        return formatter
-    }()
-    
-    static let eventDateFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd. MMMM"
-        return formatter
-    }()
-
+ 
     @State var selectedEvent: EventModel?
     @State private var fitInScreen = false
 
@@ -44,7 +26,7 @@ struct DetailView: View {
                 
                 ScrollView {
                     VStack {
-                        DetailHeaderView(title: Text("\(selectedEvent!.date, formatter: Self.weekDayDateFormat)"), focusText: selectedEvent!.start, text: Text("\(selectedEvent!.date, formatter: Self.eventDateFormat)"))
+                        DetailHeaderView(title: Text("\(SwissGermanDateFormatter.getSwissWeekname(date: self.selectedEvent!.date, short: false))"), focusText: selectedEvent!.start, text: Text("\(SwissGermanDateFormatter.getGermanDate(date: selectedEvent!.date))"))
                             .padding(.top, 24)
                         
                         EventDetailContentView(event: selectedEvent!)

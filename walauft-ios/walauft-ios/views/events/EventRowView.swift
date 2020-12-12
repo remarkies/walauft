@@ -11,17 +11,6 @@ struct EventRowView: View {
 
     @EnvironmentObject var dataService : DataService
     @EnvironmentObject var selectedRegion: RegionModel
-    static let weekDayDateFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EE"
-        return formatter
-    }()
-
-    static let shortDateFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM"
-        return formatter
-    }()
 
     @State var event: EventModel?
 
@@ -34,7 +23,7 @@ struct EventRowView: View {
 
                     VStack (alignment: .leading, spacing: 4) {
                         HStack (alignment: .top) {
-                            EventHeaderItemView(text: Text("\(self.dataService.getSwissWeekname(date: self.event!.date))"))
+                            EventHeaderItemView(text: Text("\(SwissGermanDateFormatter.getSwissWeekname(date: self.event!.date, short: true))"))
                                 .frame(width: 40)
 
                             EventHeaderItemView(text: Text(self.event!.location!.name))
