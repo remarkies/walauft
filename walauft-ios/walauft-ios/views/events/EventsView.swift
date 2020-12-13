@@ -57,7 +57,7 @@ struct EventsView: View {
                                 .textCase(.uppercase)
                                 .cornerRadius(8)
                                 .pickerStyle(SegmentedPickerStyle())
-                                .padding(24)
+                                .padding()
                             }
                         }
                     }
