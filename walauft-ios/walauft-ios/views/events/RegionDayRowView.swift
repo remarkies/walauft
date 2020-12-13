@@ -8,14 +8,7 @@
 import SwiftUI
 
 struct RegionDayRowView: View {
-
-    func getGermanDate(date:Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
-        formatter.dateFormat = "dd. MMMM"
-        return formatter.string(from: date)
-    }
-
+    
     @State var regionDay: RegionDayModel
 
     var body: some View {
