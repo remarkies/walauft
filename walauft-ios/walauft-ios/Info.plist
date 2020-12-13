@@ -2,14 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Manrope-Medium.ttf</string>
-		<string>Manrope-Bold.ttf</string>
-		<string>Manrope-Light.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>walauft</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -35,6 +31,12 @@
 	<string>Wo bisch?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Wo bisch?</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Manrope-Medium.ttf</string>
+		<string>Manrope-Bold.ttf</string>
+		<string>Manrope-Light.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
