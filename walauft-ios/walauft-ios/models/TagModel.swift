@@ -8,23 +8,23 @@
 import Combine
 import SwiftUI
 
-class TagModel: Codable, Equatable, Hashable {
-    let id: UUID
+
+class TagModel: Codable, Equatable, Identifiable {
     let date: String?
-    let type: String
+    let type: TagOption
     let text: String
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        id = UUID()
         date = try? container.decode(String.self, forKey: .date)
-        type = try container.decode(String.self, forKey: .type)
+        let typeStr = try container.decode(String.self, forKey: .type)
+        type = TagOption(rawValue: typeStr) ?? .unknown;
         text = try container.decode(String.self, forKey: .text)
     }
     
     enum CodingKeys: CodingKey {
-        case date, type, text, id
+        case date, type, text
     }
     
     func encode(to encoder: Encoder) throws {
@@ -32,13 +32,6 @@ class TagModel: Codable, Equatable, Hashable {
         try container.encode(type, forKey: .type)
         try container.encode(text, forKey: .text)
         try container.encode(date, forKey: .date)
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-        hasher.combine(date)
-        hasher.combine(type)
-        hasher.combine(text)
     }
     
     static func ==(lhs: TagModel, rhs: TagModel) -> Bool {

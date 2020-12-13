@@ -11,9 +11,10 @@ struct EventHeaderItemView: View {
     var text: Text
     var body: some View {
         self.text
+            .font(.custom("Manrope-Bold", size: 16))
             .bold()
             .textCase(.uppercase)
-            .font(.system(size: 16))
+            
     }
 }
 

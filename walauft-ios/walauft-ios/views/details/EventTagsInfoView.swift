@@ -10,7 +10,7 @@ import SwiftUI
 struct EventTagsInfoView: View {
     var title: String
     var tags: [TagModel]
-    var tagType: String
+    var tagType: TagOption
     
     @State private var totalHeight
               = CGFloat.zero
@@ -18,8 +18,7 @@ struct EventTagsInfoView: View {
         
         VStack (alignment: .leading) {
             Text("\(title)")
-                .bold()
-                .font(.system(size: 12))
+                .font(.custom("Manrope-Bold", size: 12))
                 .foregroundColor(Color("Layer2"))
                 .padding(.bottom, -2)
             WrappedTags(tags: tags.filter { tag in return tag.type == tagType })
@@ -30,6 +29,6 @@ struct EventTagsInfoView: View {
 
 struct EventTagsInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        EventTagsInfoView(title: "Genres", tags: [], tagType: "act")
+        EventTagsInfoView(title: "Genres", tags: [], tagType: .style)
     }
 }

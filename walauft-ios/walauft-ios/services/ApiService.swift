@@ -20,8 +20,13 @@ final class ApiService: ObservableObject {
     }
     
     static func loadEventsAsync(region: RegionModel, filters: [TagModel], completion: @escaping ([RegionDayModel]?) -> Void) {
+
+        var searchTags: [SearchTagModel] = []
+        for filterItem in filters {
+            searchTags.append(SearchTagModel(type: filterItem.type.rawValue, text: filterItem.text))
+        }
         
-        let filter = FilterModel(regionId: region.id, tags: filters)
+        let filter = FilterModel(regionId: region.id, tags: searchTags)
         
         var url = URL(string: "\(apiPath)\(eventsPath)")!
         if useLocalEnvironement {
@@ -56,17 +61,16 @@ final class ApiService: ObservableObject {
                 
             }
             else if let data = data {
-                var model:[RegionDayModel] = []
+                var regionDays: [RegionDayModel] = []
                 do {
-                    model = try JSONDecoder().decode([RegionDayModel].self, from: data)
-                    
+                    regionDays = try JSONDecoder().decode([RegionDayModel].self, from: data)
                 } catch let error {
                     print("\(data)")
                     print("JSONDecoder failed, \(error)")
                 }
                 
                 DispatchQueue.main.async {
-                    completion(model)
+                    completion(regionDays)
                 }
             }
         }).resume()
@@ -109,16 +113,16 @@ final class ApiService: ObservableObject {
                 return
             }
             else if let data = data {
-                var model:[TagModel] = []
+                var tags: [TagModel] = []
                 do {
-                    model = try JSONDecoder().decode([TagModel].self, from: data)
-                    
+                    tags = try JSONDecoder().decode([TagModel].self, from: data)
                 } catch let error {
                     print("\(data)")
                     print("JSONDecoder failed, \(error)")
                 }
+                
                 DispatchQueue.main.async {
-                    completion(model)
+                    completion(tags)
                 }
             }
         }).resume()

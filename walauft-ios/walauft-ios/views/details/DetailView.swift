@@ -9,8 +9,8 @@ import SwiftUI
 import MapKit
 
 struct DetailView: View {
- 
-    @State var selectedEvent: EventModel?
+
+    @State var selectedEvent: EventModel
     @State private var fitInScreen = false
 
     var body: some View {
@@ -21,32 +21,31 @@ struct DetailView: View {
                 Divider()
                     .frame(height: 2)
                     .background(Color("Layer3"))
-                
-                
-                
+
+
+
                 ScrollView {
                     VStack {
                         DetailHeaderView(title: Text("\(SwissGermanDateFormatter.getLongSwissDay(date: self.selectedEvent!.date))"), focusText: selectedEvent!.start, text: Text("\(SwissGermanDateFormatter.getSwissDate(date: selectedEvent!.date))"))
                             .padding(.top, 24)
-                        
-                        EventDetailContentView(event: selectedEvent!)
+
+                        EventDetailContentView(event: selectedEvent)
                     }
                     .padding(.horizontal, 24)
                     .padding(.bottom, 48)
                 }
-                
+
             }
             .background(Color("Background"))
             .ignoresSafeArea(edges: /*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/)
         }
-        .navigationBarTitle(selectedEvent!.location!.name)
+        .navigationBarTitle(selectedEvent.location.name)
     }
 }
 
 
 struct Detail_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(selectedEvent: nil)
+        VStack {}
     }
 }
- 

@@ -13,12 +13,12 @@ struct EventInfoView: View {
         VStack (alignment: .leading) {
             EventTextInfoView(title: "Event", text: Text("\(event.name)"))
             
-            if event.tags.filter { tag in return tag.type == "act" }.count > 0 {
-                EventTagsInfoView(title: "Acts", tags: event.tags, tagType: "act")
+            if event.tags.filter { tag in return tag.type == .act }.count > 0 {
+                EventTagsInfoView(title: "Acts", tags: event.tags, tagType: .act)
             }
             
-            if event.tags.filter { tag in return tag.type == "style" }.count > 0 {
-                EventTagsInfoView(title: "Genres", tags: event.tags, tagType: "style")
+            if event.tags.filter { tag in return tag.type == .style }.count > 0 {
+                EventTagsInfoView(title: "Genres", tags: event.tags, tagType: .style)
             }
             
             if event.minage != nil && event.minage! > 0 {
@@ -29,8 +29,8 @@ struct EventInfoView: View {
                 EventTextInfoView(title: "Price", text: Text("CHF \(event.price!, specifier: "%.2f")"))
             }
             
-            if event.text.count > 0 {
-                EventTextInfoView(title: "Beschriebig", text: Text("\(event.text)"))
+            if event.description.count > 0 {
+                EventTextInfoView(title: "Beschriebig", text: Text("\(event.description)"))
             }
         }
     }

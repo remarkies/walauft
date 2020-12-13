@@ -1,5 +1,5 @@
 //
-//  RegionDay.swift
+//  RegionDayModel.swift
 //  walauft-ios
 //
 //  Created by Luka Kramer on 04.11.20.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RegionDayModel : Codable {
+class RegionDayModel : Codable, Identifiable {
     let _id: String
     let date: Date
     let region: String
@@ -20,7 +20,7 @@ struct RegionDayModel : Codable {
         self.events = events
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         _id = try container.decode(String.self, forKey: ._id)

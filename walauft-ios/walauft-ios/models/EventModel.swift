@@ -1,5 +1,5 @@
 //
-//  Event.swift
+//  EventModel.swift
 //  walauft-ios
 //
 //  Created by Luka Kramer on 04.11.20.
@@ -7,28 +7,20 @@
 
 import Foundation
 
-struct EventModel: Codable, Hashable {
-    let id: String
+class EventModel: Codable, Identifiable {
     let name: String
-    let acts: String
     let date: Date
-    let start: String
-    let end: String?
-    var location: LocationModel?
-    let musicstyles: String
+    let time: String
+    var location: LocationModel
     let minage: Int?
-    let minagef: Int?
     let price: Double?
-    let text: String
+    let description: String
     let tags: [TagModel]
-    let comments: String
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        id = try container.decode(String.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
-        acts = try container.decode(String.self, forKey: .acts)
         
         let dateString = try container.decode(String.self, forKey: .date)
         let formatter = DateFormatter.yyyyMMdd2
@@ -40,22 +32,14 @@ struct EventModel: Codable, Hashable {
                   debugDescription: "Date string does not match format expected by formatter.")
         }
         
-        start = try container.decode(String.self, forKey: .start)
-        end = try container.decode(String?.self, forKey: .end)
-        location = try container.decode(LocationModel?.self, forKey: .location)
-        musicstyles = try container.decode(String.self, forKey: .musicstyles)
+        time = try container.decode(String.self, forKey: .time)
+        location = try container.decode(LocationModel.self, forKey: .location)
         let minageString = try container.decode(String.self, forKey: .minage)
-        let minagefString = try container.decode(String.self, forKey: .minage)
         
         if minageString.count > 0 {
             minage = Int(minageString)
         } else {
             minage = nil
-        }
-        if minagefString.count > 0 {
-            minagef = Int(minagefString)
-        } else {
-            minagef = nil
         }
         
         let priceString = try container.decode(String.self, forKey: .price)
@@ -65,14 +49,10 @@ struct EventModel: Codable, Hashable {
             price = nil
         }
         
-        text = try container.decode(String.self, forKey: .text)
-        comments = try container.decode(String.self, forKey: .comments)
+        description = try container.decode(String.self, forKey: .description)
         tags = try container.decode([TagModel].self, forKey: .tags)
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
     static func ==(lhs: EventModel, rhs: EventModel) -> Bool {
         return lhs.id == rhs.id
     }

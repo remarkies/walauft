@@ -17,15 +17,14 @@ struct CustomTextField: View {
         ZStack(alignment: .leading) {
             if text.isEmpty {
                 placeholder
-                    .font(.system(size: 12))
+                    .font(.custom("Manrope-Medium", size: 12))
                     .foregroundColor(Color("SubtleForeground"))
-                    .textCase(.uppercase)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 16)
             }
             
             TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
-                .textCase(.uppercase)
+                .font(.custom("Manrope-Medium", size: 12))
                 .font(.system(size: 12))
                 .foregroundColor(Color("Foreground"))
                 .padding(.horizontal, 16)
@@ -35,6 +34,6 @@ struct CustomTextField: View {
         }
         .background(Color("Layer2"))
         .cornerRadius(5)
-        .padding(.horizontal, 24)
+        .padding(.horizontal)
     }
 }

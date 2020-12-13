@@ -14,13 +14,13 @@ struct EventListInfoView: View {
         VStack (alignment: .leading) {
             Text("\(title)")
                 .bold()
-                .font(.system(size: 12))
+                .font(.custom("Manrope-Bold", size: 12))
                 .foregroundColor(Color("Layer2"))
             ForEach(texts, id: \.self) {
                 text in
             
                 Text("\(text)")
-                    .font(.system(size: 16))
+                    .font(.custom("Manrope-Medium", size: 16))
                     .foregroundColor(Color("Foreground"))
             }
         }

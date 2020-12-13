@@ -18,6 +18,7 @@ struct CustomButton: View {
             Spacer()
             Image(systemName: icon).font(.system(size: 16, weight: .regular))
             Text("\(text)")
+                .font(.custom("Manrope-Bold", size: 16))
             Spacer()
         }
         .padding(.horizontal)
@@ -25,6 +26,7 @@ struct CustomButton: View {
         .background(accent)
         .foregroundColor(Color("Foreground"))
         .cornerRadius(3)
+        .shadow(radius: 2)
     }
 }
 
