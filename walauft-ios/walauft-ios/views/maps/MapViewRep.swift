@@ -96,7 +96,7 @@ struct MapViewRep: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            if (parent.eventsClickable){
+            if (parent.eventsClickable && !(view.annotation is MKUserLocation)){
                 let eventClicked = parent.dataViewModel.data[parent.selectedDate].events.filter {
                     event in
                     
