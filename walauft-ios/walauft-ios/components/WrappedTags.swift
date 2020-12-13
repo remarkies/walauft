@@ -39,7 +39,7 @@ struct WrappedTags: View {
                                 height -= d.height
                             }
                             let result = width
-                            if tag.text == self.tags.last!.text && tag.type == self.tags.last!.type {
+                            if tag == self.tags.last! {
                                 width = 0 //last item
                             } else {
                                 width -= d.width
@@ -48,7 +48,7 @@ struct WrappedTags: View {
                         })
                         .alignmentGuide(.top, computeValue: {d in
                             let result = height
-                            if tag.text == self.tags.last!.text && tag.type == self.tags.last!.type {
+                            if tag == self.tags.last! {
                                 height = 0 // last item
                             }
                             return result

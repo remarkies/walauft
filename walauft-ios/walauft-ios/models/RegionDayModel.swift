@@ -8,6 +8,7 @@
 import Foundation
 
 class RegionDayModel : Codable, Identifiable {
+    let id = UUID()
     let _id: String
     let date: Date
     let region: String

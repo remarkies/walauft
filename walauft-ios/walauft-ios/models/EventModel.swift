@@ -8,6 +8,7 @@
 import Foundation
 
 class EventModel: Codable, Identifiable {
+    let id = UUID()
     let name: String
     let date: Date
     let time: String

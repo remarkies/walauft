@@ -3,7 +3,6 @@ let moment = require('moment');
 let database = require('../services/database');
 let router = express.Router();
 let fuzzy = require('fuzzy-search')
-//import FuzzySearch from 'fuzzy-search';
 
 router.post('/',function(request,response){
     var param = request.body;
@@ -27,14 +26,14 @@ router.post('/',function(request,response){
 
     database.aggregate('tags', query)
         .then(function (docs) {
-
             const searcher = new fuzzy(docs, ['tags.text'], {
                 caseSensitive: false,
                 sort: true
             });
 
             const results = searcher.search(param.search);
-            response.json(results.slice(0, 10).map((result => {
+
+            response.json(results.map((result => {
                 return {
                     date: result.tags.date,
                     text: result.tags.text,
@@ -42,8 +41,8 @@ router.post('/',function(request,response){
                 }
             })));
         })
-        .catch(err => {
-            console.log(err);
+        .catch(() => {
+            response.json({})
         });
 });
 

@@ -10,6 +10,7 @@ import SwiftUI
 
 
 class TagModel: Codable, Equatable, Identifiable {
+    let id = UUID()
     let date: String?
     let type: TagOption
     let text: String

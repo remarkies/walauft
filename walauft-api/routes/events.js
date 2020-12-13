@@ -78,8 +78,8 @@ router.post('/',function(request,response){
         .then(function (docs) {
             response.json(docs);
         })
-        .catch(err => {
-            console.log(err);
+        .catch(() => {
+            response.json({})
         });
 });
 

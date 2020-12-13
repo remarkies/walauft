@@ -8,6 +8,7 @@
 import Foundation
 
 class LocationModel : Codable, Identifiable {
+    let id = UUID()
     let name: String
     let street: String
     let streetNo: String

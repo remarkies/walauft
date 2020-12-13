@@ -31,7 +31,6 @@ struct HomeTitleView: View {
                     .foregroundColor(Color("Layer2"))
                     .rotationEffect(.degrees(-90), anchor: .bottomTrailing)
                     .padding(.top, -72)
-                    //.rotated()
             }
             .padding(.top, 14)
         }

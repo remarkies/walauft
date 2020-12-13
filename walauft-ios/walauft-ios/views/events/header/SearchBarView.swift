@@ -48,13 +48,11 @@ struct SearchBarView: View {
                             ForEach(proposedTags, id: \.id) {
                                 tag in
                                 TagView(tag: tag, background:  Color("Layer2"), clicked: {
-                                    if !self.dataViewModel.isFilterTag(tag: tag) {
-                                        
-                                        self.dataViewModel.filterTags.append(tag)
-                                        self.dataViewModel.reloadEvents(region: selectedRegion)
+                                    if self.dataViewModel.addFilterTag(tag: tag) {
                                         self.searchText = ""
                                         self.proposedTags = []
                                         self.hideKeyboard()
+                                        self.dataViewModel.reloadEvents(region: selectedRegion)
                                     }
                                 }, unClicked:{})
                             }
@@ -69,11 +67,10 @@ struct SearchBarView: View {
                 FilterInfoView(text: "Gsetzti Chästli")
                 ScrollView (.horizontal){
                     HStack {
-                        ForEach(self.dataViewModel.filterTags, id: \.id) {
+                        ForEach(self.dataViewModel.filterTags) {
                             tag in
                             TagView(tag: tag, background:  Color("Layer2"), clicked: {}, unClicked: {
-                                if let index = self.dataViewModel.filterTags.firstIndex(where: { $0.type == tag.type && $0.text == tag.text }) {
-                                    self.dataViewModel.filterTags.remove(at: index)
+                                if self.dataViewModel.removeFilterTag(tag: tag) {
                                     self.dataViewModel.reloadEvents(region: selectedRegion)
                                 }
                             })

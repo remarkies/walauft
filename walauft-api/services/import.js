@@ -22,7 +22,7 @@ let regionsDic = {
 
 //2 : "Luzern", 3 : "Bern", 4 : "Basel", 5 : "St.Gallen", 6 : "Zürich"
 let regions = ["2", "3", "4", "5", "6"];
-//let regions = [ "6" ];
+//let regions = [ "4" ];
 
 scratchData(regions);
 
@@ -64,7 +64,8 @@ function downloadEvents(url, region, date) {
     return new Promise(function (resolve, reject) {
         let req = https.get(url, function(res) {
 
-            let data = '', json_data;
+            let data = ''
+            let json_data;
 
             res.on('data', function(stream) {
                 data += stream;
@@ -197,23 +198,26 @@ async function handleEvents(result) {
     return result;
 }
 async function handleTags(result) {
-    let tagsDoc = {
-        region: result.region,
-        tags: []
+
+    let tagsDoc = await database.find('tags', {"region" : result.region});
+
+    if (tagsDoc.length === 0) {
+        tagsDoc = {
+            region: result.region,
+            tags: []
+        }
+    } else {
+        tagsDoc = tagsDoc[0];
     }
 
     result.events.forEach(event => {
-        let tagsOfEvent = event.tags;
-
-        tagsOfEvent.forEach(tagOfEvent => {
-            let existingTag = tagsDoc.tags.filter(o => o.text === tagOfEvent.text && o.type === tagOfEvent.type);
-
-            if (existingTag.length > 0) {
-
-                if (existingTag.date < tagOfEvent.date) {
-                    existingTag.date = tagOfEvent.date;
+        event.tags.forEach(tagOfEvent => {
+            let existingTags = tagsDoc.tags.filter(o => o.text === tagOfEvent.text && o.type === tagOfEvent.type);
+            if (existingTags.length > 0) {
+                if (moment(existingTags[0].date) < moment(result.date)) {
+                    existingTags[0].date = result.date;
+                } else {
                 }
-
             } else {
                 tagsDoc.tags.push({
                     date: result.date,

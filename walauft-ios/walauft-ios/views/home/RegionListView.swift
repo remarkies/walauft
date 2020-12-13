@@ -34,15 +34,6 @@ struct RegionListView: View {
                     RegionListItem(region: region)
                 }
             }
-            
-            Button (action:{
-                regions.append( RegionModel(id: 6, name: "Züri", position: CLLocation(latitude: 47.379935134221896,  longitude: 8.532979765316039)))
-             
-                
-            }){
-                //Text("\(locationManager.location == nil ? "nil": locationManager.location )")
-            }
-            
         }
     }
 }

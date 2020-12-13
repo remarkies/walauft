@@ -19,14 +19,11 @@ struct EventTagListView: View {
                 ForEach(self.tags.filter { tag in return tag.type == .style }) {
                     tag in
                     TagView(tag: tag, background:  Color("Layer1"), clicked: {
-                        if !self.dataViewModel.filterTags.contains(where: { $0.type == tag.type && $0.text == tag.text }) {
-                            self.dataViewModel.filterTags.append(tag)
+                        if self.dataViewModel.addFilterTag(tag: tag) {
                             self.dataViewModel.reloadEvents(region: selectedRegion)
                         }
                     }, unClicked: {
-                        if let index = self.dataViewModel.filterTags.firstIndex(where: { $0.type == tag.type && $0.text == tag.text
-                        }) {
-                            self.dataViewModel.filterTags.remove(at: index)
+                        if self.dataViewModel.removeFilterTag(tag: tag) {
                             self.dataViewModel.reloadEvents(region: selectedRegion)
                         }
                     })
