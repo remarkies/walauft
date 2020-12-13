@@ -16,12 +16,12 @@ struct RegionDayListView: View {
         return formatter.string(from: date)
     }
     
-    @EnvironmentObject var dataService : DataService
+    @EnvironmentObject var dataViewModel : DataViewModel
     @Binding var days: [RegionDayModel]
     
     var body: some View {
         
-        if dataService.loading {
+        if dataViewModel.loading {
             VStack {
                 Spacer()
                 HStack {

@@ -14,7 +14,7 @@ struct GroupHeaderView: View {
             HStack {
                 Text("\(text)")
                     .bold()
-                    .font(.system(size: 16))
+                    .font(.custom("Manrope-Bold", size: 20))
                     .foregroundColor(Color("Layer2"))
                     .padding(.leading)
                     .padding(.top)

@@ -13,7 +13,7 @@ import MapKitGoogleStyler
 
 struct MapViewRep: UIViewRepresentable {
     
-    @EnvironmentObject var dataService : DataService
+    @EnvironmentObject var dataViewModel : DataViewModel
     @EnvironmentObject var selectedRegion: RegionModel
     @Binding var selectedDate: Int
     private var event: EventModel?
@@ -42,8 +42,8 @@ struct MapViewRep: UIViewRepresentable {
             return MKMapView(frame: .zero)
         }
         mapView.addOverlay(tileOverlay)
-        if (!dataService.data.isEmpty){
-            let annotationsOfLocations = getAnnotationsFromEvents(events: dataService.data[selectedDate].events)
+        if (!dataViewModel.data.isEmpty){
+            let annotationsOfLocations = getAnnotationsFromEvents(events: dataViewModel.data[selectedDate].events)
             mapView.addAnnotations(annotationsOfLocations)
             mapView.showAnnotations(annotationsOfLocations, animated: true)
         }
@@ -54,8 +54,8 @@ struct MapViewRep: UIViewRepresentable {
     
     func updateUIView(_ mapView: MKMapView, context: Context) {
         mapView.removeAnnotations(mapView.annotations)
-        if (!dataService.data.isEmpty && dataService.data.indices.contains(selectedDate)){
-            let annotationsOfEvents = getAnnotationsFromEvents(events: dataService.data[selectedDate].events)
+        if (!dataViewModel.data.isEmpty && dataViewModel.data.indices.contains(selectedDate)){
+            let annotationsOfEvents = getAnnotationsFromEvents(events: dataViewModel.data[selectedDate].events)
             mapView.addAnnotations(annotationsOfEvents.filter{annotation in
                 !(annotation is MKUserLocation)
             }
@@ -97,12 +97,12 @@ struct MapViewRep: UIViewRepresentable {
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             if (parent.eventsClickable){
-                let eventClicked = parent.dataService.data[parent.selectedDate].events.filter {
+                let eventClicked = parent.dataViewModel.data[parent.selectedDate].events.filter {
                     event in
                     
                     event.location.name == view.annotation?.title
                 }
-                let detailView = UIHostingController(rootView: DetailView(selectedEvent: eventClicked[0]).environmentObject(parent.selectedRegion).environmentObject(parent.dataService))
+                let detailView = UIHostingController(rootView: DetailView(selectedEvent: eventClicked[0]).environmentObject(parent.selectedRegion).environmentObject(parent.dataViewModel))
                 
                 mapView.parentViewController?.navigationController?.pushViewController(detailView, animated: true)
             }

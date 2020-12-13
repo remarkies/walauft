@@ -12,9 +12,8 @@ struct FilterInfoView: View {
     var body: some View {
         HStack {
             Text(text)
+                .font(.custom("Manrope-Medium", size: 12))
                 .foregroundColor(Color("Foreground"))
-                .font(.system(size: 12))
-                .textCase(.uppercase)
             Spacer()
         }
     }

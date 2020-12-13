@@ -18,8 +18,7 @@ struct EventTagsInfoView: View {
         
         VStack (alignment: .leading) {
             Text("\(title)")
-                .bold()
-                .font(.system(size: 12))
+                .font(.custom("Manrope-Bold", size: 12))
                 .foregroundColor(Color("Layer2"))
                 .padding(.bottom, -2)
             WrappedTags(tags: tags.filter { tag in return tag.type == tagType })

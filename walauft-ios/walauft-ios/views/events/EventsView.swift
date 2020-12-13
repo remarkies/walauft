@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventsView: View {
-    @EnvironmentObject var dataService : DataService
+    @EnvironmentObject var dataViewModel : DataViewModel
     @EnvironmentObject var selectedRegion: RegionModel
     
     @State var searchText: String = ""
@@ -27,12 +27,12 @@ struct EventsView: View {
             Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack (spacing: 0) {
                 SearchBarView()
+                    .shadow(radius: 2)
+                
                 if (isListview) {
                     Group{
-                        ZStack{
-                            VStack (spacing: 0) {
-                                RegionDayListView(days: self.$dataService.data)
-                            }
+                        ZStack {
+                            RegionDayListView(days: self.$dataViewModel.data)
                         }
                         .background(Color("Background"))
                         .ignoresSafeArea()
@@ -45,14 +45,16 @@ struct EventsView: View {
                         ZStack (alignment: .topLeading) {
                             MapViewRep(selectedDate: $selectedDate, eventsClickable: true).ignoresSafeArea()
                             
-                            if (self.dataService.data.count > 0) {
+                            if (self.dataViewModel.data.count > 0) {
                                 Picker(selection: $selectedDate, label: Text("")) {
-                                    ForEach(0 ..< min(self.dataService.datesAvailable.count, 3)) {
-                                        Text("\(SwissGermanDateFormatter.getSwissWeekname(date: self.dataService.datesAvailable[$0], short: true))\(self.dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                                    ForEach(0 ..< min(self.dataViewModel.datesAvailable.count, 3)) {
+                                        Text("\(SwissGermanDateFormatter.getSwissWeekname(date: self.dataViewModel.datesAvailable[$0], short: true))\(self.dataViewModel.datesAvailable[$0], formatter: Self.weekDayDateFormat)")
+                                            .tag($0)
+                                            
                                     }
                                 }
+                                .font(.custom("Manrope-Bold", size: 12))
                                 .textCase(.uppercase)
-                                .background(Color("Layer2"))
                                 .cornerRadius(8)
                                 .pickerStyle(SegmentedPickerStyle())
                                 .padding(24)
@@ -64,34 +66,33 @@ struct EventsView: View {
             }.padding(.top, 16)
         }
         .onAppear() {
-            if self.dataService.loadedRegion != nil &&
-                self.dataService.loadedRegion!.id != selectedRegion.id {
-                self.dataService.reset()
-                self.dataService.reloadEvents(region: selectedRegion)
+            if self.dataViewModel.loadedRegion != nil &&
+                self.dataViewModel.loadedRegion!.id != selectedRegion.id {
+                self.dataViewModel.reset()
+                self.dataViewModel.reloadEvents(region: selectedRegion)
             }
             
             
-            if self.dataService.data.count == 0 {
-                self.dataService.reloadEvents(region: selectedRegion)
+            if self.dataViewModel.data.count == 0 {
+                self.dataViewModel.reloadEvents(region: selectedRegion)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarTitle(self.selectedRegion.name)
         .navigationBarItems(trailing:
-                                
-                                HStack(alignment: .center) {
-                                    
-                                    CustomIconButton(icon: "list.bullet", background: isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
-                                        withAnimation(.easeInOut(duration: 0.3)){
-                                            isListview = true
-                                        }
-                                    }).animation(.easeIn)
-                                    CustomIconButton(icon: "map", background: !isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), action: {
-                                        withAnimation(.easeInOut(duration: 0.3)){
-                                            isListview = false
-                                        }
-                                    }).animation(.easeIn)
-                                }
+            HStack(alignment: .center) {
+                
+                CustomIconButton(icon: "list.bullet", background: isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), isSelected: isListview, action: {
+                    withAnimation(.easeInOut(duration: 0.3)){
+                        isListview = true
+                    }
+                }).animation(.easeIn)
+                CustomIconButton(icon: "map", background: !isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), isSelected: !isListview, action: {
+                    withAnimation(.easeInOut(duration: 0.3)){
+                        isListview = false
+                    }
+                }).animation(.easeIn)
+            }
         )
         
     }

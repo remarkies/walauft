@@ -14,11 +14,11 @@ struct EventTextInfoView: View {
         VStack (alignment: .leading, spacing: 2) {
             Text("\(title)")
                 .bold()
-                .font(.system(size: 12))
+                .font(.custom("Manrope-Bold", size: 12))
                 .foregroundColor(Color("Layer2"))
             
             text
-                .font(.system(size: 16))
+                .font(.custom("Manrope-Medium", size: 16))
                 .foregroundColor(Color("Foreground"))
                 
         }

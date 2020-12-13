@@ -15,7 +15,7 @@ struct RegionListItem: View {
         HStack {
             HStack {
                 Text("\(region.name)")
-                    .font(.system(size: 50))
+                    .font(.custom("Manrope-Bold", size: 50))
                     .bold()
                     .textCase(.uppercase)
                     .foregroundColor(Color("Foreground"))

@@ -1,5 +1,5 @@
 //
-//  MapService.swift
+//  MapViewModel.swift
 //  walauft-ios
 //
 //  Created by Luka Kramer on 07.12.20.
@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-final class MapService {
+final class MapViewModel {
     init() {}
     
     static func openMapWithCoordinates(latitude: CLLocationDegrees, longitude: CLLocationDegrees, pinText: String) {

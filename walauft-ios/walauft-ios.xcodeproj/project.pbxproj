@@ -30,16 +30,24 @@
 		A1B2361E2552EF9400774259 /* EventRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2361D2552EF9400774259 /* EventRowView.swift */; };
 		A1B236212552F0B400774259 /* RegionDayRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B236202552F0B400774259 /* RegionDayRowView.swift */; };
 		A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B905FF25545D2F0074EABA /* SearchBarView.swift */; };
-		A1BBC825257E6CE600061E67 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC824257E6CE600061E67 /* MapService.swift */; };
+		A1BBC825257E6CE600061E67 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC824257E6CE600061E67 /* MapViewModel.swift */; };
 		A1BBC828257E706600061E67 /* EventListInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC827257E706600061E67 /* EventListInfoView.swift */; };
 		A1BBC82B257E746900061E67 /* CustomIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC82A257E746900061E67 /* CustomIconButton.swift */; };
 		A1BBC830257EDC2500061E67 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BBC82F257EDC2500061E67 /* FilterModel.swift */; };
 		A1C7098F257E601C008D7123 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C7098E257E601C008D7123 /* CustomButton.swift */; };
+		A1C9BCEE2585A15300A56059 /* HideKeyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9BCED2585A15300A56059 /* HideKeyBoard.swift */; };
+		A1C9BCFC2585A6AC00A56059 /* Manrope-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C9BCF52585A6AC00A56059 /* Manrope-ExtraLight.ttf */; };
+		A1C9BCFD2585A6AC00A56059 /* Manrope-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C9BCF62585A6AC00A56059 /* Manrope-ExtraBold.ttf */; };
+		A1C9BCFE2585A6AC00A56059 /* Manrope-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C9BCF72585A6AC00A56059 /* Manrope-Medium.ttf */; };
+		A1C9BCFF2585A6AC00A56059 /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C9BCF82585A6AC00A56059 /* Manrope-Regular.ttf */; };
+		A1C9BD002585A6AC00A56059 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C9BCF92585A6AC00A56059 /* Manrope-Light.ttf */; };
+		A1C9BD012585A6AC00A56059 /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C9BCFA2585A6AC00A56059 /* Manrope-SemiBold.ttf */; };
+		A1C9BD022585A6AC00A56059 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1C9BCFB2585A6AC00A56059 /* Manrope-Bold.ttf */; };
 		A1CE908A2584312A00A524A6 /* EventInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE90892584312A00A524A6 /* EventInfoView.swift */; };
 		A1D979FE257BF97400468F0C /* EventTextInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D979FD257BF97400468F0C /* EventTextInfoView.swift */; };
 		A1E2C5EC255462FD00E88FDD /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */; };
 		A1E2C5F32554971E00E88FDD /* CustomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5F22554971E00E88FDD /* CustomNavigationView.swift */; };
-		A1E2C5F92554A55E00E88FDD /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5F82554A55E00E88FDD /* DataService.swift */; };
+		A1E2C5F92554A55E00E88FDD /* DataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E2C5F82554A55E00E88FDD /* DataViewModel.swift */; };
 		A1E4928625534459002F07BE /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4928525534459002F07BE /* TagView.swift */; };
 		A1E4928D25534BBF002F07BE /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4928C25534BBF002F07BE /* TagModel.swift */; };
 		A1F075AF257D6617009BCA73 /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */; };
@@ -90,16 +98,24 @@
 		A1B2361D2552EF9400774259 /* EventRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowView.swift; sourceTree = "<group>"; };
 		A1B236202552F0B400774259 /* RegionDayRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionDayRowView.swift; sourceTree = "<group>"; };
 		A1B905FF25545D2F0074EABA /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
-		A1BBC824257E6CE600061E67 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
+		A1BBC824257E6CE600061E67 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		A1BBC827257E706600061E67 /* EventListInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListInfoView.swift; sourceTree = "<group>"; };
 		A1BBC82A257E746900061E67 /* CustomIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIconButton.swift; sourceTree = "<group>"; };
 		A1BBC82F257EDC2500061E67 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		A1C7098E257E601C008D7123 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		A1C9BCED2585A15300A56059 /* HideKeyBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyBoard.swift; sourceTree = "<group>"; };
+		A1C9BCF52585A6AC00A56059 /* Manrope-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraLight.ttf"; sourceTree = "<group>"; };
+		A1C9BCF62585A6AC00A56059 /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
+		A1C9BCF72585A6AC00A56059 /* Manrope-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Medium.ttf"; sourceTree = "<group>"; };
+		A1C9BCF82585A6AC00A56059 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
+		A1C9BCF92585A6AC00A56059 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
+		A1C9BCFA2585A6AC00A56059 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
+		A1C9BCFB2585A6AC00A56059 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		A1CE90892584312A00A524A6 /* EventInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoView.swift; sourceTree = "<group>"; };
 		A1D979FD257BF97400468F0C /* EventTextInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTextInfoView.swift; sourceTree = "<group>"; };
 		A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		A1E2C5F22554971E00E88FDD /* CustomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationView.swift; sourceTree = "<group>"; };
-		A1E2C5F82554A55E00E88FDD /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		A1E2C5F82554A55E00E88FDD /* DataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewModel.swift; sourceTree = "<group>"; };
 		A1E4928525534459002F07BE /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		A1E4928C25534BBF002F07BE /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		A1F075AE257D6617009BCA73 /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
@@ -212,10 +228,39 @@
 			isa = PBXGroup;
 			children = (
 				A1321A1B2552C0DC000016B8 /* ApiService.swift */,
-				A1E2C5F82554A55E00E88FDD /* DataService.swift */,
-				A1BBC824257E6CE600061E67 /* MapService.swift */,
 			);
 			path = services;
+			sourceTree = "<group>";
+		};
+		A1C9BCEC2585A13F00A56059 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A1C9BCED2585A15300A56059 /* HideKeyBoard.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		A1C9BCF12585A2EA00A56059 /* viewmodels */ = {
+			isa = PBXGroup;
+			children = (
+				A1E2C5F82554A55E00E88FDD /* DataViewModel.swift */,
+				A1BBC824257E6CE600061E67 /* MapViewModel.swift */,
+			);
+			path = viewmodels;
+			sourceTree = "<group>";
+		};
+		A1C9BCF42585A65800A56059 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A1C9BCFB2585A6AC00A56059 /* Manrope-Bold.ttf */,
+				A1C9BCF62585A6AC00A56059 /* Manrope-ExtraBold.ttf */,
+				A1C9BCF52585A6AC00A56059 /* Manrope-ExtraLight.ttf */,
+				A1C9BCF92585A6AC00A56059 /* Manrope-Light.ttf */,
+				A1C9BCF72585A6AC00A56059 /* Manrope-Medium.ttf */,
+				A1C9BCF82585A6AC00A56059 /* Manrope-Regular.ttf */,
+				A1C9BCFA2585A6AC00A56059 /* Manrope-SemiBold.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		A1E2C5EA255462E800E88FDD /* components */ = {
@@ -253,6 +298,9 @@
 		A1FA3F532551C4DC00D1F84A /* walauft-ios */ = {
 			isa = PBXGroup;
 			children = (
+				A1C9BCF42585A65800A56059 /* fonts */,
+				A1C9BCF12585A2EA00A56059 /* viewmodels */,
+				A1C9BCEC2585A13F00A56059 /* extensions */,
 				A1E2C5EA255462E800E88FDD /* components */,
 				A1321A1A2552C0BA000016B8 /* services */,
 				A1FA3F6D2551C61600D1F84A /* views */,
@@ -382,11 +430,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1C9BCFD2585A6AC00A56059 /* Manrope-ExtraBold.ttf in Resources */,
 				E7081AC7257D684800392137 /* 4.json in Resources */,
+				A1C9BCFF2585A6AC00A56059 /* Manrope-Regular.ttf in Resources */,
 				E7081ACB257D684800392137 /* 2.json in Resources */,
+				A1C9BD012585A6AC00A56059 /* Manrope-SemiBold.ttf in Resources */,
+				A1C9BD002585A6AC00A56059 /* Manrope-Light.ttf in Resources */,
 				E7081AC9257D684800392137 /* 6.json in Resources */,
+				A1C9BCFE2585A6AC00A56059 /* Manrope-Medium.ttf in Resources */,
 				A1FA3F5C2551C4DD00D1F84A /* Preview Assets.xcassets in Resources */,
 				E7081AC8257D684800392137 /* 5.json in Resources */,
+				A1C9BD022585A6AC00A56059 /* Manrope-Bold.ttf in Resources */,
+				A1C9BCFC2585A6AC00A56059 /* Manrope-ExtraLight.ttf in Resources */,
 				E7081ACA257D684800392137 /* 3.json in Resources */,
 				A1FA3F592551C4DD00D1F84A /* Assets.xcassets in Resources */,
 			);
@@ -446,7 +501,7 @@
 				A11D5169257051F90054E9CF /* EventTagListView.swift in Sources */,
 				E7CAC739258267C500E5400D /* LocationManager.swift in Sources */,
 				A15C6D28257FB7F700E57D6B /* WrappedTags.swift in Sources */,
-				A1E2C5F92554A55E00E88FDD /* DataService.swift in Sources */,
+				A1E2C5F92554A55E00E88FDD /* DataViewModel.swift in Sources */,
 				A1FA3F662551C57C00D1F84A /* RegionModel.swift in Sources */,
 				A1FA3F572551C4DC00D1F84A /* ContentView.swift in Sources */,
 				A1E2C5F32554971E00E88FDD /* CustomNavigationView.swift in Sources */,
@@ -481,9 +536,10 @@
 				A1F075BB257D6A85009BCA73 /* EventTagsInfoView.swift in Sources */,
 				A1B9060025545D2F0074EABA /* SearchBarView.swift in Sources */,
 				A1E4928625534459002F07BE /* TagView.swift in Sources */,
+				A1C9BCEE2585A15300A56059 /* HideKeyBoard.swift in Sources */,
 				A1CE908A2584312A00A524A6 /* EventInfoView.swift in Sources */,
 				A1BBC830257EDC2500061E67 /* FilterModel.swift in Sources */,
-				A1BBC825257E6CE600061E67 /* MapService.swift in Sources */,
+				A1BBC825257E6CE600061E67 /* MapViewModel.swift in Sources */,
 				A1321A182552BCDD000016B8 /* EventsView.swift in Sources */,
 				A19E178C257FE1320038C16B /* SearchModel.swift in Sources */,
 				A146C853256EB4EE003C2F15 /* RegionListItem.swift in Sources */,

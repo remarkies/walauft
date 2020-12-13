@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EventRowView: View {
 
-    @EnvironmentObject var dataService : DataService
+    @EnvironmentObject var dataViewModel : DataViewModel
     @EnvironmentObject var selectedRegion: RegionModel
 
     @State var event: EventModel
@@ -17,7 +17,7 @@ struct EventRowView: View {
 
     var body: some View {
         VStack (alignment: .leading) {
-            NavigationLink(destination: DetailView(selectedEvent: event).environmentObject(selectedRegion).environmentObject(dataService)) {
+            NavigationLink(destination: DetailView(selectedEvent: event).environmentObject(selectedRegion).environmentObject(dataViewModel)) {
 
                 VStack (alignment: .leading, spacing: 4) {
                     HStack (alignment: .top) {
@@ -32,7 +32,7 @@ struct EventRowView: View {
                         if self.event.minage != nil && self.event.minage! > 0 {
                             HStack {
                                 Text("\(self.event.minage!)+")
-                                    .font(.system(size: 12))
+                                    .font(.custom("Manrope-Medium", size: 12))
                                     .foregroundColor(Color("Accent1"))
                                 Spacer()
                             }
@@ -56,7 +56,7 @@ struct EventRowView: View {
                     }
                     HStack {
                         HStack {}
-                        .frame(width: 48)
+                        .frame(width: 44)
                         EventTagListView(tags: event.tags)
 
                     }
@@ -66,7 +66,6 @@ struct EventRowView: View {
                 .cornerRadius(3)
             }
         }
-        .padding(.vertical, 4)
     }
 }
 

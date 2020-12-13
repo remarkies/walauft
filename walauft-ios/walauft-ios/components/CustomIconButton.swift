@@ -11,6 +11,7 @@ struct CustomIconButton: View {
     var icon: String
     var background: Color
     var foreground: Color
+    var isSelected: Bool
     var action: ()->() = { }
     var body: some View {
         Button (action: action) {
@@ -20,11 +21,12 @@ struct CustomIconButton: View {
         .background(background)
         .foregroundColor(foreground)
         .cornerRadius(3)
+        .shadow(radius: isSelected ? 2 : 0)
     }
 }
 
 struct CustomIconButton_Previews: PreviewProvider {
     static var previews: some View {
-        CustomIconButton(icon: "map", background: Color("Layer1"), foreground: Color("Foreground"))
+        CustomIconButton(icon: "map", background: Color("Layer1"), foreground: Color("Foreground"), isSelected: true)
     }
 }

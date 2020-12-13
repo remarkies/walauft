@@ -1,5 +1,5 @@
 //
-//  DataService.swift
+//  DataViewModel.swift
 //  walauft-ios
 //
 //  Created by Luka Kramer on 05.11.20.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DataService: ObservableObject {
+final class DataViewModel: ObservableObject {
 
     var loadedRegion: RegionModel?
 

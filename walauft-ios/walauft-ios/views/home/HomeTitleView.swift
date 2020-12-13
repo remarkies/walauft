@@ -14,9 +14,9 @@ struct HomeTitleView: View {
         HStack (alignment: .top) {
             VStack {
                 Text("IN")
+                .font(.custom("Manrope-Bold", size: self.fontSize))
                 .bold()
                 .textCase(.uppercase)
-                .font(.system(size: self.fontSize))
                 .foregroundColor(Color("Layer1"))
                 Spacer()
             }
@@ -25,15 +25,15 @@ struct HomeTitleView: View {
             HStack {
                 Spacer()
                 Text("Walauft")
+                    .font(.custom("Manrope-Bold", size: self.fontSize))
                     .bold()
                     .textCase(.uppercase)
-                    .font(.system(size: self.fontSize))
                     .foregroundColor(Color("Layer2"))
                     .rotationEffect(.degrees(-90), anchor: .bottomTrailing)
                     .padding(.top, -72)
                     //.rotated()
             }
-            .padding(.top, 10)
+            .padding(.top, 14)
         }
     }
 }

@@ -18,7 +18,6 @@ struct DetailHeaderView: View {
                 title
                     .bold()
                     .foregroundColor(Color("Foreground"))
-                    
                     .textCase(.uppercase)
                     .fixedSize(horizontal: true, vertical: false)
                 
@@ -29,7 +28,7 @@ struct DetailHeaderView: View {
                     .foregroundColor(Color("Foreground"))
                     .fixedSize(horizontal: true, vertical: false)
             }
-            .font(.system(size: 20))
+            .font(.custom("Manrope-Bold", size: 20))
             HStack {
                 text
                     .bold()
@@ -37,7 +36,7 @@ struct DetailHeaderView: View {
                     .fixedSize(horizontal: true, vertical: false)
                 Spacer()
             }
-            .font(.system(size: 16))
+            .font(.custom("Manrope-Bold", size: 16))
         }
         .padding(.bottom, 24)
     }

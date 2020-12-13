@@ -11,7 +11,7 @@ struct EventNameView: View {
     var name: String
     var body: some View {
         Text("\(self.name)")
-                .font(.system(size: 12))
+                .font(.custom("Manrope-Medium", size: 12))
     }
 }
 

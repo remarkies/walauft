@@ -23,18 +23,20 @@ struct EventDetailContentView: View {
                     MapViewRep(event: event, eventsClickable: false)
                         .frame(height: 350)
                         .cornerRadius(3)
+                        .shadow(radius: 2)
+                    
                     CustomButton(icon: "map", text: "Open in Maps", accent: Color("Layer2"), action: {
-                        MapService.openMapWithCoordinates(latitude: event.location.latitude!, longitude: event.location.longitude!, pinText: event.location.name)
+                        MapViewModel.openMapWithCoordinates(latitude: event.location.latitude!, longitude: event.location.longitude!, pinText: event.location.name)
                     })
                  
                 }
             } else {
 
                 CustomButton(icon: "map", text: "Open in Maps", accent: Color("Layer2"), action: {
-                    MapService.searchCoordinates(forAddress: "\(event.location.street) \(event.location.streetNo), \(event.location.zipCode), \(event.location.city)") {
+                    MapViewModel.searchCoordinates(forAddress: "\(event.location.street) \(event.location.streetNo), \(event.location.zipCode), \(event.location.city)") {
                         coordinate in
                         if coordinate != nil {
-                            MapService.openMapWithCoordinates(latitude: coordinate!.latitude, longitude: coordinate!.longitude, pinText: event.location.name)
+                            MapViewModel.openMapWithCoordinates(latitude: coordinate!.latitude, longitude: coordinate!.longitude, pinText: event.location.name)
                         }
                     }
                 })

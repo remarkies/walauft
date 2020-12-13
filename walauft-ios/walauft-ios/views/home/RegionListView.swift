@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreLocation
 struct RegionListView: View {
-    @EnvironmentObject var dataService : DataService
+    @EnvironmentObject var dataViewModel : DataViewModel
     @ObservedObject private var locationManager = LocationManager()
     @State var regions: [RegionModel] = [
         RegionModel(id: 2, name: "Lozärn", position: CLLocation(latitude: 47.050820893720214, longitude: 8.310552721471659)),
@@ -28,7 +28,7 @@ struct RegionListView: View {
                 region in
                 NavigationLink(destination:
                                 EventsView()
-                                .environmentObject(dataService)
+                                .environmentObject(dataViewModel)
                                 .environmentObject(region))
                 {
                     RegionListItem(region: region)
