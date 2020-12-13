@@ -51,6 +51,7 @@ struct SearchBarView: View {
                                     if !self.dataService.isFilterTag(tag: tag) {
                                         
                                         self.dataService.filterTags.append(tag)
+                                        self.dataService.reloadEvents(region: selectedRegion)
                                         self.searchText = ""
                                         self.proposedTags = []
                                         self.hideKeyboard()
@@ -73,6 +74,7 @@ struct SearchBarView: View {
                             TagView(tag: tag, background:  Color("Layer2"), clicked: {}, unClicked: {
                                 if let index = self.dataService.filterTags.firstIndex(where: { $0.type == tag.type && $0.text == tag.text }) {
                                     self.dataService.filterTags.remove(at: index)
+                                    self.dataService.reloadEvents(region: selectedRegion)
                                 }
                             })
                         }

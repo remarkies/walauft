@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    var dataService = DataService()
     init() {
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
+        
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
         // this is not the same as manipulating the proxy directly
@@ -44,6 +48,7 @@ struct ContentView: View {
     var body: some View {
             NavigationView {
                 HomeView()
+                    .environmentObject(dataService)
             }
         
     }

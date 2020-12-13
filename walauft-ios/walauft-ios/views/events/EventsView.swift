@@ -22,11 +22,6 @@ struct EventsView: View {
         formatter.dateFormat = " dd."
         return formatter
     }()
-    init(){
-        //dataService = DataService(selectedRegion: selectedRegion)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.black], for: .selected)
-    }
     var body: some View {
         ZStack (alignment: .topLeading) {
             Color("Layer1").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -69,8 +64,15 @@ struct EventsView: View {
             }.padding(.top, 16)
         }
         .onAppear() {
+            if self.dataService.loadedRegion != nil &&
+                self.dataService.loadedRegion!.id != selectedRegion.id {
+                self.dataService.reset()
+                self.dataService.reloadEvents(region: selectedRegion)
+            }
+            
+            
             if self.dataService.data.count == 0 {
-                self.dataService.reloadEvents()
+                self.dataService.reloadEvents(region: selectedRegion)
             }
         }
         .navigationBarTitleDisplayMode(.inline)

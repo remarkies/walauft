@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EventTagListView: View {
     
+    @EnvironmentObject var selectedRegion : RegionModel
     @EnvironmentObject var dataService : DataService
     @State var tags: [TagModel] = []
     
@@ -20,11 +21,13 @@ struct EventTagListView: View {
                     TagView(tag: tag, background:  Color("Layer1"), clicked: {
                         if !self.dataService.filterTags.contains(where: { $0.type == tag.type && $0.text == tag.text }) {
                             self.dataService.filterTags.append(tag)
+                            self.dataService.reloadEvents(region: selectedRegion)
                         }
                     }, unClicked: {
                         if let index = self.dataService.filterTags.firstIndex(where: { $0.type == tag.type && $0.text == tag.text
                         }) {
                             self.dataService.filterTags.remove(at: index)
+                            self.dataService.reloadEvents(region: selectedRegion)
                         }
                     })
                 }

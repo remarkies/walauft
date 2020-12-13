@@ -10,35 +10,37 @@ import Combine
 
 final class DataService: ObservableObject {
 
-    var selectedRegion: RegionModel
+    var loadedRegion: RegionModel?
 
     @Published var loading: Bool
     @Published var datesAvailable: [Date]
     @Published var data: [RegionDayModel] {
         willSet {
-            datesAvailable = self.data.map{event in event.date}
-            objectWillChange.send()
+            datesAvailable = self.data.map { event in event.date }
         }
     }
 
-    @Published var filterTags: [TagModel] {
-        didSet {
-            reloadEvents()
-        }
-    }
+    @Published var filterTags: [TagModel]
 
-    init(selectedRegion: RegionModel) {
-        self.selectedRegion = selectedRegion
+    init() {
         self.data = []
         self.filterTags = []
         self.loading = false
         self.datesAvailable = []
     }
+    
+    func reset() {
+        self.data = []
+        self.filterTags = []
+        self.datesAvailable = []
+        self.loading = false
+    }
 
-    func reloadEvents() {
+    func reloadEvents(region: RegionModel) {
+        self.loadedRegion = region
         self.data = []
         self.loading = true
-        ApiService.loadEventsAsync(region: self.selectedRegion, filters: filterTags) {
+        ApiService.loadEventsAsync(region: region, filters: filterTags) {
             (result) in
             if result != nil {
                 self.data = result!

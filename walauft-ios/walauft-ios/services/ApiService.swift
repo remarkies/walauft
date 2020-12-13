@@ -44,7 +44,6 @@ final class ApiService: ObservableObject {
         let encoder = JSONEncoder()
         do {
             let jsonData = try encoder.encode(filter)
-            print(String(data: jsonData, encoding: .utf8)!)
             request.httpBody = jsonData
         } catch {
             print(String(describing: error))

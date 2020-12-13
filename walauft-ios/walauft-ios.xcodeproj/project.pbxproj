@@ -214,7 +214,6 @@
 				A1321A1B2552C0DC000016B8 /* ApiService.swift */,
 				A1E2C5F82554A55E00E88FDD /* DataService.swift */,
 				A1BBC824257E6CE600061E67 /* MapService.swift */,
-				E7CAC74D2584EB0800E5400D /* SwissGermanDateFormatter.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -222,6 +221,7 @@
 		A1E2C5EA255462E800E88FDD /* components */ = {
 			isa = PBXGroup;
 			children = (
+				E7CAC74D2584EB0800E5400D /* SwissGermanDateFormatter.swift */,
 				A1E2C5F22554971E00E88FDD /* CustomNavigationView.swift */,
 				A1E2C5EB255462FD00E88FDD /* CustomTextField.swift */,
 				A1F075C8257D8D1B009BCA73 /* RotatedView.swift */,
