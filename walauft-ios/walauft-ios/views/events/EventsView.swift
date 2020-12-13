@@ -45,8 +45,8 @@ struct EventsView: View {
 
                             if (self.dataViewModel.data.count > 0) {
                                 Picker(selection: $selectedDate, label: Text("")) {
-                                    ForEach(0 ..< min(self.dataService.datesAvailable.count, 3)) {
-                                        Text("\(SwissGermanDateFormatter.getShortSwissDay(date: self.dataService.datesAvailable[$0]))\(self.dataService.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
+                                    ForEach(0 ..< min(self.dataViewModel.datesAvailable.count, 3)) {
+                                        Text("\(SwissGermanDateFormatter.getShortSwissDay(date: self.dataViewModel.datesAvailable[$0]))\(self.dataViewModel.datesAvailable[$0], formatter: Self.weekDayDateFormat)").tag($0)
                                     }
                                 }
                                 .font(.custom("Manrope-Bold", size: 12))
