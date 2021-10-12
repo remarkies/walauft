@@ -45,9 +45,7 @@ router.post('/:regionId/:today',function(request,response){
 
 router.post('/',function(request,response){
     var param = request.body;
-
     let date = moment(new Date())
-                    .add(-1, 'years')
                     .add(-10, 'hours')
                     .format('YYYYMMDD');
 

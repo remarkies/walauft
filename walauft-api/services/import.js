@@ -2,7 +2,9 @@ let moment = require('moment');
 require('dotenv').config()
 const https = require('https');
 let database = require('../services/database');
-const NodeGeocoder = require('node-geocoder');
+//const NodeGeocoder = require('node-geocoder');
+const openGeocoder = require('node-open-geocoder');
+
 let url1 = "https://zuerich.usgang.ch/v1/events?date=";
 let url2 = "&regionid=";
 let url3 = "&limit=100";
@@ -24,9 +26,9 @@ let regionsDic = {
 let regions = ["2", "3", "4", "5", "6"];
 //let regions = [ "4" ];
 
-scratchData(regions);
+crawlData(regions);
 
-async function scratchData(regions) {
+async function crawlData(regions) {
     await database.connect(process.env.DB_LINK);
     console.log("INFO: Connected to Db")
     for (const region of regions) {
@@ -43,13 +45,11 @@ async function scratchData(regions) {
     await database.close();
     console.log("INFO: Db connection closed");
 }
-
 function createLinks(region) {
     let links = [];
 
     for(let i = 0; i < checkDaysInAdvance; i++) {
         let date = moment()
-            .add(-1, 'years')
             .add(i, 'days').hours(0).minutes(0).seconds(0).milliseconds(0).format("YYYY-MM-DD");
         let link = url1 + date + url2 + region + url3;
         links.push({url: link, id: region, date: date});
@@ -157,32 +157,29 @@ function downloadEvents(url, region, date) {
 function searchForMissingLocations(result) {
     let promises = [];
     const options = {
-        provider: 'google',
+        provider: 'openstreetmap',
 
         // Optional depending on the providers
         //fetch: customFetchImplementation,
-        apiKey: 'AIzaSyAaqSC_s0YO6-lkfimjjFN9lIL31plwu8A', // for Mapquest, OpenCage, Google Premier
+        //apiKey: process.env.GOOGLE_API, // for Mapquest, OpenCage, Google Premier
         //formatter: null // 'gpx', 'string', ...
     };
-    const geocoder = NodeGeocoder(options);
+
+    const geocoder = openGeocoder()
     for (const event of result.events) {
         if (event.location.longitude === "-1" || event.location.latitude === "-1") {
             promises.push(new Promise((resolve, reject) => {
-                let search = event.location.street + " " + event.location.streetno + ", " + event.location.zipcode + " " + event.location.city;
+                let search = event.location.street + " " + event.location.streetNo + ", " + event.location.zipCode + " " + event.location.city;
 
                 geocoder.geocode(search)
-                    .then(loc => {
-                        if (loc.length > 0) {
-                            let foundLocation = loc[0];
+                    .end((err, res) => {
+                        if (res !== undefined && res.length > 0) {
+                            let foundLocation = res[0];
                             event.location.latitude =  "" + foundLocation.latitude + "";
                             event.location.longitude = "" + foundLocation.longitude + "";
                         }
                         resolve();
                     })
-                    .catch(error => {
-                        console.log(error);
-                        reject(error);
-                    });
             }));
         }
     }
