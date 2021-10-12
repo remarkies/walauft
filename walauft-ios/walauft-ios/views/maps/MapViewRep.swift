@@ -42,7 +42,7 @@ struct MapViewRep: UIViewRepresentable {
             return MKMapView(frame: .zero)
         }
         mapView.addOverlay(tileOverlay)
-        if (!dataViewModel.data.isEmpty){
+        if (!dataViewModel.data.isEmpty && dataViewModel.data.indices.contains(selectedDate)){
             let annotationsOfLocations = getAnnotationsFromEvents(events: dataViewModel.data[selectedDate].events)
             mapView.addAnnotations(annotationsOfLocations)
             mapView.showAnnotations(annotationsOfLocations, animated: true)
@@ -53,7 +53,9 @@ struct MapViewRep: UIViewRepresentable {
     }
     
     func updateUIView(_ mapView: MKMapView, context: Context) {
-        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeAnnotations(mapView.annotations.filter{annotation in
+            !(annotation is MKUserLocation)
+        })
         if (!dataViewModel.data.isEmpty && dataViewModel.data.indices.contains(selectedDate)){
             let annotationsOfEvents = getAnnotationsFromEvents(events: dataViewModel.data[selectedDate].events)
             mapView.addAnnotations(annotationsOfEvents.filter{annotation in
