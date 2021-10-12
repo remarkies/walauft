@@ -16,6 +16,7 @@ struct CustomIconButton: View {
     var body: some View {
         Button (action: action) {
             Image(systemName: icon).font(.system(size: 16, weight: .regular))
+            Spacer()
         }
         .frame(width: 40, height: 40)
         .background(background)
