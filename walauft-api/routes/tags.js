@@ -11,6 +11,9 @@ router.post('/',function(request,response){
         .add(-10, 'hours')
         .format('YYYYMMDD');
 
+    date = moment("2019-12-12")
+        .format('YYYYMMDD');
+    
     let query = [
         { $match: { region: param.regionId.toString() } },
         { $project: {

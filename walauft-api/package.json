@@ -17,11 +17,12 @@
     "fuzzy-search": "^3.2.1",
     "jsdom": "^9.10.0",
     "moment": "^2.29.0",
-    "mongodb": "^2.2.22",
+    "mongodb": "^4.1.3",
     "morgan": "^1.10.0",
     "node-geocoder": "^3.27.0",
+    "node-open-geocoder": "^4.0.1",
     "request": "^2.88.2",
-    "require": "^2.4.20",
+    "require": "^0.4.4",
     "serve-favicon": "^2.5.0"
   }
 }
