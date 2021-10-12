@@ -77,7 +77,6 @@ struct EventsView: View {
         .navigationBarTitle(self.selectedRegion.name)
         .navigationBarItems(trailing:
             HStack(alignment: .center) {
-
                 CustomIconButton(icon: "list.bullet", background: isListview ? Color("Layer2") : Color("Layer1"), foreground: Color("Foreground"), isSelected: isListview, action: {
                     withAnimation(.easeInOut(duration: 0.3)){
                         isListview = true
@@ -90,9 +89,7 @@ struct EventsView: View {
                 }).animation(.easeIn)
             }
         )
-
     }
-
 }
 
 struct Events_Previews: PreviewProvider {

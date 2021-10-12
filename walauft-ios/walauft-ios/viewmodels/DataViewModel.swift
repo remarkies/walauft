@@ -13,7 +13,6 @@ final class DataViewModel: ObservableObject {
     var loadedRegion: RegionModel?
     
     @Published var data: [RegionDayModel]
-    
     @Published var loading: Bool
     @Published var datesAvailable: [Date]
     @Published var filterTags: [TagModel]
