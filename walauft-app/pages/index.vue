@@ -1,6 +1,6 @@
 <template>
   <div id="cities">
-    <NuxtLink v-for="city in cities" :key="city.id" :to="'in/' + city.name">
+    <NuxtLink v-for="city in cities" :key="city.id" :to="'/' + city.name">
       {{ city.name }}
     </NuxtLink>
   </div>
@@ -18,9 +18,17 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+
 #cities {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    font-size: 10vw;
+    font-variation-settings: "wght" 200;
+    a:hover {
+        transition: all 0.3s ease-in-out;
+        font-variation-settings: "wght" 500;
+    }
 }
+
 </style>
