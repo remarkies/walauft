@@ -108,6 +108,4 @@ dist
 .env.*.local
 *.xcuserstate
 .DS_Store
-*.xcuserstate
-.DS_Store
-.DS_Store
+
