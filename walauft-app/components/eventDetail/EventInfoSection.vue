@@ -21,18 +21,16 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss" scoped>
-.info-title {
-}
 h4 {
   font-size: 0.625rem;
   margin: 0;
+  font-weight: 400;
+
+  font-style: normal;
 }
 .info {
   font-size: 1rem;
-  font-variation-settings: "wght" 500;
-  font-style: normal;
-  adress {
-    font-style: normal;
-  }
+  // font-variation-settings: "wght" 500;
+  font-weight: 500;
 }
 </style>

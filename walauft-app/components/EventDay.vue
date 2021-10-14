@@ -1,12 +1,12 @@
 <template>
-  <div class="event-day">
-    <div class="event-day-date" ref="day">{{ formattedDay }}</div>
+  <ul class="event-day">
+    <li class="event-day-date" ref="day">{{ formattedDay }}</li>
     <EventListItem
       v-for="eventItem in eventDay.events"
       :key="eventItem.key"
       :event-item="eventItem"
     />
-  </div>
+  </ul>
 </template>
 
 <script lang="ts">

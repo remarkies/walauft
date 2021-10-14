@@ -1,5 +1,5 @@
 <template>
-  <article class="event">
+  <article class="event" v-if="eventItem">
     <h2 class="rounded-box">{{ eventItem.name }}</h2>
     <EventInfoSection title="Wo">
       <address id="event-adress">{{ eventItem.location.name }}</address>
@@ -53,8 +53,8 @@ export default Vue.extend({
   section {
     margin: 1rem 0;
   }
-}
-adress {
-  font-style: normal !important;
+  #event-adress {
+    font-style: inherit;
+  }
 }
 </style>

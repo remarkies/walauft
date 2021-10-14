@@ -1,10 +1,22 @@
 <template>
   <div>
+    <div>
+      <input type="search" name="search" id="" v-model="searchString" />
+      <div>
+        <Tag
+          v-for="tag in $store.state.tags.activeTags"
+          :key="tag.text"
+          :tag="tag"
+        />
+      </div>
+    </div>
     <div v-if="$fetchState.pending">Bin am lade... wart schnell pls</div>
     <div v-else-if="$fetchState.error">da lauft nix</div>
     <ul v-else>
       <EventDay
-        v-for="eventDay in eventDays"
+        v-for="eventDay in $store.getters['events/getFilteredEvents'](
+          searchString
+        )"
         :key="eventDay.date"
         :eventDay="eventDay"
       />
@@ -14,9 +26,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { PropType } from "vue";
 import citiesObj from "@/static/cities.js";
-import { EventDay } from "~/types/Models";
+import { EventDay, Tag } from "~/types/Models";
+import { mapState } from "vuex";
 export default Vue.extend({
   head() {
     return {
@@ -45,18 +57,36 @@ export default Vue.extend({
     return {
       city: this.$route.params.stadt,
       eventDays: [] as EventDay[],
+      searchString: "",
     };
   },
-  async fetch(){
-    this.eventDays = await this.$http.$post("https://api.walauft.ch/events", {
-      tags: [],
+  computed: {
+    ...mapState("tags", {
+      activeTags: (state: any) => state.activeTags,
+    }),
+  },
+  watch: {
+    activeTags() {
+      this.$fetch();
+    },
+  },
+  async fetch() {
+    const allEvents = await this.$http.$post("https://api.walauft.ch/events", {
+      tags: this.activeTags,
       regionId: citiesObj.cityIdName.find(
         (cityIdNameObj) => this.city == cityIdNameObj.name
       )?.id,
     });
-    if (this.eventDays.length <= 0) {
+    this.$store.commit("events/setAllEvents", allEvents);
+    if (allEvents.length <= 0) {
       throw new Error();
     }
   },
 });
 </script>
+<style>
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+</style>
