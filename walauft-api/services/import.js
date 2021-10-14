@@ -125,6 +125,7 @@ function downloadEvents(url, region, date) {
                 });
                 json_data.items.forEach(item => {
                     let newEventItem = {
+                        _id: database.generateObjectId(),
                         name: item.name,
                         date: item.date,
                         time: item.start,

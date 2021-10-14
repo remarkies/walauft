@@ -14,7 +14,7 @@ struct CustomIconButton: View {
     var isSelected: Bool
     var action: ()->() = { }
     var body: some View {
-        Button (action: action) {
+        Button (action: action) { 
             Image(systemName: icon).font(.system(size: 16, weight: .regular))
             Spacer()
         }

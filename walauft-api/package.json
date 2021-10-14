@@ -23,6 +23,8 @@
     "node-open-geocoder": "^4.0.1",
     "request": "^2.88.2",
     "require": "^0.4.4",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "utf8": "^3.0.0",
+    "x-ray": "^2.1.0"
   }
 }
