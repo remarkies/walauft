@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { EventItem, Tag } from "~/types/Models";
+import { EventDay, EventItem, Tag } from "~/types/Models";
 
 export default Vue.extend({
   data: function () {
@@ -45,6 +45,18 @@ export default Vue.extend({
     getActs(): Tag[] {
       return this.eventItem.tags.filter((tag) => tag.type == "act");
     },
+  },
+  async fetch() {
+    if (!this.eventItem) {
+      const eventday = (await this.$http.$post(
+        "https://api.walauft.ch/events/event",
+        {
+          eventId: this.$route.params.event,
+        }
+      )) as EventDay[];
+      //api doesnt respond with an array of events but with a EventItem
+      this.eventItem = eventday[0].events[0] as EventItem;
+    }
   },
 });
 </script>

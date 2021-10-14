@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="search" name="search" id="" v-model="searchString" />
+    <input type="search" name="search" id="" v-model="searchTerm" />
   </div>
 </template>
 
@@ -11,8 +11,15 @@ import { mapActions } from "vuex";
 export default Vue.extend({
   data() {
     return {
-      searchString: "",
+      searchTerm: "",
     };
+  },
+  watch: {
+    searchTerm(newTerm) {
+      console.log(newTerm);
+      
+      this.$store.dispatch("events/setSearchTerm", newTerm);
+    },
   },
   methods: {
     ...mapActions({

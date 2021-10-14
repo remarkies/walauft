@@ -1,7 +1,9 @@
 <template>
   <div>
     <div>
-      <input type="search" name="search" id="" v-model="searchString" />
+      {{ $store.state.events.filteredEventDays.length }}
+
+      <Search />
       <div>
         <Tag
           v-for="tag in $store.state.tags.activeTags"
@@ -14,9 +16,7 @@
     <div v-else-if="$fetchState.error">da lauft nix</div>
     <ul v-else>
       <EventDay
-        v-for="eventDay in $store.getters['events/getFilteredEvents'](
-          searchString
-        )"
+        v-for="eventDay in $store.state.events.filteredEventDays"
         :key="eventDay.date"
         :eventDay="eventDay"
       />
@@ -56,8 +56,8 @@ export default Vue.extend({
   data() {
     return {
       city: this.$route.params.stadt,
-      eventDays: [] as EventDay[],
       searchString: "",
+      allEventDays: [] as EventDay[],
     };
   },
   computed: {
@@ -69,16 +69,22 @@ export default Vue.extend({
     activeTags() {
       this.$fetch();
     },
+    //watching it bc fetch requests can be cached therefore be not executed
+    allEventDays(newValue: EventDay[]) {
+      this.$store.commit("events/setAllEventDays", newValue);
+    },
   },
   async fetch() {
-    const allEvents = await this.$http.$post("https://api.walauft.ch/events", {
-      tags: this.activeTags,
-      regionId: citiesObj.cityIdName.find(
-        (cityIdNameObj) => this.city == cityIdNameObj.name
-      )?.id,
-    });
-    this.$store.commit("events/setAllEvents", allEvents);
-    if (allEvents.length <= 0) {
+    this.allEventDays = await this.$http.$post(
+      "https://api.walauft.ch/events",
+      {
+        tags: this.activeTags,
+        regionId: citiesObj.cityIdName.find(
+          (cityIdNameObj) => this.city == cityIdNameObj.name
+        )?.id,
+      }
+    );
+    if (this.allEventDays.length <= 0) {
       throw new Error();
     }
   },

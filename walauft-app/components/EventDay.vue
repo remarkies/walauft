@@ -1,6 +1,7 @@
 <template>
   <ul class="event-day">
     <li class="event-day-date" ref="day">{{ formattedDay }}</li>
+    
     <EventListItem
       v-for="eventItem in eventDay.events"
       :key="eventItem.key"
@@ -24,7 +25,6 @@ export default Vue.extend({
       return this.eventDay.date;
     },
   },
-  
 });
 </script>
 <style lang="scss" scoped>
@@ -44,5 +44,4 @@ export default Vue.extend({
   background: var(--secondary-color);
   top: 1rem;
 }
-
 </style>

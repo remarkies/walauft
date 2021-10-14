@@ -13,7 +13,7 @@ export interface Location {
     latitude: Number;
 }
 export interface EventItem {
-    id: String;
+    _id: String;
     name: String;
     date: String;
     time: String;

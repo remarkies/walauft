@@ -4,7 +4,7 @@
       class="event-item-name"
       :to="{
         name: 'stadt-event',
-        params: { event: eventItem.name, eventItem: eventItem },
+        params: { event: eventItem._id, eventItem: eventItem },
       }"
       >{{ eventItem.name }}</NuxtLink
     >
@@ -41,8 +41,7 @@ export default Vue.extend({
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  padding-left: 1rem ;
-
+  padding-left: 1rem;
 }
 .event-item-name {
   font-size: 1rem;
