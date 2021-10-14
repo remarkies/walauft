@@ -1,3 +1,5 @@
+
+let MongoLib = require('mongodb');
 let MongoClient = require('mongodb').MongoClient;
 
 let database = null;
@@ -13,6 +15,13 @@ module.exports.connect = function(url) {
         });
     });
 };
+
+module.exports.generateObjectId = function() {
+    return new MongoLib.ObjectId()
+}
+module.exports.getObjectId = function(id) {
+    return MongoLib.ObjectId(id)
+}
 
 module.exports.query = function (collection, query) {
     return new Promise(function (resolve, reject) {

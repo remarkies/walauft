@@ -43,6 +43,31 @@ router.post('/:regionId/:today',function(request,response){
 
 });
 
+router.post('/event', function(request, response) {
+
+    if (request.body.eventId !== undefined) {
+        const eventId = database.getObjectId(request.body.eventId)
+
+        let query = [
+            { $unwind: '$events' },
+            { $match: {'events._id' : eventId }}
+        ];
+
+        database.aggregate('events', query)
+            .then(function (docs) {
+                response.status(200).json(docs);
+            })
+            .catch((error) => {
+                response.status(400).json({ error: error})
+            });
+
+    } else {
+        response.status(404).send()
+    }
+
+
+})
+
 router.post('/',function(request,response){
     var param = request.body;
     let date = moment(new Date())

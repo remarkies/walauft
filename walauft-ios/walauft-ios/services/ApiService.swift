@@ -9,7 +9,7 @@ import Foundation
 
 final class ApiService: ObservableObject {
     
-    static let useLocalEnvironement = true
+    static let useLocalEnvironement = false
     static let apiPath: String = "https://api.walauft.ch/"
     static let devApiPath: String = "http://localhost:3000/"
     static let eventsPath: String = "events/"
