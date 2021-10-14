@@ -1,0 +1,19 @@
+:root {
+
+    --primary-color: black;
+    --secondary-color: white;
+    --box-shadow-style:  0.25rem 0.25rem 0px var(--primary-color);
+    --border-style: 1px solid var(--primary-color);
+    font-family: "Roboto Mono", monospace;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    @media (prefers-color-scheme: dark) {
+        --primary-color: white;
+        --secondary-color: rgb(36, 36, 36);
+    }
+    font-size: 18px;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
