@@ -35,7 +35,7 @@ export default Vue.extend({
     },
     formattedDate(): String {
       return moment(this.eventDay.date as MomentInput, "YYYYMMDD").format(
-        "DD. MMMM"
+        "DD.MMM"
       );
     },
   },

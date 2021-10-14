@@ -10,7 +10,7 @@
     >
     <div class="location-tags-wrapper">
       <div class="location">{{ eventItem.location.name }}</div>
-      <div>
+      <div class="tags-wrapper">
         <Tag v-for="genre in getGenres" :tag="genre" :key="genre.text"></Tag>
       </div>
     </div>
@@ -53,6 +53,11 @@ export default Vue.extend({
     font-weight: 300;
   }
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
+  .tags-wrapper {
+    text-align: right;
+    max-width: 66%;
+  }
 }
 </style>

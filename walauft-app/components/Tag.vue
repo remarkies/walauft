@@ -39,6 +39,7 @@ export default Vue.extend({
   color: inherit;
   background-color: var(--secondary-color);
   cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 .active {
   box-shadow: 0.125rem 0.125rem 0px var(--primary-color);

@@ -6,6 +6,6 @@
 
 <style lang="scss" scoped>
 #main {
-  padding: 1rem;
+  padding: .75rem;
 }
 </style>

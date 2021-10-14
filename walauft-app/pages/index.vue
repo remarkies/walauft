@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import citiesObj from "@/static/cities.js";
+import citiesObj from "@/static/cities";
 
 export default Vue.extend({
   data() {

@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import citiesObj from "@/static/cities.js";
+import citiesObj from "@/static/cities.ts";
 import { EventDay, Tag } from "~/types/Models";
 import { mapState } from "vuex";
 export default Vue.extend({

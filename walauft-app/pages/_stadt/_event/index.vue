@@ -43,7 +43,7 @@ export default Vue.extend({
       if (this.eventItem.time) {
         return (
           moment(this.eventItem.date as MomentInput, "YYYYMMDD").format(
-            "dddd  DD.MMMM"
+            "dddd DD.MMMM"
           ) +
           " am " +
           this.eventItem.time
@@ -51,7 +51,7 @@ export default Vue.extend({
       } else {
         return (
           moment(this.eventItem.date as MomentInput, "YYYYMMDD").format(
-            "dddd  DD.MMMM"
+            "dddd DD.MMMM"
           )
         );
       }
