@@ -1,8 +1,6 @@
 <template>
   <div>
     <div>
-      {{ $store.state.events.filteredEventDays.length }}
-
       <Search />
       <div>
         <Tag

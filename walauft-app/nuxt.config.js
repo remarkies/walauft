@@ -7,7 +7,7 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
       { hid: 'description', name: 'description', content: 'Events Partys in Zürich, Basel, Bern, St.Gallen und Luzern' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
@@ -45,5 +45,9 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+  server: {     
+    port: 8000, // default: 3000     
+    host: '0.0.0.0', // default: localhost   
+  },   // other configs 
 }

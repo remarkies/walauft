@@ -1,0 +1,33 @@
+export default {
+    months: [
+        "Januar",
+        "Februar",
+        "März",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "Auguscht",
+        "Septembaer",
+        "Oktober",
+        "November",
+        "Dezember",
+    ],
+    weekdays: [
+        "Sunntig",
+        "Mentig",
+        "Zistig",
+        "Mittwuch",
+        "Dunschtig",
+        "Fritig",
+        "Samschtig",
+    ],
+    calendar: {
+        lastDay: "[Gester]",
+        sameDay: "[Hüt]",
+        nextDay: "[Morn]",
+        lastWeek: "[letscht] dddd",
+        nextWeek: "dddd",
+        sameElse: "dddd",
+    },
+}

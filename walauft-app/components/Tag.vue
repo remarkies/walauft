@@ -42,5 +42,6 @@ export default Vue.extend({
 }
 .active {
   box-shadow: 0.125rem 0.125rem 0px var(--primary-color);
+  font-weight: 700;
 }
 </style>

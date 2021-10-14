@@ -1,6 +1,6 @@
 import Fuse from 'fuse.js'
 const options = {
-  keys: ["name", "tags.text"],
+  keys: ["name", "tags.text", "location.name"],
   threshold: 0.4
 }
 const fuse = new Fuse([], options)

@@ -28,7 +28,10 @@
 <script lang="ts">
 import Vue from "vue";
 import { EventDay, EventItem, Tag } from "~/types/Models";
-
+import moment, { MomentInput } from "moment";
+import "moment/locale/es";
+import swissGermanLocale from "@/static/swissGermanLocale";
+moment.updateLocale("de-ch", swissGermanLocale);
 export default Vue.extend({
   data: function () {
     return {
@@ -37,7 +40,21 @@ export default Vue.extend({
   },
   computed: {
     formatedDate(): String {
-      return this.eventItem.date + " " + this.eventItem.time;
+      if (this.eventItem.time) {
+        return (
+          moment(this.eventItem.date as MomentInput, "YYYYMMDD").format(
+            "dddd  DD.MMMM"
+          ) +
+          " am " +
+          this.eventItem.time
+        );
+      } else {
+        return (
+          moment(this.eventItem.date as MomentInput, "YYYYMMDD").format(
+            "dddd  DD.MMMM"
+          )
+        );
+      }
     },
     getGenres(): Tag[] {
       return this.eventItem.tags.filter((tag) => tag.type == "style");
