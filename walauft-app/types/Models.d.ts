@@ -6,11 +6,11 @@ export interface Tag {
 export interface Location {
     name: String;
     street: String;
-    streetNo: Number;
-    zipCode: Number;
+    streetNo: number;
+    zipCode: number;
     city: String;
-    longitude: Number;
-    latitude: Number;
+    longitude: number;
+    latitude: number;
 }
 export interface EventItem {
     _id: String;
@@ -26,6 +26,12 @@ export interface EventItem {
 export interface EventDay {
     _id: String;
     date: String;
-    region: Number;
+    region: number;
     events: EventItem[];
+}
+export type CityName = 'Lozärn' | 'Bärn' | 'Baasel' | 'St.Galle' | 'Züri' ;
+export interface City {
+    id: number;
+    name: CityName,
+    color: [number, number, number] //HSL
 }

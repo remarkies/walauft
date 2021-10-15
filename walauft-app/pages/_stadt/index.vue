@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-      <Search />
-      <div>
+      <Search id="search-bar" />
+      <div id="active-tag-wrapper">
         <Tag
           v-for="tag in $store.state.tags.activeTags"
           :key="tag.text"
@@ -10,7 +10,7 @@
         />
       </div>
     </div>
-    <div v-if="$fetchState.pending">Bin am lade... wart schnell pls</div>
+    <div v-if="this.$store.state.events.allEventDays.length <= 0 && !$fetchState.error">Bin am lade... wart schnell pls</div>
     <div v-else-if="$fetchState.error">da lauft nix</div>
     <ul v-else>
       <EventDay
@@ -24,8 +24,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import citiesObj from "@/static/cities.ts";
-import { EventDay, Tag } from "~/types/Models";
+import citiesObj from "@/static/cities";
+import { City, EventDay, Tag } from "~/types/Models";
 import { mapState } from "vuex";
 export default Vue.extend({
   head() {
@@ -53,7 +53,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      city: this.$route.params.stadt,
+      cityName: this.$route.params.stadt,
       searchString: "",
       allEventDays: [] as EventDay[],
     };
@@ -65,25 +65,44 @@ export default Vue.extend({
   },
   watch: {
     activeTags() {
-      this.$fetch();
+      this.$fetch(true);
     },
     //watching it bc fetch requests can be cached therefore be not executed
     allEventDays(newValue: EventDay[]) {
       this.$store.commit("events/setAllEventDays", newValue);
     },
   },
+  // mounted() {
+  //   const color = citiesObj.cityIdName.find(
+  //     (cityIdNameObj: City) => this.cityName == cityIdNameObj.name
+  //   )?.color;
+  //   if (color) {
+  //     document.documentElement.style.setProperty("--hue", color[0].toString());
+  //     document.documentElement.style.setProperty(
+  //       "--saturation",
+  //       color[1].toString() + "%"
+  //     );
+  //     document.documentElement.style.setProperty(
+  //       "--luminosity",
+  //       color[2].toString() + "%"
+  //     );
+  //   }
+  // },
   async fetch() {
-    this.allEventDays = await this.$http.$post(
-      "https://api.walauft.ch/events",
-      {
-        tags: this.activeTags,
-        regionId: citiesObj.cityIdName.find(
-          (cityIdNameObj) => this.city == cityIdNameObj.name
-        )?.id,
+    if (this.$store.state.events.allEventDays.length <= 0 || this.activeTags) {
+      const response = await this.$http.$post(
+        "https://api.walauft.ch/events",
+        {
+          tags: this.activeTags,
+          regionId: citiesObj.cityIdName.find(
+            (cityIdNameObj: City) => this.cityName == cityIdNameObj.name
+          )?.id,
+        }
+      );
+      if (response.length <= 0) {
+        throw new Error();
       }
-    );
-    if (this.allEventDays.length <= 0) {
-      throw new Error();
+      this.allEventDays = response
     }
   },
 });
@@ -92,5 +111,12 @@ export default Vue.extend({
 ul {
   padding: 0;
   list-style-type: none;
+}
+#active-tag-wrapper {
+  display: flex;
+  align-items: center;
+}
+#search-bar {
+  margin-bottom: 1rem;
 }
 </style>

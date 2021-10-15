@@ -40,7 +40,7 @@ export default Vue.extend({
 .event-item {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  // gap: 0.25rem;
   padding-left: 1rem;
 }
 .event-item-name {

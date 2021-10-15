@@ -1,8 +1,10 @@
 :root {
-
-    --primary-color: black;
+    --hue: 0;
+    --saturation: 0%;
+    --luminosity: 0%;
+    --primary-color: hsl(var(--hue), var(--saturation), var(--luminosity));
     --secondary-color: white;
-    --box-shadow-style:  0.25rem 0.25rem 0px var(--primary-color);
+    --box-shadow-style: 0.25rem 0.25rem 0px var(--primary-color);
     --border-style: 1px solid var(--primary-color);
     font-family: "Roboto Mono", monospace;
     color: var(--primary-color);
@@ -16,4 +18,15 @@
 a {
     text-decoration: none;
     color: inherit;
+}
+.box-with-dropshadow {
+    padding: 0.75rem;
+    border: var(--border-style);
+    box-shadow: var(--box-shadow-style);
+    border-radius: 0.25rem;
+    background: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.485, -0.12, 0.07, 1);
 }

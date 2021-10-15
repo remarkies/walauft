@@ -35,6 +35,9 @@ export default Vue.extend({
       toggleTag: "tags/toggleTag",
     }),
   },
+  mounted () {
+    this.searchTerm = this.$store.state.events.searchTerm;
+  },
 });
 </script>
 <style lang="scss" scoped>

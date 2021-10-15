@@ -1,27 +1,32 @@
 <template>
   <article class="event" v-if="eventItem">
-    <h2 class="rounded-box">{{ eventItem.name }}</h2>
-    <EventInfoSection title="Wo">
-      <address id="event-adress">{{ eventItem.location.name }}</address>
-    </EventInfoSection>
-    <EventInfoSection title="Wenn">
-      <time id="event-date" :datetime="formatedDate">{{ formatedDate }}</time>
-    </EventInfoSection>
-    <EventInfoSection v-if="eventItem.minage.length > 0" title="Ab">
-      <div id="event-minage">{{ eventItem.minage }}</div>
-    </EventInfoSection>
-    <EventInfoSection v-if="eventItem.price.length > 0" title="Wie tür">
-      <div id="event-price">{{ eventItem.price }}</div>
-    </EventInfoSection>
-    <EventInfoSection v-if="getGenres.length > 0" title="Genres">
-      <Tag :tag="tag" v-for="tag in getGenres" :key="tag.text" />
-    </EventInfoSection>
-    <EventInfoSection v-if="getActs.length > 0" title="Acts">
-      <Tag :tag="tag" v-for="tag in getActs" :key="tag.text" />
-    </EventInfoSection>
-    <section>
-      <p>{{ eventItem.description }}</p>
+    <!-- <NuxtLink :to="'/' + $route.params.stadt"> zrugg </NuxtLink> -->
+    <h1 class="box-with-dropshadow">{{ eventItem.name }}</h1>
+    <section id="event-details-section">
+      <EventInfoSection title="Wo">
+        <address id="event-adress">{{ eventItem.location.name }}</address>
+      </EventInfoSection>
+      <EventInfoSection title="Wenn">
+        <time id="event-date" :datetime="formatedDate">{{ formatedDate }}</time>
+      </EventInfoSection>
+      <EventInfoSection v-if="eventItem.minage.length > 0" title="Ab">
+        <div id="event-minage">{{ eventItem.minage }}</div>
+      </EventInfoSection>
+      <EventInfoSection v-if="eventItem.price.length > 0" title="Wie tür">
+        <div id="event-price">{{ eventItem.price }}</div>
+      </EventInfoSection>
+      <EventInfoSection v-if="getGenres.length > 0" title="Genres">
+        <Tag :tag="tag" v-for="tag in getGenres" :key="tag.text" />
+      </EventInfoSection>
+      <EventInfoSection v-if="getActs.length > 0" title="Acts">
+        <Tag :tag="tag" v-for="tag in getActs" :key="tag.text" />
+      </EventInfoSection>
+      <section>
+        <p>{{ eventItem.description }}</p>
+      </section>
     </section>
+
+    <MapBox v-if="hasCoordinates" :location="eventItem.location" />
   </article>
 </template>
 
@@ -39,6 +44,12 @@ export default Vue.extend({
     };
   },
   computed: {
+    hasCoordinates(): Boolean {
+      return (
+        String(this.eventItem.location.longitude).length > 0 &&
+        !isNaN(this.eventItem.location.longitude)
+      );
+    },
     formatedDate(): String {
       if (this.eventItem.time) {
         return (
@@ -49,10 +60,8 @@ export default Vue.extend({
           this.eventItem.time
         );
       } else {
-        return (
-          moment(this.eventItem.date as MomentInput, "YYYYMMDD").format(
-            "dddd DD.MMMM"
-          )
+        return moment(this.eventItem.date as MomentInput, "YYYYMMDD").format(
+          "dddd DD.MMMM"
         );
       }
     },
@@ -79,11 +88,23 @@ export default Vue.extend({
 </script>
 <style lang="scss" >
 .event {
-  section {
-    margin: 1rem 0;
+  $gap: 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  p {
+    margin-top: 0;
+    margin-bottom: $gap;
   }
   #event-adress {
     font-style: inherit;
+  }
+  #event-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+    padding: 0 $gap;
+    height: 100%;
   }
 }
 </style>
