@@ -25,7 +25,18 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    // {src: "~/plugins/fastClick.js", ssr: false}
   ],
+  pwa: {
+    meta: {
+      /* meta options */
+      mobileAppIOS: true,
+      appleStatusBarStyle: "hidden",
+      lang: "de-ch",
+      
+
+    }
+  },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -34,6 +45,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/pwa',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

@@ -1,5 +1,13 @@
 <template>
-  <button class="tag" :class="{ active: $store.state.tags.activeTags.find(tagInArray => tagInArray.text == tag.text) }" @click="toggleTag(tag)">
+  <button
+    class="tag"
+    :class="{
+      active: $store.state.tags.activeTags.find(
+        (tagInArray) => tagInArray.text == tag.text
+      ),
+    }"
+    @click="toggleTag(tag)"
+  >
     {{ tag.text }}
   </button>
 </template>
@@ -7,7 +15,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { Tag } from "~/types/Models";
-import { mapActions} from "vuex";
+import { mapActions } from "vuex";
 
 export default Vue.extend({
   props: {
@@ -39,7 +47,8 @@ export default Vue.extend({
   color: inherit;
   background-color: var(--secondary-color);
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  box-shadow: 0rem 0rem 0px var(--primary-color);
+  transition: all 0.17s cubic-bezier(0.485, -0.12, 0.07, 1);
 }
 .active {
   box-shadow: 0.125rem 0.125rem 0px var(--primary-color);

@@ -1373,6 +1373,21 @@
   dependencies:
     http-proxy-middleware "^1.0.6"
 
+"@nuxtjs/pwa@^3.3.5":
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/pwa/-/pwa-3.3.5.tgz#db7c905536ebe8a464a347b6ae3215810642c044"
+  integrity sha512-8tTmW8DBspWxlJwTimOHTkwfkwPpL9wIcGmy75Gcmin+c9YtX2Ehxmhgt/TLFOC9XsLAqojqynw3/Agr/9OE1w==
+  dependencies:
+    clone-deep "^4.0.1"
+    defu "^3.2.2"
+    execa "^5.0.0"
+    fs-extra "^9.1.0"
+    hasha "^5.2.2"
+    jimp-compact "^0.16.1"
+    lodash.template "^4.5.0"
+    serve-static "^1.14.1"
+    workbox-cdn "^5.1.4"
+
 "@nuxtjs/style-resources@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@nuxtjs/style-resources/-/style-resources-1.2.1.tgz#9a2b6580b2ed9b06e930bee488a56b8376a263de"
@@ -2875,6 +2890,15 @@ cliui@^6.0.0:
     strip-ansi "^6.0.0"
     wrap-ansi "^6.2.0"
 
+clone-deep@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/clone-deep/-/clone-deep-4.0.1.tgz#c19fd9bdbbf85942b4fd979c84dcf7d5f07c2387"
+  integrity sha512-neHB9xuzh/wk0dIHweyAXv2aPGZIVk3pLMe+/RNzINf17fe0OG96QroktYAUm7SM1PBnzTabaLboqqxDyMU+SQ==
+  dependencies:
+    is-plain-object "^2.0.4"
+    kind-of "^6.0.2"
+    shallow-clone "^3.0.0"
+
 coa@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/coa/-/coa-2.0.2.tgz#43f6c21151b4ef2bf57187db0d73de229e3e7ec3"
@@ -4001,6 +4025,11 @@ fast-json-stable-stringify@^2.0.0:
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz#874bf69c6f404c2b5d99c481341399fd55892633"
   integrity sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==
 
+fastclick@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/fastclick/-/fastclick-1.0.6.tgz#161625b27b1a5806405936bda9a2c1926d06be6a"
+  integrity sha1-FhYlsnsaWAZAWTa9qaLBkm0Gvmo=
+
 fastq@^1.6.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.13.0.tgz#616760f88a7526bdfc596b7cab8c18938c36b98c"
@@ -4605,6 +4634,14 @@ hash.js@^1.0.0, hash.js@^1.0.3:
   dependencies:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
+
+hasha@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/hasha/-/hasha-5.2.2.tgz#a48477989b3b327aea3c04f53096d816d97522a1"
+  integrity sha512-Hrp5vIK/xr5SkeN2onO32H0MgNZ0f17HRNH39WfL0SYUNOTZ5Lz1TJ8Pajo/87dYGEFlLMm7mIc/k/s6Bvz9HQ==
+  dependencies:
+    is-stream "^2.0.0"
+    type-fest "^0.8.0"
 
 he@1.2.0, he@^1.1.0, he@^1.2.0:
   version "1.2.0"
@@ -5229,6 +5266,11 @@ jest-worker@^26.5.0:
     "@types/node" "*"
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
+
+jimp-compact@^0.16.1:
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/jimp-compact/-/jimp-compact-0.16.2.tgz#650bf90698eb7af797e20bf5f5cdccd137e7d08a"
+  integrity sha512-F/r0L283J46xiGUEvUb3jxUsei7aB94g3NRIMuJ4WhbpEcJV2U5GpaUNJLnBiOP2+x4lLTI4UiRVrmbrXQAOMA==
 
 jiti@^1.9.2:
   version "1.12.7"
@@ -8008,6 +8050,13 @@ sha.js@^2.4.0, sha.js@^2.4.8:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+shallow-clone@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/shallow-clone/-/shallow-clone-3.0.1.tgz#8f2981ad92531f55035b01fb230769a40e02efa3"
+  integrity sha512-/6KqX+GVUdqPuPPd2LxDDxzX6CAbjJehAAOKlNpqqUpAqPM6HeL8f+o3a+JsyGjn2lv0WY8UsTgUJjU9Ok55NA==
+  dependencies:
+    kind-of "^6.0.2"
+
 shebang-command@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-2.0.0.tgz#ccd0af4f8835fbdc265b82461aaf0c36663f34ea"
@@ -8752,7 +8801,7 @@ type-fest@^0.6.0:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.6.0.tgz#8d2a2370d3df886eb5c90ada1c5bf6188acf838b"
   integrity sha512-q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==
 
-type-fest@^0.8.1:
+type-fest@^0.8.0, type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
@@ -9272,6 +9321,11 @@ widest-line@^3.1.0:
   integrity sha512-NsmoXalsWVDMGupxZ5R08ka9flZjjiLvHVAWYOKtiKM8ujtZWr9cRffak+uSE48+Ob8ObalXpwyeUiyDD6QFgg==
   dependencies:
     string-width "^4.0.0"
+
+workbox-cdn@^5.1.4:
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/workbox-cdn/-/workbox-cdn-5.1.4.tgz#dbd8acee70b1978be70106207590bbb76af935cf"
+  integrity sha512-04gM3mi8QGutokkSaA9xunVfjURnLbo9TTWyi8+pSDCEW5cD8u5GbJiliLK1vB9CShk/9OY1UDfW+XcmD+d6KQ==
 
 worker-farm@^1.7.0:
   version "1.7.0"
