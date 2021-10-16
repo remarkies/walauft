@@ -10,7 +10,13 @@
         />
       </div>
     </div>
-    <div v-if="this.$store.state.events.allEventDays.length <= 0 && !$fetchState.error">Bin am lade... wart schnell pls</div>
+    <div
+      v-if="
+        this.$store.state.events.allEventDays.length <= 0 && !$fetchState.error
+      "
+    >
+      Bin am lade... wart schnell pls
+    </div>
     <div v-else-if="$fetchState.error">da lauft nix</div>
     <ul v-else>
       <EventDay
@@ -27,7 +33,18 @@ import Vue from "vue";
 import citiesObj from "@/static/cities";
 import { City, EventDay, Tag } from "~/types/Models";
 import { mapState } from "vuex";
+
 export default Vue.extend({
+    transition(to, from) {
+
+    if (
+      (to.name == "stadt" && from?.name == "index") ||
+      (to.name == "stadt-event" && from?.name == "stadt")
+    ) {
+      return "router-view";
+    }
+    return "router-view-back";
+  },
   head() {
     return {
       title: "Walauft in " + this.$route.params.stadt,
@@ -90,19 +107,16 @@ export default Vue.extend({
   // },
   async fetch() {
     if (this.$store.state.events.allEventDays.length <= 0 || this.activeTags) {
-      const response = await this.$http.$post(
-        "https://api.walauft.ch/events",
-        {
-          tags: this.activeTags,
-          regionId: citiesObj.cityIdName.find(
-            (cityIdNameObj: City) => this.cityName == cityIdNameObj.name
-          )?.id,
-        }
-      );
+      const response = await this.$http.$post("https://api.walauft.ch/events", {
+        tags: this.activeTags,
+        regionId: citiesObj.cityIdName.find(
+          (cityIdNameObj: City) => this.cityName == cityIdNameObj.name
+        )?.id,
+      });
       if (response.length <= 0) {
         throw new Error();
       }
-      this.allEventDays = response
+      this.allEventDays = response;
     }
   },
 });
@@ -111,12 +125,16 @@ export default Vue.extend({
 ul {
   padding: 0;
   list-style-type: none;
+  margin: 0;
 }
 #active-tag-wrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  min-height: 1rem;
 }
 #search-bar {
-  margin-bottom: 1rem;
 }
 </style>

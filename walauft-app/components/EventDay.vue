@@ -72,7 +72,7 @@ export default Vue.extend({
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin: 1.5rem 0;
+  margin-bottom: 1.5rem;
   .event-day-date-wrapper {
     top: -1px;
     padding-top: calc(1rem + 1px);

@@ -58,6 +58,8 @@ export default Vue.extend({
   .tags-wrapper {
     text-align: right;
     max-width: 66%;
+    gap: 0.5rem;
+    display: flex;
   }
 }
 </style>

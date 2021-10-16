@@ -7,7 +7,7 @@ export const mutations = {
     state.activeTags.push(tag)
   },
   removeTag(state, tag) {
-    state.activeTags.splice(state.activeTags.indexOf(tag), 1)
+    state.activeTags = state.activeTags.filter(activeTag => activeTag.text !== tag.text)
   },
   clearAllTags(state) {
     state.activeTags = []

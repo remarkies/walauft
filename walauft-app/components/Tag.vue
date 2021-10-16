@@ -43,12 +43,12 @@ export default Vue.extend({
   border-radius: 0.2rem;
   padding: 0.1rem 0.3rem;
   display: inline;
-  margin-right: 0.5rem;
   color: inherit;
   background-color: var(--secondary-color);
   cursor: pointer;
   box-shadow: 0rem 0rem 0px var(--primary-color);
   transition: all 0.17s cubic-bezier(0.485, -0.12, 0.07, 1);
+  white-space: nowrap;
 }
 .active {
   box-shadow: 0.125rem 0.125rem 0px var(--primary-color);

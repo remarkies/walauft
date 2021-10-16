@@ -1,7 +1,7 @@
 <template>
-  <div id="main" ref="main">
+  <main id="main" ref="main">
     <Nuxt />
-  </div>
+  </main>
 </template>
 
 <style lang="scss" scoped>
@@ -11,3 +11,9 @@
   margin: 0 auto;
 }
 </style>
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+
+});
+</script>
