@@ -16,12 +16,12 @@
         <div id="event-price">{{ eventItem.price }}</div>
       </EventInfoSection>
       <EventInfoSection v-if="getGenres.length > 0" title="Genres">
-        <Tag :tag="tag" v-for="tag in getGenres" :key="tag.text" />
+        <TagSection :tags="getGenres" />
       </EventInfoSection>
       <EventInfoSection v-if="getActs.length > 0" title="Acts">
-        <Tag :tag="tag" v-for="tag in getActs" :key="tag.text" />
+        <TagSection :tags="getActs" />
       </EventInfoSection>
-      <section>
+      <section v-if="eventItem.description">
         <p>{{ eventItem.description }}</p>
       </section>
     </section>
@@ -105,6 +105,7 @@ export default Vue.extend({
     gap: $gap;
     padding: 0 $gap;
     height: 100%;
+    margin-bottom: 1rem;
   }
 }
 </style>

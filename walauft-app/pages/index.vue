@@ -16,7 +16,7 @@ export default Vue.extend({
       cities: citiesObj.cityIdName,
     };
   },
-  
+
 });
 </script>
 <style lang="scss">

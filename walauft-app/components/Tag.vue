@@ -2,7 +2,7 @@
   <button
     class="tag"
     :class="{
-      active: $store.state.tags.activeTags.find(
+      active: $store.state.activeTags.find(
         (tagInArray) => tagInArray.text == tag.text
       ),
     }"
@@ -31,7 +31,7 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions({
-      toggleTag: "tags/toggleTag",
+      toggleTag: "toggleTag",
     }),
   },
 });

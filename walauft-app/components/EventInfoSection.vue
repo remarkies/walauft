@@ -32,5 +32,7 @@ h4 {
   font-size: 1rem;
   // font-variation-settings: "wght" 500;
   font-weight: 500;
+
+
 }
 </style>

@@ -11,7 +11,8 @@
     <div class="location-tags-wrapper">
       <div class="location">{{ eventItem.location.name }}</div>
       <div class="tags-wrapper">
-        <Tag v-for="genre in getGenres" :tag="genre" :key="genre.text"></Tag>
+        <TagSection :tags="getGenres" :flexEnd="true"/> 
+        <!-- <Tag v-for="genre in getGenres" :tag="genre" :key="genre.text"></Tag> -->
       </div>
     </div>
   </li>

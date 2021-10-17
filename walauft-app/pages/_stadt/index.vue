@@ -4,27 +4,28 @@
       <Search id="search-bar" />
       <div id="active-tag-wrapper">
         <Tag
-          v-for="tag in $store.state.tags.activeTags"
+          v-for="tag in $store.state.activeTags"
           :key="tag.text"
           :tag="tag"
         />
       </div>
     </div>
     <div
-      v-if="
-        this.$store.state.events.allEventDays.length <= 0 && !$fetchState.error
-      "
+      v-if="this.$store.state.allEventDays.length <= 0 && !$fetchState.error"
     >
       Bin am lade... wart schnell pls
     </div>
     <div v-else-if="$fetchState.error">da lauft nix</div>
-    <ul v-else>
-      <EventDay
-        v-for="eventDay in $store.state.events.filteredEventDays"
-        :key="eventDay.date"
-        :eventDay="eventDay"
-      />
-    </ul>
+    <div v-else>
+      <transition-group name="list-complete" tag="ul" id="event-day-list">
+        <EventDay
+          v-for="eventDay in $store.state.filteredEventDays"
+          :key="eventDay.date"
+          :eventDay="eventDay"
+          class="list-complete-item"
+        />
+      </transition-group>
+    </div>
   </div>
 </template>
 
@@ -35,8 +36,7 @@ import { City, EventDay, Tag } from "~/types/Models";
 import { mapState } from "vuex";
 
 export default Vue.extend({
-    transition(to, from) {
-
+  transition(to, from) {
     if (
       (to.name == "stadt" && from?.name == "index") ||
       (to.name == "stadt-event" && from?.name == "stadt")
@@ -76,17 +76,17 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapState("tags", {
+    ...mapState({
       activeTags: (state: any) => state.activeTags,
     }),
   },
   watch: {
     activeTags() {
-      this.$fetch(true);
+      // this.$fetch(true);
     },
     //watching it bc fetch requests can be cached therefore be not executed
     allEventDays(newValue: EventDay[]) {
-      this.$store.commit("events/setAllEventDays", newValue);
+      this.$store.dispatch("setAllEventDays", newValue);
     },
   },
   // mounted() {
@@ -106,27 +106,20 @@ export default Vue.extend({
   //   }
   // },
   async fetch() {
-    if (this.$store.state.events.allEventDays.length <= 0 || this.activeTags) {
-      const response = await this.$http.$post("https://api.walauft.ch/events", {
-        tags: this.activeTags,
-        regionId: citiesObj.cityIdName.find(
-          (cityIdNameObj: City) => this.cityName == cityIdNameObj.name
-        )?.id,
-      });
-      if (response.length <= 0) {
-        throw new Error();
-      }
-      this.allEventDays = response;
+    const response = await this.$http.$post("https://api.walauft.ch/events", {
+      tags: "",
+      regionId: citiesObj.cityIdName.find(
+        (cityIdNameObj: City) => this.cityName == cityIdNameObj.name
+      )?.id,
+    });
+    if (response.length <= 0) {
+      throw new Error();
     }
+    this.allEventDays = response;
   },
 });
 </script>
-<style>
-ul {
-  padding: 0;
-  list-style-type: none;
-  margin: 0;
-}
+<style lang="scss">
 #active-tag-wrapper {
   display: flex;
   align-items: flex-start;
@@ -135,6 +128,31 @@ ul {
   padding-top: 1rem;
   min-height: 1rem;
 }
-#search-bar {
+
+ul {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+#event-day-list {
+  display: flex;
+  flex-direction: column;
+}
+.list-complete-item {
+  // display: inline-block !important;
+  transition: all 0.3s ease;
+}
+
+.list-complete-enter-from,
+.list-complete-leave-to {
+  display: none ;
+}
+
+.list-complete-leave-active {
+  display: none !important;
+
+
 }
 </style>

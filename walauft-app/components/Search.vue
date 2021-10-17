@@ -24,19 +24,20 @@ export default Vue.extend({
   },
   watch: {
     searchTerm(newTerm) {
-      this.$store.dispatch("events/setSearchTerm", newTerm);
+      this.$store.dispatch("setSearchTerm", newTerm);
     },
   },
   methods: {
     onSubmit(): void {
-      this.$refs.seachfield.blur();
+      const seachrFieldEL = this.$refs.seachfield as HTMLInputElement;
+      seachrFieldEL.blur();
     },
     ...mapActions({
-      toggleTag: "tags/toggleTag",
+      toggleTag: "toggleTag",
     }),
   },
-  mounted () {
-    this.searchTerm = this.$store.state.events.searchTerm;
+  mounted() {
+    this.searchTerm = this.$store.state.searchTerm;
   },
 });
 </script>
