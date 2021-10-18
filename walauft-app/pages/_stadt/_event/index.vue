@@ -37,6 +37,13 @@ import moment, { MomentInput } from "moment";
 import "moment/locale/es";
 import swissGermanLocale from "@/static/swissGermanLocale";
 moment.updateLocale("de-ch", swissGermanLocale);
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $http: any
+  }
+}
+
 export default Vue.extend({
   data: function () {
     return {

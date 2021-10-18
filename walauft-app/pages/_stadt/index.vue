@@ -35,6 +35,12 @@ import citiesObj from "@/static/cities";
 import { City, EventDay, Tag } from "~/types/Models";
 import { mapState } from "vuex";
 
+declare module 'vue/types/vue' {
+  interface Vue {
+    $http: any
+  }
+}
+
 export default Vue.extend({
   transition(to, from) {
     if (
