@@ -1,31 +1,25 @@
 <template>
   <div>
-    <div>
-      <Search id="search-bar" />
-      <div id="active-tag-wrapper">
-        <Tag
-          v-for="tag in $store.state.activeTags"
-          :key="tag.text"
-          :tag="tag"
-        />
-      </div>
-    </div>
+    <Search id="search-bar" />
+      <TagSection
+        v-if="$store.state.activeTags.length > 0"
+        :tags="$store.state.activeTags"
+      />
     <div
       v-if="this.$store.state.allEventDays.length <= 0 && !$fetchState.error"
     >
       Bin am lade... wart schnell pls
     </div>
     <div v-else-if="$fetchState.error">da lauft nix</div>
-    <div v-else>
-      <transition-group name="list-complete" tag="ul" id="event-day-list">
-        <EventDay
-          v-for="eventDay in $store.state.filteredEventDays"
-          :key="eventDay.date"
-          :eventDay="eventDay"
-          class="list-complete-item"
-        />
-      </transition-group>
-    </div>
+
+    <transition-group name="list-complete" tag="ul" id="event-day-list" v-else>
+      <EventDay
+        v-for="eventDay in $store.state.filteredEventDays"
+        :key="eventDay.date"
+        :eventDay="eventDay"
+        class="list-complete-item"
+      />
+    </transition-group>
   </div>
 </template>
 
@@ -35,9 +29,9 @@ import citiesObj from "@/static/cities";
 import { City, EventDay, Tag } from "~/types/Models";
 import { mapState } from "vuex";
 
-declare module 'vue/types/vue' {
+declare module "vue/types/vue" {
   interface Vue {
-    $http: any
+    $http: any;
   }
 }
 
@@ -47,9 +41,9 @@ export default Vue.extend({
       (to.name == "stadt" && from?.name == "index") ||
       (to.name == "stadt-event" && from?.name == "stadt")
     ) {
-      return "router-view";
+      return "slide-left";
     }
-    return "router-view-back";
+    return "slide-right";
   },
   head() {
     return {
@@ -127,12 +121,7 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 #active-tag-wrapper {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding-top: 1rem;
-  min-height: 1rem;
+  padding-top: calc((var(--tag-height) + var(--shadow-distance)) / 2);
 }
 
 ul {
@@ -145,20 +134,5 @@ ul {
 #event-day-list {
   display: flex;
   flex-direction: column;
-}
-.list-complete-item {
-  // display: inline-block !important;
-  transition: all 0.3s ease;
-}
-
-.list-complete-enter-from,
-.list-complete-leave-to {
-  display: none ;
-}
-
-.list-complete-leave-active {
-  display: none !important;
-
-
 }
 </style>

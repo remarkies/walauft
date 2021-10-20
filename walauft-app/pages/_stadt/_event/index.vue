@@ -1,7 +1,7 @@
 <template>
   <article class="event" v-if="eventItem">
     <!-- <NuxtLink :to="'/' + $route.params.stadt"> zrugg </NuxtLink> -->
-    <h1 class="box-with-dropshadow">{{ eventItem.name }}</h1>
+    <h1 class="box-with-dropshadow" id="event-title">{{ eventItem.name }}</h1>
     <section id="event-details-section">
       <EventInfoSection title="Wo">
         <address id="event-adress">{{ eventItem.location.name }}</address>
@@ -114,5 +114,6 @@ export default Vue.extend({
     height: 100%;
     margin-bottom: 1rem;
   }
+
 }
 </style>

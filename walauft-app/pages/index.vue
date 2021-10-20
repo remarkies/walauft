@@ -24,7 +24,7 @@ export default Vue.extend({
 #cities {
     display: flex;
     flex-direction: column;
-    font-size: 10vw;
+    font-size: 10vh;
     font-variation-settings: "wght" 200;
     a:hover {
         transition: all 0.3s ease-in-out;

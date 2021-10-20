@@ -39,6 +39,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .tag {
   border: var(--border-style);
+  height:  var(--tag-height);
   font-size: 0.625rem;
   border-radius: 0.2rem;
   padding: 0.1rem 0.3rem;
@@ -54,4 +55,5 @@ export default Vue.extend({
   box-shadow: 0.125rem 0.125rem 0px var(--primary-color);
   font-weight: 700;
 }
+
 </style>

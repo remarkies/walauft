@@ -79,7 +79,7 @@ export default Vue.extend({
   margin-bottom: 3rem;
 
   @media screen and (max-width: 480px) {
-    margin: 0 -1.5rem;
+    margin: 0 -1.2rem;
   }
 }
 .mapboxgl-marker {

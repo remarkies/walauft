@@ -54,7 +54,7 @@ export default Vue.extend({
     font-weight: 300;
   }
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   .tags-wrapper {
     text-align: right;

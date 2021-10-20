@@ -1,7 +1,14 @@
 <template>
-  <div id="tag-list" :class="{ flexEnd: flexEnd }">
-    <Tag v-for="tag in tags" :tag="tag" :key="tag.key" />
-  </div>
+
+    <transition-group
+      name="list-complete"
+      tag="div"
+      id="tag-list"
+      :class="{ flexEnd: flexEnd }"
+    >
+      <Tag v-for="tag in tags" :tag="tag" :key="tag.text" />
+    </transition-group>
+ 
 </template>
 
 <script lang="ts">
@@ -25,11 +32,11 @@ export default Vue.extend({
 <style lang="scss" scoped>
 #tag-list {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: 0.3rem 0;
-  min-height: 1rem;
+  // min-height: calc(var(--shadow-distance) + var(--tag-height));
 }
 .flexEnd {
   justify-content: flex-end;

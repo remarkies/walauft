@@ -4,8 +4,10 @@
     --luminosity: 0%;
     --primary-color: hsl(var(--hue), var(--saturation), var(--luminosity));
     --secondary-color: white;
-    --box-shadow-style: 0.25rem 0.25rem 0px var(--primary-color);
+    --shadow-distance: 0.25rem;
+    --box-shadow-style: var(--shadow-distance) var(--shadow-distance) 0px var(--primary-color);
     --border-style: 1px solid var(--primary-color);
+    --tag-height: calc(1rem + 1px);
     font-family: "Roboto Mono", monospace;
     color: var(--primary-color);
     background-color: var(--secondary-color);
@@ -29,4 +31,18 @@ a {
     justify-content: space-between;
     align-items: center;
     transition: all 0.3s cubic-bezier(0.485, -0.12, 0.07, 1);
+}
+//list transisitons
+.list-complete-item {
+    // display: inline-block !important;
+    transition: all 0.3s ease;
+}
+
+.list-complete-enter-from,
+.list-complete-leave-to {
+    display: none;
+}
+
+.list-complete-leave-active {
+    display: none !important;
 }
