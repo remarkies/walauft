@@ -4,7 +4,24 @@
     <h1 class="box-with-dropshadow" id="event-title">{{ eventItem.name }}</h1>
     <section id="event-details-section">
       <EventInfoSection title="Wo">
-        <address id="event-adress">{{ eventItem.location.name }}</address>
+        <a
+          v-if="hasCoordinates"
+          :href="
+            'https://maps.google.com/?q=' +
+            eventItem.location.latitude +
+            ',' +
+            eventItem.location.longitude
+          "
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <address id="event-adress">
+            {{ eventItem.location.name }}
+          </address>
+        </a>
+        <address v-else id="event-adress">
+          {{ eventItem.location.name }}
+        </address>
       </EventInfoSection>
       <EventInfoSection title="Wenn">
         <time id="event-date" :datetime="formatedDate">{{ formatedDate }}</time>
@@ -38,9 +55,9 @@ import "moment/locale/es";
 import swissGermanLocale from "@/static/swissGermanLocale";
 moment.updateLocale("de-ch", swissGermanLocale);
 
-declare module 'vue/types/vue' {
+declare module "vue/types/vue" {
   interface Vue {
-    $http: any
+    $http: any;
   }
 }
 
@@ -54,7 +71,11 @@ export default Vue.extend({
     hasCoordinates(): Boolean {
       return (
         String(this.eventItem.location.longitude).length > 0 &&
-        !isNaN(this.eventItem.location.longitude)
+        !isNaN(this.eventItem.location.longitude) &&
+        !(
+          this.eventItem.location.longitude == -1 &&
+          this.eventItem.location.latitude == -1
+        )
       );
     },
     formatedDate(): String {
@@ -114,6 +135,5 @@ export default Vue.extend({
     height: 100%;
     margin-bottom: 1rem;
   }
-
 }
 </style>

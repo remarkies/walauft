@@ -1,16 +1,13 @@
 <template>
   <ul class="event-day">
-    <div class="event-day-date-wrapper" ref="day">
-      <li class="event-day-date box-with-dropshadow">
-        <!-- <span style="font-size: 8px"> {{ rectTop }} , {{ rectBottom }} </span> -->
-        <time>
-          {{ formattedDay }}
-        </time>
-        <time class="date">
-          {{ formattedDate }}
-        </time>
-      </li>
-    </div>
+    <EventDayDateBox>
+      <time>
+        {{ formattedDay }}
+      </time>
+      <time class="date">
+        {{ formattedDate }}
+      </time>
+    </EventDayDateBox>
     <EventListItem
       v-for="eventItem in eventDay.events"
       :key="eventItem.key"
@@ -73,20 +70,10 @@ export default Vue.extend({
   flex-direction: column;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
-  .event-day-date-wrapper {
-    top: -1px;
-    padding-top: calc(1rem + 1px);
-    position: sticky;
 
-    .event-day-date {
-      font-size: 1.5rem;
-      position: sticky;
-      top: 1rem;
-      .date {
-        font-size: 0.75rem;
-        font-weight: 200;
-      }
-    }
+  .date {
+    font-size: 0.75rem;
+    font-weight: 200;
   }
   // .isSticky {
   //   .event-day-date {

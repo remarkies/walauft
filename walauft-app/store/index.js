@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js'
 const options = {
   keys: ["name", "tags.text", "location.name"],
-  threshold: 0.2
+  threshold: 0.25
 }
 const fuse = new Fuse([], options)
 const _ = require('lodash');

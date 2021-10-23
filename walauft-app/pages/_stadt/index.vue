@@ -5,11 +5,13 @@
         v-if="$store.state.activeTags.length > 0"
         :tags="$store.state.activeTags"
       />
-    <div
+    
+    <EventDayDateBox
       v-if="this.$store.state.allEventDays.length <= 0 && !$fetchState.error"
+      class="loading"
     >
-      Bin am lade... wart schnell pls
-    </div>
+     walauft?
+    </EventDayDateBox>
     <div v-else-if="$fetchState.error">da lauft nix</div>
 
     <transition-group name="list-complete" tag="ul" id="event-day-list" v-else>
@@ -134,5 +136,8 @@ ul {
 #event-day-list {
   display: flex;
   flex-direction: column;
+}
+.loading{
+
 }
 </style>

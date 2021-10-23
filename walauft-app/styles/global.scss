@@ -21,6 +21,12 @@ a {
     text-decoration: none;
     color: inherit;
 }
+li {
+    list-style-type: none;
+}
+button {
+    // font-family: inherit;
+}
 .box-with-dropshadow {
     padding: 0.75rem;
     border: var(--border-style);
