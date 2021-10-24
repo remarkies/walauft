@@ -23,7 +23,7 @@ export default {
         "Samschtig",
     ],
     calendar: {
-        lastDay: "[Gester]",
+        lastDay: "[Sit gester]",
         sameDay: "[Hüt]",
         nextDay: "[Morn]",
         lastWeek: "[letscht] dddd",

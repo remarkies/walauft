@@ -1,16 +1,16 @@
 <template>
   <div>
     <Search id="search-bar" />
-      <TagSection
-        v-if="$store.state.activeTags.length > 0"
-        :tags="$store.state.activeTags"
-      />
-    
+    <TagSection
+      v-if="$store.state.activeTags.length > 0"
+      :tags="$store.state.activeTags"
+    />
+
     <EventDayDateBox
       v-if="this.$store.state.allEventDays.length <= 0 && !$fetchState.error"
       class="loading"
     >
-     walauft?
+      walauft?
     </EventDayDateBox>
     <div v-else-if="$fetchState.error">da lauft nix</div>
 
@@ -108,11 +108,13 @@ export default Vue.extend({
   //   }
   // },
   async fetch() {
+    const regionId = citiesObj.cityIdName.find(
+      (cityIdNameObj: City) => this.cityName == cityIdNameObj.name
+    )?.id;
+
     const response = await this.$http.$post("https://api.walauft.ch/events", {
       tags: "",
-      regionId: citiesObj.cityIdName.find(
-        (cityIdNameObj: City) => this.cityName == cityIdNameObj.name
-      )?.id,
+      regionId: regionId,
     });
     if (response.length <= 0) {
       throw new Error();
@@ -137,7 +139,6 @@ ul {
   display: flex;
   flex-direction: column;
 }
-.loading{
-
+.loading {
 }
 </style>

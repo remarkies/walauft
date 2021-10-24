@@ -121,8 +121,11 @@ export default Vue.extend({
   display: flex;
   flex-direction: column;
   p {
-    margin-top: 0;
+    margin-top: 0rem;
     margin-bottom: $gap;
+  }
+  h1{
+    margin-top: -0.1999rem;
   }
   #event-adress {
     font-style: inherit;

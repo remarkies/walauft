@@ -4,7 +4,6 @@
       type="search"
       name="search"
       ref="seachfield"
-      id=""
       placeholder="suech was so lauft"
       v-model="searchTerm"
     />
@@ -63,6 +62,7 @@ input {
   color: var(--primary-color);
   box-shadow: none !important;
   outline: none;
+  font-size: 16px;
   font-family: inherit !important;
 }
 

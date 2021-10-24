@@ -11,7 +11,7 @@
   top: -1px;
   padding-top: calc(1rem + 1px);
   position: sticky;
-
+  background-color: var(--secondary-color);
   .event-day-date {
     font-size: 1.5rem;
     position: sticky;

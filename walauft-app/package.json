@@ -1,5 +1,6 @@
 {
   "name": "walauft",
+  "description": "Events und Parties in Zürich, Basel, Bern, St.Gallen und Luzern",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,6 +11,7 @@
   },
   "dependencies": {
     "@nuxt/http": "^0.6.4",
+    "@nuxtjs/robots": "^2.5.0",
     "core-js": "^3.15.1",
     "fastclick": "^1.0.6",
     "fuse.js": "^6.4.6",

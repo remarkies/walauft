@@ -1,20 +1,42 @@
+const baseURL = "https://walauft.ch/"
+const prevImageURL = baseURL + 'PreviewImage.png'
+const description = "Events und Parties in Zürich, Basel, Bern, St.Gallen und Luzern"
+const title = "walauft"
+const lang = "de-ch"
+const color = '#ffffff'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+ 
   head: {
-    title: 'Walauft',
+    title: title,
     htmlAttrs: {
-      lang: 'de'
+      lang: lang
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Events Partys in Zürich, Basel, Bern, St.Gallen und Luzern' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+
+
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { hid: 'canonical', rel: 'canonical', href: 'https://walauft.ch/'},
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;1,700&display=swap" rel="stylesheet'}
+      { hid: 'canonical', rel: 'canonical', href: baseURL },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;1,700&display=swap" rel="stylesheet' },
+      { hid: 'description', name: 'description', content: description },
+      { name: 'image', content: prevImageURL },
+
+      { name: 'og:type', content: 'website' },
+      { name: 'og:url', content: baseURL },
+      { name: 'og:title', content: title },
+      { name: 'og:description', content: description },
+      { name: 'og:image', content: prevImageURL },
+
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:url', content: baseURL },
+      { name: 'twitter:description', content: description },
+      { name: 'twitter:image', content: prevImageURL },
     ]
   },
 
@@ -31,9 +53,21 @@ export default {
     meta: {
       /* meta options */
       mobileAppIOS: true,
-      appleStatusBarStyle: "hidden",
-      lang: "de-ch",
-      
+      lang: lang,
+      name: title,
+      short_name: title,
+      theme_color: color,
+      background_color: color,
+      description: description,
+      nativeUI: true,
+    },
+    manifest: {
+      name: title,
+      short_name: title,
+      description: description,
+      lang: lang,
+      useWebmanifestExtension: false,
+      background_color: color,
 
     }
   },
@@ -49,7 +83,9 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxt/http'
+  modules: [
+    '@nuxt/http',
+    '@nuxtjs/robots',
   ],
 
   http: {
@@ -58,11 +94,11 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-  server: {     
+  server: {
     port: 8000, // default: 3000     
     host: '0.0.0.0', // default: localhost   
   },   // other configs 
-  scrollBehavior: function (to, from, savedPosition){
+  scrollBehavior: function (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     }
