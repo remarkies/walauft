@@ -80,7 +80,6 @@ export default Vue.extend({
     },
     formatedDate(): String {
       if (this.eventItem.time) {
-        console.log(this.eventItem.date)
         return (
           moment(this.eventItem.date as MomentInput).format(
             "dddd DD.MMMM"
@@ -89,7 +88,6 @@ export default Vue.extend({
           this.eventItem.time
         );
       } else {
-        console.log(this.eventItem.date)
         return moment(this.eventItem.date as MomentInput).format(
           "dddd DD.MMMM"
         );
