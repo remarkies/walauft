@@ -80,15 +80,17 @@ export default Vue.extend({
     },
     formatedDate(): String {
       if (this.eventItem.time) {
+        console.log(this.eventItem.date)
         return (
-          moment(this.eventItem.date as MomentInput, "YYYYMMDD").format(
+          moment(this.eventItem.date as MomentInput).format(
             "dddd DD.MMMM"
           ) +
           " am " +
           this.eventItem.time
         );
       } else {
-        return moment(this.eventItem.date as MomentInput, "YYYYMMDD").format(
+        console.log(this.eventItem.date)
+        return moment(this.eventItem.date as MomentInput).format(
           "dddd DD.MMMM"
         );
       }
